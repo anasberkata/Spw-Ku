@@ -44,6 +44,20 @@ class Admin_model extends CI_Model
         $this->db->insert('tbl_user_submenu', $data);
     }
 
+    function update_submenu($data, $id_user_submenu)
+    {
+        $this->db->where('id_user_submenu', $id_user_submenu);
+        $this->db->update('tbl_user_submenu', $data);
+    }
+
+    function delete_submenu($id_user_submenu)
+    {
+        $this->db->where('id_user_submenu', $id_user_submenu);
+        $this->db->delete('tbl_user_submenu');
+
+        return true;
+    }
+
     // ROLE
     function get_role()
     {
@@ -51,5 +65,24 @@ class Admin_model extends CI_Model
         $this->db->from('tbl_user_role');
         $query = $this->db->get();
         return $query;
+    }
+
+    function save_role($data)
+    {
+        $this->db->insert('tbl_user_role', $data);
+    }
+
+    function update_role($data, $id_role)
+    {
+        $this->db->where('id_role', $id_role);
+        $this->db->update('tbl_user_role', $data);
+    }
+
+    function delete_role($id_role)
+    {
+        $this->db->where('id_role', $id_role);
+        $this->db->delete('tbl_user_role');
+
+        return true;
     }
 }

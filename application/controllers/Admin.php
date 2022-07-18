@@ -165,6 +165,38 @@ class Admin extends CI_Controller
         }
     }
 
+    public function submenu_edit()
+    {
+        $id_user_submenu = $this->input->post('id_user_submenu', true);
+        $title = $this->input->post('title', true);
+        $menu_id = $this->input->post('menu_id', true);
+        $url = $this->input->post('url', true);
+        $icon = $this->input->post('icon', true);
+        $is_active = 1;
+
+        $data = [
+            'title' => $title,
+            'menu_id' => $menu_id,
+            'url' => $url,
+            'icon' => $icon,
+            'is_active' => $is_active
+        ];
+
+        $this->admin->update_submenu($data, $id_user_submenu);
+        $this->session->set_flashdata('message_submenu', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Submenu berhasil diubah!</div>');
+        redirect('admin/menu');
+    }
+
+    public function submenu_delete()
+    {
+        $id_user_submenu = $this->input->post('id_user_submenu');
+
+        $this->admin->delete_submenu($id_user_submenu);
+
+        $this->session->set_flashdata('message_submenu', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Submenu berhasil dihapus!</div>');
+        redirect('admin/menu');
+    }
+
 
     // ACCESS ROLE MENU
     public function role()
@@ -179,5 +211,65 @@ class Admin extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('admin/role', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function role_add()
+    {
+        $this->form_validation->set_rules(
+            'role',
+            'Menu',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Access Role Menu";
+            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+            $data['role'] = $this->admin->get_role();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/role', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $role = $this->input->post('role', true);
+
+            $data = [
+                'id_role' => NULL,
+                'role' => $role
+            ];
+
+            $this->admin->save_role($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil ditambahkan!</div>');
+            redirect('admin/role');
+        }
+    }
+
+    public function role_edit()
+    {
+        $id_role = $this->input->post('id_role', true);
+        $role = $this->input->post('role', true);
+
+        $data = [
+            'role' => $role
+        ];
+
+        $this->admin->update_role($data, $id_role);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil diubah!</div>');
+        redirect('admin/role');
+    }
+
+    public function role_delete()
+    {
+        $id_role = $this->input->post('id_role');
+
+        $this->admin->delete_role($id_role);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil dihapus!</div>');
+        redirect('admin/role');
     }
 }

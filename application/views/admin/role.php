@@ -6,7 +6,7 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Menu</h6>
+                        <h6>Daftar Role</h6>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalRoleAdd">
@@ -42,10 +42,10 @@
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="row">
                     <div class="col-12">
-                        <?= $this->session->flashdata('message_menu'); ?>
+                        <?= $this->session->flashdata('message'); ?>
                     </div>
                     <div class="col-12">
-                        <?= form_error('menu', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('role', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
@@ -69,13 +69,48 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $r->role; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
+                                                <button type="button" class="btn btn-success btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalRoleAccess<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                |
                                                 <button type="button" class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalRoleEdit<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
                                                 |
                                                 <button type="button" class="btn btn-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalRoleDelete<?= $r->id_role; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
                                             </td>
                                         </tr>
 
-                                        <!-- Modal Edit Menu -->
+                                        <!-- Modal Edit Role -->
+                                        <div class="modal fade" id="modalRoleAccess<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="AccessModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="AccessModalLabel">Ubah Access Role</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5>Role : <?= $r->role; ?></h5>
+
+                                                        <!-- <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">No.</th>
+                                                                    <th scope="col">Menu</th>
+                                                                    <th scope="col">Access</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row"></th>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table> -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal Edit Role -->
                                         <div class="modal fade" id="modalRoleEdit<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -99,7 +134,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Modal Hapus Menu -->
+                                        <!-- Modal Hapus Role -->
                                         <div class="modal fade" id="modalRoleDelete<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">

@@ -252,8 +252,22 @@
                                                     <form role="form" action="<?= base_url('admin/submenu_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_user_menu" value="<?= $sm->id_user_submenu; ?>">
-                                                                <input type="text" class="form-control" placeholder="Nama Menu" name="menu" value="<?= $sm->title; ?>">
+                                                                <input type="hidden" name="id_user_submenu" value="<?= $sm->id_user_submenu; ?>">
+                                                                <input type="text" class="form-control" placeholder="Nama Submenu" name="title" value="<?= $sm->title; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <select class="form-select" aria-label="Default select" name="menu_id">
+                                                                    <option value="<?= $sm->menu_id; ?>" selected><?= $sm->menu; ?></option>
+                                                                    <?php foreach ($menu->result() as $m) : ?>
+                                                                        <option value="<?= $m->id_user_menu ?>"><?= $m->menu ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input type="text" class="form-control" placeholder="URL" name="url" value="<?= $sm->url; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $sm->icon; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -273,11 +287,11 @@
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Menu</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('admin/menu_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('admin/submenu_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_user_menu" value="<?= $sm->id_user_submenu; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus menu : <span class="text-bold"><?= $sm->title; ?></span>!</p>
+                                                                <input type="hidden" name="id_user_submenu" value="<?= $sm->id_user_submenu; ?>">
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus submenu : <span class="text-bold"><?= $sm->title; ?></span>!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
