@@ -213,6 +213,47 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function roleAccess($role_id)
+    {
+        $data['title'] = "Access Role Menu";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['role'] = $this->admin->get_role_by_id($role_id);
+        $this->db->where('id_user_menu !=', 1);
+        $data['menu'] = $this->admin->get_menus();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/role_access', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function changeAccess()
+    {
+        $menu_id = $this->input->post('menuId');
+        $role_id = $this->input->post('roleId');
+
+        echo $menu_id;
+        echo $role_id;
+        die;
+
+        $data = [
+            'role_id' => $role_id,
+            'menu_id' => $menu_id
+        ];
+
+        $result = $this->db->get_where('tbl_user_access_menu', $data);
+
+        if ($result->num_rows() < 1) {
+            $this->db->insert('tbl_user_access_menu', $data);
+        } else {
+            $this->db->delete('tbl_user_access_menu', $data);
+        }
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Access sudah diubah!</div>');
+    }
+
     public function role_add()
     {
         $this->form_validation->set_rules(
@@ -271,5 +312,21 @@ class Admin extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil dihapus!</div>');
         redirect('admin/role');
+    }
+
+
+    // DATA LAB SPW
+    public function lab()
+    {
+        $data['title'] = "Data Lab SPW";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->admin->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/lab', $data);
+        $this->load->view('templates/footer');
     }
 }

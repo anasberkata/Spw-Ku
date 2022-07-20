@@ -55,7 +55,6 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
-                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,9 +68,9 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $m->menu; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <button type="button" class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $m->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $m->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 |
-                                                <button type="button" class="btn btn-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalMenuDelete<?= $m->id_user_menu; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuDelete<?= $m->id_user_menu; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
 
@@ -203,7 +202,7 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-0" id="table1">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
@@ -212,7 +211,6 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
-                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -235,9 +233,9 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $sm->icon; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <button type="button" class="btn btn-primary btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalSubmenuEdit<?= $sm->id_user_submenu; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSubmenuEdit<?= $sm->id_user_submenu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 |
-                                                <button type="button" class="btn btn-danger btn-sm mt-3" data-bs-toggle="modal" data-bs-target="#modalSubmenuDelete<?= $sm->id_user_submenu; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSubmenuDelete<?= $sm->id_user_submenu; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
 

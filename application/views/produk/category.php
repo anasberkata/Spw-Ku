@@ -1,30 +1,30 @@
 <div class="row">
 
-    <!-- ROLE -->
+    <!-- KATAGORI -->
     <div class="col-12 col-lg-8">
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Role</h6>
+                        <h6>Daftar Katagori</h6>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalRoleAdd">
+                        <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalCategoryAdd">
                             Tambah
                         </button>
 
-                        <!-- Modal Tambah Menu -->
-                        <div class="modal fade" id="modalRoleAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <!-- Modal Tambah Kategori -->
+                        <div class="modal fade" id="modalCategoryAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addModalLabel">Tambah Role</h5>
+                                        <h5 class="modal-title" id="addModalLabel">Tambah Kategori</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('admin/role_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('produk/category_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="Nama Role" name="role">
+                                                <input type="text" class="form-control" placeholder="Kategori" name="category">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -45,7 +45,7 @@
                         <?= $this->session->flashdata('message'); ?>
                     </div>
                     <div class="col-12">
-                        <?= form_error('role', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('category', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
@@ -53,58 +53,40 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($role->result() as $r) : ?>
+                                    <?php foreach ($category->result() as $c) : ?>
                                         <tr>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $r->role; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $c->category; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <!-- <a type="button" class="badge bg-success btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleAccess<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></a> -->
-                                                <a type="button" class="badge bg-success btn-sm px-3 py-2 rounded-pill" href="<?= base_url('admin/roleaccess/') . $r->id_role; ?>"><i class="fa fa-key cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryEdit<?= $c->id_category; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 |
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleEdit<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleDelete<?= $r->id_role; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalCategoryDelete<?= $c->id_category; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
 
-                                        <!-- Modal Edit Role -->
-                                        <!-- <div class="modal fade" id="modalRoleAccess<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="AccessModalLabel" aria-hidden="true">
+                                        <!-- Modal Edit Kategori -->
+                                        <div class="modal fade" id="modalCategoryEdit<?= $c->id_category; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="AccessModalLabel">Ubah Access Role</h5>
+                                                        <h5 class="modal-title" id="EditModalLabel">Ubah Kategori</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <h5>Role : <?= $r->role; ?></h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-
-                                        <!-- Modal Edit Role -->
-                                        <div class="modal fade" id="modalRoleEdit<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="EditModalLabel">Ubah Role</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form role="form" action="<?= base_url('admin/role_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/category_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_role" value="<?= $r->id_role; ?>">
-                                                                <input type="text" class="form-control" placeholder="Nama Role" name="role" value="<?= $r->role; ?>">
+                                                                <input type="hidden" name="id_category" value="<?= $c->id_category; ?>">
+                                                                <input type="text" class="form-control" placeholder="Nama Kategori" name="category" value="<?= $c->category; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -116,19 +98,19 @@
                                             </div>
                                         </div>
 
-                                        <!-- Modal Hapus Role -->
-                                        <div class="modal fade" id="modalRoleDelete<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <!-- Modal Hapus Kategori -->
+                                        <div class="modal fade" id="modalCategoryDelete<?= $c->id_category; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="DeleteModalLabel">Hapus Role</h5>
+                                                        <h5 class="modal-title" id="DeleteModalLabel">Hapus Kategori</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('admin/role_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/category_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_role" value="<?= $r->id_role; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus role : <span class="text-bold"><?= $r->role; ?></span>!</p>
+                                                                <input type="hidden" name="id_category" value="<?= $c->id_category; ?>">
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus kategori : <span class="text-bold"><?= $c->category; ?></span>!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

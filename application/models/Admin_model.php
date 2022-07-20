@@ -67,6 +67,18 @@ class Admin_model extends CI_Model
         return $query;
     }
 
+    function get_role_by_id($role_id = NULL)
+    {
+        // $this->db->select('*');
+        // $this->db->from('tbl_user_role');
+        // $this->db->where('id_role', $role_id);
+        // $query = $this->db->get();
+        // return $query;
+
+        $query = $this->db->get_where('tbl_user_role', ['id_role' => $role_id])->row();
+        return $query;
+    }
+
     function save_role($data)
     {
         $this->db->insert('tbl_user_role', $data);
@@ -84,5 +96,14 @@ class Admin_model extends CI_Model
         $this->db->delete('tbl_user_role');
 
         return true;
+    }
+
+    // LAB SPWE
+    function get_lab()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_data_lab');
+        $query = $this->db->get();
+        return $query;
     }
 }
