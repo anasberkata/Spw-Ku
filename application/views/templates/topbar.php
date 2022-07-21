@@ -38,7 +38,7 @@
                                     <div class="d-flex py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
-                                                <span class="font-weight-bold">logout</span>
+                                                <span class="font-weight-bold text-dark">logout</span>
                                             </h6>
                                         </div>
                                     </div>

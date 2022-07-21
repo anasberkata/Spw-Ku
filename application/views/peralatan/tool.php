@@ -99,7 +99,17 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->qty; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->condition; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?php if ($t->tool_condition == 1) : ?>
+                                                        <span class="badge badge-sm bg-gradient-success"><?= $t->condition; ?></span>
+                                                    <?php elseif ($t->tool_condition == 2) : ?>
+                                                        <span class="badge badge-sm bg-gradient-info"><?= $t->condition; ?></span>
+                                                    <?php elseif ($t->tool_condition == 3) : ?>
+                                                        <span class="badge badge-sm bg-gradient-warning"><?= $t->condition; ?></span>
+                                                    <?php elseif ($t->tool_condition == 4) : ?>
+                                                        <span class="badge badge-sm bg-gradient-danger"><?= $t->condition; ?></span>
+                                                    <?php endif; ?>
+                                                </p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->description; ?></p>
