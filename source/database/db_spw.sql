@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2022 at 08:35 PM
+-- Generation Time: Jul 21, 2022 at 06:17 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -55,6 +55,7 @@ CREATE TABLE `tbl_product` (
   `basic_price` int(100) NOT NULL,
   `selling_price` int(100) NOT NULL,
   `image` varchar(258) NOT NULL,
+  `id_lab` int(11) NOT NULL,
   `is_active` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -62,10 +63,12 @@ CREATE TABLE `tbl_product` (
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `is_active`) VALUES
-(1, 'SPW-001', 1, 'La Vida Cup', 184, 281, 500, 'default-product.jpg', 1),
-(2, 'SPW-002', 1, 'Aqua Cup', 10, 1900, 3000, 'default-product1.jpg', 1),
-(3, 'SPW-003', 1, 'Aqua Botol', 24, 1900, 3000, 'Aqua_Botol-01.jpg', 1);
+INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
+(1, 'SPW-001', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 1, 1),
+(2, 'SPW-002', 1, 'Aqua Cup', 10, 300, 500, 'default-product1.jpg', 1, 1),
+(3, 'SPW-003', 1, 'Aqua Botol', 24, 1900, 3000, 'Aqua_Botol-01.jpg', 1, 1),
+(4, 'SPW-004', 1, 'Arvin Botol', 24, 1900, 2500, 'default-product2.jpg', 1, 1),
+(5, 'SPW-005', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -93,6 +96,53 @@ INSERT INTO `tbl_product_categories` (`id_category`, `category`) VALUES
 (8, 'ATK'),
 (9, 'Obat-obatan'),
 (10, 'Lainnya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tool`
+--
+
+CREATE TABLE `tbl_tool` (
+  `id_tool` int(11) NOT NULL,
+  `tool` varchar(128) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `tool_condition` int(11) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `id_lab` int(11) NOT NULL,
+  `is_active` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_tool`
+--
+
+INSERT INTO `tbl_tool` (`id_tool`, `tool`, `qty`, `tool_condition`, `description`, `id_lab`, `is_active`) VALUES
+(1, 'Showcase', 1, 1, '', 1, 1),
+(2, 'Freezer', 1, 1, '', 1, 1),
+(3, 'Rak Piring', 1, 1, '', 1, 1),
+(5, 'Kompor', 1, 1, '', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_tool_condition`
+--
+
+CREATE TABLE `tbl_tool_condition` (
+  `id_tool_condition` int(11) NOT NULL,
+  `condition` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_tool_condition`
+--
+
+INSERT INTO `tbl_tool_condition` (`id_tool_condition`, `condition`) VALUES
+(1, 'Baik'),
+(2, 'Sedang'),
+(3, 'Rusak'),
+(4, 'Hilang');
 
 -- --------------------------------------------------------
 
@@ -210,7 +260,7 @@ INSERT INTO `tbl_user_role` (`id_role`, `role`) VALUES
 (1, 'Admin Super SPW'),
 (2, 'Admin SPW'),
 (3, 'PJ. Produk'),
-(4, 'PJ Peralatan'),
+(4, 'PJ. Peralatan'),
 (5, 'Guru SPW'),
 (6, 'Siswa SPW'),
 (7, 'Member');
@@ -241,7 +291,7 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (4, 1, 'Data Lab SPW', 'admin/lab', 'ni ni-atom text-info', 1),
 (5, 2, 'Data Kategori', 'produk/category', 'ni ni-bullet-list-67 text-info', 1),
 (6, 2, 'Data Produk', 'produk', 'ni ni-app text-warning', 1),
-(7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 1),
+(7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0),
 (8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1),
 (9, 4, 'Data Pembelian', 'pembelian', 'ni ni-cart text-warning', 1),
 (10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
@@ -269,6 +319,18 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_product_categories`
   ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `tbl_tool`
+--
+ALTER TABLE `tbl_tool`
+  ADD PRIMARY KEY (`id_tool`);
+
+--
+-- Indexes for table `tbl_tool_condition`
+--
+ALTER TABLE `tbl_tool_condition`
+  ADD PRIMARY KEY (`id_tool_condition`);
 
 --
 -- Indexes for table `tbl_users`
@@ -314,13 +376,25 @@ ALTER TABLE `tbl_data_lab`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_categories`
 --
 ALTER TABLE `tbl_product_categories`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_tool`
+--
+ALTER TABLE `tbl_tool`
+  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_tool_condition`
+--
+ALTER TABLE `tbl_tool_condition`
+  MODIFY `id_tool_condition` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`

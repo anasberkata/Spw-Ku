@@ -9,10 +9,10 @@
                         <h6>Daftar Produk LAB SPW <?= $product->result()[0]->id_lab; ?></h6>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 ml-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
+                        <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                             Tambah
                         </button>
-                        <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 me-2 float-end">
+                        <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                             Kembali
                         </a>
 

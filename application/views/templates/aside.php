@@ -72,6 +72,6 @@
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">
-        <a href="<?= base_url('auth/logout') ?>" class="btn btn-dark btn-sm w-100 mb-3">Logout</a>
+        <a class="btn btn-dark btn-sm w-100 mb-3" data-bs-toggle="modal" data-bs-target="#modalLogout">Logout</a>
     </div>
 </aside>

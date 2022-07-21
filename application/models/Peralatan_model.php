@@ -2,8 +2,7 @@
 class Peralatan_model extends CI_Model
 {
 
-    // PRODUK
-
+    // ERALATAN
     function get_lab()
     {
         $this->db->select('*');
@@ -16,80 +15,43 @@ class Peralatan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_tool');
+        $this->db->join('tbl_tool_condition', 'tbl_tool_condition.id_tool_condition = tbl_tool.tool_condition');
         $this->db->where('id_lab', $id_lab);
         $query = $this->db->get();
         return $query;
     }
 
-    function get_products_by_id($id_product = NULL)
+    function get_tools_by_id($id_tool = NULL)
     {
-        // $this->db->select('*');
-        // $this->db->from('tbl_product');
-        // $this->db->where('id_product', $id_product);
-        // $query = $this->db->row();
-        // return $query;
-
-        $query = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row();
+        $query = $this->db->get_where('tbl_tool', ['id_tool' => $id_tool])->row();
         return $query;
     }
 
-    function get_code_product()
+    function save_tool($data)
     {
-        $query = $this->db->query("SELECT MAX(code) as kodebarang from tbl_product");
-        $hasil = $query->row();
-        return $hasil->kodebarang;
+        $this->db->insert('tbl_tool', $data);
     }
 
-    function save_product($data)
+    function update_tool($data, $id_tool)
     {
-        $this->db->insert('tbl_product', $data);
+        $this->db->where('id_tool', $id_tool);
+        $this->db->update('tbl_tool', $data);
     }
 
-    // function update_product($data, $id_product)
-    // {
-    //     $this->db->where('id_product', $id_product);
-    //     $this->db->update('tbl_product', $data);
-    // }
-
-    function update_product($id_product)
+    function delete_tool($id_tool)
     {
-        $this->db->where('id_product', $id_product);
-        $this->db->update('tbl_product');
-    }
-
-    function delete_product($id_product)
-    {
-        $this->db->where('id_product', $id_product);
-        $this->db->delete('tbl_product');
+        $this->db->where('id_tool', $id_tool);
+        $this->db->delete('tbl_tool');
 
         return true;
     }
 
-    // KATAGORI
-    function get_categories()
+    // KONDISI
+    function get_condition()
     {
         $this->db->select('*');
-        $this->db->from('tbl_product_categories');
+        $this->db->from('tbl_tool_condition');
         $query = $this->db->get();
         return $query;
-    }
-
-    function save_category($data)
-    {
-        $this->db->insert('tbl_product_categories', $data);
-    }
-
-    function update_category($data, $id_category)
-    {
-        $this->db->where('id_category', $id_category);
-        $this->db->update('tbl_product_categories', $data);
-    }
-
-    function delete_category($id_category)
-    {
-        $this->db->where('id_category', $id_category);
-        $this->db->delete('tbl_product_categories');
-
-        return true;
     }
 }

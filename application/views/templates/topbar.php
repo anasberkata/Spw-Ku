@@ -34,7 +34,7 @@
                                 </a>
                             </li>
                             <li class="mb-2">
-                                <a class="dropdown-item border-radius-md" href="<?= base_url('auth/logout') ?>">
+                                <a class="dropdown-item border-radius-md" type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalLogout">
                                     <div class="d-flex py-1">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">

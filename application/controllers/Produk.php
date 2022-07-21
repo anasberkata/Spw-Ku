@@ -63,23 +63,25 @@ class Produk extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
+            $id_lab = $this->input->get('id_lab', true);
+
             $data['title'] = "Data Produk";
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
+            // Kode Produk
             $ambilKode = $this->produk->get_code_product();
             $nourut = (int) substr($ambilKode, 6, 3);
             $kodeBarang = $nourut + 1;
             $awalKode = "SPW-";
             $data['code_product'] = $awalKode . sprintf("%03s", $kodeBarang);
 
-
             $data['category'] = $this->produk->get_categories();
-            $data['product'] = $this->produk->get_products();
+            $data['product'] = $this->produk->get_products($id_lab);
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/index', $data);
+            $this->load->view('produk/product', $data);
             $this->load->view('templates/footer');
         } else {
             $code = $this->input->post('code', true);

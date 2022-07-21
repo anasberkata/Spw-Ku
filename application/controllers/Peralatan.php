@@ -23,18 +23,19 @@ class Peralatan extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('produk/index', $data);
+        $this->load->view('peralatan/index', $data);
         $this->load->view('templates/footer');
     }
 
-    public function tools()
+    public function tool()
     {
         $id_lab = $this->input->get('id_lab', true);
 
         $data['title'] = "Data Peralatan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['tools'] = $this->peralatan->get_tools($id_lab);
+        $data['tool'] = $this->peralatan->get_tools($id_lab);
+        $data['tool_condition'] = $this->peralatan->get_condition();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
@@ -43,11 +44,11 @@ class Peralatan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function product_add()
+    public function tool_add()
     {
         $this->form_validation->set_rules(
-            'product',
-            'Product',
+            'tool',
+            'Tool',
             'required',
             array(
                 'required' => '{field} wajib diisi'
@@ -55,199 +56,72 @@ class Peralatan extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Produk";
+            $id_lab = $this->input->get('id_lab', true);
+
+            $data['title'] = "Data Peralatan";
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-            $ambilKode = $this->produk->get_code_product();
-            $nourut = (int) substr($ambilKode, 6, 3);
-            $kodeBarang = $nourut + 1;
-            $awalKode = "SPW-";
-            $data['code_product'] = $awalKode . sprintf("%03s", $kodeBarang);
-
-
-            $data['category'] = $this->produk->get_categories();
-            $data['product'] = $this->produk->get_products();
+            $data['tool'] = $this->peralatan->get_tools($id_lab);
+            $data['tool_condition'] = $this->peralatan->get_condition();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/index', $data);
+            $this->load->view('peralatan/tool', $data);
             $this->load->view('templates/footer');
         } else {
-            $code = $this->input->post('code', true);
             $id_lab = $this->input->post('id_lab', true);
-            $id_category = $this->input->post('id_category', true);
-            $product = $this->input->post('product', true);
+            $tool = $this->input->post('tool', true);
             $qty = $this->input->post('qty', true);
-            $basic_price = $this->input->post('basic_price', true);
-            $selling_price = $this->input->post('selling_price', true);
-            $image = $this->uploadImage();
+            $id_tool_condition = $this->input->post('id_tool_condition', true);
+            $description = $this->input->post('description', true);
             $is_active = 1;
 
             $data = [
-                'id_product' => NULL,
-                'code' => $code,
-                'id_category' => $id_category,
-                'product' => $product,
+                'id_tool' => NULL,
+                'tool' => $tool,
                 'qty' => $qty,
-                'basic_price' => $basic_price,
-                'selling_price' => $selling_price,
-                'image' => $image,
+                'tool_condition' => $id_tool_condition,
+                'description' => $description,
                 'id_lab' => $id_lab,
                 'is_active' => $is_active
             ];
 
-            $this->produk->save_product($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
-            redirect('produk/product/?id_lab=' . $id_lab);
+            $this->peralatan->save_tool($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil ditambahkan!</div>');
+            redirect('peralatan/tool/?id_lab=' . $id_lab);
         }
     }
 
-    public function product_edit()
+    public function tool_edit()
     {
-        $id_product = $this->input->post('id_product', true);
+        $id_tool = $this->input->post('id_tool', true);
         $id_lab = $this->input->post('id_lab', true);
-        $id_category = $this->input->post('id_category', true);
-        $product = $this->input->post('product', true);
+        $tool = $this->input->post('tool', true);
         $qty = $this->input->post('qty', true);
-        $basic_price = $this->input->post('basic_price', true);
-        $selling_price = $this->input->post('selling_price', true);
-
-        $data['product'] = $this->produk->get_products_by_id($id_product);
-        $change_image = $_FILES['image']['name'];
-
-        if ($change_image) {
-            $config['allowed_types']    = 'gif|jpg|png';
-            $config['max_size']         = '2048';
-            $config['upload_path']      = './assets/img/products/';
-            $config['max_width']        = '1024';
-            $config['max_height']       = '1024';
-
-            $this->load->library('upload', $config);
-
-            if ($this->upload->do_upload('image')) {
-                $old_image = $data['product']->image;
-                if ($old_image != 'default-product.jpg') {
-                    unlink(FCPATH . 'assets/img/products/' . $old_image);
-                }
-                $new_image = $this->upload->data('file_name');
-                $this->db->set('image', $new_image);
-            } else {
-                echo $this->upload->dispay_errors();
-            }
-        }
-
-        $this->db->set('id_category', $id_category);
-        $this->db->set('product', $product);
-        $this->db->set('qty', $qty);
-        $this->db->set('basic_price', $basic_price);
-        $this->db->set('selling_price', $selling_price);
-
-        $this->produk->update_product($id_product);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
-        redirect('produk/product/?id_lab=' . $id_lab);
-    }
-
-    public function product_delete()
-    {
-        $id_product = $this->input->post('id_product');
-        $id_lab = $this->input->post('id_lab', true);
-
-        $this->produk->delete_product($id_product);
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
-        redirect('produk/product/?id_lab=' . $id_lab);
-    }
-
-    private function uploadImage()
-    {
-        $config['allowed_types']    = 'gif|jpg|png';
-        $config['max_size']         = '2048';
-        $config['upload_path']      = './assets/img/products/';
-        $config['max_width']        = '1024';
-        $config['max_height']       = '1024';
-
-        $this->load->library('upload', $config);
-
-        if ($this->upload->do_upload('image')) {
-            return $this->upload->data("file_name");
-        }
-
-        return "default-product.jpg";
-    }
-
-    // KATAGORI
-    public function category()
-    {
-        $data['title'] = "Data Kategori";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['category'] = $this->produk->get_categories();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('produk/category', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function category_add()
-    {
-        $this->form_validation->set_rules(
-            'category',
-            'Category',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Kategori";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['category'] = $this->produk->get_categories();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/category', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $category = $this->input->post('category', true);
-
-            $data = [
-                'id_category' => NULL,
-                'category' => $category
-            ];
-
-            $this->produk->save_category($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Menu berhasil ditambahkan!</div>');
-            redirect('produk/category');
-        }
-    }
-
-    public function category_edit()
-    {
-        $id_category = $this->input->post('id_category', true);
-        $category = $this->input->post('category', true);
+        $id_tool_condition = $this->input->post('id_tool_condition', true);
+        $description = $this->input->post('description', true);
 
         $data = [
-            'category' => $category
+            'tool' => $tool,
+            'qty' => $qty,
+            'tool_condition' => $id_tool_condition,
+            'description' => $description
         ];
 
-        $this->produk->update_category($data, $id_category);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil diubah!</div>');
-        redirect('produk/category');
+        $this->peralatan->update_tool($data, $id_tool);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil diubah!</div>');
+        redirect('peralatan/tool/?id_lab=' . $id_lab);
     }
 
-    public function category_delete()
+    public function tool_delete()
     {
-        $id_category = $this->input->post('id_category');
+        $id_tool = $this->input->post('id_tool', true);
+        $id_lab = $this->input->post('id_lab', true);
 
-        $this->produk->delete_category($id_category);
+        $this->peralatan->delete_tool($id_tool);
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil dihapus!</div>');
-        redirect('produk/category');
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil dihapus!</div>');
+        redirect('peralatan/tool/?id_lab=' . $id_lab);
     }
 }
