@@ -30,7 +30,7 @@
                     <?php $i = 1; ?>
                     <?php foreach ($product->result() as $p) : ?>
                         <div class="col-6 col-md-4 col-lg-3 mb-4">
-                            <div class="card">
+                            <div class="card" style="min-height: 380px;">
                                 <img src="<?= base_url('assets/img/products/' . $p->image); ?>" class="card-img-top" alt="">
                                 <div class="card-body">
                                     <h6 class="card-title"><?= $p->product; ?></h6>

@@ -51,6 +51,15 @@
     let dataTable = new simpleDatatables.DataTable(table1);
 </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 2000);
+</script>
+
 <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 

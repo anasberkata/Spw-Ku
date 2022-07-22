@@ -28,7 +28,7 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label>Kode Produk</label>
-                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="">
+                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code">
                                         </div>
                                         <div class="mb-3">
                                             <label>Lab SPW</label>
@@ -190,7 +190,6 @@
                                                                     <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">

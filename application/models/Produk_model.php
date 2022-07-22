@@ -18,6 +18,7 @@ class Produk_model extends CI_Model
         $this->db->from('tbl_product');
         $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
         $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('category', 'ASC');
         $query = $this->db->get();
         return $query;
     }

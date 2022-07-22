@@ -86,7 +86,7 @@
                                 <div class="carousel-item h-100" style="background-image: url('<?= base_url('assets/img/users/') . $u->image; ?>'); background-size: cover; background-position: center;">
                                     <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                                         <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                                            <i class="ni ni-trophy text-dark opacity-10"></i>
+                                            <i class="<?= $u->icon; ?>opacity-10"></i>
                                         </div>
                                         <h5 class="text-white mb-1"><?= $u->name; ?></h5>
                                         <p><?= $u->role; ?></p>
