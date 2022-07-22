@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2022 at 06:17 AM
+-- Generation Time: Jul 21, 2022 at 04:41 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -43,6 +43,27 @@ INSERT INTO `tbl_data_lab` (`id_lab`, `lab`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_data_web`
+--
+
+CREATE TABLE `tbl_data_web` (
+  `id_data_web` int(11) NOT NULL,
+  `title_web` varchar(128) NOT NULL,
+  `about_spw` varchar(1000) NOT NULL,
+  `vision` varchar(1000) NOT NULL,
+  `mission` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_data_web`
+--
+
+INSERT INTO `tbl_data_web` (`id_data_web`, `title_web`, `about_spw`, `vision`, `mission`) VALUES
+(1, 'SPW SMK NEGERI 2 CILAKU', 'Program SEKOLAH PENCETAK WIRASAHA (SPW-KU), merupakan salah satu pilar yang mendukung kegiatan kewirausahaan di SMK N 2 Cilaku Cianjur. Program ini merupakan integrasi dari mata pelajaran Produk Kreatif Kewirausahaan dan mata pelajaran produktif.', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_product`
 --
 
@@ -67,7 +88,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`
 (1, 'SPW-001', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 1, 1),
 (2, 'SPW-002', 1, 'Aqua Cup', 10, 300, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 'Aqua Botol', 24, 1900, 3000, 'Aqua_Botol-01.jpg', 1, 1),
-(4, 'SPW-004', 1, 'Arvin Botol', 24, 1900, 2500, 'default-product2.jpg', 1, 1),
+(4, 'SPW-004', 1, 'Arvin Botol', 5, 1900, 2500, 'default-product2.jpg', 1, 1),
 (5, 'SPW-005', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 2, 1);
 
 -- --------------------------------------------------------
@@ -121,7 +142,8 @@ INSERT INTO `tbl_tool` (`id_tool`, `tool`, `qty`, `tool_condition`, `description
 (1, 'Showcase', 1, 1, '', 1, 1),
 (2, 'Freezer', 1, 1, '', 1, 1),
 (3, 'Rak Piring', 1, 1, '', 1, 1),
-(5, 'Kompor', 1, 1, '', 1, 1);
+(5, 'Kompor', 1, 1, '', 1, 1),
+(6, 'Kompor Rinnai', 1, 1, '', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +196,11 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `role_id`, `position`, `image`, `facebook`, `instagram`, `whatsapp`, `icon`, `date_created`, `is_active`) VALUES
 (1, 'Anas Berkata', 'anasberkata@gmail.com', 'anasberkata', '$2y$10$VtW8kK.auFys07t4yVj3ie2ACxAtcQXtOXi6adhmIq8hdyy6LWmGy', 1, 1, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-17', 1),
 (2, 'Eka Anas Jatnika', 'ideanasdesain@gmail.com', 'ideanasdesain', '$2y$10$3SzLELmexfDlK43bMqtVteHhIbxPwPaDsFAf6zmlfo.d/iWkmcFLi', 2, 2, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-17', 1),
-(3, 'PJ Produk', 'pjproduk@gmail.com', 'pjproduk', '$2y$10$byh2agzIllFTgx06gAbUEeTrBUCrDnEYaSA8Ww.LtJS8S0/T.Wmz6', 3, 3, 'default.jpg', 'pjproduk', 'pjproduk', '8510000000', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-18', 1);
+(3, 'Ira Akhira Dewi', 'iraakhiradewi@gmail.com', 'pjproduk', '$2y$10$byh2agzIllFTgx06gAbUEeTrBUCrDnEYaSA8Ww.LtJS8S0/T.Wmz6', 2, 2, 'default.jpg', 'pjproduk', 'pjproduk', '8510000000', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-18', 1),
+(4, 'Elinda Rosi, S.Si', 'elindarosi@gmail.com', 'elindarosi', '$2y$10$WNEn.dLnU3UmbfOoamtaweAJjkgVgWCZjswUDPTseHVwrBuOzgFWe', 3, 2, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(5, 'Nara Yumita, S.ST', 'narayumita@gmail.com', 'narayumita', '$2y$10$Jt/53u5DzteZxwdOm5zKSOElzG9TS3QjDjmv90REflhO2EeMARn.S', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$BzsgrctAdJUZmZ56o6b0UuPceiwAFxeySMrigJnBNCOQAiFnb4Xy.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$11Q8plQmPsj/3cXRP0jhuetx2NnITyjqh.vwYkWbCqBhznuu2coo.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1);
 
 -- --------------------------------------------------------
 
@@ -238,7 +264,7 @@ INSERT INTO `tbl_user_menu` (`id_user_menu`, `menu`) VALUES
 (4, 'pembelian'),
 (5, 'penjualan'),
 (6, 'stok'),
-(7, 'list'),
+(7, 'daftar'),
 (16, 'pengguna');
 
 -- --------------------------------------------------------
@@ -296,7 +322,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (9, 4, 'Data Pembelian', 'pembelian', 'ni ni-cart text-warning', 1),
 (10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
-(12, 7, 'List Produk', 'list', 'ni ni-shop text-primary', 1);
+(12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
+(13, 16, 'Pengguna', 'users', 'ni ni-single-02 text-danger', 1);
 
 --
 -- Indexes for dumped tables
@@ -307,6 +334,12 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 --
 ALTER TABLE `tbl_data_lab`
   ADD PRIMARY KEY (`id_lab`);
+
+--
+-- Indexes for table `tbl_data_web`
+--
+ALTER TABLE `tbl_data_web`
+  ADD PRIMARY KEY (`id_data_web`);
 
 --
 -- Indexes for table `tbl_product`
@@ -373,6 +406,12 @@ ALTER TABLE `tbl_data_lab`
   MODIFY `id_lab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `tbl_data_web`
+--
+ALTER TABLE `tbl_data_web`
+  MODIFY `id_data_web` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
@@ -388,7 +427,7 @@ ALTER TABLE `tbl_product_categories`
 -- AUTO_INCREMENT for table `tbl_tool`
 --
 ALTER TABLE `tbl_tool`
-  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool_condition`
@@ -400,7 +439,7 @@ ALTER TABLE `tbl_tool_condition`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
@@ -424,7 +463,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

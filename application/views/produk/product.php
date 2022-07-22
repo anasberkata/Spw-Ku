@@ -28,7 +28,7 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label>Kode Produk</label>
-                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $code_product; ?>" readonly>
+                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="">
                                         </div>
                                         <div class="mb-3">
                                             <label>Lab SPW</label>
@@ -52,11 +52,11 @@
                                             <input type="number" class="form-control" placeholder="Qty" name="qty">
                                         </div>
                                         <div class="mb-3">
-                                            <label>Harga Dasar</label>
+                                            <label>Harga Dasar (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price">
                                         </div>
                                         <div class="mb-3">
-                                            <label>Harga Jual</label>
+                                            <label>Harga Jual (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price">
                                         </div>
                                         <div class="mb-3">
@@ -151,7 +151,7 @@
                                                         <input type="hidden" class="form-control" placeholder="Kode Produk" name="id_lab" value="<?= $p->id_lab; ?>">
                                                         <div class="mb-3">
                                                             <label>Kode Produk</label>
-                                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $p->code; ?>" readonly>
+                                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $p->code; ?>">
                                                         </div>
                                                         <div class=" mb-3">
                                                             <label>Kategori Produk</label>
@@ -171,11 +171,11 @@
                                                             <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $p->qty; ?>">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Harga Dasar</label>
+                                                            <label>Harga Dasar (Rp.)</label>
                                                             <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price" value="<?= $p->basic_price; ?>">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Harga Jual</label>
+                                                            <label>Harga Jual (Rp.)</label>
                                                             <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price" value="<?= $p->selling_price; ?>">
                                                         </div>
                                                         <div class="mb-3">

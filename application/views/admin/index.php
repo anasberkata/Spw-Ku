@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center ">
+                        <table class="table align-items-center" id="table1">
                             <tbody>
                                 <?php foreach ($product->result() as $p) : ?>
                                     <tr>

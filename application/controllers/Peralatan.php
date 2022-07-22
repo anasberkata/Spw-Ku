@@ -72,7 +72,9 @@ class Peralatan extends CI_Controller
         } else {
             $id_lab = $this->input->post('id_lab', true);
             $tool = $this->input->post('tool', true);
+            $brand = $this->input->post('brand', true);
             $qty = $this->input->post('qty', true);
+            $price = $this->input->post('price', true);
             $id_tool_condition = $this->input->post('id_tool_condition', true);
             $description = $this->input->post('description', true);
             $is_active = 1;
@@ -80,7 +82,9 @@ class Peralatan extends CI_Controller
             $data = [
                 'id_tool' => NULL,
                 'tool' => $tool,
+                'brand' => $brand,
                 'qty' => $qty,
+                'price' => $price,
                 'tool_condition' => $id_tool_condition,
                 'description' => $description,
                 'id_lab' => $id_lab,
@@ -98,13 +102,17 @@ class Peralatan extends CI_Controller
         $id_tool = $this->input->post('id_tool', true);
         $id_lab = $this->input->post('id_lab', true);
         $tool = $this->input->post('tool', true);
+        $brand = $this->input->post('brand', true);
         $qty = $this->input->post('qty', true);
+        $price = $this->input->post('price', true);
         $id_tool_condition = $this->input->post('id_tool_condition', true);
         $description = $this->input->post('description', true);
 
         $data = [
             'tool' => $tool,
+            'brand' => $brand,
             'qty' => $qty,
+            'price' => $price,
             'tool_condition' => $id_tool_condition,
             'description' => $description
         ];

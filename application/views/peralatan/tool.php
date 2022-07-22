@@ -35,8 +35,16 @@
                                                 <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool">
                                             </div>
                                             <div class="mb-3">
+                                                <label>Spesifikasi / Merk</label>
+                                                <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand">
+                                            </div>
+                                            <div class="mb-3">
                                                 <label>Qty</label>
                                                 <input type="number" class="form-control" placeholder="Qty" name="qty">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Harga (Rp.)</label>
+                                                <input type="number" class="form-control" placeholder="Harga" name="price">
                                             </div>
                                             <div class="mb-3">
                                                 <label>Kondisi</label>
@@ -79,7 +87,9 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Peralatan</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Spesifikasi / Merk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kondisi</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keterangan</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
@@ -96,7 +106,13 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->tool; ?></p>
                                             </td>
                                             <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->brand; ?></p>
+                                            </td>
+                                            <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->qty; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($t->price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
@@ -141,8 +157,16 @@
                                                                 <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool" value="<?= $t->tool; ?>">
                                                             </div>
                                                             <div class="mb-3">
+                                                                <label>Spesifikasi / Merk</label>
+                                                                <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand" value="<?= $t->brand; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
                                                                 <label>Qty</label>
                                                                 <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $t->qty; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Harga (Rp.)</label>
+                                                                <input type="number" class="form-control" placeholder="Harga" name="price" value="<?= $t->price; ?>">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label>Kondisi</label>

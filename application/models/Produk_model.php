@@ -34,12 +34,12 @@ class Produk_model extends CI_Model
         return $query;
     }
 
-    function get_code_product()
-    {
-        $query = $this->db->query("SELECT MAX(code) as kodebarang from tbl_product");
-        $hasil = $query->row();
-        return $hasil->kodebarang;
-    }
+    // function get_code_product()
+    // {
+    //     $query = $this->db->query("SELECT MAX(code) as kodebarang from tbl_product");
+    //     $hasil = $query->row();
+    //     return $hasil->kodebarang;
+    // }
 
     function save_product($data)
     {

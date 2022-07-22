@@ -35,11 +35,11 @@ class Produk extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         // Kode Produk
-        $ambilKode = $this->produk->get_code_product();
-        $nourut = (int) substr($ambilKode, 6, 3);
-        $kodeBarang = $nourut + 1;
-        $awalKode = "SPW-";
-        $data['code_product'] = $awalKode . sprintf("%03s", $kodeBarang);
+        // $ambilKode = $this->produk->get_code_product();
+        // $nourut = (int) substr($ambilKode, 4, 1);
+        // $kodeBarang = $nourut + 1;
+        // $awalKode = "SPW-";
+        // $data['code_product'] = $awalKode . $kodeBarang;
 
         $data['category'] = $this->produk->get_categories();
         $data['product'] = $this->produk->get_products($id_lab);
@@ -69,11 +69,11 @@ class Produk extends CI_Controller
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
             // Kode Produk
-            $ambilKode = $this->produk->get_code_product();
-            $nourut = (int) substr($ambilKode, 6, 3);
-            $kodeBarang = $nourut + 1;
-            $awalKode = "SPW-";
-            $data['code_product'] = $awalKode . sprintf("%03s", $kodeBarang);
+            // $ambilKode = $this->produk->get_code_product();
+            // $nourut = (int) substr($ambilKode, 4, 1);
+            // $kodeBarang = $nourut + 1;
+            // $awalKode = "SPW-";
+            // $data['code_product'] = $awalKode . $kodeBarang;
 
             $data['category'] = $this->produk->get_categories();
             $data['product'] = $this->produk->get_products($id_lab);
@@ -116,6 +116,7 @@ class Produk extends CI_Controller
     public function product_edit()
     {
         $id_product = $this->input->post('id_product', true);
+        $code = $this->input->post('code', true);
         $id_lab = $this->input->post('id_lab', true);
         $id_category = $this->input->post('id_category', true);
         $product = $this->input->post('product', true);
@@ -147,6 +148,7 @@ class Produk extends CI_Controller
             }
         }
 
+        $this->db->set('code', $code);
         $this->db->set('id_category', $id_category);
         $this->db->set('product', $product);
         $this->db->set('qty', $qty);
