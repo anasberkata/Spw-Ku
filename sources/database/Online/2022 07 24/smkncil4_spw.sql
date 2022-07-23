@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 22, 2022 at 08:31 PM
+-- Generation Time: Jul 24, 2022 at 01:41 AM
 -- Server version: 5.7.38
 -- PHP Version: 7.4.30
 
@@ -274,7 +274,7 @@ INSERT INTO `tbl_tool` (`id_tool`, `tool`, `brand`, `qty`, `price`, `tool_condit
 (1, 'Showcase', '', 1, 0, 1, '', 1, 1),
 (2, 'Freezer', '', 1, 0, 1, '', 1, 1),
 (3, 'Rak Piring', '', 1, 0, 1, '', 1, 1),
-(5, 'Kompor', '', 1, 0, 1, '', 1, 1),
+(5, 'Kompor', 'Rinnai', 1, 300000, 1, '', 1, 1),
 (6, 'Kompor Rinnai', '', 1, 0, 1, '', 2, 1);
 
 -- --------------------------------------------------------

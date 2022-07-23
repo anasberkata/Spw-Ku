@@ -76,7 +76,7 @@
                                 </p> -->
                                 <p class="mb-4 text-sm mx-auto">
                                     Lupa Password? Klik
-                                    <a href="#" class="text-primary text-gradient font-weight-bold">di Sini</a>
+                                    <a href="https://wa.me/message/3KL7OTZRYNCGC1" target="blank" class="text-primary text-gradient font-weight-bold">di Sini</a>
                                 </p>
                             </div>
                         </div>

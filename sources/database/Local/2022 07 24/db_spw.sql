@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 22, 2022 at 08:02 PM
+-- Generation Time: Jul 23, 2022 at 08:39 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -204,14 +204,15 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `role_id`, `position`, `image`, `facebook`, `instagram`, `whatsapp`, `icon`, `date_created`, `is_active`) VALUES
-(1, 'Anas Berkata', 'anasberkata@gmail.com', 'anasberkata', '$2y$10$VtW8kK.auFys07t4yVj3ie2ACxAtcQXtOXi6adhmIq8hdyy6LWmGy', 1, 1, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', 'ni ni-camera-compact text-dark', '2022-07-17', 1),
+(1, 'Anas Berkata', 'anasberkata@gmail.com', 'anasberkata', '$2y$10$8AXhxDu24xYyMYQNydFEN.BBrK31UUC6quVLQZlb7bGVpuFE84HIO', 1, 1, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', 'ni ni-camera-compact text-dark', '2022-07-17', 1),
 (2, 'Eka Anas Jatnika', 'ideanasdesain@gmail.com', 'ideanasdesain', '$2y$10$3SzLELmexfDlK43bMqtVteHhIbxPwPaDsFAf6zmlfo.d/iWkmcFLi', 2, 2, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', 'ni ni-camera-compact text-dark', '2022-07-17', 1),
 (3, 'Ira Akhira Dewi', 'iraakhiradewi@gmail.com', 'pjproduk', '$2y$10$byh2agzIllFTgx06gAbUEeTrBUCrDnEYaSA8Ww.LtJS8S0/T.Wmz6', 2, 2, 'default.jpg', 'pjproduk', 'pjproduk', '8510000000', 'ni ni-camera-compact text-dark', '2022-07-18', 1),
 (4, 'Elinda Rosi, S.Si', 'elindarosi@gmail.com', 'elindarosi', '$2y$10$WNEn.dLnU3UmbfOoamtaweAJjkgVgWCZjswUDPTseHVwrBuOzgFWe', 3, 2, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (5, 'Nara Yumita, S.ST', 'narayumita@gmail.com', 'narayumita', '$2y$10$Jt/53u5DzteZxwdOm5zKSOElzG9TS3QjDjmv90REflhO2EeMARn.S', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$BzsgrctAdJUZmZ56o6b0UuPceiwAFxeySMrigJnBNCOQAiFnb4Xy.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$11Q8plQmPsj/3cXRP0jhuetx2NnITyjqh.vwYkWbCqBhznuu2coo.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(8, 'Member 01', 'member01@gmail.com', 'member01', '$2y$10$.HT16WrBOTpkfpnnxB7mNOEOrPKlDaxxnFIsY6wvgnI4igYu9/uCi', 7, 7, 'default.jpg', 'member01', 'member01', '87651651452', '', '2022-07-22', 1);
+(8, 'Member 01', 'member01@gmail.com', 'member01', '$2y$10$.HT16WrBOTpkfpnnxB7mNOEOrPKlDaxxnFIsY6wvgnI4igYu9/uCi', 7, 7, 'default.jpg', 'member01', 'member01', '87651651452', '', '2022-07-22', 1),
+(10, 'Member 02', 'member02@gmail.com', 'member02', '$2y$10$VdrL0oNfbu1q53SMpzCaz.KGe8KCmUfaedr.nraeaeesaChgyyBVi', 7, 7, 'default.jpg', '', '', '', '', '2022-07-23', 1);
 
 -- --------------------------------------------------------
 
@@ -334,7 +335,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
-(13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1);
+(13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -450,7 +452,7 @@ ALTER TABLE `tbl_tool_condition`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
@@ -474,7 +476,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

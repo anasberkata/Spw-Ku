@@ -1,5 +1,5 @@
 <?php
-class User_model extends CI_Model
+class Pengguna_model extends CI_Model
 {
 
     function get_users()
@@ -27,6 +27,7 @@ class User_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_users');
+        $this->db->join('tbl_user_role', 'tbl_user_role.id_role = tbl_users.role_id');
         $this->db->where('id_user', $id_user);
         $query = $this->db->get();
         return $query;
@@ -57,5 +58,18 @@ class User_model extends CI_Model
         $this->db->delete('tbl_users');
 
         return true;
+    }
+
+    // PROFILE
+    function update_profile($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $this->db->update('tbl_users');
+    }
+
+    function update_profile_password($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $this->db->update('tbl_users');
     }
 }

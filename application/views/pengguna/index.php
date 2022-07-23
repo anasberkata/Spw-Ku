@@ -78,7 +78,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -130,13 +129,84 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $u->role; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-success btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></a>
+
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
 
-                                        <!-- Modal Edit Role -->
+                                        <!-- Modal Detail User -->
+                                        <div class="modal fade" id="modalUserDetail<?= $u->id_user; ?>" tabindex="-1" aria-labelledby="DetailModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="DetailModalLabel">Detail Data Pengguna</h5>
+                                                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="avatar avatar-xxl position-relative">
+                                                                    <img src="<?= base_url('assets/img/users/' . $u->image); ?>" alt="user_image" class="w-100 border-radius-lg shadow-sm">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="mb-3">
+                                                                    <label>Nama Lengkap</label>
+                                                                    <p class="ms-1 text-sm"><?= $u->name; ?></p>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label>E-Mail</label>
+                                                                    <p class="ms-1 text-sm"><?= $u->email; ?></p>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label>Facebook</label>
+                                                                    <p class="ms-1 text-sm">
+                                                                        <a href="https://www.facebook.com/<?= $u->facebook; ?>" target="blank"><?= $u->facebook; ?></a>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label>Whatsapp</label>
+                                                                    <p class="ms-1 text-sm">
+                                                                        <a href="https://www.instagram.com/<?= $u->instagram; ?>" target="blank"><?= $u->instagram; ?></a>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <div class="mb-3">
+                                                                    <label>Username</label>
+                                                                    <p class="ms-1 text-sm"><?= $u->username; ?></p>
+                                                                </div>
+                                                                <div class=" mb-3">
+                                                                    <label>Role</label>
+                                                                    <p class="ms-1 text-sm"><?= $u->role; ?></p>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label>Instagram</label>
+                                                                    <p class="ms-1 text-sm">
+                                                                        <a href="https://api.whatsapp.com/send?phone=62<?= $u->whatsapp; ?>" target="blank"><?= $u->whatsapp; ?></a>
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label>Icon</label>
+                                                                    <p class="ms-1 text-sm"><?= $u->icon; ?></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal Edit User -->
                                         <div class="modal fade" id="modalUserEdit<?= $u->id_user; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -160,8 +230,8 @@
                                                             <input type="text" class="form-control" placeholder="Username" name="username" value="<?= $u->username; ?>">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Password</label>
-                                                            <input type="password" class="form-control" placeholder="Password" name="password" value="<?= $u->password; ?>">
+                                                            <label>Password Baru (Kosongkan jika tidak ingin diubah)</label>
+                                                            <input type="password" class="form-control" placeholder="Password Baru" name="new_password">
                                                         </div>
                                                         <div class=" mb-3">
                                                             <label>Role</label>
@@ -173,7 +243,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label>Gambar Produk</label>
+                                                            <label>Gambar Pengguna</label>
                                                             <div class="row">
                                                                 <div class="col-3 col-lg-2">
                                                                     <div class="avatar avatar-xl position-relative">
@@ -211,7 +281,7 @@
                                             </div>
                                         </div>
 
-                                        <!-- Modal Hapus Role -->
+                                        <!-- Modal Hapus User -->
                                         <div class="modal fade" id="modalUserDelete<?= $u->id_user; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
