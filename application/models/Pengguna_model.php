@@ -8,6 +8,7 @@ class Pengguna_model extends CI_Model
         $this->db->from('tbl_users');
         $this->db->join('tbl_user_role', 'tbl_user_role.id_role = tbl_users.role_id');
         $this->db->where_not_in('id_user', 1);
+        $this->db->order_by('role_id', 'ASC');
         $query = $this->db->get();
         return $query;
     }

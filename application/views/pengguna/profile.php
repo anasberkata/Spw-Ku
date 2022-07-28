@@ -8,11 +8,11 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="row">
-                                <div class="col">
+                                <div class="col-6">
                                     <p class="mb-0 text-uppercase text-sm">Profile Saya</p>
                                 </div>
-                                <div class="col">
-                                    <button type="button" class="btn btn-warning btn-sm float-end me-2" data-bs-toggle="modal" data-bs-target="#modalEditPassword<?= $user['id_user']; ?>">
+                                <div class="col-6">
+                                    <button type=" button" class="btn btn-warning btn-sm float-end me-2" data-bs-toggle="modal" data-bs-target="#modalEditPassword<?= $user['id_user']; ?>">
                                         Ubah Password
                                     </button>
                                     <button type="button" class="btn btn-primary btn-sm float-end me-2" data-bs-toggle="modal" data-bs-target="#modalEditProfile<?= $user['id_user']; ?>">
@@ -132,7 +132,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="avatar position-relative w-100">
+                                    <div class="mb-3 w-100">
                                         <img src="<?= base_url('assets/img/users/') . $user['image']; ?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                                     </div>
                                 </div>

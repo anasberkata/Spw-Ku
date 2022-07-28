@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jul 24, 2022 at 01:41 AM
--- Server version: 5.7.38
--- PHP Version: 7.4.30
+-- Host: localhost
+-- Generation Time: Jul 25, 2022 at 04:41 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `smkncil4_spw`
+-- Database: `db_spw`
 --
 
 -- --------------------------------------------------------
@@ -326,13 +325,24 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `role_id`, `position`, `image`, `facebook`, `instagram`, `whatsapp`, `icon`, `date_created`, `is_active`) VALUES
-(1, 'Anas Berkata', 'anasberkata@gmail.com', 'anasberkata', '$2y$10$VtW8kK.auFys07t4yVj3ie2ACxAtcQXtOXi6adhmIq8hdyy6LWmGy', 1, 1, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-17', 1),
-(2, 'Eka Anas Jatnika', 'ideanasdesain@gmail.com', 'ideanasdesain', '$2y$10$3SzLELmexfDlK43bMqtVteHhIbxPwPaDsFAf6zmlfo.d/iWkmcFLi', 2, 2, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-17', 1),
-(3, 'Ira Akhira Dewi', 'iraakhiradewi@gmail.com', 'pjproduk', '$2y$10$byh2agzIllFTgx06gAbUEeTrBUCrDnEYaSA8Ww.LtJS8S0/T.Wmz6', 2, 2, 'default.jpg', 'pjproduk', 'pjproduk', '8510000000', '<i class=\"ni ni-camera-compact text-dark opacity-10\"></i>', '2022-07-18', 1),
-(4, 'Elinda Rosi, S.Si', 'elindarosi@gmail.com', 'elindarosi', '$2y$10$WNEn.dLnU3UmbfOoamtaweAJjkgVgWCZjswUDPTseHVwrBuOzgFWe', 3, 2, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(5, 'Nara Yumita, S.ST', 'narayumita@gmail.com', 'narayumita', '$2y$10$Jt/53u5DzteZxwdOm5zKSOElzG9TS3QjDjmv90REflhO2EeMARn.S', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$BzsgrctAdJUZmZ56o6b0UuPceiwAFxeySMrigJnBNCOQAiFnb4Xy.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$11Q8plQmPsj/3cXRP0jhuetx2NnITyjqh.vwYkWbCqBhznuu2coo.', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1);
+(1, 'Anas Berkata', 'anasberkata@gmail.com', 'anasberkata', '$2y$10$VtW8kK.auFys07t4yVj3ie2ACxAtcQXtOXi6adhmIq8hdyy6LWmGy', 1, 1, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', 'ni ni-camera-compact text-dark ', '2022-07-17', 1),
+(2, 'Eka Anas Jatnika, S.Ds', 'ideanasdesain@gmail.com', 'ideanasdesain', '$2y$10$N6v/byfq1jrLmFqyveOVdOXrP5NaoSfbOjhQoqzsOhTLPnlrxuZPK', 2, 2, 'anas.jpg', 'anasberkata', 'anasberkata', '85156334607', 'ni ni-camera-compact text-dark ', '2022-07-17', 1),
+(3, 'Ira Akhira Dewi, S.Pd', 'iraakhiradewi@gmail.com', 'pjproduk', '$2y$10$iwFuMPgmG58i2Cegq3O3Nuy04l2ex1Q4f31xL1y39Yk6BA5fhvfDS', 2, 2, 'default.jpg', 'pjproduk', 'pjproduk', '8510000000', '&lt;i class=', '2022-07-18', 1),
+(4, 'Elinda Rosi, S.Si', 'elindarosi415@gmail.com', 'elindarosi', '$2y$10$jnLtgriXQAA13BvsL0r5NeQcwZso7T2aYVSXtYDmQ8TQodpcVP0zm', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(5, 'Nara Yumita, S.ST', 'narayumita86@gmail.com', 'narayumita', '$2y$10$3qL9L1fHw2WoYhVln0iO5uytLwAGerbUh6drRzfS4QlIF7q46H5pC', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$maVCCO2F.Hd2fk.oacgF3.tWoPnFNA58gkFLPljQrU2MlDmlNYLuK', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$nlxL2S0ZwEiUO.OPVWlqTOhtj2DfZon8whJQbyetOulgb3JAryO4u', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
+(8, 'Siswa SPW DG', 'siswaspwgrafika@gmail.com', 'siswaspwgrafika', '$2y$10$rrhEBAWAyF9Vq9M3e4/q.uMeDoJWDkUEzZ34P1KElUwOr0iJjO2GS', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(9, 'Fachmi Fathurahman, S.Pd', 'fachmifathurahman@gmail.com', 'fachmifathurahman', '$2y$10$sNASxSjI2/ol1.dbiy8y9u67qq53EhpkirA6PHq34MRaWF/u9MLBu', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(10, 'Andika Nurhidayat, S.Pd', 'andikanurhidayat2@gmail.com', 'ansikanurhidayat', '$2y$10$EoAU28WQqs4KfG9B3erd3OBy8lL5EiD8FKnDAcn1oAZX2tJQWMIwG', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(11, 'Asep Suherman, SP., MP', 'asepsuherman@gmail.com', 'asepsuherman', '$2y$10$yc4ztsfa2MMapcWfdL6Er.mKsHkpvDpb2EezRhFCvK83d1cApzN6m', 5, 5, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(12, 'Ir. H. Muhammad Ridwan', 'omm_mmo83@yahoo.co.id', 'irhmuhammadridwan', '$2y$10$rVacsqyY072R.lnbjzD/Eu3lC5EtJeha6zfdIXtP9DWcjEVgaF2yW', 5, 5, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(13, 'Afif Amarullah, S.ST', 'afifamarullah@gmail.com', 'afifamarullah', '$2y$10$R5F2ayMRM3txNG40mT65NOAxWFPdVHCb/1WnHmXcQmqgIsQUDll1S', 5, 5, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(14, 'Siswa SPW APL', 'siswaspwapl@gmail.com', 'siswaspwapl', '$2y$10$GYOQq0.v79nF8jQQtmeuwun.rE.h.PNmwMSkJnOPUunfmAtkYOmHC', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(15, 'Siswa SPW TKJ', 'siswaspwtkj@gmail.com', 'siswaspwtkj', '$2y$10$bIzSLHRZRZ8cBUnpCCcv0OjjeiCVzvFTn2g07Ny54qCRz9dokIs2q', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(16, 'Siswa SPW ATPH', 'siswaspwatph@gmail.com', 'siswaspwatph', '$2y$10$OVqPUxjnjF0UYk5xHbUHOu.m8MF17PjjzqplYgtTFZCMm3muNS8nu', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(17, 'Siswa SPW APHP', 'siswaspwaphp@gmail.com', 'siswaspwaphp', '$2y$10$b4q3JfyYvRVnND0sAaZBq.cLxd6ng4PBDWNgiPc21C5RgPpXJIs1O', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(18, 'Siswa SPW ATU', 'siswaspwatu@gmail.com', 'siswaspwatu', '$2y$10$9bvvL4iExOzCd8TCxD.ubOlIfeGMieXDm7rSjjK9lMBAZ/h9lA1zm', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1);
 
 -- --------------------------------------------------------
 
@@ -363,16 +373,22 @@ INSERT INTO `tbl_user_access_menu` (`id_user_access_menu`, `role_id`, `menu_id`)
 (10, 2, 3),
 (11, 2, 4),
 (12, 2, 5),
-(13, 2, 7),
-(15, 3, 2),
-(16, 3, 4),
-(17, 3, 5),
-(18, 3, 6),
-(19, 3, 7),
-(21, 4, 3),
-(23, 5, 5),
-(24, 5, 7),
-(26, 6, 7);
+(13, 2, 6),
+(15, 2, 7),
+(16, 2, 16),
+(17, 3, 2),
+(18, 3, 4),
+(19, 3, 5),
+(21, 3, 6),
+(23, 3, 7),
+(24, 4, 3),
+(26, 4, 5),
+(28, 4, 6),
+(29, 4, 7),
+(32, 5, 5),
+(33, 5, 7),
+(34, 6, 7),
+(35, 5, 6);
 
 -- --------------------------------------------------------
 
@@ -455,7 +471,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
-(13, 16, 'Pengguna', 'users', 'ni ni-single-02 text-danger', 1);
+(13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -571,13 +588,13 @@ ALTER TABLE `tbl_tool_condition`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
 --
 ALTER TABLE `tbl_user_access_menu`
-  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_menu`
@@ -595,7 +612,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
