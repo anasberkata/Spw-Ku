@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2022 at 04:41 PM
+-- Generation Time: Jul 28, 2022 at 07:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -89,7 +89,6 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`
 (2, 'SPW-002', 1, 'La Vida Cup', 184, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
 (4, 'SPW-004', 1, 'SUI Botol 600 mL', 0, 958, 2000, 'default-product2.jpg', 1, 1),
-(5, 'SPW-005', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 2, 1),
 (6, 'SPW-006', 1, 'Arvin Botol 600 mL', 0, 958, 2000, 'default-product.jpg', 1, 1),
 (7, 'SPW-007', 2, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
@@ -250,6 +249,83 @@ INSERT INTO `tbl_product_categories` (`id_category`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_purchase`
+--
+
+CREATE TABLE `tbl_purchase` (
+  `id_purchase` int(11) NOT NULL,
+  `date_purchasing` date NOT NULL,
+  `id_supplier` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_purchase_cart`
+--
+
+CREATE TABLE `tbl_purchase_cart` (
+  `id_cart` int(11) NOT NULL,
+  `id_supplier` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `date_purchasing` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_purchase_cart`
+--
+
+INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_product`, `price`, `total_price`, `date_purchasing`) VALUES
+(1, 3, 98, 50, 2500, 125000, '2022-07-29'),
+(2, 3, 100, 60, 230, 13800, '2022-07-29'),
+(3, 3, 102, 70, 2300, 161000, '2022-07-29'),
+(4, 3, 89, 40, 3000, 120000, '2022-07-29'),
+(5, 3, 103, 50, 2500, 125000, '2022-07-29'),
+(6, 3, 96, 10, 3500, 35000, '2022-07-29'),
+(7, 3, 89, 50, 2400, 120000, '2022-07-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_purchase_detail`
+--
+
+CREATE TABLE `tbl_purchase_detail` (
+  `id_purchase` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty_purchase` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_supplier`
+--
+
+CREATE TABLE `tbl_supplier` (
+  `id_supplier` int(11) NOT NULL,
+  `supplier` varchar(128) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_supplier`
+--
+
+INSERT INTO `tbl_supplier` (`id_supplier`, `supplier`, `address`, `phone`) VALUES
+(1, 'Toko Deri', 'Cianjur Kota', '085156334607'),
+(3, 'AICE Cianjur', 'Cianjur', '08000000000');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_tool`
 --
 
@@ -273,8 +349,7 @@ INSERT INTO `tbl_tool` (`id_tool`, `tool`, `brand`, `qty`, `price`, `tool_condit
 (1, 'Showcase', '', 1, 0, 1, '', 1, 1),
 (2, 'Freezer', '', 1, 0, 1, '', 1, 1),
 (3, 'Rak Piring', '', 1, 0, 1, '', 1, 1),
-(5, 'Kompor', 'Rinnai', 1, 300000, 1, '', 1, 1),
-(6, 'Kompor Rinnai', '', 1, 0, 1, '', 2, 1);
+(5, 'Kompor', 'Rinnai', 1, 300000, 1, '', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -472,7 +547,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
-(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1);
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
+(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -501,6 +577,24 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_product_categories`
   ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `tbl_purchase`
+--
+ALTER TABLE `tbl_purchase`
+  ADD PRIMARY KEY (`id_purchase`);
+
+--
+-- Indexes for table `tbl_purchase_cart`
+--
+ALTER TABLE `tbl_purchase_cart`
+  ADD PRIMARY KEY (`id_cart`);
+
+--
+-- Indexes for table `tbl_supplier`
+--
+ALTER TABLE `tbl_supplier`
+  ADD PRIMARY KEY (`id_supplier`);
 
 --
 -- Indexes for table `tbl_tool`
@@ -573,6 +667,24 @@ ALTER TABLE `tbl_product_categories`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `tbl_purchase`
+--
+ALTER TABLE `tbl_purchase`
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_purchase_cart`
+--
+ALTER TABLE `tbl_purchase_cart`
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_supplier`
+--
+ALTER TABLE `tbl_supplier`
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tbl_tool`
 --
 ALTER TABLE `tbl_tool`
@@ -612,7 +724,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
