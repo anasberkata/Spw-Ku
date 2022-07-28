@@ -43,6 +43,7 @@ class Produk extends CI_Controller
 
         $data['category'] = $this->produk->get_categories();
         $data['product'] = $this->produk->get_products($id_lab);
+        $data['lab'] = $id_lab;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

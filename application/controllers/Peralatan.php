@@ -36,6 +36,7 @@ class Peralatan extends CI_Controller
 
         $data['tool'] = $this->peralatan->get_tools($id_lab);
         $data['tool_condition'] = $this->peralatan->get_condition();
+        $data['lab'] = $id_lab;
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

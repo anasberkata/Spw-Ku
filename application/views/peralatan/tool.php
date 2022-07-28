@@ -6,7 +6,7 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Peralatan LAB SPW <?= $tool->result()[0]->id_lab; ?></h6>
+                        <h6>Daftar Peralatan LAB SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalToolAdd">
@@ -28,7 +28,7 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label>Lab SPW</label>
-                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $tool->result()[0]->id_lab ?>" readonly>
+                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label>Nama Peralatan</label>
@@ -150,7 +150,7 @@
                                                             <div class="mb-3">
                                                                 <label>Lab SPW</label>
                                                                 <input type="hidden" class="form-control" placeholder="Lab SPW" name="id_tool" value="<?= $t->id_tool ?>">
-                                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $tool->result()[0]->id_lab ?>" readonly>
+                                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label>Nama Peralatan</label>

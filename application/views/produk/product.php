@@ -6,7 +6,7 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Produk LAB SPW <?= $product->result()[0]->id_lab; ?></h6>
+                        <h6>Daftar Produk LAB SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label>Lab SPW</label>
-                                            <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $product->result()[0]->id_lab ?>" readonly>
+                                            <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
                                         </div>
                                         <div class=" mb-3">
                                             <label>Kategori Produk</label>
