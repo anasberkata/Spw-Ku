@@ -13,7 +13,7 @@ class Auth extends CI_Controller
     {
 
         if ($this->session->userdata('email')) {
-            redirect('user');
+            redirect('pengguna/profile');
         }
 
         $this->form_validation->set_rules(

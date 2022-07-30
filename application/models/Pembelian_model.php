@@ -38,6 +38,7 @@ class Pembelian_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_purchase_cart');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_purchase_cart.id_product');
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase_cart.id_supplier');
         $query = $this->db->get();
         return $query;
     }
@@ -46,6 +47,26 @@ class Pembelian_model extends CI_Model
     {
         $this->db->insert('tbl_purchase_cart', $data);
     }
+
+    function update_purchase_cart($data, $id_cart)
+    {
+        $this->db->where('id_cart', $id_cart);
+        $this->db->update('tbl_purchase_cart', $data);
+    }
+
+    function delete_purchase_cart($id_cart)
+    {
+        $this->db->where('id_cart', $id_cart);
+        $this->db->delete('tbl_purchase_cart');
+
+        return true;
+    }
+
+
+
+
+
+
 
     // SUPPLIER
     function get_supplier()
