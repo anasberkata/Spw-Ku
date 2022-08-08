@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 28, 2022 at 07:51 PM
+-- Generation Time: Aug 01, 2022 at 06:39 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -85,8 +85,8 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
-(1, 'SPW-001', 1, 'Cibodas Cup', 0, 315, 500, 'default-product.jpg', 1, 1),
-(2, 'SPW-002', 1, 'La Vida Cup', 184, 281, 500, 'default-product1.jpg', 1, 1),
+(1, 'SPW-001', 1, 'Cibodas Cup', 30, 315, 500, 'default-product.jpg', 1, 1),
+(2, 'SPW-002', 1, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
 (4, 'SPW-004', 1, 'SUI Botol 600 mL', 0, 958, 2000, 'default-product2.jpg', 1, 1),
 (6, 'SPW-006', 1, 'Arvin Botol 600 mL', 0, 958, 2000, 'default-product.jpg', 1, 1),
@@ -260,6 +260,13 @@ CREATE TABLE `tbl_purchase` (
   `id_lab` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_purchase`
+--
+
+INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
+(1, '2022-08-01', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -286,8 +293,7 @@ INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_pr
 (3, 3, 102, 70, 2300, 161000, '2022-07-29'),
 (4, 3, 89, 40, 3000, 120000, '2022-07-29'),
 (5, 3, 103, 50, 2500, 125000, '2022-07-29'),
-(6, 3, 96, 10, 3500, 35000, '2022-07-29'),
-(7, 3, 89, 50, 2400, 120000, '2022-07-29');
+(6, 3, 96, 50, 3000, 150000, '2022-07-29');
 
 -- --------------------------------------------------------
 
@@ -296,11 +302,21 @@ INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_pr
 --
 
 CREATE TABLE `tbl_purchase_detail` (
+  `id_purchase_detail` int(11) NOT NULL,
   `id_purchase` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
-  `qty_purchase` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `qty_product` int(11) NOT NULL,
+  `basic_price` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_purchase_detail`
+--
+
+INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_product`, `qty_product`, `basic_price`, `total_price`) VALUES
+(2, 1, 1, 30, 315, 9450),
+(3, 1, 2, 16, 281, 4496);
 
 -- --------------------------------------------------------
 
@@ -591,6 +607,12 @@ ALTER TABLE `tbl_purchase_cart`
   ADD PRIMARY KEY (`id_cart`);
 
 --
+-- Indexes for table `tbl_purchase_detail`
+--
+ALTER TABLE `tbl_purchase_detail`
+  ADD PRIMARY KEY (`id_purchase_detail`);
+
+--
 -- Indexes for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
@@ -670,13 +692,19 @@ ALTER TABLE `tbl_product_categories`
 -- AUTO_INCREMENT for table `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase_cart`
 --
 ALTER TABLE `tbl_purchase_cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_purchase_detail`
+--
+ALTER TABLE `tbl_purchase_detail`
+  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
