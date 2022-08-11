@@ -7,7 +7,7 @@
                         document.write(new Date().getFullYear())
                     </script>.
                     Dev by
-                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">Anas Berkata</a>
+                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">TIM SPW SMK NEGERI 2 CILAKU CIANJUR</a>
                 </div>
             </div>
         </div>

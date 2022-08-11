@@ -43,22 +43,31 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
+                                        <div class=" mb-3">
+                                            <label>Tempat Produk</label>
+                                            <select class="form-select" aria-label="Default select" name="id_place">
+                                                <option selected>Pilih tempat</option>
+                                                <?php foreach ($place->result() as $pl) : ?>
+                                                    <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                         <div class="mb-3">
                                             <label>Nama Produk</label>
                                             <input type="text" class="form-control" placeholder="Nama Produk" name="product">
                                         </div>
-                                        <div class="mb-3">
+                                        <!-- <div class="mb-3">
                                             <label>Qty</label>
                                             <input type="number" class="form-control" placeholder="Qty" name="qty">
-                                        </div>
-                                        <div class="mb-3">
+                                        </div> -->
+                                        <!-- <div class="mb-3">
                                             <label>Harga Dasar (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price">
-                                        </div>
-                                        <div class="mb-3">
+                                        </div> -->
+                                        <!-- <div class="mb-3">
                                             <label>Harga Jual (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price">
-                                        </div>
+                                        </div> -->
                                         <div class="mb-3">
                                             <label>Gambar Produk</label>
                                             <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">
@@ -93,6 +102,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
@@ -117,6 +127,19 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->category; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?php if ($p->id_place == 1) : ?>
+                                                        <span class="badge badge-sm bg-gradient-success"><?= $p->place; ?></span>
+                                                    <?php elseif ($p->id_place == 2) : ?>
+                                                        <span class="badge badge-sm bg-gradient-info"><?= $p->place; ?></span>
+                                                    <?php elseif ($p->id_place == 3) : ?>
+                                                        <span class="badge badge-sm bg-gradient-warning"><?= $p->place; ?></span>
+                                                    <?php elseif ($p->id_place == 4) : ?>
+                                                        <span class="badge badge-sm bg-gradient-danger"><?= $p->place; ?></span>
+                                                    <?php endif; ?>
+                                                </p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->product; ?></p>
@@ -159,6 +182,15 @@
                                                                 <option value="<?= $p->id_category; ?>" selected><?= $p->category; ?></option>
                                                                 <?php foreach ($category->result() as $c) : ?>
                                                                     <option value="<?= $c->id_category ?>"><?= $c->category ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
+                                                        <div class=" mb-3">
+                                                            <label>Tempat Produk</label>
+                                                            <select class="form-select" aria-label="Default select" name="id_place">
+                                                                <option value="<?= $p->id_place; ?>" selected><?= $p->place; ?></option>
+                                                                <?php foreach ($place->result() as $pl) : ?>
+                                                                    <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
                                                                 <?php endforeach; ?>
                                                             </select>
                                                         </div>

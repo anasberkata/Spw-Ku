@@ -208,6 +208,26 @@ class Pembelian extends CI_Controller
         redirect('pembelian/purchase/?id_lab=' . $id_lab);
     }
 
+    public function purchase_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_purchasing = $this->input->post('date_purchasing', true);
+        $id_supplier = $this->input->post('id_supplier', true);
+
+        $data = [
+            'date_purchasing' => $date_purchasing,
+            'id_supplier' => $id_supplier,
+            'id_user' => $id_user
+        ];
+
+        $this->pembelian->update_purchase($data, $id_purchase);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembelian berhasil diubah!</div>');
+
+        redirect('pembelian/purchase/?id_lab=' . $id_lab);
+    }
+
     public function purchase_detail()
     {
         $id_purchase = $this->input->get('id_purchase', true);
@@ -221,6 +241,9 @@ class Pembelian extends CI_Controller
         $data['id_purchase'] = $id_purchase;
         $data['lab'] = $id_lab;
         $data['product'] = $this->pembelian->get_product($id_lab);
+
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
+        $data['purchase'] = $this->db->get_where('tbl_purchase', ['id_purchase' => $id_purchase])->row_array();
         $data['purchase_detail'] = $this->pembelian->get_purchase_detail($id_purchase);
 
         $this->load->view('templates/header', $data);
@@ -275,6 +298,7 @@ class Pembelian extends CI_Controller
             $id_product = $this->input->post('id_product', true);
             $qty_product = $this->input->post('qty_product', true);
             $basic_price = $this->input->post('basic_price', true);
+            $selling_price = $this->input->post('selling_price', true);
 
             $data = [
                 'id_purchase_detail' => NULL,
@@ -289,7 +313,8 @@ class Pembelian extends CI_Controller
 
             $data_stock = [
                 'qty' => $d['p']['qty'] + $qty_product,
-                'basic_price' => $basic_price
+                'basic_price' => $basic_price,
+                'selling_price' => $selling_price
             ];
 
             $this->pembelian->save_purchase_detail($data);
@@ -300,6 +325,31 @@ class Pembelian extends CI_Controller
             redirect('pembelian/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
         }
     }
+
+    public function purchase_detail_delete()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_purchase_detail = $this->input->post('id_purchase_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_product = $this->input->post('qty_product', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+        $data_stock = [
+            'qty' => $d['p']['qty'] - $qty_product
+        ];
+
+        $this->pembelian->delete_purchase_detail($id_purchase_detail);
+        $this->pembelian->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
+
+        redirect('pembelian/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+    }
+
+
+
 
 
 

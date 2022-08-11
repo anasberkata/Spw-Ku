@@ -43,6 +43,7 @@ class Produk extends CI_Controller
 
         $data['category'] = $this->produk->get_categories();
         $data['product'] = $this->produk->get_products($id_lab);
+        $data['place'] = $this->produk->get_places();
         $data['lab'] = $id_lab;
 
         $this->load->view('templates/header', $data);
@@ -78,6 +79,7 @@ class Produk extends CI_Controller
 
             $data['category'] = $this->produk->get_categories();
             $data['product'] = $this->produk->get_products($id_lab);
+            $data['place'] = $this->produk->get_places();
 
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
@@ -88,10 +90,11 @@ class Produk extends CI_Controller
             $code = $this->input->post('code', true);
             $id_lab = $this->input->post('id_lab', true);
             $id_category = $this->input->post('id_category', true);
+            $id_place = $this->input->post('id_place', true);
             $product = $this->input->post('product', true);
-            $qty = $this->input->post('qty', true);
-            $basic_price = $this->input->post('basic_price', true);
-            $selling_price = $this->input->post('selling_price', true);
+            // $qty = $this->input->post('qty', true);
+            // $basic_price = $this->input->post('basic_price', true);
+            // $selling_price = $this->input->post('selling_price', true);
             $image = $this->uploadImage();
             $is_active = 1;
 
@@ -99,10 +102,11 @@ class Produk extends CI_Controller
                 'id_product' => NULL,
                 'code' => $code,
                 'id_category' => $id_category,
+                'id_place' => $id_place,
                 'product' => $product,
-                'qty' => $qty,
-                'basic_price' => $basic_price,
-                'selling_price' => $selling_price,
+                'qty' => 0,
+                'basic_price' => 0,
+                'selling_price' => 0,
                 'image' => $image,
                 'id_lab' => $id_lab,
                 'is_active' => $is_active
@@ -120,6 +124,7 @@ class Produk extends CI_Controller
         $code = $this->input->post('code', true);
         $id_lab = $this->input->post('id_lab', true);
         $id_category = $this->input->post('id_category', true);
+        $id_place = $this->input->post('id_place', true);
         $product = $this->input->post('product', true);
         $qty = $this->input->post('qty', true);
         $basic_price = $this->input->post('basic_price', true);
@@ -151,6 +156,7 @@ class Produk extends CI_Controller
 
         $this->db->set('code', $code);
         $this->db->set('id_category', $id_category);
+        $this->db->set('id_place', $id_place);
         $this->db->set('product', $product);
         $this->db->set('qty', $qty);
         $this->db->set('basic_price', $basic_price);

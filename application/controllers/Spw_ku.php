@@ -7,7 +7,7 @@ class Spw_ku extends CI_Controller
     {
         parent::__construct();
         // is_logged_in();
-        $this->load->model('User_model', 'user');
+        $this->load->model('Pengguna_model', 'user');
         // $this->load->helper('date');
     }
 

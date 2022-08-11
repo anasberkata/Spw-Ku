@@ -35,17 +35,15 @@ class Pembelian_model extends CI_Model
         return $query;
     }
 
-    function get_purchase_detail($id_purchase)
+    function save_purchase($data)
     {
-        $this->db->select('*');
-        $this->db->from('tbl_purchase_detail');
-        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_purchase_detail.id_product');
-        // $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
-        // $this->db->join('tbl_users', 'tbl_users.id_user = tbl_purchase.id_user');
-        // $this->db->join('tbl_purchase_detail', 'tbl_purchase_detail.id_purchase = tbl_purchase.id_purchase');
+        $this->db->insert('tbl_purchase', $data);
+    }
+
+    function update_purchase($data, $id_purchase)
+    {
         $this->db->where('id_purchase', $id_purchase);
-        $query = $this->db->get();
-        return $query;
+        $this->db->update('tbl_purchase', $data);
     }
 
     // CART
@@ -78,14 +76,30 @@ class Pembelian_model extends CI_Model
     //     return true;
     // }
 
-    function save_purchase($data)
+    function get_purchase_detail($id_purchase)
     {
-        $this->db->insert('tbl_purchase', $data);
+        $this->db->select('*');
+        $this->db->from('tbl_purchase_detail');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_purchase_detail.id_product');
+        // $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
+        // $this->db->join('tbl_users', 'tbl_users.id_user = tbl_purchase.id_user');
+        // $this->db->join('tbl_purchase_detail', 'tbl_purchase_detail.id_purchase = tbl_purchase.id_purchase');
+        $this->db->where('id_purchase', $id_purchase);
+        $query = $this->db->get();
+        return $query;
     }
 
     function save_purchase_detail($data)
     {
         $this->db->insert('tbl_purchase_detail', $data);
+    }
+
+    function delete_purchase_detail($id_purchase_detail)
+    {
+        $this->db->where('id_purchase_detail', $id_purchase_detail);
+        $this->db->delete('tbl_purchase_detail');
+
+        return true;
     }
 
     function update_stock_product($data_stock, $id_product)
