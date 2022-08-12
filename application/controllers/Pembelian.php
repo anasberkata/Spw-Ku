@@ -326,6 +326,50 @@ class Pembelian extends CI_Controller
         }
     }
 
+    public function purchase_detail_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_purchase_detail = $this->input->post('id_purchase_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_product = $this->input->post('qty_product', true);
+        $basic_price = $this->input->post('basic_price', true);
+        $selling_price = $this->input->post('selling_price', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+        $d['pd'] = $this->db->get_where('tbl_purchase_detail', ['id_purchase_detail' => $id_purchase_detail])->row_array();
+
+        if ($qty_product > $d['p']['qty']) {
+            $selisih = $qty_product - $d['p']['qty'];
+            $qty = $d['p']['qty'] + $selisih;
+        } else if ($qty_product < $d['p']['qty']) {
+            $selisih = $d['p']['qty'] - $qty_product;
+            $qty = $d['p']['qty'] - $selisih;
+        } else {
+            $qty = $qty_product;
+        }
+
+        $data = [
+            'id_product' => $id_product,
+            'qty_product' => $qty_product,
+            'basic_price' => $basic_price,
+            'total_price' => $qty_product * $basic_price
+        ];
+
+        $data_stock = [
+            'qty' => $qty,
+            'basic_price' => $basic_price,
+            'selling_price' => $selling_price
+        ];
+
+        $this->pembelian->update_purchase_detail($data, $id_purchase_detail);
+        $this->pembelian->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+
+        redirect('pembelian/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+    }
+
     public function purchase_detail_delete()
     {
         $id_lab = $this->input->post('id_lab', true);

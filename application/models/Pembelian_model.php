@@ -94,6 +94,12 @@ class Pembelian_model extends CI_Model
         $this->db->insert('tbl_purchase_detail', $data);
     }
 
+    function update_purchase_detail($data, $id_purchase_detail)
+    {
+        $this->db->where('id_purchase_detail', $id_purchase_detail);
+        $this->db->update('tbl_purchase_detail', $data);
+    }
+
     function delete_purchase_detail($id_purchase_detail)
     {
         $this->db->where('id_purchase_detail', $id_purchase_detail);

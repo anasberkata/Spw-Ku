@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 09, 2022 at 12:26 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost:3306
+-- Generation Time: Aug 12, 2022 at 08:59 PM
+-- Server version: 5.7.39
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_spw`
+-- Database: `smkncil4_spw`
 --
 
 -- --------------------------------------------------------
@@ -85,10 +86,11 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
-(1, 'SPW-001', 1, 'Cibodas Cup', 30, 315, 500, 'default-product.jpg', 1, 1),
-(2, 'SPW-002', 1, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
+(1, 'SPW-001', 1, 'Cibodas Cup', 0, 315, 500, 'default-product.jpg', 1, 1),
+(2, 'SPW-002', 1, 'La Vida Cup', 184, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
 (4, 'SPW-004', 1, 'SUI Botol 600 mL', 0, 958, 2000, 'default-product2.jpg', 1, 1),
+(5, 'SPW-005', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 2, 1),
 (6, 'SPW-006', 1, 'Arvin Botol 600 mL', 0, 958, 2000, 'default-product.jpg', 1, 1),
 (7, 'SPW-007', 2, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
@@ -249,99 +251,6 @@ INSERT INTO `tbl_product_categories` (`id_category`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_purchase`
---
-
-CREATE TABLE `tbl_purchase` (
-  `id_purchase` int(11) NOT NULL,
-  `date_purchasing` date NOT NULL,
-  `id_supplier` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_lab` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_purchase`
---
-
-INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
-(1, '2022-08-01', 1, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_purchase_cart`
---
-
-CREATE TABLE `tbl_purchase_cart` (
-  `id_cart` int(11) NOT NULL,
-  `id_supplier` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `qty_product` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL,
-  `date_purchasing` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_purchase_cart`
---
-
-INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_product`, `price`, `total_price`, `date_purchasing`) VALUES
-(1, 3, 98, 50, 2500, 125000, '2022-07-29'),
-(2, 3, 100, 60, 230, 13800, '2022-07-29'),
-(3, 3, 102, 70, 2300, 161000, '2022-07-29'),
-(4, 3, 89, 40, 3000, 120000, '2022-07-29'),
-(5, 3, 103, 50, 2500, 125000, '2022-07-29'),
-(6, 3, 96, 50, 3000, 150000, '2022-07-29');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_purchase_detail`
---
-
-CREATE TABLE `tbl_purchase_detail` (
-  `id_purchase_detail` int(11) NOT NULL,
-  `id_purchase` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `qty_product` int(11) NOT NULL,
-  `basic_price` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_purchase_detail`
---
-
-INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_product`, `qty_product`, `basic_price`, `total_price`) VALUES
-(2, 1, 1, 30, 315, 9450),
-(3, 1, 2, 16, 281, 4496);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_supplier`
---
-
-CREATE TABLE `tbl_supplier` (
-  `id_supplier` int(11) NOT NULL,
-  `supplier` varchar(128) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `phone` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_supplier`
---
-
-INSERT INTO `tbl_supplier` (`id_supplier`, `supplier`, `address`, `phone`) VALUES
-(1, 'Toko Deri', 'Cianjur Kota', '085156334607'),
-(3, 'AICE Cianjur', 'Cianjur', '08000000000');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_tool`
 --
 
@@ -362,10 +271,62 @@ CREATE TABLE `tbl_tool` (
 --
 
 INSERT INTO `tbl_tool` (`id_tool`, `tool`, `brand`, `qty`, `price`, `tool_condition`, `description`, `id_lab`, `is_active`) VALUES
-(1, 'Showcase', '', 1, 0, 1, '', 1, 1),
-(2, 'Freezer', '', 1, 0, 1, '', 1, 1),
-(3, 'Rak Piring', '', 1, 0, 1, '', 1, 1),
-(5, 'Kompor', 'Rinnai', 1, 300000, 1, '', 1, 1);
+(1, 'Showcase', 'Panasonic', 1, 0, 1, 'Kepemilikan Titipan Coca Cola', 1, 1),
+(2, 'Freezer', 'Aqua 262 Liter', 1, 0, 1, 'Kepemilikan Titipan AICE', 1, 1),
+(3, 'Rak Piring', '3 Tingkat', 1, 200000, 1, 'Kepemilikan SPW', 1, 1),
+(5, 'Kompor', 'Rinnai 2 Tungku', 1, 325000, 1, 'Kepemilikan SPW', 1, 1),
+(6, 'Kompor Rinnai', '', 1, 0, 1, '', 2, 1),
+(7, 'Kompor', 'Rinai 2 Tungku', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(8, 'Gas 3 Kg', '3 Kg', 2, 160000, 1, 'Kepemilikan SPW', 1, 1),
+(9, 'Gas 5 Kg', '5 Kg', 1, 400000, 1, 'Kepemilikan SPW', 1, 1),
+(10, 'Estalase', '2 Meter', 1, 1200000, 1, 'Kepemilikan SPW', 1, 1),
+(11, 'Rice Cooker', '', 1, 250000, 1, 'Kepemilikan SPW', 1, 1),
+(12, 'Langseng', '', 1, 50000, 1, 'Kepemilikan SPW', 1, 1),
+(13, 'Katel Besar', 'Ukuran Besar', 1, 75000, 1, 'Kepemilikan SPW', 1, 1),
+(14, 'Katel Kecil', 'Ukuran Kecil', 1, 45000, 1, 'Kepemilikan SPW', 1, 1),
+(15, 'Baskom Besar', 'Ukuran Besar Biru', 1, 75000, 1, 'Kepemilikan SPW', 1, 1),
+(16, 'Baskom Kecil', 'Ukuran Kecil Warna Merah', 2, 25000, 1, 'Kepemilikan SPW', 1, 1),
+(17, 'Kontener Besar', 'Lion Star', 1, 125000, 1, 'Kepemilikan SPW', 1, 1),
+(18, 'Timbingan Digital', 'Kapasitas Max 5 Kg', 5, 100000, 1, 'Kepemilikan SPW', 1, 1),
+(19, 'Gunting', '', 1, 25000, 1, 'Kepemilikan SPW', 1, 1),
+(20, 'Talenan Kayu', 'Kayu', 2, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(21, 'Serokan', 'Stanless', 4, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(22, 'Sodet', 'Plastik', 3, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(23, 'Sealer', '', 5, 250000, 1, 'Kepemilikan SPW', 1, 1),
+(24, 'Timbangan BDigital Besar', 'Kapasitas Max 100 Kg', 1, 400000, 1, 'Kepemilikan SPW', 1, 1),
+(25, 'Keler Besar', '', 1, 45000, 1, 'Kepemilikan SPW', 1, 1),
+(26, 'Gelas Plastik', 'Plastik', 167, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(27, 'Cangkir Plastik', 'Plastik', 6, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(28, 'Piring Plastik', 'Plastik', 9, 7000, 1, 'Kepemilikan SPW', 1, 1),
+(29, 'Mangkok Plastik', 'Plastik', 254, 7000, 1, 'Kepemilikan SPW', 1, 1),
+(30, 'Mangkok Kaca', 'Kaca', 1, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(31, 'Box Roti Bening', 'Plastik', 5, 35000, 1, 'Kepemilikan SPW', 1, 1),
+(32, 'Baki', '', 2, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(33, 'Gayung', 'Gayung', 1, 1000, 0, '', 1, 1),
+(34, 'Gayung', 'Plastik', 1, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(35, 'Ember', 'Plastik', 1, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(36, 'Pe\'lan', '', 3, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(37, 'Meja Kecil', 'Kayu', 8, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(38, 'Meja Besar', 'Kayu', 2, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(39, 'Bangku Kayu', 'Kayu', 16, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(40, 'Kursi Plastik', 'Plastik', 2, 50000, 1, 'Kepemilikan SPW', 1, 1),
+(41, 'Cetakan Telur', 'Stanless', 1, 35000, 1, 'Kepemilikan SPW', 1, 1),
+(42, 'Botol Saus Kecap', 'Plastik', 3, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(43, 'Pisau', 'Stanless', 4, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(44, 'Centong', 'Plastik', 2, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(45, 'Sendok Nasi', 'Plastik', 3, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(46, 'Sendok Stanless', 'Stanless', 85, 2000, 1, 'Kepemilikan SPW', 1, 1),
+(47, 'Garpu', 'Stanless', 9, 2000, 1, 'Kepemilikan SPW', 1, 1),
+(48, 'Sendok Plastik', 'Plastik', 135, 200, 1, 'Kepemilikan SPW', 1, 1),
+(49, 'Penjapit', 'Almunium', 1, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(50, 'Sapu', 'Kayu', 1, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(51, 'Termos Es', 'Kapasitas 20 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(52, 'Sinduk', 'Plastik', 1, 12000, 1, 'Kepemilikan SPW', 1, 1),
+(53, 'Gas LPG', '3 Kg', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(54, 'Blender', 'Philips', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(55, 'Galon', '19 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(56, 'Rak Plastik', 'Plastik', 1, 12000, 1, 'Kepemilikan SPW', 1, 1),
+(57, 'Galon dengan Kran ', 'Kapasitas 5 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -423,7 +384,7 @@ INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `ro
 (5, 'Nara Yumita, S.ST', 'narayumita86@gmail.com', 'narayumita', '$2y$10$3qL9L1fHw2WoYhVln0iO5uytLwAGerbUh6drRzfS4QlIF7q46H5pC', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$maVCCO2F.Hd2fk.oacgF3.tWoPnFNA58gkFLPljQrU2MlDmlNYLuK', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$nlxL2S0ZwEiUO.OPVWlqTOhtj2DfZon8whJQbyetOulgb3JAryO4u', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(8, 'Siswa SPW DG', 'siswaspwgrafika@gmail.com', 'siswaspwgrafika', '$2y$10$rrhEBAWAyF9Vq9M3e4/q.uMeDoJWDkUEzZ34P1KElUwOr0iJjO2GS', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(8, 'Siswa SPW Grafika', 'siswaspwgrafika@gmail.com', 'siswaspwgrafika', '$2y$10$rrhEBAWAyF9Vq9M3e4/q.uMeDoJWDkUEzZ34P1KElUwOr0iJjO2GS', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (9, 'Fachmi Fathurahman, S.Pd', 'fachmifathurahman@gmail.com', 'fachmifathurahman', '$2y$10$sNASxSjI2/ol1.dbiy8y9u67qq53EhpkirA6PHq34MRaWF/u9MLBu', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (10, 'Andika Nurhidayat, S.Pd', 'andikanurhidayat2@gmail.com', 'ansikanurhidayat', '$2y$10$EoAU28WQqs4KfG9B3erd3OBy8lL5EiD8FKnDAcn1oAZX2tJQWMIwG', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (11, 'Asep Suherman, SP., MP', 'asepsuherman@gmail.com', 'asepsuherman', '$2y$10$yc4ztsfa2MMapcWfdL6Er.mKsHkpvDpb2EezRhFCvK83d1cApzN6m', 5, 5, 'default.jpg', '', '', '', '', '2022-07-25', 1),
@@ -563,8 +524,7 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
-(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
-(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1);
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -593,30 +553,6 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_product_categories`
   ADD PRIMARY KEY (`id_category`);
-
---
--- Indexes for table `tbl_purchase`
---
-ALTER TABLE `tbl_purchase`
-  ADD PRIMARY KEY (`id_purchase`);
-
---
--- Indexes for table `tbl_purchase_cart`
---
-ALTER TABLE `tbl_purchase_cart`
-  ADD PRIMARY KEY (`id_cart`);
-
---
--- Indexes for table `tbl_purchase_detail`
---
-ALTER TABLE `tbl_purchase_detail`
-  ADD PRIMARY KEY (`id_purchase_detail`);
-
---
--- Indexes for table `tbl_supplier`
---
-ALTER TABLE `tbl_supplier`
-  ADD PRIMARY KEY (`id_supplier`);
 
 --
 -- Indexes for table `tbl_tool`
@@ -686,37 +622,13 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT for table `tbl_product_categories`
 --
 ALTER TABLE `tbl_product_categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `tbl_purchase`
---
-ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_purchase_cart`
---
-ALTER TABLE `tbl_purchase_cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `tbl_purchase_detail`
---
-ALTER TABLE `tbl_purchase_detail`
-  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_supplier`
---
-ALTER TABLE `tbl_supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool`
 --
 ALTER TABLE `tbl_tool`
-  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool_condition`
@@ -752,7 +664,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

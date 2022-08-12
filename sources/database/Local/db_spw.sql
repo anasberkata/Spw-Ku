@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 11, 2022 at 07:21 PM
+-- Generation Time: Aug 12, 2022 at 04:00 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -89,8 +89,8 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (1, 'SPW-001', 1, 3, 'Cibodas Cup', 30, 315, 500, 'default-product.jpg', 1, 1),
 (2, 'SPW-002', 1, 3, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 3, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
-(4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 200, 1500, 2000, 'default-product2.jpg', 1, 1),
-(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 0, 958, 2000, 'default-product.jpg', 1, 1),
+(4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 72, 1520, 2000, 'default-product2.jpg', 1, 1),
+(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 72, 1250, 2000, 'default-product.jpg', 1, 1),
 (7, 'SPW-007', 2, 3, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 3, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
 (9, 'SPW-009', 2, 3, 'Koko Jelly Drink', 0, 795, 1500, 'default-product.jpg', 1, 1),
@@ -177,12 +177,12 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
 (91, 'SPW-091', 6, 1, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
 (92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
-(93, 'SPW-093', 6, 1, 'AICE Sweet Corn Stick New 52gr FIFA SS', 40, 2362, 3000, 'default-product.jpg', 1, 1),
+(93, 'SPW-093', 6, 1, 'AICE Sweet Corn Stick New 52gr FIFA SS', 80, 3500, 5000, 'default-product.jpg', 1, 1),
 (94, 'SPW-094', 6, 1, 'AICE Mochi Stick 30gr SP', 40, 2312, 3000, 'default-product.jpg', 1, 1),
 (95, 'SPW-095', 6, 1, 'AICE Mochi Durian 45mL SP', 40, 3212, 3000, 'default-product.jpg', 1, 1),
 (96, 'SPW-096', 6, 1, 'AICE 2 Colour Chocolate Stick 50 mL', 40, 1912, 2500, 'default-product.jpg', 1, 1),
 (97, 'SPW-097', 6, 1, 'AICE Milk Melon 50gr', 40, 1912, 2500, 'default-product.jpg', 1, 1),
-(98, 'SPW-098', 6, 1, 'AICE Blieberry Yogurt Stick 49 mL', 50, 1900, 2500, 'default-product.jpg', 1, 1),
+(98, 'SPW-098', 6, 1, 'AICE Blieberry Yogurt Stick 49 mL', 48, 2500, 3000, 'default-product.jpg', 1, 1),
 (99, 'SPW-099', 6, 1, 'AICE Fruit Twister Stick 60 mL', 40, 2425, 3000, 'default-product.jpg', 1, 1),
 (100, 'SPW-100', 6, 1, 'AICE Chocolate Crispy Stick 60gr', 40, 4000, 5000, 'default-product.jpg', 1, 1),
 (101, 'SPW-101', 6, 1, 'AICE Strawberry Crispy Stick New', 40, 2750, 3500, 'default-product.jpg', 1, 1),
@@ -286,7 +286,8 @@ CREATE TABLE `tbl_purchase` (
 --
 
 INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
-(1, '2022-08-01', 1, 1, 1);
+(1, '2022-08-01', 1, 1, 1),
+(2, '2022-08-12', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -338,7 +339,10 @@ CREATE TABLE `tbl_purchase_detail` (
 INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_product`, `qty_product`, `basic_price`, `total_price`) VALUES
 (2, 1, 1, 30, 315, 9450),
 (3, 1, 2, 16, 281, 4496),
-(4, 1, 4, 200, 2000, 400000);
+(7, 1, 4, 72, 1520, 109440),
+(10, 1, 6, 72, 1250, 90000),
+(11, 2, 98, 48, 2500, 120000),
+(12, 2, 93, 40, 3500, 140000);
 
 -- --------------------------------------------------------
 
@@ -726,7 +730,7 @@ ALTER TABLE `tbl_product_place`
 -- AUTO_INCREMENT for table `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase_cart`
@@ -738,7 +742,7 @@ ALTER TABLE `tbl_purchase_cart`
 -- AUTO_INCREMENT for table `tbl_purchase_detail`
 --
 ALTER TABLE `tbl_purchase_detail`
-  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
