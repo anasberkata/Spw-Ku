@@ -115,6 +115,13 @@ class Pembelian_model extends CI_Model
     }
 
 
+    function sum_total_price($id_purchase)
+    {
+        $query = $this->db->query("SELECT SUM(`total_price`) AS `total` FROM `tbl_purchase_detail` WHERE `id_purchase` = $id_purchase");
+        return $query->row();
+    }
+
+
 
 
 

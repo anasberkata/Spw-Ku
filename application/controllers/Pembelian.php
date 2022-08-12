@@ -246,6 +246,8 @@ class Pembelian extends CI_Controller
         $data['purchase'] = $this->db->get_where('tbl_purchase', ['id_purchase' => $id_purchase])->row_array();
         $data['purchase_detail'] = $this->pembelian->get_purchase_detail($id_purchase);
 
+        $data['total'] = $this->pembelian->sum_total_price($id_purchase);
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);

@@ -183,6 +183,17 @@
 
                                         <?php $i++; ?>
                                     <?php endforeach; ?>
+
+
+                                    <tr>
+                                        <td colspan="3"></td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0 px-3">TOTAL</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total->total, 2, ',', '.'); ?></p>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

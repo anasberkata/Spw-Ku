@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 12, 2022 at 08:59 PM
+-- Generation Time: Aug 12, 2022 at 09:10 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.30
 
@@ -72,6 +72,7 @@ CREATE TABLE `tbl_product` (
   `id_product` int(11) NOT NULL,
   `code` varchar(20) NOT NULL,
   `id_category` int(11) NOT NULL,
+  `id_place` int(11) NOT NULL,
   `product` varchar(128) NOT NULL,
   `qty` int(11) NOT NULL,
   `basic_price` int(100) NOT NULL,
@@ -85,141 +86,140 @@ CREATE TABLE `tbl_product` (
 -- Dumping data for table `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
-(1, 'SPW-001', 1, 'Cibodas Cup', 0, 315, 500, 'default-product.jpg', 1, 1),
-(2, 'SPW-002', 1, 'La Vida Cup', 184, 281, 500, 'default-product1.jpg', 1, 1),
-(3, 'SPW-003', 1, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
-(4, 'SPW-004', 1, 'SUI Botol 600 mL', 0, 958, 2000, 'default-product2.jpg', 1, 1),
-(5, 'SPW-005', 1, 'La Vida Cup', 100, 300, 500, 'default-product.jpg', 2, 1),
-(6, 'SPW-006', 1, 'Arvin Botol 600 mL', 0, 958, 2000, 'default-product.jpg', 1, 1),
-(7, 'SPW-007', 2, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
-(8, 'SPW-008', 2, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
-(9, 'SPW-009', 2, 'Koko Jelly Drink', 0, 792, 1000, 'default-product.jpg', 1, 1),
-(10, 'SPW-010', 2, 'Okky Jelly Drink', 27, 792, 1000, 'default-product.jpg', 1, 1),
-(11, 'SPW-011', 2, 'Teh Gelas', 29, 813, 1000, 'default-product.jpg', 1, 1),
-(12, 'SPW-012', 2, 'Teh Pucuk Harum', 0, 2271, 3000, 'default-product.jpg', 1, 1),
-(13, 'SPW-013', 3, 'Cocorio', 4, 0, 0, 'default-product.jpg', 1, 1),
-(14, 'SPW-014', 3, 'Top Ice', 26, 0, 0, 'default-product.jpg', 1, 1),
-(15, 'SPW-015', 3, 'Frenta', 5, 0, 0, 'default-product.jpg', 1, 1),
-(16, 'SPW-016', 4, 'Beng-beng', 68, 1700, 2000, 'default-product.jpg', 1, 1),
-(17, 'SPW-017', 4, 'Better', 0, 890, 1000, 'default-product.jpg', 1, 1),
-(18, 'SPW-018', 4, 'Chiki Ball', 0, 900, 1000, 'default-product.jpg', 1, 1),
-(19, 'SPW-019', 4, 'Chiki Twist', 0, 1750, 2000, 'default-product.jpg', 1, 1),
-(20, 'SPW-020', 4, 'Chitato Lite', 0, 1750, 2000, 'default-product.jpg', 1, 1),
-(21, 'SPW-021', 4, 'Choco Pie', 0, 1708, 2000, 'default-product.jpg', 1, 1),
-(22, 'SPW-022', 4, 'Chocolatos Roll', 31, 795, 1000, 'default-product.jpg', 1, 1),
-(23, 'SPW-023', 4, 'Dilan 5 in 1', 12, 1567, 2000, 'default-product.jpg', 1, 1),
-(24, 'SPW-024', 4, 'Garuda Pilus', 146, 425, 500, 'default-product.jpg', 1, 1),
-(25, 'SPW-025', 4, 'Garuda Rosta', 0, 850, 1000, 'default-product.jpg', 1, 1),
-(26, 'SPW-026', 4, 'Gedy Malkist', 21, 440, 500, 'default-product.jpg', 1, 1),
-(27, 'SPW-027', 4, 'Gery Wafer', 22, 1583, 2000, 'default-product.jpg', 1, 1),
-(28, 'SPW-028', 4, 'Good Time', 0, 875, 1000, 'default-product.jpg', 1, 1),
-(29, 'SPW-029', 4, 'Goriorio', 17, 450, 500, 'default-product.jpg', 1, 1),
-(30, 'SPW-030', 4, 'Kacang Koro', 0, 850, 1000, 'default-product.jpg', 1, 1),
-(31, 'SPW-031', 4, 'Kalpa', 5, 1667, 2000, 'default-product.jpg', 1, 1),
-(32, 'SPW-032', 4, 'Kenji colak colek', 0, 1750, 2000, 'default-product.jpg', 1, 1),
-(33, 'SPW-033', 4, 'Mie Shoer Kremez', 7, 450, 500, 'default-product.jpg', 1, 1),
-(34, 'SPW-034', 4, 'Moring', 0, 430, 500, 'default-product.jpg', 1, 1),
-(35, 'SPW-035', 4, 'Nabati Aah', 62, 425, 500, 'default-product.jpg', 1, 1),
-(36, 'SPW-036', 4, 'Nabati Siip', 26, 425, 500, 'default-product.jpg', 1, 1),
-(37, 'SPW-037', 4, 'Nextar', 0, 1750, 2000, 'default-product.jpg', 1, 1),
-(38, 'SPW-038', 4, 'Oreo Soft Cake', 18, 1750, 2000, 'default-product.jpg', 1, 1),
-(39, 'SPW-039', 4, 'Roma Arden', 0, 1700, 2000, 'default-product.jpg', 1, 1),
-(40, 'SPW-040', 4, 'Roma Gandum', 0, 1734, 2000, 'default-product.jpg', 1, 1),
-(41, 'SPW-041', 4, 'Roma Malkist', 30, 900, 1000, 'default-product.jpg', 1, 1),
-(42, 'SPW-042', 4, 'Slai O\'Lai', 1, 850, 1000, 'default-product.jpg', 1, 1),
-(43, 'SPW-043', 4, 'Sosis Sonice', 0, 813, 1000, 'default-product.jpg', 1, 1),
-(44, 'SPW-044', 4, 'Timtam Maxi', 10, 875, 1000, 'default-product.jpg', 1, 1),
-(45, 'SPW-045', 4, 'Top Chocolate', 52, 812, 1000, 'default-product.jpg', 1, 1),
-(46, 'SPW-046', 4, 'Wafello', 13, 900, 1000, 'default-product.jpg', 1, 1),
-(47, 'SPW-047', 5, 'Alpenliebe', 0, 196, 250, 'default-product.jpg', 1, 1),
-(48, 'SPW-048', 5, 'Kiss', 14, 0, 0, 'default-product.jpg', 1, 1),
-(49, 'SPW-049', 5, 'Kopiko', 14, 120, 250, 'default-product.jpg', 1, 1),
-(50, 'SPW-050', 5, 'Mint', 118, 0, 0, 'default-product.jpg', 1, 1),
-(51, 'SPW-051', 5, 'Relaxa', 140, 100, 250, 'default-product.jpg', 1, 1),
-(52, 'SPW-052', 7, 'Indomie Ayam Bawang', 66, 2525, 3000, 'default-product.jpg', 1, 1),
-(53, 'SPW-053', 7, 'Indomie Goreng', 26, 2675, 3000, 'default-product.jpg', 1, 1),
-(54, 'SPW-054', 7, 'Mie Sedap Ayam Bawang', 80, 2363, 3000, 'default-product.jpg', 1, 1),
-(55, 'SPW-055', 7, 'Mie Sedap Goreng', 80, 2525, 3000, 'default-product.jpg', 1, 1),
-(56, 'SPW-056', 7, 'Mie Sedap Soto', 0, 2525, 3000, 'default-product.jpg', 1, 1),
-(57, 'SPW-057', 8, 'Ballpoint Standard AE7', 63, 1458, 2000, 'default-product.jpg', 1, 1),
-(58, 'SPW-058', 8, 'Buku Big Boss 50 Lbr', 0, 4750, 6000, 'default-product.jpg', 1, 1),
-(59, 'SPW-059', 8, 'Buku Saku Tipis', 78, 900, 1500, 'default-product.jpg', 1, 1),
-(60, 'SPW-060', 8, 'Glue Stick', 12, 2000, 2500, 'default-product.jpg', 1, 1),
-(61, 'SPW-061', 8, 'Kertas HVS', 0, 85, 100, 'default-product.jpg', 1, 1),
-(62, 'SPW-062', 8, 'Kertas Polio', 190, 250, 500, 'default-product.jpg', 1, 1),
-(63, 'SPW-063', 8, 'Penggaris 30 Cm', 8, 2000, 2500, 'default-product.jpg', 1, 1),
-(64, 'SPW-064', 8, 'Tip-Ex', 6, 2500, 3000, 'default-product.jpg', 1, 1),
-(65, 'SPW-065', 9, 'Mixagrip Per Butir', 37, 220, 500, 'default-product.jpg', 1, 1),
-(66, 'SPW-066', 9, 'Hansaplast', 62, 225, 500, 'default-product.jpg', 1, 1),
-(67, 'SPW-067', 9, 'Promaag', 17, 667, 1000, 'default-product.jpg', 1, 1),
-(68, 'SPW-068', 10, 'Laurier', 12, 430, 500, 'default-product.jpg', 1, 1),
-(69, 'SPW-069', 10, 'Hers Protex', 16, 440, 500, 'default-product.jpg', 1, 1),
-(70, 'SPW-070', 10, 'Charm', 11, 430, 500, 'default-product.jpg', 1, 1),
-(71, 'SPW-071', 10, 'Tissue Tessa', 36, 1771, 2000, 'default-product.jpg', 1, 1),
-(72, 'SPW-072', 10, 'Minyak Sayur Promo 1 L', 3, 23750, 24000, 'default-product.jpg', 1, 1),
-(73, 'SPW-073', 10, 'Mama Lemon 1000', 0, 875, 1000, 'default-product.jpg', 1, 1),
-(74, 'SPW-074', 10, 'Garam Jempol', 5, 1500, 2000, 'default-product.jpg', 1, 1),
-(75, 'SPW-075', 10, 'Kecap Bango', 1, 24300, 25000, 'default-product.jpg', 1, 1),
-(76, 'SPW-076', 10, 'Saos Gembol', 3, 2500, 2750, 'default-product.jpg', 1, 1),
-(77, 'SPW-077', 10, 'Cuka 1000', 11, 1000, 1000, 'default-product.jpg', 1, 1),
-(78, 'SPW-078', 2, 'Pulpy Orange', 120, 3833, 4500, 'default-product.jpg', 1, 1),
-(79, 'SPW-079', 2, 'Sprite Pet Seru 390 mL', 120, 3958, 4500, 'default-product.jpg', 1, 1),
-(80, 'SPW-080', 2, 'Fanta Pet Seru 390 mL', 120, 3958, 5000, 'default-product.jpg', 1, 1),
-(81, 'SPW-081', 2, 'Sprite Pet Imut 250 mL', 168, 2375, 3000, 'default-product.jpg', 1, 1),
-(82, 'SPW-082', 2, 'Fanta Pet Imut 250 mL', 72, 2375, 3000, 'default-product.jpg', 1, 1),
-(83, 'SPW-083', 2, 'Coca Cola Pet Imut 250 mL', 120, 2375, 3000, 'default-product.jpg', 1, 1),
-(84, 'SPW-084', 2, ' Frestea 350mL', 48, 3500, 4500, 'default-product.jpg', 1, 1),
-(85, 'SPW-085', 2, 'Coca Cola Pet Seru 390 mL', 84, 3958, 5000, 'default-product.jpg', 1, 1),
-(86, 'SPW-086', 2, 'Nutriboost', 120, 5333, 7000, 'default-product.jpg', 1, 1),
-(87, 'SPW-087', 4, 'Choki-Choki', 160, 900, 1500, 'default-product.jpg', 1, 1),
-(88, 'SPW-088', 4, 'Top Delfi', 96, 804, 1000, 'default-product.jpg', 1, 1),
-(89, 'SPW-089', 6, 'AICE Markisa 55 mL', 50, 1550, 2000, 'default-product.jpg', 1, 1),
-(90, 'SPW-090', 6, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
-(91, 'SPW-091', 6, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
-(92, 'SPW-092', 6, 'AICE Semangka Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
-(93, 'SPW-093', 6, 'AICE Sweet Corn Stick New 52gr FIFA SS', 40, 2362, 3000, 'default-product.jpg', 1, 1),
-(94, 'SPW-094', 6, 'AICE Mochi Stick 30gr SP', 40, 2312, 3000, 'default-product.jpg', 1, 1),
-(95, 'SPW-095', 6, 'AICE Mochi Durian 45mL SP', 40, 3212, 3000, 'default-product.jpg', 1, 1),
-(96, 'SPW-096', 6, 'AICE 2 Colour Chocolate Stick 50 mL', 40, 1912, 2500, 'default-product.jpg', 1, 1),
-(97, 'SPW-097', 6, 'AICE Milk Melon 50gr', 40, 1912, 2500, 'default-product.jpg', 1, 1),
-(98, 'SPW-098', 6, 'AICE Blieberry Yogurt Stick 49 mL', 50, 1900, 2500, 'default-product.jpg', 1, 1),
-(99, 'SPW-099', 6, 'AICE Fruit Twister Stick 60 mL', 40, 2425, 3000, 'default-product.jpg', 1, 1),
-(100, 'SPW-100', 6, 'AICE Chocolate Crispy Stick 60gr', 40, 4000, 5000, 'default-product.jpg', 1, 1),
-(101, 'SPW-101', 6, 'AICE Strawberry Crispy Stick New', 40, 2750, 3500, 'default-product.jpg', 1, 1),
-(102, 'SPW-102', 6, 'AICE Sundae Chocolate Cup 100 mL', 24, 4041, 5000, 'default-product.jpg', 1, 1),
-(103, 'SPW-103', 6, 'AICE Freezy Choco 49 mL', 50, 1560, 2000, 'default-product.jpg', 1, 1),
-(104, 'SPW-104', 6, 'AICE Bingo Cookies Cone 100 mL', 24, 4062, 4000, 'default-product.jpg', 1, 1),
-(105, 'SPW-105', 5, 'Bontea Green Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
-(106, 'SPW-106', 5, 'Kiss Zak Cherry', 0, 0, 0, 'default-product.jpg', 1, 1),
-(107, 'SPW-107', 5, 'Kopiko Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
-(108, 'SPW-108', 5, 'Mintz Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
-(109, 'SPW-109', 5, 'Relaxa', 0, 0, 0, 'default-product.jpg', 1, 1),
-(110, 'SPW-110', 5, 'Yupi', 0, 0, 0, 'default-product.jpg', 1, 1),
-(111, 'SPW-111', 4, 'Mio Fullo', 0, 0, 0, 'default-product.jpg', 1, 1),
-(112, 'SPW-112', 4, 'Garuda Katom', 0, 0, 2000, 'default-product.jpg', 1, 1),
-(113, 'SPW-113', 4, 'Gery Salut Hazelnut', 0, 0, 0, 'default-product.jpg', 1, 1),
-(114, 'SPW-114', 4, 'Gery Malkist Kelapa Coklat', 0, 0, 1000, 'default-product.jpg', 1, 1),
-(115, 'SPW-115', 4, 'Gery Salut Roll', 0, 0, 500, 'default-product.jpg', 1, 1),
-(116, 'SPW-116', 4, 'Japota', 0, 0, 1000, 'default-product.jpg', 1, 1),
-(117, 'SPW-117', 4, 'Deka Kacang', 0, 0, 1000, 'default-product.jpg', 1, 1),
-(118, 'SPW-118', 4, 'Kacang Polong', 0, 0, 0, 'default-product.jpg', 1, 1),
-(119, 'SPW-119', 4, 'Oishi Rinbee', 0, 0, 0, 'default-product.jpg', 1, 1),
-(120, 'SPW-120', 4, 'Oreo Cream', 0, 0, 2000, 'default-product.jpg', 1, 1),
-(121, 'SPW-121', 4, 'Roti Aoka', 0, 0, 2000, 'default-product.jpg', 1, 1),
-(122, 'SPW-122', 4, 'Selimut', 0, 0, 500, 'default-product.jpg', 1, 1),
-(123, 'SPW-123', 4, 'Tiktak', 0, 0, 0, 'default-product.jpg', 1, 1),
-(124, 'SPW-124', 4, 'Tiktuk Lingga Sari', 0, 0, 0, 'default-product.jpg', 1, 1),
-(125, 'SPW-125', 4, 'Tanggo', 0, 0, 2000, 'default-product.jpg', 1, 1),
-(126, 'SPW-126', 4, 'Monde Serena Gold', 0, 0, 0, 'default-product.jpg', 1, 1),
-(127, 'SPW-127', 4, 'Nabati Roll', 0, 0, 500, 'default-product.jpg', 1, 1),
-(128, 'SPW-128', 2, 'Calpico', 0, 0, 0, 'default-product.jpg', 1, 1),
-(129, 'SPW-129', 2, 'Kopikap', 0, 0, 0, 'default-product.jpg', 1, 1),
-(130, 'SPW-130', 2, 'Milku 200 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
-(131, 'SPW-131', 2, 'Teh Gelas', 0, 0, 0, 'default-product.jpg', 1, 1),
-(132, 'SPW-132', 10, 'Mama Lemon 450 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
-(133, 'SPW-133', 10, 'Lavida', 0, 0, 0, 'default-product.jpg', 1, 1),
-(134, 'SPW-134', 1, 'Sui Cup 600 mL', 0, 0, 0, 'default-product.jpg', 1, 1);
+INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
+(1, 'SPW-001', 1, 3, 'Cibodas Cup', 30, 315, 500, 'default-product.jpg', 1, 1),
+(2, 'SPW-002', 1, 3, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
+(3, 'SPW-003', 1, 3, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
+(4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 72, 1520, 2000, 'default-product2.jpg', 1, 1),
+(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 72, 1250, 2000, 'default-product.jpg', 1, 1),
+(7, 'SPW-007', 2, 3, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
+(8, 'SPW-008', 2, 3, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
+(9, 'SPW-009', 2, 3, 'Koko Jelly Drink', 0, 795, 1500, 'default-product.jpg', 1, 1),
+(10, 'SPW-010', 2, 3, 'Okky Jelly Drink', 27, 792, 1000, 'default-product.jpg', 1, 1),
+(11, 'SPW-011', 2, 3, 'Teh Gelas', 29, 813, 1000, 'default-product.jpg', 1, 1),
+(12, 'SPW-012', 2, 3, 'Teh Pucuk Harum', 0, 2271, 3000, 'default-product.jpg', 1, 1),
+(13, 'SPW-013', 3, 3, 'Cocorio', 4, 0, 0, 'default-product.jpg', 1, 1),
+(14, 'SPW-014', 3, 3, 'Top Ice', 26, 0, 0, 'default-product.jpg', 1, 1),
+(15, 'SPW-015', 3, 3, 'Frenta', 5, 0, 0, 'default-product.jpg', 1, 1),
+(16, 'SPW-016', 4, 3, 'Beng-beng', 68, 1700, 2000, 'default-product.jpg', 1, 1),
+(17, 'SPW-017', 4, 3, 'Better', 0, 890, 1000, 'default-product.jpg', 1, 1),
+(18, 'SPW-018', 4, 3, 'Chiki Ball', 0, 900, 1000, 'default-product.jpg', 1, 1),
+(19, 'SPW-019', 4, 3, 'Chiki Twist', 0, 1750, 2000, 'default-product.jpg', 1, 1),
+(20, 'SPW-020', 4, 3, 'Chitato Lite', 0, 1750, 2000, 'default-product.jpg', 1, 1),
+(21, 'SPW-021', 4, 3, 'Choco Pie', 0, 1708, 2000, 'default-product.jpg', 1, 1),
+(22, 'SPW-022', 4, 3, 'Chocolatos Roll', 31, 795, 1000, 'default-product.jpg', 1, 1),
+(23, 'SPW-023', 4, 3, 'Dilan 5 in 1', 12, 1567, 2000, 'default-product.jpg', 1, 1),
+(24, 'SPW-024', 4, 3, 'Garuda Pilus', 146, 425, 500, 'default-product.jpg', 1, 1),
+(25, 'SPW-025', 4, 3, 'Garuda Rosta', 0, 850, 1000, 'default-product.jpg', 1, 1),
+(26, 'SPW-026', 4, 3, 'Gedy Malkist', 21, 440, 500, 'default-product.jpg', 1, 1),
+(27, 'SPW-027', 4, 3, 'Gery Wafer', 22, 1583, 2000, 'default-product.jpg', 1, 1),
+(28, 'SPW-028', 4, 3, 'Good Time', 0, 875, 1000, 'default-product.jpg', 1, 1),
+(29, 'SPW-029', 4, 3, 'Goriorio', 17, 450, 500, 'default-product.jpg', 1, 1),
+(30, 'SPW-030', 4, 3, 'Kacang Koro', 0, 850, 1000, 'default-product.jpg', 1, 1),
+(31, 'SPW-031', 4, 3, 'Kalpa', 5, 1667, 2000, 'default-product.jpg', 1, 1),
+(32, 'SPW-032', 4, 3, 'Kenji colak colek', 0, 1750, 2000, 'default-product.jpg', 1, 1),
+(33, 'SPW-033', 4, 3, 'Mie Shoer Kremez', 7, 450, 500, 'default-product.jpg', 1, 1),
+(34, 'SPW-034', 4, 3, 'Moring', 0, 430, 500, 'default-product.jpg', 1, 1),
+(35, 'SPW-035', 4, 3, 'Nabati Aah', 62, 425, 500, 'default-product.jpg', 1, 1),
+(36, 'SPW-036', 4, 3, 'Nabati Siip', 26, 425, 500, 'default-product.jpg', 1, 1),
+(37, 'SPW-037', 4, 3, 'Nextar', 0, 1750, 2000, 'default-product.jpg', 1, 1),
+(38, 'SPW-038', 4, 3, 'Oreo Soft Cake', 18, 1750, 2000, 'default-product.jpg', 1, 1),
+(39, 'SPW-039', 4, 3, 'Roma Arden', 0, 1700, 2000, 'default-product.jpg', 1, 1),
+(40, 'SPW-040', 4, 3, 'Roma Gandum', 0, 1734, 2000, 'default-product.jpg', 1, 1),
+(41, 'SPW-041', 4, 3, 'Roma Malkist', 30, 900, 1000, 'default-product.jpg', 1, 1),
+(42, 'SPW-042', 4, 3, 'Slai O\'Lai', 1, 850, 1000, 'default-product.jpg', 1, 1),
+(43, 'SPW-043', 4, 3, 'Sosis Sonice', 0, 813, 1000, 'default-product.jpg', 1, 1),
+(44, 'SPW-044', 4, 3, 'Timtam Maxi', 10, 875, 1000, 'default-product.jpg', 1, 1),
+(45, 'SPW-045', 4, 3, 'Top Chocolate', 52, 812, 1000, 'default-product.jpg', 1, 1),
+(46, 'SPW-046', 4, 3, 'Wafello', 13, 900, 1000, 'default-product.jpg', 1, 1),
+(47, 'SPW-047', 5, 3, 'Alpenliebe', 0, 196, 250, 'default-product.jpg', 1, 1),
+(48, 'SPW-048', 5, 3, 'Kiss', 14, 0, 0, 'default-product.jpg', 1, 1),
+(49, 'SPW-049', 5, 3, 'Kopiko', 14, 120, 250, 'default-product.jpg', 1, 1),
+(50, 'SPW-050', 5, 3, 'Mint', 118, 0, 0, 'default-product.jpg', 1, 1),
+(51, 'SPW-051', 5, 3, 'Relaxa', 140, 100, 250, 'default-product.jpg', 1, 1),
+(52, 'SPW-052', 7, 3, 'Indomie Ayam Bawang', 66, 2525, 3000, 'default-product.jpg', 1, 1),
+(53, 'SPW-053', 7, 3, 'Indomie Goreng', 26, 2675, 3000, 'default-product.jpg', 1, 1),
+(54, 'SPW-054', 7, 3, 'Mie Sedap Ayam Bawang', 80, 2363, 3000, 'default-product.jpg', 1, 1),
+(55, 'SPW-055', 7, 3, 'Mie Sedap Goreng', 80, 2525, 3000, 'default-product.jpg', 1, 1),
+(56, 'SPW-056', 7, 3, 'Mie Sedap Soto', 0, 2525, 3000, 'default-product.jpg', 1, 1),
+(57, 'SPW-057', 8, 3, 'Ballpoint Standard AE7', 63, 1458, 2000, 'default-product.jpg', 1, 1),
+(58, 'SPW-058', 8, 3, 'Buku Big Boss 50 Lbr', 0, 4750, 6000, 'default-product.jpg', 1, 1),
+(59, 'SPW-059', 8, 3, 'Buku Saku Tipis', 78, 900, 1500, 'default-product.jpg', 1, 1),
+(60, 'SPW-060', 8, 3, 'Glue Stick', 12, 2000, 2500, 'default-product.jpg', 1, 1),
+(61, 'SPW-061', 8, 3, 'Kertas HVS', 0, 85, 100, 'default-product.jpg', 1, 1),
+(62, 'SPW-062', 8, 3, 'Kertas Polio', 190, 250, 500, 'default-product.jpg', 1, 1),
+(63, 'SPW-063', 8, 3, 'Penggaris 30 Cm', 8, 2000, 2500, 'default-product.jpg', 1, 1),
+(64, 'SPW-064', 8, 3, 'Tip-Ex', 6, 2500, 3000, 'default-product.jpg', 1, 1),
+(65, 'SPW-065', 9, 3, 'Mixagrip Per Butir', 37, 220, 500, 'default-product.jpg', 1, 1),
+(66, 'SPW-066', 9, 3, 'Hansaplast', 62, 225, 500, 'default-product.jpg', 1, 1),
+(67, 'SPW-067', 9, 3, 'Promaag', 17, 667, 1000, 'default-product.jpg', 1, 1),
+(68, 'SPW-068', 10, 3, 'Laurier', 12, 430, 500, 'default-product.jpg', 1, 1),
+(69, 'SPW-069', 10, 3, 'Hers Protex', 16, 440, 500, 'default-product.jpg', 1, 1),
+(70, 'SPW-070', 10, 3, 'Charm', 11, 430, 500, 'default-product.jpg', 1, 1),
+(71, 'SPW-071', 10, 3, 'Tissue Tessa', 36, 1771, 2000, 'default-product.jpg', 1, 1),
+(72, 'SPW-072', 10, 3, 'Minyak Sayur Promo 1 L', 3, 23750, 24000, 'default-product.jpg', 1, 1),
+(73, 'SPW-073', 10, 3, 'Mama Lemon 1000', 0, 875, 1000, 'default-product.jpg', 1, 1),
+(74, 'SPW-074', 10, 3, 'Garam Jempol', 5, 1500, 2000, 'default-product.jpg', 1, 1),
+(75, 'SPW-075', 10, 3, 'Kecap Bango', 1, 24300, 25000, 'default-product.jpg', 1, 1),
+(76, 'SPW-076', 10, 3, 'Saos Gembol', 3, 2500, 2750, 'default-product.jpg', 1, 1),
+(77, 'SPW-077', 10, 3, 'Cuka 1000', 11, 1000, 1000, 'default-product.jpg', 1, 1),
+(78, 'SPW-078', 2, 2, 'Pulpy Orange', 120, 3833, 4500, 'default-product.jpg', 1, 1),
+(79, 'SPW-079', 2, 2, 'Sprite Pet Seru 390 mL', 120, 3958, 4500, 'default-product.jpg', 1, 1),
+(80, 'SPW-080', 2, 2, 'Fanta Pet Seru 390 mL', 120, 3958, 5000, 'default-product.jpg', 1, 1),
+(81, 'SPW-081', 2, 2, 'Sprite Pet Imut 250 mL', 168, 2375, 3000, 'default-product.jpg', 1, 1),
+(82, 'SPW-082', 2, 2, 'Fanta Pet Imut 250 mL', 72, 2375, 3000, 'default-product.jpg', 1, 1),
+(83, 'SPW-083', 2, 2, 'Coca Cola Pet Imut 250 mL', 120, 2375, 3000, 'default-product.jpg', 1, 1),
+(84, 'SPW-084', 2, 2, ' Frestea 350mL', 48, 3500, 4500, 'default-product.jpg', 1, 1),
+(85, 'SPW-085', 2, 2, 'Coca Cola Pet Seru 390 mL', 84, 3958, 5000, 'default-product.jpg', 1, 1),
+(86, 'SPW-086', 2, 2, 'Nutriboost', 120, 5333, 7000, 'default-product.jpg', 1, 1),
+(87, 'SPW-087', 4, 3, 'Choki-Choki', 160, 900, 1500, 'default-product.jpg', 1, 1),
+(88, 'SPW-088', 4, 3, 'Top Delfi', 96, 804, 1000, 'default-product.jpg', 1, 1),
+(89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 50, 1550, 2000, 'default-product.jpg', 1, 1),
+(90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
+(91, 'SPW-091', 6, 1, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
+(92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
+(93, 'SPW-093', 6, 1, 'AICE Sweet Corn Stick New 52gr FIFA SS', 80, 3500, 5000, 'default-product.jpg', 1, 1),
+(94, 'SPW-094', 6, 1, 'AICE Mochi Stick 30gr SP', 40, 2312, 3000, 'default-product.jpg', 1, 1),
+(95, 'SPW-095', 6, 1, 'AICE Mochi Durian 45mL SP', 40, 3212, 3000, 'default-product.jpg', 1, 1),
+(96, 'SPW-096', 6, 1, 'AICE 2 Colour Chocolate Stick 50 mL', 40, 1912, 2500, 'default-product.jpg', 1, 1),
+(97, 'SPW-097', 6, 1, 'AICE Milk Melon 50gr', 40, 1912, 2500, 'default-product.jpg', 1, 1),
+(98, 'SPW-098', 6, 1, 'AICE Blieberry Yogurt Stick 49 mL', 48, 2500, 3000, 'default-product.jpg', 1, 1),
+(99, 'SPW-099', 6, 1, 'AICE Fruit Twister Stick 60 mL', 40, 2425, 3000, 'default-product.jpg', 1, 1),
+(100, 'SPW-100', 6, 1, 'AICE Chocolate Crispy Stick 60gr', 40, 4000, 5000, 'default-product.jpg', 1, 1),
+(101, 'SPW-101', 6, 1, 'AICE Strawberry Crispy Stick New', 40, 2750, 3500, 'default-product.jpg', 1, 1),
+(102, 'SPW-102', 6, 1, 'AICE Sundae Chocolate Cup 100 mL', 24, 4041, 5000, 'default-product.jpg', 1, 1),
+(103, 'SPW-103', 6, 1, 'AICE Freezy Choco 49 mL', 50, 1560, 2000, 'default-product.jpg', 1, 1),
+(104, 'SPW-104', 6, 1, 'AICE Bingo Cookies Cone 100 mL', 24, 4062, 4000, 'default-product.jpg', 1, 1),
+(105, 'SPW-105', 5, 3, 'Bontea Green Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
+(106, 'SPW-106', 5, 3, 'Kiss Zak Cherry', 0, 0, 0, 'default-product.jpg', 1, 1),
+(107, 'SPW-107', 5, 3, 'Kopiko Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
+(108, 'SPW-108', 5, 3, 'Mintz Zak', 0, 0, 0, 'default-product.jpg', 1, 1),
+(109, 'SPW-109', 5, 3, 'Relaxa', 0, 0, 0, 'default-product.jpg', 1, 1),
+(110, 'SPW-110', 5, 3, 'Yupi', 0, 0, 0, 'default-product.jpg', 1, 1),
+(111, 'SPW-111', 4, 3, 'Mio Fullo', 0, 0, 0, 'default-product.jpg', 1, 1),
+(112, 'SPW-112', 4, 3, 'Garuda Katom', 0, 0, 2000, 'default-product.jpg', 1, 1),
+(113, 'SPW-113', 4, 3, 'Gery Salut Hazelnut', 0, 0, 0, 'default-product.jpg', 1, 1),
+(114, 'SPW-114', 4, 3, 'Gery Malkist Kelapa Coklat', 0, 0, 1000, 'default-product.jpg', 1, 1),
+(115, 'SPW-115', 4, 3, 'Gery Salut Roll', 0, 0, 500, 'default-product.jpg', 1, 1),
+(116, 'SPW-116', 4, 3, 'Japota', 0, 0, 1000, 'default-product.jpg', 1, 1),
+(117, 'SPW-117', 4, 3, 'Deka Kacang', 0, 0, 1000, 'default-product.jpg', 1, 1),
+(118, 'SPW-118', 4, 3, 'Kacang Polong', 0, 0, 0, 'default-product.jpg', 1, 1),
+(119, 'SPW-119', 4, 3, 'Oishi Rinbee', 0, 0, 0, 'default-product.jpg', 1, 1),
+(120, 'SPW-120', 4, 3, 'Oreo Cream', 0, 0, 2000, 'default-product.jpg', 1, 1),
+(121, 'SPW-121', 4, 3, 'Roti Aoka', 0, 0, 2000, 'default-product.jpg', 1, 1),
+(122, 'SPW-122', 4, 3, 'Selimut', 0, 0, 500, 'default-product.jpg', 1, 1),
+(123, 'SPW-123', 4, 3, 'Tiktak', 0, 0, 0, 'default-product.jpg', 1, 1),
+(124, 'SPW-124', 4, 3, 'Tiktuk Lingga Sari', 0, 0, 0, 'default-product.jpg', 1, 1),
+(125, 'SPW-125', 4, 3, 'Tanggo', 0, 0, 2000, 'default-product.jpg', 1, 1),
+(126, 'SPW-126', 4, 3, 'Monde Serena Gold', 0, 0, 0, 'default-product.jpg', 1, 1),
+(127, 'SPW-127', 4, 3, 'Nabati Roll', 0, 0, 500, 'default-product.jpg', 1, 1),
+(128, 'SPW-128', 2, 3, 'Calpico', 0, 0, 0, 'default-product.jpg', 1, 1),
+(129, 'SPW-129', 2, 3, 'Kopikap', 0, 0, 0, 'default-product.jpg', 1, 1),
+(130, 'SPW-130', 2, 3, 'Milku 200 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
+(131, 'SPW-131', 2, 3, 'Teh Gelas', 0, 0, 0, 'default-product.jpg', 1, 1),
+(132, 'SPW-132', 10, 3, 'Mama Lemon 450 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
+(133, 'SPW-133', 10, 3, 'Lavida', 0, 0, 0, 'default-product.jpg', 1, 1),
+(134, 'SPW-134', 1, 3, 'Sui Cup 600 mL', 0, 0, 0, 'default-product.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -247,6 +247,124 @@ INSERT INTO `tbl_product_categories` (`id_category`, `category`) VALUES
 (8, 'ATK'),
 (9, 'Obat-obatan'),
 (10, 'Lainnya');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_product_place`
+--
+
+CREATE TABLE `tbl_product_place` (
+  `id_place` int(11) NOT NULL,
+  `place` varchar(125) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_product_place`
+--
+
+INSERT INTO `tbl_product_place` (`id_place`, `place`) VALUES
+(1, 'Es Krim (AICE)'),
+(2, 'Showcase'),
+(3, 'Etalase');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_purchase`
+--
+
+CREATE TABLE `tbl_purchase` (
+  `id_purchase` int(11) NOT NULL,
+  `date_purchasing` date NOT NULL,
+  `id_supplier` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_purchase`
+--
+
+INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
+(1, '2022-08-01', 1, 1, 1),
+(2, '2022-08-12', 3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_purchase_cart`
+--
+
+CREATE TABLE `tbl_purchase_cart` (
+  `id_cart` int(11) NOT NULL,
+  `id_supplier` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `date_purchasing` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_purchase_cart`
+--
+
+INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_product`, `price`, `total_price`, `date_purchasing`) VALUES
+(1, 3, 98, 50, 2500, 125000, '2022-07-29'),
+(2, 3, 100, 60, 230, 13800, '2022-07-29'),
+(3, 3, 102, 70, 2300, 161000, '2022-07-29'),
+(4, 3, 89, 40, 3000, 120000, '2022-07-29'),
+(5, 3, 103, 50, 2500, 125000, '2022-07-29'),
+(6, 3, 96, 50, 3000, 150000, '2022-07-29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_purchase_detail`
+--
+
+CREATE TABLE `tbl_purchase_detail` (
+  `id_purchase_detail` int(11) NOT NULL,
+  `id_purchase` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `basic_price` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_purchase_detail`
+--
+
+INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_product`, `qty_product`, `basic_price`, `total_price`) VALUES
+(2, 1, 1, 30, 315, 9450),
+(3, 1, 2, 16, 281, 4496),
+(7, 1, 4, 72, 1520, 109440),
+(10, 1, 6, 72, 1250, 90000),
+(11, 2, 98, 48, 2500, 120000),
+(12, 2, 93, 40, 3500, 140000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_supplier`
+--
+
+CREATE TABLE `tbl_supplier` (
+  `id_supplier` int(11) NOT NULL,
+  `supplier` varchar(128) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_supplier`
+--
+
+INSERT INTO `tbl_supplier` (`id_supplier`, `supplier`, `address`, `phone`) VALUES
+(1, 'Toko Deri', 'Cianjur Kota', '085156334607'),
+(3, 'AICE Cianjur', 'Cianjur', '08000000000');
 
 -- --------------------------------------------------------
 
@@ -384,7 +502,7 @@ INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `ro
 (5, 'Nara Yumita, S.ST', 'narayumita86@gmail.com', 'narayumita', '$2y$10$3qL9L1fHw2WoYhVln0iO5uytLwAGerbUh6drRzfS4QlIF7q46H5pC', 3, 3, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (6, 'Moch Angga Kusumah, S.Pd', 'manggakusumah@gmail.com', 'manggakusumah', '$2y$10$maVCCO2F.Hd2fk.oacgF3.tWoPnFNA58gkFLPljQrU2MlDmlNYLuK', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
 (7, 'Rony Noor Sa\'roni, ST', 'ronynoorsaroni@gmail.com', 'ronynoorsaroni', '$2y$10$nlxL2S0ZwEiUO.OPVWlqTOhtj2DfZon8whJQbyetOulgb3JAryO4u', 4, 4, 'default.jpg', '', '', '', '', '2022-07-21', 1),
-(8, 'Siswa SPW Grafika', 'siswaspwgrafika@gmail.com', 'siswaspwgrafika', '$2y$10$rrhEBAWAyF9Vq9M3e4/q.uMeDoJWDkUEzZ34P1KElUwOr0iJjO2GS', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(8, 'Siswa SPW DG', 'siswaspwgrafika@gmail.com', 'siswaspwgrafika', '$2y$10$rrhEBAWAyF9Vq9M3e4/q.uMeDoJWDkUEzZ34P1KElUwOr0iJjO2GS', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (9, 'Fachmi Fathurahman, S.Pd', 'fachmifathurahman@gmail.com', 'fachmifathurahman', '$2y$10$sNASxSjI2/ol1.dbiy8y9u67qq53EhpkirA6PHq34MRaWF/u9MLBu', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (10, 'Andika Nurhidayat, S.Pd', 'andikanurhidayat2@gmail.com', 'ansikanurhidayat', '$2y$10$EoAU28WQqs4KfG9B3erd3OBy8lL5EiD8FKnDAcn1oAZX2tJQWMIwG', 2, 2, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (11, 'Asep Suherman, SP., MP', 'asepsuherman@gmail.com', 'asepsuherman', '$2y$10$yc4ztsfa2MMapcWfdL6Er.mKsHkpvDpb2EezRhFCvK83d1cApzN6m', 5, 5, 'default.jpg', '', '', '', '', '2022-07-25', 1),
@@ -524,7 +642,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
-(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1);
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
+(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -553,6 +672,36 @@ ALTER TABLE `tbl_product`
 --
 ALTER TABLE `tbl_product_categories`
   ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `tbl_product_place`
+--
+ALTER TABLE `tbl_product_place`
+  ADD PRIMARY KEY (`id_place`);
+
+--
+-- Indexes for table `tbl_purchase`
+--
+ALTER TABLE `tbl_purchase`
+  ADD PRIMARY KEY (`id_purchase`);
+
+--
+-- Indexes for table `tbl_purchase_cart`
+--
+ALTER TABLE `tbl_purchase_cart`
+  ADD PRIMARY KEY (`id_cart`);
+
+--
+-- Indexes for table `tbl_purchase_detail`
+--
+ALTER TABLE `tbl_purchase_detail`
+  ADD PRIMARY KEY (`id_purchase_detail`);
+
+--
+-- Indexes for table `tbl_supplier`
+--
+ALTER TABLE `tbl_supplier`
+  ADD PRIMARY KEY (`id_supplier`);
 
 --
 -- Indexes for table `tbl_tool`
@@ -616,13 +765,43 @@ ALTER TABLE `tbl_data_web`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_categories`
 --
 ALTER TABLE `tbl_product_categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_product_place`
+--
+ALTER TABLE `tbl_product_place`
+  MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_purchase`
+--
+ALTER TABLE `tbl_purchase`
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_purchase_cart`
+--
+ALTER TABLE `tbl_purchase_cart`
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_purchase_detail`
+--
+ALTER TABLE `tbl_purchase_detail`
+  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_supplier`
+--
+ALTER TABLE `tbl_supplier`
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool`
@@ -664,7 +843,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
