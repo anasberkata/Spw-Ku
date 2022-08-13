@@ -6,14 +6,14 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Pembelian Produk :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($purchase["date_purchasing"])) . " / " . $purchase["supplier"] . " / SPW " . $lab; ?></p>
+                        <h6>Daftar Penjualan Produk :</h6>
+                        <!-- <p class="small"><?= date('d F Y', strtotime($selling["date_selling"])) . " / SPW " . $lab; ?></p> -->
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                             Tambah
                         </button>
-                        <a href="<?= base_url('pembelian/purchase/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                        <a href="<?= base_url('penjualan/selling/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                             Kembali
                         </a>
 
@@ -25,10 +25,10 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('pembelian/purchase_detail_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('penjualan/selling_detail_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
-                                            <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
+                                            <input type="hidden" name="id_selling" value="<?= $id_selling ?>" readonly>
                                             <div class="mb-3">
                                                 <select class="form-select" aria-label="Default select" name="id_product">
                                                     <option selected>Pilih Produk</option>
@@ -38,16 +38,8 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label>Qty Produk</label>
+                                                <label>Qty Penjualan</label>
                                                 <input type="text" class="form-control" placeholder="Jumlah Produk" name="qty_product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Dasar (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Dasar Produk" name="basic_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Jual (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Jual Produk" name="selling_price">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -86,16 +78,16 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($purchase_detail->result() as $pd) : ?>
+                                    <?php foreach ($selling_detail->result() as $sd) : ?>
                                         <tr>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $pd->product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->product; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $pd->qty_product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->qty_product; ?></p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($pd->basic_price, 0, ',', '.'); ?>,-</p>
@@ -185,7 +177,7 @@
                                     <?php endforeach; ?>
 
 
-                                    <?php if ($total->total == NULL) : ?>
+                                    <?php if ($total_basic_price->total_basic_price == NULL) : ?>
                                     <?php else : ?>
                                         <tr>
                                             <td colspan="3"></td>
@@ -193,7 +185,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total->total, 2, ',', '.'); ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_basic_price->total_basic_price, 2, ',', '.'); ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_selling_price->total_selling_price, 2, ',', '.'); ?></p>
                                             </td>
                                         </tr>
                                     <?php endif; ?>

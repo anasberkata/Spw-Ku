@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 12, 2022 at 04:00 PM
+-- Generation Time: Aug 13, 2022 at 06:43 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -287,35 +287,8 @@ CREATE TABLE `tbl_purchase` (
 
 INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
 (1, '2022-08-01', 1, 1, 1),
-(2, '2022-08-12', 3, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_purchase_cart`
---
-
-CREATE TABLE `tbl_purchase_cart` (
-  `id_cart` int(11) NOT NULL,
-  `id_supplier` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `qty_product` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL,
-  `date_purchasing` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_purchase_cart`
---
-
-INSERT INTO `tbl_purchase_cart` (`id_cart`, `id_supplier`, `id_product`, `qty_product`, `price`, `total_price`, `date_purchasing`) VALUES
-(1, 3, 98, 50, 2500, 125000, '2022-07-29'),
-(2, 3, 100, 60, 230, 13800, '2022-07-29'),
-(3, 3, 102, 70, 2300, 161000, '2022-07-29'),
-(4, 3, 89, 40, 3000, 120000, '2022-07-29'),
-(5, 3, 103, 50, 2500, 125000, '2022-07-29'),
-(6, 3, 96, 50, 3000, 150000, '2022-07-29');
+(2, '2022-08-12', 3, 1, 1),
+(3, '2022-08-13', 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -343,6 +316,41 @@ INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_prod
 (10, 1, 6, 72, 1250, 90000),
 (11, 2, 98, 48, 2500, 120000),
 (12, 2, 93, 40, 3500, 140000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_selling`
+--
+
+CREATE TABLE `tbl_selling` (
+  `id_selling` int(11) NOT NULL,
+  `date_selling` date NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_selling`
+--
+
+INSERT INTO `tbl_selling` (`id_selling`, `date_selling`, `id_user`, `id_lab`) VALUES
+(1, '2022-08-13', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_selling_detail`
+--
+
+CREATE TABLE `tbl_selling_detail` (
+  `id_selling_detail` int(11) NOT NULL,
+  `id_selling` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `qty_selling` int(11) NOT NULL,
+  `total_basic_price` int(11) NOT NULL,
+  `total_selling_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -633,16 +641,22 @@ ALTER TABLE `tbl_purchase`
   ADD PRIMARY KEY (`id_purchase`);
 
 --
--- Indexes for table `tbl_purchase_cart`
---
-ALTER TABLE `tbl_purchase_cart`
-  ADD PRIMARY KEY (`id_cart`);
-
---
 -- Indexes for table `tbl_purchase_detail`
 --
 ALTER TABLE `tbl_purchase_detail`
   ADD PRIMARY KEY (`id_purchase_detail`);
+
+--
+-- Indexes for table `tbl_selling`
+--
+ALTER TABLE `tbl_selling`
+  ADD PRIMARY KEY (`id_selling`);
+
+--
+-- Indexes for table `tbl_selling_detail`
+--
+ALTER TABLE `tbl_selling_detail`
+  ADD PRIMARY KEY (`id_selling_detail`);
 
 --
 -- Indexes for table `tbl_supplier`
@@ -730,19 +744,25 @@ ALTER TABLE `tbl_product_place`
 -- AUTO_INCREMENT for table `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_purchase_cart`
---
-ALTER TABLE `tbl_purchase_cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase_detail`
 --
 ALTER TABLE `tbl_purchase_detail`
   MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tbl_selling`
+--
+ALTER TABLE `tbl_selling`
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_selling_detail`
+--
+ALTER TABLE `tbl_selling_detail`
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
