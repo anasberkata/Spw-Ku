@@ -27,7 +27,7 @@ class Dashboard_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_product');
         $this->db->where('qty<=', 5);
-        $this->db->where('qty>=', 2);
+        $this->db->where('qty>=', 0);
         $query = $this->db->get();
         return $query;
     }

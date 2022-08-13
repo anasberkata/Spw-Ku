@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 13, 2022 at 06:43 AM
+-- Generation Time: Aug 13, 2022 at 04:29 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -86,11 +86,11 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
-(1, 'SPW-001', 1, 3, 'Cibodas Cup', 30, 315, 500, 'default-product.jpg', 1, 1),
+(1, 'SPW-001', 1, 3, 'Cibodas Cup', 54, 315, 500, 'default-product.jpg', 1, 1),
 (2, 'SPW-002', 1, 3, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 3, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
-(4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 72, 1520, 2000, 'default-product2.jpg', 1, 1),
-(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 72, 1250, 2000, 'default-product.jpg', 1, 1),
+(4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 10, 1520, 2000, 'default-product2.jpg', 1, 1),
+(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 12, 1500, 2000, 'default-product.jpg', 1, 1),
 (7, 'SPW-007', 2, 3, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 3, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
 (9, 'SPW-009', 2, 3, 'Koko Jelly Drink', 0, 795, 1500, 'default-product.jpg', 1, 1),
@@ -120,7 +120,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (33, 'SPW-033', 4, 3, 'Mie Shoer Kremez', 7, 450, 500, 'default-product.jpg', 1, 1),
 (34, 'SPW-034', 4, 3, 'Moring', 0, 430, 500, 'default-product.jpg', 1, 1),
 (35, 'SPW-035', 4, 3, 'Nabati Aah', 62, 425, 500, 'default-product.jpg', 1, 1),
-(36, 'SPW-036', 4, 3, 'Nabati Siip', 26, 425, 500, 'default-product.jpg', 1, 1),
+(36, 'SPW-036', 4, 3, 'Nabati Siip', 20, 425, 500, 'default-product.jpg', 1, 1),
 (37, 'SPW-037', 4, 3, 'Nextar', 0, 1750, 2000, 'default-product.jpg', 1, 1),
 (38, 'SPW-038', 4, 3, 'Oreo Soft Cake', 18, 1750, 2000, 'default-product.jpg', 1, 1),
 (39, 'SPW-039', 4, 3, 'Roma Arden', 0, 1700, 2000, 'default-product.jpg', 1, 1),
@@ -144,7 +144,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (57, 'SPW-057', 8, 3, 'Ballpoint Standard AE7', 63, 1458, 2000, 'default-product.jpg', 1, 1),
 (58, 'SPW-058', 8, 3, 'Buku Big Boss 50 Lbr', 0, 4750, 6000, 'default-product.jpg', 1, 1),
 (59, 'SPW-059', 8, 3, 'Buku Saku Tipis', 78, 900, 1500, 'default-product.jpg', 1, 1),
-(60, 'SPW-060', 8, 3, 'Glue Stick', 12, 2000, 2500, 'default-product.jpg', 1, 1),
+(60, 'SPW-060', 8, 3, 'Glue Stick', 0, 2000, 2500, 'default-product.jpg', 1, 1),
 (61, 'SPW-061', 8, 3, 'Kertas HVS', 0, 85, 100, 'default-product.jpg', 1, 1),
 (62, 'SPW-062', 8, 3, 'Kertas Polio', 190, 250, 500, 'default-product.jpg', 1, 1),
 (63, 'SPW-063', 8, 3, 'Penggaris 30 Cm', 8, 2000, 2500, 'default-product.jpg', 1, 1),
@@ -172,8 +172,8 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (85, 'SPW-085', 2, 2, 'Coca Cola Pet Seru 390 mL', 84, 3958, 5000, 'default-product.jpg', 1, 1),
 (86, 'SPW-086', 2, 2, 'Nutriboost', 120, 5333, 7000, 'default-product.jpg', 1, 1),
 (87, 'SPW-087', 4, 3, 'Choki-Choki', 160, 900, 1500, 'default-product.jpg', 1, 1),
-(88, 'SPW-088', 4, 3, 'Top Delfi', 96, 804, 1000, 'default-product.jpg', 1, 1),
-(89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 50, 1550, 2000, 'default-product.jpg', 1, 1),
+(88, 'SPW-088', 4, 3, 'Top Delfi', 75, 804, 1000, 'default-product.jpg', 1, 1),
+(89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 100, 1550, 3000, 'default-product.jpg', 1, 1),
 (90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
 (91, 'SPW-091', 6, 1, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
 (92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
@@ -286,9 +286,9 @@ CREATE TABLE `tbl_purchase` (
 --
 
 INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
-(1, '2022-08-01', 1, 1, 1),
-(2, '2022-08-12', 3, 1, 1),
-(3, '2022-08-13', 1, 1, 2);
+(5, '2022-08-10', 3, 1, 1),
+(6, '2022-08-11', 3, 1, 1),
+(7, '2022-08-12', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -310,12 +310,9 @@ CREATE TABLE `tbl_purchase_detail` (
 --
 
 INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_product`, `qty_product`, `basic_price`, `total_price`) VALUES
-(2, 1, 1, 30, 315, 9450),
-(3, 1, 2, 16, 281, 4496),
-(7, 1, 4, 72, 1520, 109440),
-(10, 1, 6, 72, 1250, 90000),
-(11, 2, 98, 48, 2500, 120000),
-(12, 2, 93, 40, 3500, 140000);
+(17, 5, 89, 89, 1550, 137950),
+(18, 6, 89, 1, 1550, 1550),
+(19, 7, 89, 15, 1550, 23250);
 
 -- --------------------------------------------------------
 
@@ -335,7 +332,7 @@ CREATE TABLE `tbl_selling` (
 --
 
 INSERT INTO `tbl_selling` (`id_selling`, `date_selling`, `id_user`, `id_lab`) VALUES
-(1, '2022-08-13', 1, 1);
+(3, '2022-08-11', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -396,10 +393,62 @@ CREATE TABLE `tbl_tool` (
 --
 
 INSERT INTO `tbl_tool` (`id_tool`, `tool`, `brand`, `qty`, `price`, `tool_condition`, `description`, `id_lab`, `is_active`) VALUES
-(1, 'Showcase', '', 1, 0, 1, '', 1, 1),
-(2, 'Freezer', '', 1, 0, 1, '', 1, 1),
-(3, 'Rak Piring', '', 1, 0, 1, '', 1, 1),
-(5, 'Kompor', 'Rinnai', 1, 300000, 1, '', 1, 1);
+(1, 'Showcase', 'Panasonic', 1, 0, 1, 'Kepemilikan Titipan Coca Cola', 1, 1),
+(2, 'Freezer', 'Aqua 262 Liter', 1, 0, 1, 'Kepemilikan Titipan AICE', 1, 1),
+(3, 'Rak Piring', '3 Tingkat', 1, 200000, 1, 'Kepemilikan SPW', 1, 1),
+(5, 'Kompor', 'Rinnai 2 Tungku', 1, 325000, 1, 'Kepemilikan SPW', 1, 1),
+(6, 'Kompor Rinnai', '', 1, 0, 1, '', 2, 1),
+(7, 'Kompor', 'Rinai 2 Tungku', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(8, 'Gas 3 Kg', '3 Kg', 2, 160000, 1, 'Kepemilikan SPW', 1, 1),
+(9, 'Gas 5 Kg', '5 Kg', 1, 400000, 1, 'Kepemilikan SPW', 1, 1),
+(10, 'Estalase', '2 Meter', 1, 1200000, 1, 'Kepemilikan SPW', 1, 1),
+(11, 'Rice Cooker', '', 1, 250000, 1, 'Kepemilikan SPW', 1, 1),
+(12, 'Langseng', '', 1, 50000, 1, 'Kepemilikan SPW', 1, 1),
+(13, 'Katel Besar', 'Ukuran Besar', 1, 75000, 1, 'Kepemilikan SPW', 1, 1),
+(14, 'Katel Kecil', 'Ukuran Kecil', 1, 45000, 1, 'Kepemilikan SPW', 1, 1),
+(15, 'Baskom Besar', 'Ukuran Besar Biru', 1, 75000, 1, 'Kepemilikan SPW', 1, 1),
+(16, 'Baskom Kecil', 'Ukuran Kecil Warna Merah', 2, 25000, 1, 'Kepemilikan SPW', 1, 1),
+(17, 'Kontener Besar', 'Lion Star', 1, 125000, 1, 'Kepemilikan SPW', 1, 1),
+(18, 'Timbingan Digital', 'Kapasitas Max 5 Kg', 5, 100000, 1, 'Kepemilikan SPW', 1, 1),
+(19, 'Gunting', '', 1, 25000, 1, 'Kepemilikan SPW', 1, 1),
+(20, 'Talenan Kayu', 'Kayu', 2, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(21, 'Serokan', 'Stanless', 4, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(22, 'Sodet', 'Plastik', 3, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(23, 'Sealer', '', 5, 250000, 1, 'Kepemilikan SPW', 1, 1),
+(24, 'Timbangan BDigital Besar', 'Kapasitas Max 100 Kg', 1, 400000, 1, 'Kepemilikan SPW', 1, 1),
+(25, 'Keler Besar', '', 1, 45000, 1, 'Kepemilikan SPW', 1, 1),
+(26, 'Gelas Plastik', 'Plastik', 167, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(27, 'Cangkir Plastik', 'Plastik', 6, 5000, 1, 'Kepemilikan SPW', 1, 1),
+(28, 'Piring Plastik', 'Plastik', 9, 7000, 1, 'Kepemilikan SPW', 1, 1),
+(29, 'Mangkok Plastik', 'Plastik', 254, 7000, 1, 'Kepemilikan SPW', 1, 1),
+(30, 'Mangkok Kaca', 'Kaca', 1, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(31, 'Box Roti Bening', 'Plastik', 5, 35000, 1, 'Kepemilikan SPW', 1, 1),
+(32, 'Baki', '', 2, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(33, 'Gayung', 'Gayung', 1, 1000, 0, '', 1, 1),
+(34, 'Gayung', 'Plastik', 1, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(35, 'Ember', 'Plastik', 1, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(36, 'Pe\'lan', '', 3, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(37, 'Meja Kecil', 'Kayu', 8, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(38, 'Meja Besar', 'Kayu', 2, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(39, 'Bangku Kayu', 'Kayu', 16, 0, 1, 'Kepemilikan Sekolah', 1, 1),
+(40, 'Kursi Plastik', 'Plastik', 2, 50000, 1, 'Kepemilikan SPW', 1, 1),
+(41, 'Cetakan Telur', 'Stanless', 1, 35000, 1, 'Kepemilikan SPW', 1, 1),
+(42, 'Botol Saus Kecap', 'Plastik', 3, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(43, 'Pisau', 'Stanless', 4, 20000, 1, 'Kepemilikan SPW', 1, 1),
+(44, 'Centong', 'Plastik', 2, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(45, 'Sendok Nasi', 'Plastik', 3, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(46, 'Sendok Stanless', 'Stanless', 85, 2000, 1, 'Kepemilikan SPW', 1, 1),
+(47, 'Garpu', 'Stanless', 9, 2000, 1, 'Kepemilikan SPW', 1, 1),
+(48, 'Sendok Plastik', 'Plastik', 135, 200, 1, 'Kepemilikan SPW', 1, 1),
+(49, 'Penjapit', 'Almunium', 1, 15000, 1, 'Kepemilikan SPW', 1, 1),
+(50, 'Sapu', 'Kayu', 1, 10000, 1, 'Kepemilikan SPW', 1, 1),
+(51, 'Termos Es', 'Kapasitas 20 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(52, 'Sinduk', 'Plastik', 1, 12000, 1, 'Kepemilikan SPW', 1, 1),
+(53, 'Gas LPG', '3 Kg', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(54, 'Blender', 'Philips', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(55, 'Galon', '19 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1),
+(56, 'Rak Plastik', 'Plastik', 1, 12000, 1, 'Kepemilikan SPW', 1, 1),
+(57, 'Galon dengan Kran ', 'Kapasitas 5 Liter', 1, 0, 1, 'Kepemilikan Titipan K.Deri', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -744,25 +793,25 @@ ALTER TABLE `tbl_product_place`
 -- AUTO_INCREMENT for table `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase_detail`
 --
 ALTER TABLE `tbl_purchase_detail`
-  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
-  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling_detail`
 --
 ALTER TABLE `tbl_selling_detail`
-  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
@@ -774,7 +823,7 @@ ALTER TABLE `tbl_supplier`
 -- AUTO_INCREMENT for table `tbl_tool`
 --
 ALTER TABLE `tbl_tool`
-  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_tool` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool_condition`

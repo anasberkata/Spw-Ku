@@ -50,10 +50,35 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_selling_detail');
-        // $this->db->join('tbl_product', 'tbl_product.id_product = tbl_purchase_detail.id_product');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('id_selling', $id_selling);
         $query = $this->db->get();
         return $query;
+    }
+
+    function save_selling_detail($data)
+    {
+        $this->db->insert('tbl_selling_detail', $data);
+    }
+
+    function update_selling_detail($data, $id_selling_detail)
+    {
+        $this->db->where('id_selling_detail', $id_selling_detail);
+        $this->db->update('tbl_selling_detail', $data);
+    }
+
+    function delete_selling_detail($id_selling_detail)
+    {
+        $this->db->where('id_selling_detail', $id_selling_detail);
+        $this->db->delete('tbl_selling_detail');
+
+        return true;
+    }
+
+    function update_stock_product($data_stock, $id_product)
+    {
+        $this->db->where('id_product', $id_product);
+        $this->db->update('tbl_product', $data_stock);
     }
 
     function sum_total_basic_price($id_selling)

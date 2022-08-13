@@ -341,14 +341,14 @@ class Pembelian extends CI_Controller
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
         $d['pd'] = $this->db->get_where('tbl_purchase_detail', ['id_purchase_detail' => $id_purchase_detail])->row_array();
 
-        if ($qty_product > $d['p']['qty']) {
-            $selisih = $qty_product - $d['p']['qty'];
+        if ($qty_product > $d['pd']['qty_product']) {
+            $selisih = $qty_product - $d['pd']['qty_product'];
             $qty = $d['p']['qty'] + $selisih;
-        } else if ($qty_product < $d['p']['qty']) {
-            $selisih = $d['p']['qty'] - $qty_product;
+        } else if ($qty_product < $d['pd']['qty_product']) {
+            $selisih = $d['pd']['qty_product'] - $qty_product;
             $qty = $d['p']['qty'] - $selisih;
-        } else {
-            $qty = $qty_product;
+        } else if ($qty_product == $d['pd']['qty_product']) {
+            $qty = $d['p']['qty'];
         }
 
         $data = [
@@ -367,7 +367,7 @@ class Pembelian extends CI_Controller
         $this->pembelian->update_purchase_detail($data, $id_purchase_detail);
         $this->pembelian->update_stock_product($data_stock, $id_product);
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
 
         redirect('pembelian/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
     }

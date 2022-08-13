@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col">
                         <h6>Daftar Pembelian Produk :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($purchase["date_purchasing"])) . " / " . $purchase["supplier"] . " / SPW " . $lab; ?></p>
+                        <p class="small"><?= date('d F Y', strtotime($purchase["date_purchasing"])) . " // " . $purchase["supplier"] . " // SPW " . $lab; ?></p>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
@@ -193,7 +193,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total->total, 2, ',', '.'); ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total->total, 0, ',', '.'); ?>,-</p>
                                             </td>
                                         </tr>
                                     <?php endif; ?>

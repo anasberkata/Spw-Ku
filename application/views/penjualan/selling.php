@@ -78,7 +78,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->name; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/selling_detail/?id_selling=') . $s->id_selling . '&id_lab=' . $s->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Detail</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/selling_detail/?id_selling=') . $s->id_selling . '&id_lab=' . $s->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
 
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSellingEdit<?= $s->id_selling; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
