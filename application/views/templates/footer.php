@@ -44,7 +44,7 @@
 <script src="<?= base_url('assets/') ?>js/plugins/smooth-scrollbar.min.js"></script>
 <script src="<?= base_url('assets/') ?>js/plugins/chartjs.min.js"></script>
 
-<script src="<?= base_url('vendors/') ?>simple-datatables/simple-datatables.js"></script>
+<script src="<?= base_url('vendor/') ?>simple-datatables/simple-datatables.js"></script>
 <script>
     // Simple Datatable
     let table1 = document.querySelector('#table1');
