@@ -85,7 +85,7 @@ class Penjualan extends CI_Controller
 
 
 
-
+    // SELLING DETAIL
     public function selling_detail()
     {
         $id_selling = $this->input->get('id_selling', true);
@@ -97,6 +97,7 @@ class Penjualan extends CI_Controller
         $data['id_selling'] = $id_selling;
         $data['lab'] = $id_lab;
         $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['place'] = $this->penjualan->get_place();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
         $data['selling_detail'] = $this->penjualan->get_selling_detail($id_selling);
@@ -235,5 +236,78 @@ class Penjualan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
 
         redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
+    }
+
+    public function selling_detail_search()
+    {
+        $id_selling = $this->input->get('id_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_place = $this->input->get('id_place', true);
+
+        $data['title'] = "Data Penjualan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_selling'] = $id_selling;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['place'] = $this->penjualan->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
+        $data['selling_detail'] = $this->penjualan->search_detail_selling($id_selling, $id_place);
+
+        $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price($id_selling, $id_place);
+        $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price($id_selling, $id_place);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/selling_detail_search', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+    // ---------------------------------------- MPDF ---------------------------------- //
+    public function printPDF()
+    {
+
+        $id_selling = $this->input->get('id_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Penjualan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_selling'] = $id_selling;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['place'] = $this->penjualan->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
+        $data['selling_detail'] = $this->penjualan->get_selling_detail($id_selling);
+
+        $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($id_selling);
+        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($id_selling);
+
+        // if (!isset($tgl_awal) && !isset($tgl_akhir) && !isset($jenis)) {
+        //     $data['report'] = $this->report->get_report();
+        //     $data['total'] = $this->report->sum_nominal();
+        // } else {
+        //     $data['report'] = $this->report->search_report($tgl_awal, $tgl_akhir, $jenis);
+        //     $data['total'] = $this->report->search_sum_nominal($tgl_awal, $tgl_akhir, $jenis);
+        // }
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        // $mpdf->SetHTMLFooter('
+        //         <table width="100%" style="font-size: 9pt;">
+        //             <tr>
+        //                 <td width="33%">{DATE j-m-Y}</td>
+        //                 <td width="33%" align="center">{PAGENO}/{nbpg}</td>
+        //                 <td width="33%" style="text-align: right;">Laporan Keuangan PT. Miraino Hashi Jaya</td>
+        //             </tr>
+        //         </table>');
+
+        $page = $this->load->view('penjualan/selling_detail_pdf', $data, TRUE);
+
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Laporan SPW.pdf', 'I');
     }
 }
