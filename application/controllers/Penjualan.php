@@ -240,8 +240,8 @@ class Penjualan extends CI_Controller
 
     public function selling_detail_search()
     {
-        $id_selling = $this->input->get('id_selling', true);
         $id_lab = $this->input->get('id_lab', true);
+        $id_selling = $this->input->get('id_selling', true);
         $id_place = $this->input->get('id_place', true);
 
         $data['title'] = "Data Penjualan";
@@ -249,11 +249,12 @@ class Penjualan extends CI_Controller
 
         $data['id_selling'] = $id_selling;
         $data['lab'] = $id_lab;
+        $data['id_place'] = $id_place;
         $data['product'] = $this->penjualan->get_product($id_lab);
         $data['place'] = $this->penjualan->get_place();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
-        $data['selling_detail'] = $this->penjualan->search_detail_selling($id_selling, $id_place);
+        $data['selling_detail'] = $this->penjualan->search_selling_detail($id_selling, $id_place);
 
         $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price($id_selling, $id_place);
         $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price($id_selling, $id_place);
@@ -272,6 +273,7 @@ class Penjualan extends CI_Controller
 
         $id_selling = $this->input->get('id_selling', true);
         $id_lab = $this->input->get('id_lab', true);
+        $id_place = $this->input->get('id_place', true);
 
         $data['title'] = "Data Penjualan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -282,10 +284,16 @@ class Penjualan extends CI_Controller
         $data['place'] = $this->penjualan->get_place();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
-        $data['selling_detail'] = $this->penjualan->get_selling_detail($id_selling);
 
-        $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($id_selling);
-        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($id_selling);
+        if (!isset($id_place)) {
+            $data['selling_detail'] = $this->penjualan->get_selling_detail($id_selling);
+            $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($id_selling);
+            $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($id_selling);
+        } else {
+            $data['selling_detail'] = $this->penjualan->search_selling_detail($id_selling, $id_place);
+            $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price($id_selling, $id_place);
+            $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price($id_selling, $id_place);
+        }
 
         // if (!isset($tgl_awal) && !isset($tgl_akhir) && !isset($jenis)) {
         //     $data['report'] = $this->report->get_report();

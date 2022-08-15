@@ -19,7 +19,7 @@
                                     <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('selling/printPDF') ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF/?id_selling=' . $id_selling . '&id_lab=' . $lab . '&id_place=' . $id_place) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>

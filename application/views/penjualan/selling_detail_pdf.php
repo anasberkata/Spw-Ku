@@ -33,13 +33,17 @@
     <!-- HEADER -->
     <table cellpadding="10" width="100%">
         <tr>
-            <td style="text-align: center;">
-                <p class="head-desc">SEKOLAH PENCETAK WIRAUSAHA (SPW)
+            <td width="25%"></td>
+            <td width="10%"><img src="<?= base_url('assets/img/logos/logo-smkdaku.png'); ?>" alt="Logo SMK DAKU" width="75"></td>
+            <td width="30%" style="text-align: center;">
+                <p class="text-xs">SEKOLAH PENCETAK WIRAUSAHA (SPW)
                     <br>SMK NEGERI 2 CILAKU CIANJUR
                     <br>SMKDA ENTREPRENEUR SCHOOL (SES)
                     <br>Jl. Perintis Kemerdekaan No. 02 Kab Cianjur Prov. Jawa Barat 43285
                 </p>
             </td>
+            <td width="20%"></td>
+            <td width="15%"></td>
         </tr>
     </table>
     <!-- END HEADER -->
@@ -48,7 +52,7 @@
 
     <h6 class="text-xs">Lab : <b><i><?= "SPW " . $lab; ?></i></b></h6>
 
-    <table class="table align-items-center" cellpadding="10">
+    <table class="table align-items-center" cellpadding="7">
         <thead>
             <tr class="border-2">
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NO.</td>
@@ -112,7 +116,7 @@
         </tbody>
     </table>
 
-    <table class="table align-items-center" cellpadding="10">
+    <table class="table align-items-center" cellpadding="7">
         <?php if ($total_basic_price->total_basic_price == NULL) : ?>
         <?php else : ?>
             <thead>

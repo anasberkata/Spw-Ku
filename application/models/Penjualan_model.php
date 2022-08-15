@@ -104,7 +104,7 @@ class Penjualan_model extends CI_Model
 
 
 
-    function search_detail_selling($id_selling, $id_place)
+    function search_selling_detail($id_selling, $id_place)
     {
         $this->db->select('*');
         $this->db->from('tbl_selling_detail');
