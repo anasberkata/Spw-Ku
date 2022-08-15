@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 13, 2022 at 04:29 PM
+-- Generation Time: Aug 15, 2022 at 04:58 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -94,7 +94,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (7, 'SPW-007', 2, 3, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 3, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
 (9, 'SPW-009', 2, 3, 'Koko Jelly Drink', 0, 795, 1500, 'default-product.jpg', 1, 1),
-(10, 'SPW-010', 2, 3, 'Okky Jelly Drink', 27, 792, 1000, 'default-product.jpg', 1, 1),
+(10, 'SPW-010', 2, 3, 'Okky Jelly Drink', 20, 792, 1000, 'default-product.jpg', 1, 1),
 (11, 'SPW-011', 2, 3, 'Teh Gelas', 29, 813, 1000, 'default-product.jpg', 1, 1),
 (12, 'SPW-012', 2, 3, 'Teh Pucuk Harum', 0, 2271, 3000, 'default-product.jpg', 1, 1),
 (13, 'SPW-013', 3, 3, 'Cocorio', 4, 0, 0, 'default-product.jpg', 1, 1),
@@ -126,9 +126,9 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (39, 'SPW-039', 4, 3, 'Roma Arden', 0, 1700, 2000, 'default-product.jpg', 1, 1),
 (40, 'SPW-040', 4, 3, 'Roma Gandum', 0, 1734, 2000, 'default-product.jpg', 1, 1),
 (41, 'SPW-041', 4, 3, 'Roma Malkist', 30, 900, 1000, 'default-product.jpg', 1, 1),
-(42, 'SPW-042', 4, 3, 'Slai O\'Lai', 1, 850, 1000, 'default-product.jpg', 1, 1),
+(42, 'SPW-042', 4, 3, 'Slai O\'Lai', 0, 850, 1000, 'default-product.jpg', 1, 1),
 (43, 'SPW-043', 4, 3, 'Sosis Sonice', 0, 813, 1000, 'default-product.jpg', 1, 1),
-(44, 'SPW-044', 4, 3, 'Timtam Maxi', 10, 875, 1000, 'default-product.jpg', 1, 1),
+(44, 'SPW-044', 4, 3, 'Timtam Maxi', 5, 875, 1000, 'default-product.jpg', 1, 1),
 (45, 'SPW-045', 4, 3, 'Top Chocolate', 52, 812, 1000, 'default-product.jpg', 1, 1),
 (46, 'SPW-046', 4, 3, 'Wafello', 13, 900, 1000, 'default-product.jpg', 1, 1),
 (47, 'SPW-047', 5, 3, 'Alpenliebe', 0, 196, 250, 'default-product.jpg', 1, 1),
@@ -163,28 +163,28 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (76, 'SPW-076', 10, 3, 'Saos Gembol', 3, 2500, 2750, 'default-product.jpg', 1, 1),
 (77, 'SPW-077', 10, 3, 'Cuka 1000', 11, 1000, 1000, 'default-product.jpg', 1, 1),
 (78, 'SPW-078', 2, 2, 'Pulpy Orange', 120, 3833, 4500, 'default-product.jpg', 1, 1),
-(79, 'SPW-079', 2, 2, 'Sprite Pet Seru 390 mL', 120, 3958, 4500, 'default-product.jpg', 1, 1),
+(79, 'SPW-079', 2, 2, 'Sprite Pet Seru 390 mL', 100, 3958, 4500, 'default-product.jpg', 1, 1),
 (80, 'SPW-080', 2, 2, 'Fanta Pet Seru 390 mL', 120, 3958, 5000, 'default-product.jpg', 1, 1),
 (81, 'SPW-081', 2, 2, 'Sprite Pet Imut 250 mL', 168, 2375, 3000, 'default-product.jpg', 1, 1),
 (82, 'SPW-082', 2, 2, 'Fanta Pet Imut 250 mL', 72, 2375, 3000, 'default-product.jpg', 1, 1),
 (83, 'SPW-083', 2, 2, 'Coca Cola Pet Imut 250 mL', 120, 2375, 3000, 'default-product.jpg', 1, 1),
 (84, 'SPW-084', 2, 2, ' Frestea 350mL', 48, 3500, 4500, 'default-product.jpg', 1, 1),
-(85, 'SPW-085', 2, 2, 'Coca Cola Pet Seru 390 mL', 84, 3958, 5000, 'default-product.jpg', 1, 1),
-(86, 'SPW-086', 2, 2, 'Nutriboost', 120, 5333, 7000, 'default-product.jpg', 1, 1),
+(85, 'SPW-085', 2, 2, 'Coca Cola Pet Seru 390 mL', 80, 3958, 5000, 'default-product.jpg', 1, 1),
+(86, 'SPW-086', 2, 2, 'Nutriboost', 100, 5333, 7000, 'default-product.jpg', 1, 1),
 (87, 'SPW-087', 4, 3, 'Choki-Choki', 160, 900, 1500, 'default-product.jpg', 1, 1),
 (88, 'SPW-088', 4, 3, 'Top Delfi', 75, 804, 1000, 'default-product.jpg', 1, 1),
-(89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 100, 1550, 3000, 'default-product.jpg', 1, 1),
+(89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 75, 1550, 3000, 'default-product.jpg', 1, 1),
 (90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
 (91, 'SPW-091', 6, 1, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
-(92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
+(92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 25, 1540, 2000, 'default-product.jpg', 1, 1),
 (93, 'SPW-093', 6, 1, 'AICE Sweet Corn Stick New 52gr FIFA SS', 80, 3500, 5000, 'default-product.jpg', 1, 1),
 (94, 'SPW-094', 6, 1, 'AICE Mochi Stick 30gr SP', 40, 2312, 3000, 'default-product.jpg', 1, 1),
-(95, 'SPW-095', 6, 1, 'AICE Mochi Durian 45mL SP', 40, 3212, 3000, 'default-product.jpg', 1, 1),
+(95, 'SPW-095', 6, 1, 'AICE Mochi Durian 45mL SP', 20, 3212, 3000, 'default-product.jpg', 1, 1),
 (96, 'SPW-096', 6, 1, 'AICE 2 Colour Chocolate Stick 50 mL', 40, 1912, 2500, 'default-product.jpg', 1, 1),
 (97, 'SPW-097', 6, 1, 'AICE Milk Melon 50gr', 40, 1912, 2500, 'default-product.jpg', 1, 1),
 (98, 'SPW-098', 6, 1, 'AICE Blieberry Yogurt Stick 49 mL', 48, 2500, 3000, 'default-product.jpg', 1, 1),
 (99, 'SPW-099', 6, 1, 'AICE Fruit Twister Stick 60 mL', 40, 2425, 3000, 'default-product.jpg', 1, 1),
-(100, 'SPW-100', 6, 1, 'AICE Chocolate Crispy Stick 60gr', 40, 4000, 5000, 'default-product.jpg', 1, 1),
+(100, 'SPW-100', 6, 1, 'AICE Chocolate Crispy Stick 60gr', 20, 4000, 5000, 'default-product.jpg', 1, 1),
 (101, 'SPW-101', 6, 1, 'AICE Strawberry Crispy Stick New', 40, 2750, 3500, 'default-product.jpg', 1, 1),
 (102, 'SPW-102', 6, 1, 'AICE Sundae Chocolate Cup 100 mL', 24, 4041, 5000, 'default-product.jpg', 1, 1),
 (103, 'SPW-103', 6, 1, 'AICE Freezy Choco 49 mL', 50, 1560, 2000, 'default-product.jpg', 1, 1),
@@ -348,6 +348,22 @@ CREATE TABLE `tbl_selling_detail` (
   `total_basic_price` int(11) NOT NULL,
   `total_selling_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_selling_detail`
+--
+
+INSERT INTO `tbl_selling_detail` (`id_selling_detail`, `id_selling`, `id_product`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
+(9, 3, 89, 25, 38750, 75000),
+(10, 3, 92, 25, 38500, 50000),
+(11, 3, 100, 20, 80000, 100000),
+(12, 3, 95, 20, 64240, 60000),
+(13, 3, 42, 1, 850, 1000),
+(14, 3, 10, 7, 5544, 7000),
+(15, 3, 44, 5, 4375, 5000),
+(16, 3, 85, 4, 15832, 20000),
+(17, 3, 79, 20, 79160, 90000),
+(18, 3, 86, 20, 106660, 140000);
 
 -- --------------------------------------------------------
 
@@ -811,7 +827,7 @@ ALTER TABLE `tbl_selling`
 -- AUTO_INCREMENT for table `tbl_selling_detail`
 --
 ALTER TABLE `tbl_selling_detail`
-  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
