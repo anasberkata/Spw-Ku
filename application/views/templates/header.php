@@ -24,6 +24,7 @@
 
     <!-- Datatables -->
     <link rel="stylesheet" href="<?= base_url('vendor/') ?>simple-datatables/style.css">
+
     <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url('assets/') ?>css/spw-dashboard.css?v=2.0.2" rel="stylesheet" />
 </head>

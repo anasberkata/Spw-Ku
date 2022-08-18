@@ -153,26 +153,32 @@ class Penjualan extends CI_Controller
 
             $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
 
-            $data = [
-                'id_selling_detail' => NULL,
-                'id_selling' => $id_selling,
-                'id_product' => $id_product,
-                'qty_selling' => $qty_selling,
-                'total_basic_price' => $qty_selling * $d['p']['basic_price'],
-                'total_selling_price' => $qty_selling * $d['p']['selling_price']
-            ];
+            if ($d['p']['qty'] <= 0) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Gagal! Stok Produk sudah habis. Silahkan menghubungi PJ Produk untuk konfirmasi</div>');
+
+                redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
+            } else {
+                $data = [
+                    'id_selling_detail' => NULL,
+                    'id_selling' => $id_selling,
+                    'id_product' => $id_product,
+                    'qty_selling' => $qty_selling,
+                    'total_basic_price' => $qty_selling * $d['p']['basic_price'],
+                    'total_selling_price' => $qty_selling * $d['p']['selling_price']
+                ];
 
 
-            $data_stock = [
-                'qty' => $d['p']['qty'] - $qty_selling
-            ];
+                $data_stock = [
+                    'qty' => $d['p']['qty'] - $qty_selling
+                ];
 
-            $this->penjualan->save_selling_detail($data);
-            $this->penjualan->update_stock_product($data_stock, $id_product);
+                $this->penjualan->save_selling_detail($data);
+                $this->penjualan->update_stock_product($data_stock, $id_product);
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
 
-            redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
+                redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
+            }
         }
     }
 
