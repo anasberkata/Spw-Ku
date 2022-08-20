@@ -157,6 +157,10 @@ class Penjualan extends CI_Controller
                 $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Gagal! Stok Produk sudah habis. Silahkan menghubungi PJ Produk untuk konfirmasi</div>');
 
                 redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
+            } else if ($d['p']['qty'] < $qty_selling) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Gagal! Stok akhir produk tidak mencukupi</div>');
+
+                redirect('penjualan/selling_detail/?id_selling=' . $id_selling . '&id_lab=' . $id_lab);
             } else {
                 $data = [
                     'id_selling_detail' => NULL,
