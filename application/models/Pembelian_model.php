@@ -153,4 +153,14 @@ class Pembelian_model extends CI_Model
 
         return true;
     }
+
+
+
+
+    function ajax_produk($id)
+    {
+        $hasil = $this->db->query("SELECT * FROM tbl_product WHERE id_product = '$id'");
+        // return $hasil->result();
+        return $hasil->row();
+    }
 }

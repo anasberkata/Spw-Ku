@@ -7,36 +7,36 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h6>Daftar Penjualan Produk :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($selling["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
+                        <p class="small"><?= date('d F Y', strtotime($franchise["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('penjualan/selling/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3">
+                                    <a href="<?= base_url('penjualan/franchise/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3">
                                         Kembali
                                     </a>
                                     <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF/?id_selling=' . $id_selling . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <form role="form" action="<?= base_url('penjualan/selling_detail_search') ?>" method="GET">
+                                <form role="form" action="<?= base_url('penjualan/franchise_detail_search') ?>" method="GET">
                                     <div class="row">
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="id_selling" value="<?= $id_selling ?>">
+                                        <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
                                         <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Lokasi</label>
+                                            <label class="col-form-label text-sm">Pemilik</label>
                                         </div>
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
                                             <select class="form-select" aria-label="Default select" name="id_place">
-                                                <option>Pilih Lokasi Produk</option>
-                                                <?php foreach ($place->result() as $p) : ?>
-                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                <option>Pilih Pemilik Produk</option>
+                                                <?php foreach ($franchisor->result() as $f) : ?>
+                                                    <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -56,22 +56,34 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('penjualan/selling_detail_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                            <input type="hidden" name="id_selling" value="<?= $id_selling ?>">
+                                            <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
                                             <div class="mb-3">
-                                                <label>Pilih Produk</label>
-                                                <select class="form-select" aria-label="Default select" name="id_product">
-                                                    <option selected>Pilih Produk</option>
-                                                    <?php foreach ($product->result() as $p) : ?>
-                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
+                                                <label>Pemilik Produk</label>
+                                                <select class="form-select" aria-label="Default select" name="franchisor">
+                                                    <option selected>Pilih Pemilik Produk</option>
+                                                    <?php foreach ($franchisor->result() as $f) : ?>
+                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
-                                                <label>Qty Terjual</label>
-                                                <input type="text" class="form-control" placeholder="Jumlah Terjual" name="qty_selling">
+                                                <label>Nama Produk</label>
+                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Qty Awal</label>
+                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Harga Dasar (Rp.)</label>
+                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Harga Jual (Rp.)</label>
+                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -92,7 +104,10 @@
                         <?= $this->session->flashdata('message'); ?>
                     </div>
                     <div class="col-12">
-                        <?= form_error('qty_selling', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('product', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('qty', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('basic_price', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('selling_price', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
 
                     <div class="col-12">
@@ -113,52 +128,52 @@
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($selling_detail->result() as $sd) : ?>
+                                    <?php foreach ($franchise_detail->result() as $fd) : ?>
                                         <tr>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->product; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->basic_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->basic_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->qty; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->qty_selling; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_selling; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_basic_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_basic_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_selling_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $fd->id_franchise_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 <br class="my-2">
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $fd->id_franchise_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
 
                                         <!-- Modal Edit Role -->
-                                        <div class="modal fade" id="modalProductEdit<?= $sd->id_selling_detail; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+                                        <!-- <div class="modal fade" id="modalProductEdit<?= $sd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Data Produk</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/selling_detail_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
-                                                            <input type="hidden" name="id_selling" value="<?= $id_selling ?>" readonly>
-                                                            <input type="hidden" name="id_selling_detail" value="<?= $sd->id_selling_detail; ?>" readonly>
+                                                            <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>" readonly>
+                                                            <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>" readonly>
                                                             <div class="mb-3">
                                                                 <select class="form-select" aria-label="Default select" name="id_product">
                                                                     <option value="<?= $sd->id_product ?>"><?= $sd->product ?> || Stok : <?= $sd->qty ?></option>
@@ -179,10 +194,10 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <!-- Modal Hapus Role -->
-                                        <div class="modal fade" id="modalProductDelete<?= $sd->id_selling_detail; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <!-- <div class="modal fade" id="modalProductDelete<?= $sd->id_selling_detail; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -207,13 +222,13 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <?php $i++; ?>
                                     <?php endforeach; ?>
 
 
-                                    <?php if ($total_basic_price->total_basic_price == NULL) : ?>
+                                    <!-- <?php if ($total_basic_price->total_basic_price == NULL) : ?>
                                     <?php else : ?>
                                         <tr>
                                             <td colspan="5"></td>
@@ -256,7 +271,7 @@
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba, 0, ',', '.'); ?>,-</p>
                                             </td>
                                         </tr>
-                                    <?php endif; ?>
+                                    <?php endif; ?> -->
 
                                 </tbody>
                             </table>

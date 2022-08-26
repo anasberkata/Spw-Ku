@@ -282,8 +282,6 @@ class Pembelian extends CI_Controller
             $data['title'] = "Data Pembelian";
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-            // $data['supplier'] = $this->pembelian->get_supplier();
-
             $data['id_purchase'] = $id_purchase;
             $data['lab'] = $id_lab;
             $data['product'] = $this->pembelian->get_product($id_lab);
@@ -394,6 +392,16 @@ class Pembelian extends CI_Controller
         redirect('pembelian/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
     }
 
+    public function ajax_produk()
+    {
+        $id = $this->input->get('id');
+        // $id = 6;
+
+        $data = $this->pembelian->ajax_produk($id);
+        // $data = $this->pembelian->ajax_produk(1);
+
+        echo json_encode($data);
+    }
 
 
 

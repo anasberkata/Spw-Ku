@@ -92,9 +92,9 @@ class Produk extends CI_Controller
             $id_category = $this->input->post('id_category', true);
             $id_place = $this->input->post('id_place', true);
             $product = $this->input->post('product', true);
-            // $qty = $this->input->post('qty', true);
-            // $basic_price = $this->input->post('basic_price', true);
-            // $selling_price = $this->input->post('selling_price', true);
+            $qty = $this->input->post('qty', true);
+            $basic_price = $this->input->post('basic_price', true);
+            $selling_price = $this->input->post('selling_price', true);
             $image = $this->uploadImage();
             $is_active = 1;
 
@@ -104,9 +104,9 @@ class Produk extends CI_Controller
                 'id_category' => $id_category,
                 'id_place' => $id_place,
                 'product' => $product,
-                'qty' => 0,
-                'basic_price' => 0,
-                'selling_price' => 0,
+                'qty' => $qty,
+                'basic_price' => $basic_price,
+                'selling_price' => $selling_price,
                 'image' => $image,
                 'id_lab' => $id_lab,
                 'is_active' => $is_active

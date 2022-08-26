@@ -56,18 +56,18 @@
                                             <label>Nama Produk</label>
                                             <input type="text" class="form-control" placeholder="Nama Produk" name="product">
                                         </div>
-                                        <!-- <div class="mb-3">
+                                        <div class="mb-3">
                                             <label>Qty</label>
                                             <input type="number" class="form-control" placeholder="Qty" name="qty">
-                                        </div> -->
-                                        <!-- <div class="mb-3">
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Harga Dasar (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price">
-                                        </div> -->
-                                        <!-- <div class="mb-3">
+                                        </div>
+                                        <div class="mb-3">
                                             <label>Harga Jual (Rp.)</label>
                                             <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price">
-                                        </div> -->
+                                        </div>
                                         <div class="mb-3">
                                             <label>Gambar Produk</label>
                                             <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">

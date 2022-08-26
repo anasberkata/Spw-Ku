@@ -138,4 +138,46 @@ class Penjualan_model extends CI_Model
         );
         return $query->row();
     }
+
+
+    // PENJUALAN BARANG TITIPAN
+    function get_franchisor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_franchisor');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_franchise($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_franchise');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise.id_user');
+        $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('date_selling', 'DESC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_franchise($data)
+    {
+        $this->db->insert('tbl_franchise', $data);
+    }
+
+    function update_franchise($data, $id_franchise)
+    {
+        $this->db->where('id_franchise', $id_franchise);
+        $this->db->update('tbl_franchise', $data);
+    }
+
+    function get_franchise_detail($id_franchise)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_franchise_detail');
+        // $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('id_franchise', $id_franchise);
+        $query = $this->db->get();
+        return $query;
+    }
 }

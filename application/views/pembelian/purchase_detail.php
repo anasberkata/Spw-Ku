@@ -30,7 +30,7 @@
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                             <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
                                             <div class="mb-3">
-                                                <select class="form-select" aria-label="Default select" name="id_product">
+                                                <select onchange="get_price()" class="form-select" aria-label="Default select" name="id_product" id="id_product">
                                                     <option selected>Pilih Produk</option>
                                                     <?php foreach ($product->result() as $p) : ?>
                                                         <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
@@ -43,11 +43,11 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label>Harga Dasar (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Dasar Produk" name="basic_price">
+                                                <input type="text" class="form-control" placeholder="Harga Dasar Produk" name="basic_price" id="basic_price">
                                             </div>
                                             <div class="mb-3">
                                                 <label>Harga Jual (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Jual Produk" name="selling_price">
+                                                <input type="text" class="form-control" placeholder="Harga Jual Produk" name="selling_price" id="selling_price">
                                             </div>
                                         </div>
                                         <div class="modal-footer">

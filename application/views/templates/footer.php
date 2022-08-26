@@ -51,13 +51,33 @@
     let dataTable = new simpleDatatables.DataTable(table1);
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function() {
             $(this).remove();
         });
     }, 4000);
+</script>
+
+<!-- <script src="<?= base_url('assets/js/jquery.min.js'); ?>"></script> -->
+
+<script type="text/javascript">
+    function get_price() {
+        var id = $("#id_product").val();
+        $.ajax({
+            url: '<?= base_url('autocomplete/ajax_produk/'); ?>',
+            method: "GET",
+            data: "id=" + id,
+        }).success(function(data) {
+            var json = data,
+                obj = JSON.parse(json);
+            console.log(obj);
+            $('#basic_price').val(obj.basic_price);
+            $('#selling_price').val(obj.selling_price);
+        });
+    }
 </script>
 
 <script>
