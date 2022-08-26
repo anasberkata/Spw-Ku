@@ -38,6 +38,7 @@ class Penjualan_model extends CI_Model
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
         $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
+        $this->db->order_by('id_selling', 'DESC');
         $query = $this->db->get();
         return $query;
     }

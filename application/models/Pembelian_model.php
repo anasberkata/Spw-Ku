@@ -31,6 +31,7 @@ class Pembelian_model extends CI_Model
         // $this->db->join('tbl_purchase_detail', 'tbl_purchase_detail.id_purchase = tbl_purchase.id_purchase');
         $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_purchasing', 'DESC');
+        $this->db->order_by('id_purchase', 'DESC');
         $query = $this->db->get();
         return $query;
     }

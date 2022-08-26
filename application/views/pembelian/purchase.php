@@ -70,7 +70,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Pembelian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Supplier</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Petugas</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PJ Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>

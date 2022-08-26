@@ -104,7 +104,9 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
+                                        <?php if ($user["role_id"] == 1) : ?>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
+                                        <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,13 +130,15 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $u->role; ?></p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-success btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></a>
+                                            <?php if ($user["role_id"] == 1) : ?>
+                                                <td class="align-middle text-center text-sm">
+                                                    <a type="button" class="badge bg-success btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></a>
 
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                    <a type="button" class="badge bg-primary btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                            </td>
+                                                    <a type="button" class="badge bg-danger btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                </td>
+                                            <?php endif; ?>
                                         </tr>
 
                                         <!-- Modal Detail User -->

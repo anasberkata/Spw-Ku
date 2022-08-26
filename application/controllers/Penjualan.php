@@ -52,17 +52,43 @@ class Penjualan extends CI_Controller
         $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
 
-        $data = [
-            'id_selling' => NULL,
-            'date_selling' => $date_selling,
-            'id_user' => $id_user,
-            'id_lab' => $id_lab
-        ];
+        $this->form_validation->set_rules(
+            'date_selling',
+            'Tanggal Penjualan',
+            'required|is_unique[tbl_selling.date_selling]',
+            array(
+                'required' => '{field} wajib diisi',
+                'is_unique' => 'Tanggal penjualan sudah ada!'
+            )
+        );
 
-        $this->penjualan->save_selling($data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan berhasil ditambahkan! Silahkan isi Produk</div>');
+        if ($this->form_validation->run() == false) {
 
-        redirect('penjualan/selling/?id_lab=' . $id_lab);
+            $data['title'] = "Data Penjualan SPW";
+            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+            $data['lab'] = $id_lab;
+
+            $data['selling'] = $this->penjualan->get_selling($id_lab);
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('penjualan/selling', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'id_selling' => NULL,
+                'date_selling' => $date_selling,
+                'id_user' => $id_user,
+                'id_lab' => $id_lab
+            ];
+
+            $this->penjualan->save_selling($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan berhasil ditambahkan! Silahkan isi Produk</div>');
+
+            redirect('penjualan/selling/?id_lab=' . $id_lab);
+        }
     }
 
     public function selling_edit()

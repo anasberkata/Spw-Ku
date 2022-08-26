@@ -100,7 +100,7 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Produk</th>
+                                        <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Produk</th> -->
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
@@ -122,9 +122,9 @@
                                                     <img src="<?= base_url('assets/img/products/' . $p->image); ?>" alt="product_image" class="w-100 border-radius-lg shadow-sm">
                                                 </div>
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->code; ?></p>
-                                            </td>
+                                            </td> -->
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->category; ?></p>
                                             </td>
