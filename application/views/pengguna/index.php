@@ -9,9 +9,11 @@
                         <h6>Daftar Pengguna</h6>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalUserAdd">
-                            Tambah
-                        </button>
+                        <?php if ($user["role_id"] == 1) : ?>
+                            <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalUserAdd">
+                                Tambah
+                            </button>
+                        <?php endif; ?>
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalUserAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

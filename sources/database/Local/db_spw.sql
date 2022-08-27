@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 15, 2022 at 04:58 AM
+-- Generation Time: Aug 27, 2022 at 09:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -60,6 +60,85 @@ CREATE TABLE `tbl_data_web` (
 
 INSERT INTO `tbl_data_web` (`id_data_web`, `title_web`, `about_spw`, `vision`, `mission`) VALUES
 (1, 'SPW SMK NEGERI 2 CILAKU', 'Program SEKOLAH PENCETAK WIRASAHA (SPW-KU), merupakan salah satu pilar yang mendukung kegiatan kewirausahaan di SMK N 2 Cilaku Cianjur. Program ini merupakan integrasi dari mata pelajaran Produk Kreatif Kewirausahaan dan mata pelajaran produktif.', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchise`
+--
+
+CREATE TABLE `tbl_franchise` (
+  `id_franchise` int(11) NOT NULL,
+  `date_selling` date NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_franchise`
+--
+
+INSERT INTO `tbl_franchise` (`id_franchise`, `date_selling`, `id_user`, `id_lab`) VALUES
+(5, '2022-08-10', 19, 1),
+(6, '2022-08-11', 19, 1),
+(7, '2022-08-10', 19, 2),
+(8, '2022-08-11', 19, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchise_detail`
+--
+
+CREATE TABLE `tbl_franchise_detail` (
+  `id_franchise_detail` int(11) NOT NULL,
+  `id_franchise` int(11) NOT NULL,
+  `id_franchisor` int(11) NOT NULL,
+  `product` varchar(125) NOT NULL,
+  `basic_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `qty_last` int(11) NOT NULL,
+  `qty_selling` int(11) NOT NULL,
+  `total_basic_price` int(11) NOT NULL,
+  `total_selling_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_franchise_detail`
+--
+
+INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_franchisor`, `product`, `basic_price`, `selling_price`, `qty_product`, `qty_last`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
+(2, 5, 1, 'Basruk', 4500, 5000, 15, 5, 10, 45000, 50000),
+(3, 5, 1, 'Nasi Uduk', 2500, 3000, 50, 10, 40, 100000, 120000),
+(4, 5, 2, 'Cilok', 1800, 2000, 50, 5, 45, 81000, 90000),
+(5, 5, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000),
+(6, 5, 5, 'Cibay', 800, 1000, 10, 0, 10, 8000, 10000),
+(7, 5, 6, 'Buras', 1000, 1500, 20, 0, 20, 20000, 30000),
+(9, 5, 4, 'Snack Kriuk', 4500, 5000, 15, 0, 15, 67500, 75000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchisor`
+--
+
+CREATE TABLE `tbl_franchisor` (
+  `id_franchisor` int(11) NOT NULL,
+  `franchisor` varchar(125) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_franchisor`
+--
+
+INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`) VALUES
+(1, 'Pak Deri'),
+(2, 'Bu Dyah'),
+(3, 'Bu Siti Julaeha'),
+(4, 'Bu Tuti'),
+(5, 'Pak Anas'),
+(6, 'Pak Luky');
 
 -- --------------------------------------------------------
 
@@ -174,7 +253,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (87, 'SPW-087', 4, 3, 'Choki-Choki', 160, 900, 1500, 'default-product.jpg', 1, 1),
 (88, 'SPW-088', 4, 3, 'Top Delfi', 75, 804, 1000, 'default-product.jpg', 1, 1),
 (89, 'SPW-089', 6, 1, 'AICE Markisa 55 mL', 75, 1550, 3000, 'default-product.jpg', 1, 1),
-(90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 60, 1558, 2000, 'default-product.jpg', 1, 1),
+(90, 'SPW-090', 6, 1, 'AICE Miki-Miki 39 gr', 30, 1558, 2000, 'default-product.jpg', 1, 1),
 (91, 'SPW-091', 6, 1, 'AICE Nanas Stick 65gr', 50, 1540, 2000, 'default-product.jpg', 1, 1),
 (92, 'SPW-092', 6, 1, 'AICE Semangka Stick 65gr', 25, 1540, 2000, 'default-product.jpg', 1, 1),
 (93, 'SPW-093', 6, 1, 'AICE Sweet Corn Stick New 52gr FIFA SS', 80, 3500, 5000, 'default-product.jpg', 1, 1),
@@ -218,7 +297,8 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (131, 'SPW-131', 2, 3, 'Teh Gelas', 0, 0, 0, 'default-product.jpg', 1, 1),
 (132, 'SPW-132', 10, 3, 'Mama Lemon 450 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
 (133, 'SPW-133', 10, 3, 'Lavida', 0, 0, 0, 'default-product.jpg', 1, 1),
-(134, 'SPW-134', 1, 3, 'Sui Cup 600 mL', 0, 0, 0, 'default-product.jpg', 1, 1);
+(134, 'SPW-134', 1, 3, 'Sui Cup 600 mL', 0, 0, 0, 'default-product.jpg', 1, 1),
+(136, '', 1, 3, 'Arvin Botol 600 mL', 0, 1500, 2000, 'default-product.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -245,7 +325,8 @@ INSERT INTO `tbl_product_categories` (`id_category`, `category`) VALUES
 (7, 'Mie'),
 (8, 'ATK'),
 (9, 'Obat-obatan'),
-(10, 'Lainnya');
+(10, 'Lainnya'),
+(14, 'tes');
 
 -- --------------------------------------------------------
 
@@ -264,8 +345,9 @@ CREATE TABLE `tbl_product_place` (
 
 INSERT INTO `tbl_product_place` (`id_place`, `place`) VALUES
 (1, 'Es Krim (AICE)'),
-(2, 'Showcase'),
-(3, 'Etalase');
+(2, 'Showcase Coca-Cola'),
+(3, 'Showcase Sosro'),
+(4, 'Etalase');
 
 -- --------------------------------------------------------
 
@@ -332,7 +414,10 @@ CREATE TABLE `tbl_selling` (
 --
 
 INSERT INTO `tbl_selling` (`id_selling`, `date_selling`, `id_user`, `id_lab`) VALUES
-(3, '2022-08-11', 1, 1);
+(14, '2022-08-10', 19, 1),
+(15, '2022-08-10', 19, 2),
+(16, '2022-08-11', 19, 1),
+(17, '2022-08-11', 19, 2);
 
 -- --------------------------------------------------------
 
@@ -363,7 +448,8 @@ INSERT INTO `tbl_selling_detail` (`id_selling_detail`, `id_selling`, `id_product
 (15, 3, 44, 5, 4375, 5000),
 (16, 3, 85, 4, 15832, 20000),
 (17, 3, 79, 20, 79160, 90000),
-(18, 3, 86, 20, 106660, 140000);
+(18, 3, 86, 20, 106660, 140000),
+(19, 14, 90, 30, 46740, 60000);
 
 -- --------------------------------------------------------
 
@@ -532,7 +618,8 @@ INSERT INTO `tbl_users` (`id_user`, `name`, `email`, `username`, `password`, `ro
 (15, 'Siswa SPW TKJ', 'siswaspwtkj@gmail.com', 'siswaspwtkj', '$2y$10$bIzSLHRZRZ8cBUnpCCcv0OjjeiCVzvFTn2g07Ny54qCRz9dokIs2q', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (16, 'Siswa SPW ATPH', 'siswaspwatph@gmail.com', 'siswaspwatph', '$2y$10$OVqPUxjnjF0UYk5xHbUHOu.m8MF17PjjzqplYgtTFZCMm3muNS8nu', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
 (17, 'Siswa SPW APHP', 'siswaspwaphp@gmail.com', 'siswaspwaphp', '$2y$10$b4q3JfyYvRVnND0sAaZBq.cLxd6ng4PBDWNgiPc21C5RgPpXJIs1O', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
-(18, 'Siswa SPW ATU', 'siswaspwatu@gmail.com', 'siswaspwatu', '$2y$10$9bvvL4iExOzCd8TCxD.ubOlIfeGMieXDm7rSjjK9lMBAZ/h9lA1zm', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1);
+(18, 'Siswa SPW ATU', 'siswaspwatu@gmail.com', 'siswaspwatu', '$2y$10$9bvvL4iExOzCd8TCxD.ubOlIfeGMieXDm7rSjjK9lMBAZ/h9lA1zm', 6, 6, 'default.jpg', '', '', '', '', '2022-07-25', 1),
+(19, 'Guru Piket', 'gurupiket@gmail.com', 'gurupiket', '$2y$10$r.dcXc.T5O0z4BG.wpBkauR7yGPBUJEZSSVHk.nM.6kHcE8FBaGYO', 5, 5, 'default.jpg', '', '', '', '', '2022-08-26', 1);
 
 -- --------------------------------------------------------
 
@@ -578,7 +665,8 @@ INSERT INTO `tbl_user_access_menu` (`id_user_access_menu`, `role_id`, `menu_id`)
 (32, 5, 5),
 (33, 5, 7),
 (34, 6, 7),
-(35, 5, 6);
+(35, 5, 6),
+(36, 5, 16);
 
 -- --------------------------------------------------------
 
@@ -658,12 +746,13 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0),
 (8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1),
 (9, 4, 'Data Pembelian', 'pembelian', 'ni ni-cart text-warning', 1),
-(10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
+(10, 5, 'Data Penjualan SPW', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
 (14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
-(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1);
+(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1),
+(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1);
 
 --
 -- Indexes for dumped tables
@@ -680,6 +769,24 @@ ALTER TABLE `tbl_data_lab`
 --
 ALTER TABLE `tbl_data_web`
   ADD PRIMARY KEY (`id_data_web`);
+
+--
+-- Indexes for table `tbl_franchise`
+--
+ALTER TABLE `tbl_franchise`
+  ADD PRIMARY KEY (`id_franchise`);
+
+--
+-- Indexes for table `tbl_franchise_detail`
+--
+ALTER TABLE `tbl_franchise_detail`
+  ADD PRIMARY KEY (`id_franchise_detail`);
+
+--
+-- Indexes for table `tbl_franchisor`
+--
+ALTER TABLE `tbl_franchisor`
+  ADD PRIMARY KEY (`id_franchisor`);
 
 --
 -- Indexes for table `tbl_product`
@@ -788,22 +895,40 @@ ALTER TABLE `tbl_data_web`
   MODIFY `id_data_web` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_franchise`
+--
+ALTER TABLE `tbl_franchise`
+  MODIFY `id_franchise` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_franchise_detail`
+--
+ALTER TABLE `tbl_franchise_detail`
+  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `tbl_franchisor`
+--
+ALTER TABLE `tbl_franchisor`
+  MODIFY `id_franchisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_categories`
 --
 ALTER TABLE `tbl_product_categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_place`
 --
 ALTER TABLE `tbl_product_place`
-  MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_place` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase`
@@ -821,13 +946,13 @@ ALTER TABLE `tbl_purchase_detail`
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
-  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling_detail`
 --
 ALTER TABLE `tbl_selling_detail`
-  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
@@ -851,13 +976,13 @@ ALTER TABLE `tbl_tool_condition`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
 --
 ALTER TABLE `tbl_user_access_menu`
-  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_menu`
@@ -875,7 +1000,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

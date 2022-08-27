@@ -176,9 +176,42 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise_detail');
-        // $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
         $this->db->where('id_franchise', $id_franchise);
+        $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
         $query = $this->db->get();
         return $query;
+    }
+
+    function save_franchise_detail($data)
+    {
+        $this->db->insert('tbl_franchise_detail', $data);
+    }
+
+    function update_franchise_detail($data, $id_franchise_detail)
+    {
+        $this->db->where('id_franchise_detail', $id_franchise_detail);
+        $this->db->update('tbl_franchise_detail', $data);
+    }
+
+    function delete_franchise_detail($id_franchise_detail)
+    {
+        $this->db->where('id_franchise_detail', $id_franchise_detail);
+        $this->db->delete('tbl_franchise_detail');
+
+        return true;
+    }
+
+
+    function sum_total_basic_price_franchise($id_franchise)
+    {
+        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price_franchise` FROM `tbl_franchise_detail` WHERE `id_franchise` = $id_franchise");
+        return $query->row();
+    }
+
+    function sum_total_selling_price_franchise($id_franchise)
+    {
+        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price_franchise` FROM `tbl_franchise_detail` WHERE `id_franchise` = $id_franchise");
+        return $query->row();
     }
 }

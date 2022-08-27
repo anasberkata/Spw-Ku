@@ -62,7 +62,7 @@
                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
                                             <div class="mb-3">
                                                 <label>Pemilik Produk</label>
-                                                <select class="form-select" aria-label="Default select" name="franchisor">
+                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
                                                     <option selected>Pilih Pemilik Produk</option>
                                                     <?php foreach ($franchisor->result() as $f) : ?>
                                                         <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
@@ -74,16 +74,16 @@
                                                 <input type="text" class="form-control" placeholder="Nama Produk" name="product">
                                             </div>
                                             <div class="mb-3">
-                                                <label>Qty Awal</label>
-                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty">
-                                            </div>
-                                            <div class="mb-3">
                                                 <label>Harga Dasar (Rp.)</label>
                                                 <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
                                             </div>
                                             <div class="mb-3">
                                                 <label>Harga Jual (Rp.)</label>
                                                 <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Qty Awal</label>
+                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -116,9 +116,11 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemilik Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Jual</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Awal</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Akhir</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Terjual</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">(Qty Terjual) x <br> (Harga Dasar)</th>
@@ -134,6 +136,23 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?php if ($fd->id_franchisor == 1) : ?>
+                                                        <span class="badge badge-sm bg-gradient-success"><?= $fd->franchisor; ?></span>
+                                                    <?php elseif ($fd->id_franchisor == 2) : ?>
+                                                        <span class="badge badge-sm bg-gradient-info"><?= $fd->franchisor; ?></span>
+                                                    <?php elseif ($fd->id_franchisor == 3) : ?>
+                                                        <span class="badge badge-sm bg-gradient-warning"><?= $fd->franchisor; ?></span>
+                                                    <?php elseif ($fd->id_franchisor == 4) : ?>
+                                                        <span class="badge badge-sm bg-gradient-danger"><?= $fd->franchisor; ?></span>
+                                                    <?php elseif ($fd->id_franchisor == 5) : ?>
+                                                        <span class="badge badge-sm bg-gradient-primary"><?= $fd->franchisor; ?></span>
+                                                    <?php elseif ($fd->id_franchisor == 6) : ?>
+                                                        <span class="badge badge-sm bg-gradient-dark"><?= $fd->franchisor; ?></span>
+                                                    <?php endif; ?>
+                                                </p>
+                                            </td>
+                                            <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->product; ?></p>
                                             </td>
                                             <td>
@@ -143,7 +162,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_product; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_last; ?></p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_selling; ?></p>
@@ -162,7 +184,7 @@
                                         </tr>
 
                                         <!-- Modal Edit Role -->
-                                        <!-- <div class="modal fade" id="modalProductEdit<?= $sd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalProductEdit<?= $fd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -175,17 +197,38 @@
                                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>" readonly>
                                                             <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>" readonly>
                                                             <div class="mb-3">
-                                                                <select class="form-select" aria-label="Default select" name="id_product">
-                                                                    <option value="<?= $sd->id_product ?>"><?= $sd->product ?> || Stok : <?= $sd->qty ?></option>
-                                                                    <?php foreach ($product->result() as $p) : ?>
-                                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $sd->qty ?></option>
+                                                                <label>Pemilik Produk</label>
+                                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                                    <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
+                                                                    <?php foreach ($franchisor->result() as $f) : ?>
+                                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label>Qty Terjual</label>
-                                                                <input type="text" class="form-control" placeholder="Jumlah Terjual" name="qty_selling" value="<?= $sd->qty_selling ?>">
+                                                                <label>Nama Produk</label>
+                                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
                                                             </div>
+                                                            <div class="mb-3">
+                                                                <label>Harga Dasar (Rp.)</label>
+                                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Harga Jual (Rp.)</label>
+                                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Qty Awal</label>
+                                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Qty Akhir</label>
+                                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+                                                            </div>
+                                                            <!-- <div class="mb-3">
+                                                                <label>Qty Terjual</label>
+                                                                <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
+                                                            </div> -->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -194,25 +237,23 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <!-- Modal Hapus Role -->
-                                        <!-- <div class="modal fade" id="modalProductDelete<?= $sd->id_selling_detail; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalProductDelete<?= $fd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Produk</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/selling_detail_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_selling" value="<?= $sd->id_selling; ?>">
-                                                                <input type="hidden" name="id_selling_detail" value="<?= $sd->id_selling_detail; ?>">
+                                                                <input type="hidden" name="id_franchise" value="<?= $fd->id_franchise; ?>">
+                                                                <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>">
                                                                 <input type="hidden" name="id_lab" value="<?= $lab; ?>">
-                                                                <input type="hidden" name="id_product" value="<?= $sd->id_product; ?>">
-                                                                <input type="hidden" name="qty_selling" value="<?= $sd->qty_selling; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus produk : <span class="text-bold"><?= $sd->product; ?></span> dari list penjualan produk!</p>
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus produk : <span class="text-bold"><?= $fd->product; ?></span> dari list penjualan produk!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -222,56 +263,63 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <?php $i++; ?>
                                     <?php endforeach; ?>
 
 
-                                    <!-- <?php if ($total_basic_price->total_basic_price == NULL) : ?>
+                                    <?php if ($total_basic_price_franchise->total_basic_price_franchise == NULL) : ?>
                                     <?php else : ?>
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="7"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price_franchise->total_selling_price_franchise, 0, ',', '.'); ?>,-</p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="7"></td>
                                             <td>
                                                 <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Dasar</p>
+                                                <p class="text-xs mb-0 px-3">(Disetorkan ke <br> pemilik produk)</p>
                                             </td>
                                             <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Penjualan</p>
+                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 80% Laba <br> Penjualan</p>
+                                                <p class="text-xs mb-0 px-3">(Disetorkan ke <br> SPW)</p>
                                             </td>
                                             <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Laba</p>
+                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 20% laba <br> Penjualan</p>
+                                                <p class="text-xs mb-0 px-3">(Untuk Siswa)</p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="7"></td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
                                             </td>
 
-                                            <?php $laba = $total_selling_price->total_selling_price - $total_basic_price->total_basic_price; ?>
+                                            <?php
+                                            $laba_spw = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.8;
+
+                                            $laba_siswa = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.2;
+                                            ?>
 
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba_spw, 0, ',', '.'); ?>,-</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba_siswa, 0, ',', '.'); ?>,-</p>
                                             </td>
                                         </tr>
-                                    <?php endif; ?> -->
+                                    <?php endif; ?>
 
                                 </tbody>
                             </table>
