@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2022 at 09:22 PM
+-- Generation Time: Aug 28, 2022 at 06:14 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -115,7 +115,9 @@ INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_f
 (5, 5, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000),
 (6, 5, 5, 'Cibay', 800, 1000, 10, 0, 10, 8000, 10000),
 (7, 5, 6, 'Buras', 1000, 1500, 20, 0, 20, 20000, 30000),
-(9, 5, 4, 'Snack Kriuk', 4500, 5000, 15, 0, 15, 67500, 75000);
+(9, 5, 4, 'Snack Kriuk', 4500, 5000, 15, 0, 15, 67500, 75000),
+(10, 7, 1, 'Nasi Uduk', 2500, 3000, 20, 0, 20, 50000, 60000),
+(11, 7, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000);
 
 -- --------------------------------------------------------
 
@@ -904,7 +906,7 @@ ALTER TABLE `tbl_franchise`
 -- AUTO_INCREMENT for table `tbl_franchise_detail`
 --
 ALTER TABLE `tbl_franchise_detail`
-  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchisor`

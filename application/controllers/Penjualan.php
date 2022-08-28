@@ -542,6 +542,33 @@ class Penjualan extends CI_Controller
         redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
     }
 
+    public function franchise_detail_search()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+        $id_franchise = $this->input->get('id_franchise', true);
+        $id_franchisor = $this->input->get('id_franchisor', true);
+
+        $data['title'] = "Data Penjualan Titipan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_franchise'] = $id_franchise;
+        $data['lab'] = $id_lab;
+        $data['id_franchisor'] = $id_franchisor;
+        $data['franchisor'] = $this->penjualan->get_franchisor();
+
+        $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
+        $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_franchisor);
+
+        $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_franchisor);
+        $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_franchisor);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/franchise_detail_search', $data);
+        $this->load->view('templates/footer');
+    }
+
     // ---------------------------------------- MPDF ---------------------------------- //
     public function printPDF_franchise()
     {
@@ -555,18 +582,18 @@ class Penjualan extends CI_Controller
 
         $data['id_franchise'] = $id_franchise;
         $data['lab'] = $id_lab;
-        $data['franchisor'] = $this->penjualan->get_franchisor();
+        $data['franchisor'] = $this->db->get_where('tbl_franchisor', ['id_franchisor' => $id_franchisor])->row_array();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
 
         if (!isset($id_franchisor)) {
             $data['franchise_detail'] = $this->penjualan->get_franchise_detail($id_franchise);
-            $data['total_basic_price_franchisor'] = $this->penjualan->sum_total_basic_price_franchise($id_franchise);
-            $data['total_selling_price_franchisor'] = $this->penjualan->sum_total_selling_price_franchise($id_franchise);
+            $data['total_basic_price_franchise'] = $this->penjualan->sum_total_basic_price_franchise($id_franchise);
+            $data['total_selling_price_franchise'] = $this->penjualan->sum_total_selling_price_franchise($id_franchise);
         } else {
-            $data['franchise_detail'] = $this->penjualan->search_selling_detail($id_franchise, $id_franchise);
-            $data['total_basic_price_franschise'] = $this->penjualan->search_sum_total_basic_price($id_franchise, $id_franchise);
-            $data['total_selling_price_franschise'] = $this->penjualan->search_sum_total_selling_price($id_franchise, $id_franchise);
+            $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_franchisor);
+            $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_franchisor);
+            $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_franchisor);
         }
 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);

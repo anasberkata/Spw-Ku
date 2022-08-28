@@ -59,6 +59,7 @@
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NAMA PRODUK</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA DASAR</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA JUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AWAL</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AKHIR</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY TERJUAL</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA DASAR)</td>
@@ -67,49 +68,52 @@
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            <?php foreach ($selling_detail->result() as $sd) : ?>
+            <?php foreach ($franchise_detail->result() as $fd) : ?>
                 <tr class="border height-100">
                     <td class="border text-center">
                         <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                     </td>
                     <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->product; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->product; ?></p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->basic_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->basic_price, 0, ',', '.'); ?>,-</p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->selling_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->qty; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_product; ?></p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $sd->qty_selling; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_last; ?></p>
+                    </td>
+                    <td class="border text-center">
+                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_selling; ?></p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_basic_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_basic_price, 0, ',', '.'); ?>,-</p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_selling_price, 0, ',', '.'); ?>,-</p>
                     </td>
                 </tr>
 
                 <?php $i++; ?>
             <?php endforeach; ?>
 
-            <?php if ($total_basic_price->total_basic_price == NULL) : ?>
+            <?php if ($total_basic_price_franchise->total_basic_price_franchise == NULL) : ?>
             <?php else : ?>
                 <tr class="border">
-                    <td colspan="5"></td>
+                    <td colspan="6"></td>
                     <td>
                         <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price_franchise->total_selling_price_franchise, 0, ',', '.'); ?>,-</p>
                     </td>
                 </tr>
             <?php endif; ?>
@@ -117,24 +121,27 @@
     </table>
 
     <table class="table align-items-center" cellpadding="7">
-        <?php if ($total_basic_price->total_basic_price == NULL) : ?>
+        <?php if ($total_basic_price_franchise->total_basic_price_franchise == NULL) : ?>
         <?php else : ?>
             <thead>
                 <tr class="border">
                     <td colspan="2">
-                        <p class="text-xs font-weight-bold">Tanggal : <?= date('d F Y', strtotime($selling["date_selling"])) ?></p>
+                        <p class="text-xs font-weight-bold">Tanggal : <?= date('d F Y', strtotime($franchise["date_selling"])) ?></p>
                     </td>
                     <td class="border text-center">
                         <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Tanda Tangan</p>
                     </td>
                     <td class="border text-center">
                         <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Dasar</p>
+                        <p class="text-xs mb-0 px-3">(Disetorkan ke <br> pemilik produk)</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Penjualan</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 80% Laba <br> Penjualan</p>
+                        <p class="text-xs mb-0 px-3">(Disetorkan ke <br> SPW)</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Laba</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 20% laba <br> Penjualan</p>
+                        <p class="text-xs mb-0 px-3">(Untuk Siswa)</p>
                     </td>
                 </tr>
             </thead>
@@ -149,17 +156,21 @@
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3"></p>
                     </td>
-                    <td class="border text-center" rowspan="2">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-</p>
-                    </td>
-                    <td class="border text-center" rowspan="2">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-</p>
+                    <td class="border text-center" rowspan="3">
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
                     </td>
 
-                    <?php $laba = $total_selling_price->total_selling_price - $total_basic_price->total_basic_price; ?>
+                    <?php
+                    $laba_spw = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.8;
 
-                    <td class="border text-center" rowspan="2">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($laba, 0, ',', '.'); ?>,-</p>
+                    $laba_siswa = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.2;
+                    ?>
+
+                    <td class="border text-center" rowspan="3">
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($laba_spw, 0, ',', '.'); ?>,-</p>
+                    </td>
+                    <td class="border text-center" rowspan="3">
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($laba_siswa, 0, ',', '.'); ?>,-</p>
                     </td>
                 </tr>
                 <tr class="border">
@@ -168,6 +179,25 @@
                     </td>
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3">: </p>
+                    </td>
+                    <td class="border">
+                        <p class="text-xs font-weight-bold mb-0 px-3"></p>
+                    </td>
+                </tr>
+                <tr class="border">
+                    <td class="border">
+                        <p class="text-xs font-weight-bold mb-0 px-3">Pemilik Produk</p>
+                    </td>
+                    <td class="border">
+                        <p class="text-xs font-weight-bold mb-0 px-3">:
+                            <?php
+                            if ($franchisor == NULL) {
+                                echo "Semua Franchisor";
+                            } else {
+                                echo $franchisor["franchisor"];
+                            }
+                            ?>
+                        </p>
                     </td>
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3"></p>

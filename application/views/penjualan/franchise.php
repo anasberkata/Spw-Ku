@@ -6,7 +6,7 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Data Penjualan Produk Lab SPW <?= $lab; ?></h6>
+                        <h6>Data Penjualan Produk Titipan Lab SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalFranchiseAdd">
