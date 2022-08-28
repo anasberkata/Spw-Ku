@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 27, 2022 at 09:09 PM
+-- Generation Time: Aug 28, 2022 at 12:03 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.30
 
@@ -61,6 +61,62 @@ CREATE TABLE `tbl_data_web` (
 
 INSERT INTO `tbl_data_web` (`id_data_web`, `title_web`, `about_spw`, `vision`, `mission`) VALUES
 (1, 'SPW SMK NEGERI 2 CILAKU', 'Program SEKOLAH PENCETAK WIRASAHA (SPW-KU), merupakan salah satu pilar yang mendukung kegiatan kewirausahaan di SMK N 2 Cilaku Cianjur. Program ini merupakan integrasi dari mata pelajaran Produk Kreatif Kewirausahaan dan mata pelajaran produktif.', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchise`
+--
+
+CREATE TABLE `tbl_franchise` (
+  `id_franchise` int(11) NOT NULL,
+  `date_selling` date NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchise_detail`
+--
+
+CREATE TABLE `tbl_franchise_detail` (
+  `id_franchise_detail` int(11) NOT NULL,
+  `id_franchise` int(11) NOT NULL,
+  `id_franchisor` int(11) NOT NULL,
+  `product` varchar(125) NOT NULL,
+  `basic_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `qty_last` int(11) NOT NULL,
+  `qty_selling` int(11) NOT NULL,
+  `total_basic_price` int(11) NOT NULL,
+  `total_selling_price` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_franchisor`
+--
+
+CREATE TABLE `tbl_franchisor` (
+  `id_franchisor` int(11) NOT NULL,
+  `franchisor` varchar(125) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_franchisor`
+--
+
+INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`) VALUES
+(1, 'Pak Deri'),
+(2, 'Bu Dyah'),
+(3, 'Bu Siti Julaeha'),
+(4, 'Bu Tuti'),
+(5, 'Pak Anas'),
+(6, 'Pak Luky');
 
 -- --------------------------------------------------------
 
@@ -223,7 +279,7 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (135, '', 1, 4, 'Arvin Botol 600ml', 0, 958, 2000, 'default-product.jpg', 2, 1),
 (136, '', 1, 4, 'Sui Botol 600ml', 89, 958, 2000, 'IMG_20220824_074621.jpg', 2, 1),
 (137, '', 6, 1, 'AICE Mochi Vanilla', 10, 1500, 2000, 'default-product.jpg', 2, 1),
-(138, '', 2, 2, 'Fanta Pet Seru 390 ml', 0, 3958, 5000, 'default-product.jpg', 2, 1),
+(138, '', 2, 2, 'Fanta Pet Seru 390 ml', 32, 3958, 5000, 'default-product.jpg', 2, 1),
 (139, '', 6, 1, 'AICE Colour Chocolate Stick 50ml', 0, 1912, 2500, 'default-product.jpg', 2, 1),
 (140, '', 6, 1, 'AICE Bingo Cookies Cone 100ml', 0, 4062, 5000, 'default-product.jpg', 2, 1),
 (141, '', 6, 1, 'AICE Blueberry Yoghurt Stick 49ml', 0, 1900, 2500, 'default-product.jpg', 2, 1),
@@ -248,13 +304,13 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (160, '', 6, 1, 'AICE Berry Max Cone', 25, 4062, 5000, 'default-product.jpg', 2, 1),
 (161, '', 6, 1, 'AICE Choco Cookies', 0, 3600, 4500, 'default-product.jpg', 2, 1),
 (162, '', 6, 1, 'AICE Coffee Crispy', 0, 2750, 3500, 'default-product.jpg', 2, 1),
-(163, '', 2, 2, 'Fanta Pet Imut 250ml', 0, 2375, 3000, 'default-product.jpg', 2, 1),
-(164, '', 2, 2, 'Coca-Cola Pet Seru 390ml', 0, 3958, 5000, 'default-product.jpg', 2, 1),
-(165, '', 2, 2, 'Coca-Cola Pet Imut 250ml', 0, 2375, 3000, 'default-product.jpg', 2, 1),
-(166, '', 2, 2, 'Frestea 350ml', 0, 3500, 4500, 'default-product.jpg', 2, 1),
-(167, '', 2, 2, 'Nutriboost', 0, 5333, 7000, 'default-product.jpg', 2, 1),
-(168, '', 2, 2, 'Pulpy Orange', 0, 3833, 4500, 'default-product.jpg', 2, 1),
-(169, '', 2, 2, 'Sprite Pet Imut 250ml', 0, 2375, 3000, 'default-product.jpg', 2, 1),
+(163, '', 2, 2, 'Fanta Pet Imut 250ml', 47, 2375, 3000, 'default-product.jpg', 2, 1),
+(164, '', 2, 2, 'Coca-Cola Pet Seru 390ml', 22, 3958, 5000, 'default-product.jpg', 2, 1),
+(165, '', 2, 2, 'Coca-Cola Pet Imut 250ml', 40, 2375, 3000, 'default-product.jpg', 2, 1),
+(166, '', 2, 2, 'Frestea 350ml', 5, 3500, 4500, 'default-product.jpg', 2, 1),
+(167, '', 2, 2, 'Nutriboost', 68, 5333, 7000, 'default-product.jpg', 2, 1),
+(168, '', 2, 2, 'Pulpy Orange', 22, 3833, 4500, 'default-product.jpg', 2, 1),
+(169, '', 2, 2, 'Sprite Pet Imut 250ml', 42, 2375, 3000, 'default-product.jpg', 2, 1),
 (170, '', 2, 2, 'Sprite Pet Seru 390ml', 0, 3958, 4500, 'default-product.jpg', 2, 1),
 (171, '', 1, 4, 'Cibodas Cup', 0, 315, 500, 'default-product.jpg', 2, 1),
 (172, '', 1, 4, 'La Vida Cup / SUI Cup', 170, 281, 500, 'default-product.jpg', 2, 1),
@@ -334,27 +390,27 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (248, '', 8, 4, 'Kertas Polio', 0, 250, 500, 'default-product.jpg', 2, 1),
 (249, '', 8, 4, 'Tipe-Ex', 0, 2500, 3000, 'default-product.jpg', 2, 1),
 (250, '', 3, 4, 'Luwak White Coffe', 0, 560, 1500, 'default-product.jpg', 2, 1),
-(251, '', 10, 4, 'Softex Daun Sirih', 0, 225, 500, 'default-product.jpg', 2, 1),
+(251, '', 10, 4, 'Softex Daun Sirih', 1, 225, 500, 'default-product.jpg', 2, 1),
 (252, '', 9, 4, 'Promaag / Butir', 0, 667, 1000, 'default-product.jpg', 2, 1),
 (253, '', 10, 4, 'Charm', 43, 430, 1000, 'default-product.jpg', 2, 1),
 (254, '', 10, 4, 'Cuka 1500', 6, 1000, 1500, 'default-product.jpg', 2, 1),
 (255, '', 10, 4, 'Garam Jempol', 2, 1500, 2000, 'default-product.jpg', 2, 1),
 (256, '', 10, 4, 'Hers Protex', 0, 440, 500, 'default-product.jpg', 2, 1),
 (257, '', 10, 4, 'Laurier', 0, 430, 1000, 'default-product.jpg', 2, 1),
-(258, '', 10, 4, 'Mama Lemon 55ml', 0, 812, 1000, 'default-product.jpg', 2, 1),
-(259, '', 10, 4, 'Mama Lemon 450ml', 0, 8200, 10000, 'default-product.jpg', 2, 1),
-(260, '', 10, 4, 'Mama Lemon 2000', 0, 1500, 2000, 'default-product.jpg', 2, 1),
+(258, '', 10, 4, 'Mama Lemon 55ml', 3, 812, 1000, 'default-product.jpg', 2, 1),
+(259, '', 10, 4, 'Mama Lemon 450ml', 5, 8200, 10000, 'default-product.jpg', 2, 1),
+(260, '', 10, 4, 'Mama Lemon 115 ml', 8, 1500, 2000, 'default-product.jpg', 2, 1),
 (261, '', 10, 4, 'Minyak Sayur Sedaap 1L', 0, 16700, 18000, 'default-product.jpg', 2, 1),
-(262, '', 10, 4, 'Saos Gembol', 0, 2500, 3000, 'default-product.jpg', 2, 1),
-(263, '', 10, 4, 'Terigu Segitiga Curah 1kg', 0, 10800, 12000, 'default-product.jpg', 2, 1),
+(262, '', 10, 4, 'Saos Gembol', 6, 2500, 3000, 'default-product.jpg', 2, 1),
+(263, '', 10, 4, 'Terigu Segitiga Curah 1kg', 2, 10800, 12000, 'default-product.jpg', 2, 1),
 (264, '', 10, 4, 'Tissue Tessa', 0, 1771, 2000, 'default-product.jpg', 2, 1),
 (265, '', 4, 4, 'Biskuat Bolu', 0, 1690, 2000, 'default-product.jpg', 2, 1),
 (266, '', 3, 4, 'Neo Coffe Mochacino', 0, 985, 1500, 'default-product.jpg', 2, 1),
-(267, '', 3, 4, 'Kapal Api Special Mix', 0, 1180, 2000, 'default-product.jpg', 2, 1),
-(268, '', 3, 4, 'Good Day Mochacino', 0, 1130, 2000, 'default-product.jpg', 2, 1),
+(267, '', 12, 4, 'Kapal Api Special Mix', 7, 1180, 2000, 'default-product.jpg', 2, 1),
+(268, '', 12, 4, 'Good Day Mochacino', 10, 1130, 2000, 'default-product.jpg', 2, 1),
 (269, '', 4, 4, 'Tango Walut', 8, 1140, 2000, 'default-product.jpg', 2, 1),
-(270, '', 4, 4, 'Yorilos', 0, 1140, 2000, 'default-product.jpg', 2, 1),
-(271, '', 4, 4, 'Taro Net Potato', 0, 1771, 2000, 'default-product.jpg', 2, 1),
+(270, '', 4, 4, 'Yorilos', 17, 1140, 2000, 'default-product.jpg', 2, 1),
+(271, '', 4, 4, 'Taro Net Potato', 10, 1771, 2000, 'default-product.jpg', 2, 1),
 (272, '', 8, 4, 'Ballpoint Standard AE7', 0, 1458, 2000, 'default-product.jpg', 2, 1),
 (273, '', 8, 4, 'Buku Big Boss 50 Lbr', 0, 4750, 6000, 'default-product.jpg', 2, 1),
 (274, '', 8, 4, 'Buku Saku Tipis', 0, 900, 1500, 'default-product.jpg', 2, 1),
@@ -372,7 +428,8 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (286, '', 10, 4, 'Tisu Paseo 1000', 24, 800, 1000, 'default-product.jpg', 2, 1),
 (287, '', 10, 4, 'Tisu Paseo 3000', 5, 2200, 3000, 'default-product.jpg', 2, 1),
 (288, '', 4, 4, 'Iyes kacang oven rasa pedas', 22, 430, 1000, 'default-product.jpg', 2, 1),
-(289, '', 12, 4, 'Luwak White Coffee ', 8, 560, 1500, 'default-product.jpg', 2, 1);
+(289, '', 12, 4, 'Luwak White Coffee ', 8, 560, 1500, 'default-product.jpg', 2, 1),
+(290, '', 4, 4, 'Taro Seaweed 1000', 11, 900, 1000, 'default-product.jpg', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -776,12 +833,13 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0),
 (8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1),
 (9, 4, 'Data Pembelian', 'pembelian', 'ni ni-cart text-warning', 1),
-(10, 5, 'Data Penjualan', 'penjualan', 'ni ni-cart text-primary', 1),
+(10, 5, 'Data Penjualan SPW', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
 (14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
-(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1);
+(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1),
+(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1);
 
 --
 -- Indexes for dumped tables
@@ -798,6 +856,24 @@ ALTER TABLE `tbl_data_lab`
 --
 ALTER TABLE `tbl_data_web`
   ADD PRIMARY KEY (`id_data_web`);
+
+--
+-- Indexes for table `tbl_franchise`
+--
+ALTER TABLE `tbl_franchise`
+  ADD PRIMARY KEY (`id_franchise`);
+
+--
+-- Indexes for table `tbl_franchise_detail`
+--
+ALTER TABLE `tbl_franchise_detail`
+  ADD PRIMARY KEY (`id_franchise_detail`);
+
+--
+-- Indexes for table `tbl_franchisor`
+--
+ALTER TABLE `tbl_franchisor`
+  ADD PRIMARY KEY (`id_franchisor`);
 
 --
 -- Indexes for table `tbl_product`
@@ -906,10 +982,28 @@ ALTER TABLE `tbl_data_web`
   MODIFY `id_data_web` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_franchise`
+--
+ALTER TABLE `tbl_franchise`
+  MODIFY `id_franchise` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_franchise_detail`
+--
+ALTER TABLE `tbl_franchise_detail`
+  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_franchisor`
+--
+ALTER TABLE `tbl_franchisor`
+  MODIFY `id_franchisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_categories`
@@ -939,7 +1033,7 @@ ALTER TABLE `tbl_purchase_detail`
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
-  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling_detail`
@@ -993,7 +1087,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
