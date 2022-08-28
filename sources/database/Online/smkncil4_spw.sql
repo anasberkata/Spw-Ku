@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 28, 2022 at 12:03 PM
+-- Generation Time: Aug 28, 2022 at 12:23 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.30
 
@@ -753,7 +753,9 @@ INSERT INTO `tbl_user_access_menu` (`id_user_access_menu`, `role_id`, `menu_id`)
 (33, 5, 7),
 (34, 6, 7),
 (35, 5, 6),
-(36, 5, 16);
+(36, 5, 16),
+(37, 3, 16),
+(38, 4, 16);
 
 -- --------------------------------------------------------
 
@@ -1069,7 +1071,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
 --
 ALTER TABLE `tbl_user_access_menu`
-  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_menu`
