@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 28, 2022 at 07:24 AM
+-- Generation Time: Aug 29, 2022 at 04:31 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -110,7 +110,7 @@ CREATE TABLE `tbl_franchise_detail` (
 
 INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_franchisor`, `product`, `basic_price`, `selling_price`, `qty_product`, `qty_last`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
 (2, 5, 1, 'Basruk', 4500, 5000, 15, 5, 10, 45000, 50000),
-(3, 5, 1, 'Nasi Uduk', 2500, 3000, 50, 10, 40, 100000, 120000),
+(3, 5, 1, 'Nasi Uduk', 2500, 3000, 50, 11, 39, 97500, 117000),
 (4, 5, 2, 'Cilok', 1800, 2000, 50, 5, 45, 81000, 90000),
 (5, 5, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000),
 (6, 5, 5, 'Cibay', 800, 1000, 10, 0, 10, 8000, 10000),

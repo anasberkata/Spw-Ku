@@ -10,12 +10,16 @@
                         <p class="small"><?= date('d F Y', strtotime($purchase["date_purchasing"])) . " // " . $purchase["supplier"] . " // SPW " . $lab; ?></p>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
-                            Tambah
-                        </button>
-                        <a href="<?= base_url('pembelian/purchase/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
-                            Kembali
-                        </a>
+                        <div class="btn-group float-end w-100 w-lg-auto">
+                            <a href="<?= base_url('pembelian/purchase/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                                Kembali
+                            </a>
+                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
+                                Tambah
+                            </button>
+                        </div>
+
+
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

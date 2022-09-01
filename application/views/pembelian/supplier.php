@@ -12,9 +12,6 @@
                         <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalSupplierAdd">
                             Tambah
                         </button>
-                        <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
-                            Kembali
-                        </a>
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalSupplierAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

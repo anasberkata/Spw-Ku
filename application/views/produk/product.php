@@ -9,12 +9,22 @@
                         <h6>Daftar Produk LAB SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
+                        <div class="btn-group float-end w-100 w-lg-auto">
+                            <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                                Kembali
+                            </a>
+                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
+                                Tambah
+                            </button>
+                        </div>
+
+
+                        <!-- <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                             Tambah
                         </button>
                         <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                             Kembali
-                        </a>
+                        </a> -->
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

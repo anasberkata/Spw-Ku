@@ -9,13 +9,16 @@
                         <h6>Data Penjualan Produk Lab SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-dark btn-sm mb-3 ms-2 float-end" data-bs-toggle="modal" data-bs-target="#modalSellingAdd">
-                            Tambah
-                        </button>
+                        <div class="btn-group float-end w-100 w-lg-auto">
+                            <a href="<?= base_url('penjualan'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                                Kembali
+                            </a>
+                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalSellingAdd">
+                                Tambah
+                            </button>
+                        </div>
 
-                        <a href="<?= base_url('penjualan'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
-                            Kembali
-                        </a>
+
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalSellingAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">

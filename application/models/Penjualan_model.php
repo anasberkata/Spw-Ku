@@ -175,6 +175,7 @@ class Penjualan_model extends CI_Model
         $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
         $this->db->where('id_franchise', $id_franchise);
         $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->order_by('id_franchise_detail', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -218,6 +219,7 @@ class Penjualan_model extends CI_Model
         $this->db->where('id_franchise', $id_franchise);
         $this->db->where('tbl_franchisor.id_franchisor', $id_franchisor);
         $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->order_by('id_franchise_detail', 'ASC');
         $query = $this->db->get();
         return $query;
     }

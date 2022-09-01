@@ -12,12 +12,16 @@
                                     <p class="mb-0 text-uppercase text-sm">Profile Saya</p>
                                 </div>
                                 <div class="col-6">
-                                    <button type=" button" class="btn btn-warning btn-sm float-end me-2" data-bs-toggle="modal" data-bs-target="#modalEditPassword<?= $user['id_user']; ?>">
-                                        Ubah Password
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-sm float-end me-2" data-bs-toggle="modal" data-bs-target="#modalEditProfile<?= $user['id_user']; ?>">
-                                        Ubah Profile
-                                    </button>
+                                    <div class="btn-group float-end w-100 w-lg-auto">
+                                        <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#modalEditProfile<?= $user['id_user']; ?>">
+                                            Ubah Profile
+                                        </button>
+                                        <button type=" button" class="btn btn-warning btn-sm float-end" data-bs-toggle="modal" data-bs-target="#modalEditPassword<?= $user['id_user']; ?>">
+                                            Ubah Password
+                                        </button>
+                                    </div>
+
+
                                 </div>
 
                                 <!-- Modal Edit Profile-->
