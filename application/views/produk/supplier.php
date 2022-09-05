@@ -21,7 +21,7 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Product</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('pembelian/supplier_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('produk/supplier_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label>Nama Supplier</label>
@@ -99,7 +99,7 @@
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Data Supplier</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('pembelian/supplier_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/supplier_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_supplier" value="<?= $s->id_supplier; ?>">
@@ -132,7 +132,7 @@
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Supplier</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('pembelian/supplier_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/supplier_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_supplier" value="<?= $s->id_supplier; ?>">

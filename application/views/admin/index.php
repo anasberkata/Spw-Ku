@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col mb-lg-0 mb-4">
+            <div class="col mb-lg-3 mb-4">
                 <div class="row">
                     <div class="col">
                         <div class="card card-carousel overflow-hidden h-100 p-0">
@@ -121,6 +121,62 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col mb-lg-3 mb-4">
+                <div class="card ">
+                    <div class="card-header pb-0 p-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-2">Jadwal Guru Piket</h6>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-items-center">
+                            <tbody>
+                                <?php foreach ($schedule->result() as $s) : ?>
+                                    <tr>
+                                        <td class="w-30">
+                                            <div class="d-flex px-2 py-1 align-items-center">
+                                                <div>
+                                                    <p class="text-xs mb-0">Guru:</p>
+                                                    <?php if ($s->picket_schedule == date("Y-m-d")) : ?>
+                                                        <p class="badge bg-success text-sm font-weight-bold mb-0 mt-2"><?= $s->name; ?></p>
+                                                    <?php else : ?>
+                                                        <p class="text-sm mb-0"><?= $s->name; ?></p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <p class="text-xs mb-0">Kelas:</p>
+                                                <?php if ($s->picket_schedule == date("Y-m-d")) : ?>
+                                                    <p class="badge bg-info text-sm font-weight-bold mb-0 mt-2"><?= $s->class; ?></p>
+                                                <?php else : ?>
+                                                    <p class="text-sm mb-0"><?= $s->class; ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <p class="text-xs mb-0">Tanggal:</p>
+                                                <?php if ($s->picket_schedule == date("Y-m-d")) : ?>
+                                                    <p class="badge bg-warning text-sm font-weight-bold mb-0 mt-2"><?= date('d M Y', strtotime($s->picket_schedule)); ?></p>
+                                                <?php else : ?>
+                                                    <p class="text-sm mb-0"><?= date('d M Y', strtotime($s->picket_schedule)); ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

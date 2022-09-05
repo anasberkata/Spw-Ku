@@ -36,10 +36,24 @@ class Stok_model extends CI_Model
         return $query;
     }
 
-    // function get_code_product()
-    // {
-    //     $query = $this->db->query("SELECT MAX(code) as kodebarang from tbl_product");
-    //     $hasil = $query->row();
-    //     return $hasil->kodebarang;
-    // }
+    function get_places()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product_place');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_products_to_excel($id_lab, $id_place)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product');
+        $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
+        $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
+        $this->db->where('tbl_product.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', $id_place);
+        $this->db->order_by('place', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
 }

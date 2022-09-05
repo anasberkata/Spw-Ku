@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 29, 2022 at 04:31 PM
+-- Generation Time: Sep 05, 2022 at 07:41 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -167,11 +167,11 @@ CREATE TABLE `tbl_product` (
 --
 
 INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `product`, `qty`, `basic_price`, `selling_price`, `image`, `id_lab`, `is_active`) VALUES
-(1, 'SPW-001', 1, 3, 'Cibodas Cup', 54, 315, 500, 'default-product.jpg', 1, 1),
+(1, 'SPW-001', 1, 3, 'Cibodas Cup', 50, 315, 500, 'default-product.jpg', 1, 1),
 (2, 'SPW-002', 1, 3, 'La Vida Cup', 200, 281, 500, 'default-product1.jpg', 1, 1),
 (3, 'SPW-003', 1, 3, 'Hexua Cup', 24, 281, 500, 'default-product3.jpg', 1, 1),
 (4, 'SPW-004', 1, 3, 'SUI Botol 600 mL', 10, 1520, 2000, 'default-product2.jpg', 1, 1),
-(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 12, 1500, 2000, 'default-product.jpg', 1, 1),
+(6, 'SPW-006', 1, 3, 'Arvin Botol 600 mL', 10, 1500, 2000, 'default-product.jpg', 1, 1),
 (7, 'SPW-007', 2, 3, 'Ale - Ale', 38, 792, 1000, 'default-product.jpg', 1, 1),
 (8, 'SPW-008', 2, 3, 'Kiko', 60, 850, 1000, 'default-product.jpg', 1, 1),
 (9, 'SPW-009', 2, 3, 'Koko Jelly Drink', 0, 795, 1500, 'default-product.jpg', 1, 1),
@@ -222,13 +222,13 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `pro
 (54, 'SPW-054', 7, 3, 'Mie Sedap Ayam Bawang', 80, 2363, 3000, 'default-product.jpg', 1, 1),
 (55, 'SPW-055', 7, 3, 'Mie Sedap Goreng', 80, 2525, 3000, 'default-product.jpg', 1, 1),
 (56, 'SPW-056', 7, 3, 'Mie Sedap Soto', 0, 2525, 3000, 'default-product.jpg', 1, 1),
-(57, 'SPW-057', 8, 3, 'Ballpoint Standard AE7', 63, 1458, 2000, 'default-product.jpg', 1, 1),
+(57, 'SPW-057', 8, 3, 'Ballpoint Standard AE7', 60, 1458, 2000, 'default-product.jpg', 1, 1),
 (58, 'SPW-058', 8, 3, 'Buku Big Boss 50 Lbr', 0, 4750, 6000, 'default-product.jpg', 1, 1),
-(59, 'SPW-059', 8, 3, 'Buku Saku Tipis', 78, 900, 1500, 'default-product.jpg', 1, 1),
+(59, 'SPW-059', 8, 3, 'Buku Saku Tipis', 70, 900, 1500, 'default-product.jpg', 1, 1),
 (60, 'SPW-060', 8, 3, 'Glue Stick', 0, 2000, 2500, 'default-product.jpg', 1, 1),
 (61, 'SPW-061', 8, 3, 'Kertas HVS', 0, 85, 100, 'default-product.jpg', 1, 1),
 (62, 'SPW-062', 8, 3, 'Kertas Polio', 190, 250, 500, 'default-product.jpg', 1, 1),
-(63, 'SPW-063', 8, 3, 'Penggaris 30 Cm', 8, 2000, 2500, 'default-product.jpg', 1, 1),
+(63, 'SPW-063', 8, 3, 'Penggaris 30 Cm', 5, 2000, 2500, 'default-product.jpg', 1, 1),
 (64, 'SPW-064', 8, 3, 'Tip-Ex', 6, 2500, 3000, 'default-product.jpg', 1, 1),
 (65, 'SPW-065', 9, 3, 'Mixagrip Per Butir', 37, 220, 500, 'default-product.jpg', 1, 1),
 (66, 'SPW-066', 9, 3, 'Hansaplast', 62, 225, 500, 'default-product.jpg', 1, 1),
@@ -372,7 +372,8 @@ CREATE TABLE `tbl_purchase` (
 INSERT INTO `tbl_purchase` (`id_purchase`, `date_purchasing`, `id_supplier`, `id_user`, `id_lab`) VALUES
 (5, '2022-08-10', 3, 1, 1),
 (6, '2022-08-11', 3, 1, 1),
-(7, '2022-08-12', 3, 1, 1);
+(7, '2022-08-13', 3, 1, 1),
+(8, '2022-09-06', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -401,6 +402,70 @@ INSERT INTO `tbl_purchase_detail` (`id_purchase_detail`, `id_purchase`, `id_prod
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_schedule`
+--
+
+CREATE TABLE `tbl_schedule` (
+  `id_schedule` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_class` int(11) NOT NULL,
+  `picket_schedule` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_schedule`
+--
+
+INSERT INTO `tbl_schedule` (`id_schedule`, `id_user`, `id_class`, `picket_schedule`) VALUES
+(1, 4, 2, '2022-09-05'),
+(2, 12, 18, '2022-09-06'),
+(4, 10, 23, '2022-09-07'),
+(5, 5, 5, '2022-09-08'),
+(6, 6, 22, '2022-09-09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_schedule_class`
+--
+
+CREATE TABLE `tbl_schedule_class` (
+  `id_schedule_class` int(11) NOT NULL,
+  `class` varchar(125) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_schedule_class`
+--
+
+INSERT INTO `tbl_schedule_class` (`id_schedule_class`, `class`) VALUES
+(1, 'XI Grafika'),
+(2, 'XI APL'),
+(3, 'XI TKJ 1'),
+(4, 'XI TKJ 2'),
+(5, 'XI TKJ 3'),
+(6, 'XI ATPH 1'),
+(7, 'XI ATPH 2'),
+(8, 'XI ATPH 3'),
+(9, 'XI APHP 1'),
+(10, 'XI APHP 2'),
+(11, 'XI APHP 3'),
+(12, 'XI ATU'),
+(13, 'XII GRAFIKA'),
+(14, 'XII APL'),
+(15, 'XII TKJ 1'),
+(16, 'XII TKJ 2'),
+(17, 'XII TKJ 3'),
+(18, 'XII ATPH 1'),
+(19, 'XII ATPH 2'),
+(20, 'XII APHP 1'),
+(21, 'XII APHP 2'),
+(22, 'XII APHP 3'),
+(23, 'XII ATU');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_selling`
 --
 
@@ -416,10 +481,7 @@ CREATE TABLE `tbl_selling` (
 --
 
 INSERT INTO `tbl_selling` (`id_selling`, `date_selling`, `id_user`, `id_lab`) VALUES
-(14, '2022-08-10', 19, 1),
-(15, '2022-08-10', 19, 2),
-(16, '2022-08-11', 19, 1),
-(17, '2022-08-11', 19, 2);
+(18, '2022-08-30', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -441,17 +503,11 @@ CREATE TABLE `tbl_selling_detail` (
 --
 
 INSERT INTO `tbl_selling_detail` (`id_selling_detail`, `id_selling`, `id_product`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
-(9, 3, 89, 25, 38750, 75000),
-(10, 3, 92, 25, 38500, 50000),
-(11, 3, 100, 20, 80000, 100000),
-(12, 3, 95, 20, 64240, 60000),
-(13, 3, 42, 1, 850, 1000),
-(14, 3, 10, 7, 5544, 7000),
-(15, 3, 44, 5, 4375, 5000),
-(16, 3, 85, 4, 15832, 20000),
-(17, 3, 79, 20, 79160, 90000),
-(18, 3, 86, 20, 106660, 140000),
-(19, 14, 90, 30, 46740, 60000);
+(20, 18, 1, 4, 1260, 2000),
+(21, 18, 6, 2, 3000, 4000),
+(22, 18, 57, 3, 4374, 6000),
+(23, 18, 59, 8, 7200, 12000),
+(24, 18, 63, 3, 6000, 7500);
 
 -- --------------------------------------------------------
 
@@ -670,7 +726,8 @@ INSERT INTO `tbl_user_access_menu` (`id_user_access_menu`, `role_id`, `menu_id`)
 (35, 5, 6),
 (36, 5, 16),
 (37, 3, 16),
-(38, 4, 16);
+(38, 4, 16),
+(39, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -680,22 +737,23 @@ INSERT INTO `tbl_user_access_menu` (`id_user_access_menu`, `role_id`, `menu_id`)
 
 CREATE TABLE `tbl_user_menu` (
   `id_user_menu` int(11) NOT NULL,
-  `menu` varchar(128) NOT NULL
+  `menu` varchar(128) NOT NULL,
+  `order_menu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_user_menu`
 --
 
-INSERT INTO `tbl_user_menu` (`id_user_menu`, `menu`) VALUES
-(1, 'admin'),
-(2, 'produk'),
-(3, 'peralatan'),
-(4, 'pembelian'),
-(5, 'penjualan'),
-(6, 'stok'),
-(7, 'daftar'),
-(16, 'pengguna');
+INSERT INTO `tbl_user_menu` (`id_user_menu`, `menu`, `order_menu`) VALUES
+(1, 'admin', 1),
+(2, 'produk', 4),
+(3, 'peralatan', 3),
+(5, 'penjualan', 6),
+(6, 'stok', 7),
+(7, 'daftar', 8),
+(16, 'pengguna', 9),
+(17, 'data', 2);
 
 -- --------------------------------------------------------
 
@@ -744,19 +802,20 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (1, 1, 'Menu Management', 'admin/menu', 'ni ni-bullet-list-67 text-primary', 1),
 (2, 1, 'Access Role Menu', 'admin/role', 'ni ni-ungroup text-success', 1),
 (3, 1, 'Data Web', 'admin/data_web', 'ni ni-world-2 text-warning', 1),
-(4, 1, 'Data Lab SPW', 'admin/lab', 'ni ni-atom text-info', 1),
+(4, 17, 'Lab SPW', 'data/lab', 'ni ni-atom text-info', 1),
 (5, 2, 'Data Kategori', 'produk/category', 'ni ni-bullet-list-67 text-info', 1),
 (6, 2, 'Data Produk', 'produk', 'ni ni-app text-warning', 1),
 (7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0),
 (8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1),
-(9, 4, 'Data Pembelian', 'pembelian', 'ni ni-cart text-warning', 1),
+(9, 2, 'Data Pembelian', 'produk/index_purchase', 'ni ni-cart text-success', 1),
 (10, 5, 'Data Penjualan SPW', 'penjualan', 'ni ni-cart text-primary', 1),
 (11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
 (12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
 (13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
 (14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
-(15, 4, 'Data Supplier', 'pembelian/supplier', 'ni ni-single-02 text-primary', 1),
-(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1);
+(15, 2, 'Data Supplier', 'produk/supplier', 'ni ni-single-02 text-primary', 1),
+(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1),
+(17, 17, 'Jadwal SPW', 'data/schedule', 'ni ni-calendar-grid-58 text-primary', 1);
 
 --
 -- Indexes for dumped tables
@@ -821,6 +880,18 @@ ALTER TABLE `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase_detail`
   ADD PRIMARY KEY (`id_purchase_detail`);
+
+--
+-- Indexes for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  ADD PRIMARY KEY (`id_schedule`);
+
+--
+-- Indexes for table `tbl_schedule_class`
+--
+ALTER TABLE `tbl_schedule_class`
+  ADD PRIMARY KEY (`id_schedule_class`);
 
 --
 -- Indexes for table `tbl_selling`
@@ -938,31 +1009,43 @@ ALTER TABLE `tbl_product_place`
 -- AUTO_INCREMENT for table `tbl_purchase`
 --
 ALTER TABLE `tbl_purchase`
-  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_purchase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchase_detail`
 --
 ALTER TABLE `tbl_purchase_detail`
-  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_purchase_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `tbl_schedule`
+--
+ALTER TABLE `tbl_schedule`
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_schedule_class`
+--
+ALTER TABLE `tbl_schedule_class`
+  MODIFY `id_schedule_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
-  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling_detail`
 --
 ALTER TABLE `tbl_selling_detail`
-  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
 --
 ALTER TABLE `tbl_supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_tool`
@@ -986,13 +1069,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
 --
 ALTER TABLE `tbl_user_access_menu`
-  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_menu`
 --
 ALTER TABLE `tbl_user_menu`
-  MODIFY `id_user_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_user_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_role`
@@ -1004,7 +1087,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -28,6 +28,7 @@ class Dashboard_model extends CI_Model
         $this->db->from('tbl_product');
         $this->db->where('qty<=', 5);
         $this->db->where('qty>=', 0);
+        $this->db->limit('5');
         $query = $this->db->get();
         return $query;
     }
@@ -52,4 +53,15 @@ class Dashboard_model extends CI_Model
     //     $query = $this->db->get();
     //     return $query;
     // }
+
+    function get_schedule()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_schedule');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_schedule.id_user');
+        $this->db->join('tbl_schedule_class', 'tbl_schedule_class.id_schedule_class = tbl_schedule.id_class');
+        $this->db->limit('5');
+        $query = $this->db->get();
+        return $query;
+    }
 }

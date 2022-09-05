@@ -51,8 +51,10 @@
     let dataTable = new simpleDatatables.DataTable(table1);
 </script>
 
+<!-- AJAX GOOGLE -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script type="text/javascript">
     window.setTimeout(function() {
         $(".alert").fadeTo(500, 0).slideUp(500, function() {

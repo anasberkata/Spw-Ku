@@ -313,20 +313,4 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil dihapus!</div>');
         redirect('admin/role');
     }
-
-
-    // DATA LAB SPW
-    public function lab()
-    {
-        $data['title'] = "Data Lab SPW";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['lab'] = $this->admin->get_lab();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/lab', $data);
-        $this->load->view('templates/footer');
-    }
 }

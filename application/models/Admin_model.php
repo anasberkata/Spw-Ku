@@ -97,13 +97,4 @@ class Admin_model extends CI_Model
 
         return true;
     }
-
-    // LAB SPWE
-    function get_lab()
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_data_lab');
-        $query = $this->db->get();
-        return $query;
-    }
 }

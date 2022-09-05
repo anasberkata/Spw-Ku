@@ -21,6 +21,7 @@ class Dashboard extends CI_Controller
 
         $data['product'] = $this->dashboard->get_products_running_out();
         $data['item'] = $this->dashboard->get_products();
+        $data['schedule'] = $this->dashboard->get_schedule();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

@@ -62,12 +62,42 @@
                                             <input type="hidden" name="id_selling" value="<?= $id_selling ?>">
                                             <div class="mb-3">
                                                 <label>Pilih Produk</label>
-                                                <select class="form-select" aria-label="Default select" name="id_product">
+                                                <!-- <select class="form-select" aria-label="Default select" name="id_product">
                                                     <option selected>Pilih Produk</option>
                                                     <?php foreach ($product->result() as $p) : ?>
                                                         <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
-                                                </select>
+                                                </select> -->
+
+                                                <input type="text" class="form-control" list="product" id="id_product" placeholder="Pilih Produk" autocomplete="off">
+                                                <datalist id="product">
+                                                    <?php foreach ($product->result() as $p) : ?>
+                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
+                                                    <?php endforeach; ?>
+                                                </datalist>
+                                                <input type="hidden" name="id_product" id="id_product-hidden">
+
+                                                <script>
+                                                    document.querySelector('input[list]').addEventListener('input', function(e) {
+                                                        var input = e.target,
+                                                            list = input.getAttribute('list'),
+                                                            options = document.querySelectorAll('#' + list + ' option'),
+                                                            hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                                                            inputValue = input.value;
+
+                                                        hiddenInput.value = inputValue;
+
+                                                        for (var i = 0; i < options.length; i++) {
+                                                            var option = options[i];
+
+                                                            if (option.innerText === inputValue) {
+                                                                hiddenInput.value = option.getAttribute('data-value');
+                                                                break;
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
+
                                             </div>
                                             <div class="mb-3">
                                                 <label>Qty Terjual</label>

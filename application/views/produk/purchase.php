@@ -11,7 +11,7 @@
                     <div class="col">
 
                         <div class="btn-group float-end w-100 w-lg-auto">
-                            <a href="<?= base_url('pembelian'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                            <a href="<?= base_url('produk/index_purchase'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                 Kembali
                             </a>
                             <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalPurchaseAdd">
@@ -28,7 +28,7 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Data Pembelian</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('pembelian/purchase_add'); ?>" method="POST">
+                                    <form role="form" action="<?= base_url('produk/purchase_add'); ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                             <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
@@ -94,7 +94,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->name; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('pembelian/purchase_detail/?id_purchase=') . $p->id_purchase . '&id_lab=' . $p->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('produk/purchase_detail/?id_purchase=') . $p->id_purchase . '&id_lab=' . $p->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
 
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseEdit<?= $p->id_purchase; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
@@ -110,7 +110,7 @@
                                                         <h5 class="modal-title" id="editModalLabel">Edit Pembelian</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('pembelian/purchase_edit'); ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/purchase_edit'); ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                                             <input type="hidden" class="form-control" name="id_purchase" value="<?= $p->id_purchase; ?>">

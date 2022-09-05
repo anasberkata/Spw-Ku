@@ -11,7 +11,7 @@
                     </div>
                     <div class="col">
                         <div class="btn-group float-end w-100 w-lg-auto">
-                            <a href="<?= base_url('pembelian/purchase/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                            <a href="<?= base_url('produk/purchase/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                 Kembali
                             </a>
                             <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
@@ -29,7 +29,7 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('pembelian/purchase_detail_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('produk/purchase_detail_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                             <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
@@ -40,6 +40,37 @@
                                                         <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
+
+                                                <!-- <input type="text" class="form-control" list="product" id="id_product" autocomplete="off">
+                                                <datalist id="product">
+                                                    <?php foreach ($product->result() as $p) : ?>
+                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?></option>
+                                                    <?php endforeach; ?>
+                                                </datalist>
+                                                <input type="hidden" name="id_product" id="id_product-hidden">
+
+                                                <script>
+                                                    document.querySelector('input[list]').addEventListener('input', function(e) {
+                                                        var input = e.target,
+                                                            list = input.getAttribute('list'),
+                                                            options = document.querySelectorAll('#' + list + ' option'),
+                                                            hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                                                            inputValue = input.value;
+
+                                                        hiddenInput.value = inputValue;
+
+                                                        for (var i = 0; i < options.length; i++) {
+                                                            var option = options[i];
+
+                                                            if (option.innerText === inputValue) {
+                                                                hiddenInput.value = option.getAttribute('data-value');
+                                                                break;
+                                                            }
+                                                        }
+                                                    });
+                                                </script> -->
+
+
                                             </div>
                                             <div class="mb-3">
                                                 <label>Qty Produk</label>
@@ -122,7 +153,7 @@
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Data Produk</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('pembelian/purchase_detail_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/purchase_detail_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                                             <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
@@ -165,7 +196,7 @@
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Produk</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('pembelian/purchase_detail_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('produk/purchase_detail_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_purchase" value="<?= $pd->id_purchase; ?>">

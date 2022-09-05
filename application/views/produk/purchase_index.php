@@ -33,7 +33,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $l->lab; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a href="<?= base_url('pembelian/purchase/?id_lab=') . $l->id_lab; ?>" class="badge bg-primary btn-sm px-3 py-2 rounded-pill"><i class="fa fa-arrow-right cursor-pointer"></i></a>
+                                                <a href="<?= base_url('produk/purchase/?id_lab=') . $l->id_lab; ?>" class="badge bg-primary btn-sm px-3 py-2 rounded-pill"><i class="fa fa-arrow-right cursor-pointer"></i></a>
                                             </td>
                                         </tr>
                                         <?php $i++; ?>

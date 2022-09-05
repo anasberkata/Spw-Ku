@@ -2,7 +2,7 @@
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html " target="_blank">
+        <a class="navbar-brand m-0" href=" https://spw.smkn2cilakucianjur.sch.id " target="_blank">
             <img src="<?= base_url('assets/') ?>img/logos/logo-smkdaku.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">SPW SMKN 2 Cilaku</span>
         </a>
@@ -27,7 +27,8 @@
                             FROM `tbl_user_menu` JOIN `tbl_user_access_menu`
                               ON `tbl_user_menu`.`id_user_menu` = `tbl_user_access_menu`.`menu_id`
                            WHERE `tbl_user_access_menu`.`role_id` = $role_id
-                        ORDER BY `tbl_user_access_menu`.`menu_id` ASC
+                        -- ORDER BY `tbl_user_access_menu`.`menu_id` ASC
+                        ORDER BY `tbl_user_menu`.`order_menu` ASC
                         ";
             $menu = $this->db->query($queryMenu)->result_array();
             ?>

@@ -18,6 +18,7 @@ class Penjualan_model extends CI_Model
         $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
         $this->db->where('id_lab', $id_lab);
         $this->db->order_by('place', 'ASC');
+        $this->db->order_by('product', 'ASC');
         $query = $this->db->get();
         return $query;
     }

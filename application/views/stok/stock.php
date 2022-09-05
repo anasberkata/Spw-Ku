@@ -5,13 +5,52 @@
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-lg-6">
                         <h6>Daftar Produk LAB SPW <?= $lab; ?></h6>
                     </div>
-                    <div class="col">
-                        <a href="<?= base_url('produk'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
-                            Kembali
-                        </a>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="btn-group float-end w-100 w-lg-auto">
+                                    <a href="<?= base_url('stok'); ?>" class="btn btn-primary btn-sm mb-3 ms-2">
+                                        Kembali
+                                    </a>
+
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-success btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Download Excel
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <?php foreach ($place->result() as $p) : ?>
+                                                <li><a class="dropdown-item" href="<?= base_url('stok/stock_excel/?id_place=') . $p->id_place . "&id_lab=" . $lab; ?>">Produk <?= $p->place ?></a></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <!-- <form role="form" action="<?= base_url('produk/product_search') ?>" method="GET">
+                                    <div class="row">
+                                        <input type="hidden" name="id_lab" value="<?= $lab ?>">
+                                        <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
+                                            <label class="col-form-label text-sm">Lokasi</label>
+                                        </div>
+                                        <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
+                                            <select class="form-select" aria-label="Default select" name="id_place">
+                                                <option>Pilih Lokasi Produk</option>
+                                                <?php foreach ($place->result() as $p) : ?>
+                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
+                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </form> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
