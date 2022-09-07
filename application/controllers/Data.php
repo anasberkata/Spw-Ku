@@ -100,7 +100,7 @@ class Data extends CI_Controller
 
             $this->data->save_schedule($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil ditambahkan!</div>');
-            redirect('data');
+            redirect('data/schedule');
         }
     }
 
@@ -118,7 +118,7 @@ class Data extends CI_Controller
 
         $this->data->update_schedule($id_schedule);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil diubah!</div>');
-        redirect('data');
+        redirect('data/schedule');
     }
 
     public function schedule_delete()
@@ -128,6 +128,80 @@ class Data extends CI_Controller
         $this->data->delete_schedule($id_schedule);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil dihapus!</div>');
-        redirect('data');
+        redirect('data/schedule');
+    }
+
+    // DATA KELAS
+    public function class()
+    {
+        $data['title'] = "Data Kelas";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['class'] = $this->data->get_class();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('data/class', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function class_add()
+    {
+        $data['title'] = "Data Kelas";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['class'] = $this->data->get_class();
+
+        $this->form_validation->set_rules(
+            'class',
+            'Kelas',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('data/schedule', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $class = $this->input->post('class', true);
+
+            $data = [
+                'id_class' => NULL,
+                'class' => $class
+
+            ];
+
+            $this->data->save_class($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kelas berhasil ditambahkan!</div>');
+            redirect('data/class');
+        }
+    }
+
+    public function class_edit()
+    {
+        $id_class = $this->input->post('id_class', true);
+        $class = $this->input->post('class', true);
+
+
+        $this->db->set('class', $class);
+
+        $this->data->update_class($id_class);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kelas berhasil diubah!</div>');
+        redirect('data/class');
+    }
+
+    public function class_delete()
+    {
+        $id_class = $this->input->post('id_class');
+
+        $this->data->delete_class($id_class);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kelas berhasil dihapus!</div>');
+        redirect('data/class');
     }
 }

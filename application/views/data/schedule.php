@@ -23,7 +23,7 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Jadwal</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('jadwal/schedule_add'); ?>" method="POST">
+                                    <form role="form" action="<?= base_url('data/schedule_add'); ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label>Tanggal Praktek</label>
@@ -70,10 +70,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Guru Piket</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kelas</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jadwal Piket</th>
@@ -111,7 +111,7 @@
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Jadwal Praktek</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('jadwal/schedule_edit'); ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('data/schedule_edit'); ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="id_schedule" value="<?= $s->id_schedule; ?>">
                                                             <div class="mb-3">
@@ -154,7 +154,7 @@
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Jadwal</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('jadwal/schedule_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('data/schedule_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_schedule" value="<?= $s->id_schedule; ?>">

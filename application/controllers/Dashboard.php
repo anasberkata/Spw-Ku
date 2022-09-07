@@ -16,12 +16,13 @@ class Dashboard extends CI_Controller
         $data['title'] = "Dashboard";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
+        $data['count_class'] = $this->dashboard->count_class();
         $data['count_products'] = $this->dashboard->count_products();
+        $data['count_franchisor'] = $this->dashboard->count_franchisor();
         $data['count_users'] = $this->dashboard->count_users();
-
-        $data['product'] = $this->dashboard->get_products_running_out();
-        $data['item'] = $this->dashboard->get_products();
         $data['schedule'] = $this->dashboard->get_schedule();
+        $data['item'] = $this->dashboard->get_products();
+        $data['product'] = $this->dashboard->get_products_running_out();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

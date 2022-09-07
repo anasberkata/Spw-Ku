@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 07, 2022 at 02:10 PM
+-- Generation Time: Sep 07, 2022 at 09:35 PM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.30
 
@@ -38,7 +38,7 @@ CREATE TABLE `tbl_class` (
 --
 
 INSERT INTO `tbl_class` (`id_class`, `class`) VALUES
-(1, 'XI Grafika'),
+(1, 'XI DG'),
 (2, 'XI APL'),
 (3, 'XI TKJ 1'),
 (4, 'XI TKJ 2'),
@@ -50,7 +50,7 @@ INSERT INTO `tbl_class` (`id_class`, `class`) VALUES
 (10, 'XI APHP 2'),
 (11, 'XI APHP 3'),
 (12, 'XI ATU'),
-(13, 'XII GRAFIKA'),
+(13, 'XII DG'),
 (14, 'XII APL'),
 (15, 'XII TKJ 1'),
 (16, 'XII TKJ 2'),
@@ -313,30 +313,29 @@ INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_f
 (153, 14, 1, 'Pop Ice', 2500, 3000, 20, 0, 20, 50000, 60000),
 (154, 14, 1, 'Basruk', 2500, 3000, 10, 3, 7, 17500, 21000),
 (155, 14, 2, 'Samosa', 800, 1000, 75, 5, 70, 56000, 70000),
-(156, 18, 1, 'Nasi Uduk', 2500, 3000, 35, 0, 0, 0, 0),
-(157, 18, 1, 'Pempek', 1700, 2000, 40, 0, 0, 0, 0),
-(158, 18, 1, 'Cirambay', 4000, 5000, 15, 0, 0, 0, 0),
+(156, 18, 1, 'Nasi Uduk', 2500, 3000, 35, 17, 18, 45000, 54000),
+(157, 18, 1, 'Pempek', 1700, 2000, 40, 22, 18, 30600, 36000),
+(158, 18, 1, 'Cirambay', 4000, 5000, 15, 0, 15, 60000, 75000),
 (159, 18, 1, 'Cipeng (Cireng Gepeng)', 800, 1000, 100, 0, 0, 0, 0),
 (160, 18, 1, 'Siomay', 800, 1000, 150, 0, 0, 0, 0),
-(161, 18, 1, 'Keripik Kaca', 2500, 3000, 20, 0, 0, 0, 0),
-(162, 18, 1, 'Kerupuk', 2500, 3000, 25, 0, 0, 0, 0),
+(161, 18, 1, 'Keripik Kaca', 2500, 3000, 20, 5, 15, 37500, 45000),
+(162, 18, 1, 'Kerupuk', 2500, 3000, 25, 5, 20, 50000, 60000),
 (163, 18, 1, 'Petis', 2500, 3000, 16, 0, 0, 0, 0),
-(164, 18, 1, 'Nutrisari', 2500, 3000, 50, 0, 0, 0, 0),
-(165, 18, 1, 'Pop Ice', 2500, 3000, 20, 0, 0, 0, 0),
+(164, 18, 1, 'Nutrisari', 2500, 3000, 50, 15, 35, 87500, 105000),
+(165, 18, 1, 'Pop Ice', 2500, 3000, 20, 14, 6, 15000, 18000),
 (166, 18, 2, 'Samosa', 800, 1000, 50, 0, 0, 0, 0),
 (167, 18, 0, 'Sosis Solo', 1000, 1500, 15, 0, 0, 0, 0),
-(168, 18, 1, 'Risol', 1000, 1500, 25, 0, 0, 0, 0),
 (169, 18, 6, 'Gehu', 800, 1000, 35, 0, 0, 0, 0),
 (170, 18, 6, 'Buras', 800, 1000, 20, 0, 0, 0, 0),
-(171, 19, 1, 'Nasi Uduk', 2500, 3000, 34, 0, 0, 0, 0),
-(172, 19, 1, 'Pempek', 1700, 2000, 40, 0, 0, 0, 0),
+(171, 19, 1, 'Nasi Uduk', 2500, 3000, 34, 8, 26, 65000, 78000),
+(172, 19, 1, 'Pempek', 1700, 2000, 40, 21, 19, 32300, 38000),
 (173, 19, 1, 'Cirambay', 4000, 5000, 15, 0, 0, 0, 0),
 (174, 19, 1, 'Cipeng (Cireng Gepeng)', 800, 1000, 60, 0, 0, 0, 0),
-(175, 19, 1, 'Siomay', 800, 1000, 150, 0, 0, 0, 0),
+(175, 19, 1, 'Siomay', 800, 1000, 150, 3, 147, 117600, 147000),
 (176, 19, 1, 'Keripik Kaca', 2500, 3000, 20, 0, 0, 0, 0),
-(177, 19, 1, 'Kerupuk', 2500, 3000, 25, 0, 0, 0, 0),
+(177, 19, 1, 'Kerupuk', 2500, 3000, 25, 6, 19, 47500, 57000),
 (178, 19, 1, 'Petis', 2500, 3000, 16, 0, 0, 0, 0),
-(179, 19, 1, 'Nutrisari', 2500, 3000, 50, 0, 0, 0, 0),
+(179, 19, 1, 'Nutrisari', 2500, 3000, 50, 15, 35, 87500, 105000),
 (180, 19, 1, 'Pop Ice', 2500, 3000, 20, 0, 0, 0, 0),
 (181, 19, 2, 'Samosa', 800, 1000, 50, 0, 0, 0, 0);
 
@@ -348,20 +347,21 @@ INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_f
 
 CREATE TABLE `tbl_franchisor` (
   `id_franchisor` int(11) NOT NULL,
-  `franchisor` varchar(125) NOT NULL
+  `franchisor` varchar(125) NOT NULL,
+  `whatsapp` varchar(128) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_franchisor`
 --
 
-INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`) VALUES
-(1, 'Pak Deri'),
-(2, 'Bu Dyah'),
-(3, 'Bu Siti Julaeha'),
-(4, 'Bu Tuti'),
-(5, 'Pak Anas'),
-(6, 'Pak Luky');
+INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`, `whatsapp`) VALUES
+(1, 'Pak Deri', ''),
+(2, 'Bu Dyah', ''),
+(3, 'Bu Siti Julaeha', ''),
+(4, 'Bu Tuti', ''),
+(5, 'Pak Anas', '85156334607'),
+(6, 'Pak Luky', '');
 
 -- --------------------------------------------------------
 
@@ -1072,7 +1072,22 @@ INSERT INTO `tbl_schedule` (`id_schedule`, `id_user`, `id_class`, `picket_schedu
 (2, 12, 18, '2022-09-06'),
 (4, 10, 23, '2022-09-07'),
 (5, 5, 5, '2022-09-08'),
-(6, 6, 22, '2022-09-09');
+(6, 6, 22, '2022-09-09'),
+(7, 10, 12, '2022-09-12'),
+(8, 11, 6, '2022-09-13'),
+(9, 3, 14, '2022-09-14'),
+(10, 12, 19, '2022-09-15'),
+(11, 11, 8, '2022-09-16'),
+(12, 9, 9, '2022-09-19'),
+(13, 2, 1, '2022-09-20'),
+(14, 5, 4, '2022-09-21'),
+(15, 9, 22, '2022-09-22'),
+(16, 13, 17, '2022-09-23'),
+(17, 7, 13, '2022-09-26'),
+(18, 13, 16, '2022-09-27'),
+(19, 10, 23, '2022-09-28'),
+(20, 5, 5, '2022-09-29'),
+(21, 6, 22, '2022-09-30');
 
 -- --------------------------------------------------------
 
@@ -1561,6 +1576,13 @@ CREATE TABLE `tbl_student_selling` (
   `id_class` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_student_selling`
+--
+
+INSERT INTO `tbl_student_selling` (`id_student_selling`, `date_selling`, `id_user`, `id_lab`, `id_class`) VALUES
+(3, '2022-09-07', 3, 1, 14);
+
 -- --------------------------------------------------------
 
 --
@@ -1580,6 +1602,13 @@ CREATE TABLE `tbl_student_selling_detail` (
   `total_basic_price` int(11) NOT NULL,
   `total_selling_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_student_selling_detail`
+--
+
+INSERT INTO `tbl_student_selling_detail` (`id_student_selling_detail`, `id_student_selling`, `id_class`, `product`, `basic_price`, `selling_price`, `qty_product`, `qty_last`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
+(6, 3, 14, 'Bala Bala', 442, 1000, 575, 0, 575, 254150, 575000);
 
 -- --------------------------------------------------------
 
@@ -2122,7 +2151,7 @@ ALTER TABLE `tbl_purchase_detail`
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_schedule_class`
@@ -2146,13 +2175,13 @@ ALTER TABLE `tbl_selling_detail`
 -- AUTO_INCREMENT for table `tbl_student_selling`
 --
 ALTER TABLE `tbl_student_selling`
-  MODIFY `id_student_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_student_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_selling_detail`
 --
 ALTER TABLE `tbl_student_selling_detail`
-  MODIFY `id_student_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_student_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`

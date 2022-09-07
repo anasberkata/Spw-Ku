@@ -1,31 +1,35 @@
 <div class="row">
 
-    <!-- MENU -->
-    <div class="col-12 col-lg-6">
+    <!-- ROLE -->
+    <div class="col-6">
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Lab</h6>
+                        <h6>Daftar Kelas</h6>
                     </div>
                     <div class="col">
-                        <!-- <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalMenuAdd">
-                            Tambah
-                        </button> -->
+                        <div class="btn-group float-end w-100 w-lg-auto">
+                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalClassAdd">
+                                Tambah
+                            </button>
+                        </div>
 
                         <!-- Modal Tambah Menu -->
-                        <!-- <div class="modal fade" id="modalMenuAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalClassAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addModalLabel">Tambah Menu</h5>
+                                        <h5 class="modal-title" id="addModalLabel">Tambah Kelas</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('admin/menu_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('data/class_add'); ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="Nama Menu" name="menu">
+                                                <label>Nama Kelas</label>
+                                                <input type="text" class="form-control" name="class">
                                             </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -34,7 +38,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>
@@ -45,48 +49,49 @@
                         <?= $this->session->flashdata('message'); ?>
                     </div>
                     <div class="col-12">
-                        <?= form_error('lab', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('class', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lab</th>
-                                        <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th> -->
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kelas</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($lab->result() as $l) : ?>
+                                    <?php foreach ($class->result() as $c) : ?>
                                         <tr>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $l->lab; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $c->class; ?></p>
                                             </td>
-                                            <!-- <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $l->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuDelete<?= $l->id_user_menu; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                            </td> -->
+                                            <td class="align-middle text-center text-sm">
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalClassEdit<?= $c->id_class; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                <br class="my-2">
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalClassDelete<?= $c->id_class; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                            </td>
                                         </tr>
 
-                                        <!-- Modal Edit Menu -->
-                                        <!-- <div class="modal fade" id="modalMenuEdit<?= $l->id_user_menu; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+                                        <!-- Modal Edit Role -->
+                                        <div class="modal fade" id="modalClassEdit<?= $c->id_class; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="EditModalLabel">Ubah Menu</h5>
+                                                        <h5 class="modal-title" id="EditModalLabel">Ubah Kelas</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('admin/menu_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('data/class_edit'); ?>" method="POST">
                                                         <div class="modal-body">
+                                                            <input type="hidden" class="form-control" name="id_class" value="<?= $c->id_class; ?>">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_user_menu" value="<?= $l->id_user_menu; ?>">
-                                                                <input type="text" class="form-control" placeholder="Nama Menu" name="menu" value="<?= $l->menu; ?>">
+                                                                <label>Nama Kelas</label>
+                                                                <input type="text" class="form-control" name="class" value="<?= $c->class ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -96,21 +101,21 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
 
-                                        <!-- Modal Hapus Menu -->
-                                        <!-- <div class="modal fade" id="modalMenuDelete<?= $l->id_user_menu; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <!-- Modal Hapus Role -->
+                                        <div class="modal fade" id="modalClassDelete<?= $c->id_class; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="DeleteModalLabel">Hapus Menu</h5>
+                                                        <h5 class="modal-title" id="DeleteModalLabel">Hapus Kelas</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('admin/menu_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('data/class_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_user_menu" value="<?= $l->id_user_menu; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus menu : <span class="text-bold"><?= $l->menu; ?></span>!</p>
+                                                                <input type="hidden" name="id_class" value="<?= $c->id_class; ?>">
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus jadwal : <span class="text-bold"><?= $c->class; ?></span>!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -120,7 +125,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div> -->
+                                        </div>
 
                                         <?php $i++; ?>
                                     <?php endforeach; ?>

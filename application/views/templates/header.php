@@ -18,7 +18,7 @@
     <link href="<?= base_url('assets/') ?>css/nucleo-icons.css" rel="stylesheet" />
     <link href="<?= base_url('assets/') ?>css/nucleo-svg.css" rel="stylesheet" />
 
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome & Nucleo Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="<?= base_url('assets/') ?>css/nucleo-svg.css" rel="stylesheet" />
 

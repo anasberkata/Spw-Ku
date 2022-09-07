@@ -57,7 +57,7 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
@@ -170,25 +170,42 @@
                                     </div>
                                     <form role="form" action="<?= base_url('admin/submenu_add') ?>" method="POST">
                                         <div class="modal-body">
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="Nama Submenu" name="title">
-                                            </div>
-                                            <div class="mb-3">
-                                                <select class="form-select" aria-label="Default select" name="menu_id">
-                                                    <option selected>Pilih menu</option>
-                                                    <?php foreach ($menu->result() as $m) : ?>
-                                                        <option value="<?= $m->id_user_menu ?>"><?= $m->menu ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="URL" name="url">
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="text" class="form-control" placeholder="Icon" name="icon">
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label>Nama Submenu</label>
+                                                        <input type="text" class="form-control" placeholder="Nama Submenu" name="title">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label>Menu</label>
+                                                        <select class="form-select" aria-label="Default select" name="menu_id">
+                                                            <option selected>Pilih menu</option>
+                                                            <?php foreach ($menu->result() as $m) : ?>
+                                                                <option value="<?= $m->id_user_menu ?>"><?= $m->menu ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label>Url</label>
+                                                        <input type="text" class="form-control" placeholder="URL" name="url">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label>Icon</label>
+                                                        <input type="text" class="form-control" placeholder="Icon" name="icon">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="mb-3">
+                                                        <label>Urutan Submenu</label>
+                                                        <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -210,19 +227,15 @@
                     </div>
                     <div class="col-12">
                         <?= form_error('title', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                    </div>
-                    <div class="col-12">
                         <?= form_error('url', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                    </div>
-                    <div class="col-12">
                         <?= form_error('icon', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Submenu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
@@ -270,26 +283,43 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('admin/submenu_edit') ?>" method="POST">
                                                         <div class="modal-body">
-                                                            <div class="mb-3">
-                                                                <input type="hidden" name="id_user_submenu" value="<?= $sm->id_user_submenu; ?>">
-                                                                <input type="text" class="form-control" placeholder="Nama Submenu" name="title" value="<?= $sm->title; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <select class="form-select" aria-label="Default select" name="menu_id">
-                                                                    <option value="<?= $sm->menu_id; ?>" selected><?= $sm->menu; ?></option>
-                                                                    <?php foreach ($menu->result() as $m) : ?>
-                                                                        <option value="<?= $m->id_user_menu ?>"><?= $m->menu ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="text" class="form-control" placeholder="URL" name="url" value="<?= $sm->url; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $sm->icon; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu" value="<?= $sm->order_submenu; ?>">
+                                                            <input type="hidden" name="id_user_submenu" value="<?= $sm->id_user_submenu; ?>">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Nama Submenu</label>
+                                                                        <input type="text" class="form-control" placeholder="Nama Submenu" name="title" value="<?= $sm->title; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Menu</label>
+                                                                        <select class="form-select" aria-label="Default select" name="menu_id">
+                                                                            <option value="<?= $sm->menu_id; ?>" selected><?= $sm->menu; ?></option>
+                                                                            <?php foreach ($menu->result() as $m) : ?>
+                                                                                <option value="<?= $m->id_user_menu ?>"><?= $m->menu ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Url</label>
+                                                                        <input type="text" class="form-control" placeholder="URL" name="url" value="<?= $sm->url; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Icon</label>
+                                                                        <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $sm->icon; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Urutan Submenu</label>
+                                                                        <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu" value="<?= $sm->order_submenu; ?>">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

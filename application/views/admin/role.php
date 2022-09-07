@@ -24,6 +24,7 @@
                                     <form role="form" action="<?= base_url('admin/role_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
+                                                <label>Nama Role</label>
                                                 <input type="text" class="form-control" placeholder="Nama Role" name="role">
                                             </div>
                                         </div>
@@ -52,7 +53,7 @@
                             <table class="table align-items-center mb-0" id="table1">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Role</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
@@ -102,8 +103,9 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('admin/role_edit') ?>" method="POST">
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="id_role" value="<?= $r->id_role; ?>">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_role" value="<?= $r->id_role; ?>">
+                                                                <label>Nama Role</label>
                                                                 <input type="text" class="form-control" placeholder="Nama Role" name="role" value="<?= $r->role; ?>">
                                                             </div>
                                                         </div>

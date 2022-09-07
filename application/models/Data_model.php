@@ -10,17 +10,6 @@ class Data_model extends CI_Model
         return $query;
     }
 
-    // SCHEDULE
-    function get_schedule()
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_schedule');
-        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_schedule.id_user');
-        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_schedule.id_class');
-        $query = $this->db->get();
-        return $query;
-    }
-
     function get_teacher()
     {
         $this->db->select('*');
@@ -32,10 +21,13 @@ class Data_model extends CI_Model
         return $query;
     }
 
-    function get_class()
+    // SCHEDULE
+    function get_schedule()
     {
         $this->db->select('*');
-        $this->db->from('tbl_class');
+        $this->db->from('tbl_schedule');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_schedule.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_schedule.id_class');
         $query = $this->db->get();
         return $query;
     }
@@ -55,6 +47,34 @@ class Data_model extends CI_Model
     {
         $this->db->where('id_schedule', $id_schedule);
         $this->db->delete('tbl_schedule');
+
+        return true;
+    }
+
+    // CLASS
+    function get_class()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_class');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_class($data)
+    {
+        $this->db->insert('tbl_class', $data);
+    }
+
+    function update_class($id_class)
+    {
+        $this->db->where('id_class', $id_class);
+        $this->db->update('tbl_class');
+    }
+
+    function delete_class($id_class)
+    {
+        $this->db->where('id_class', $id_class);
+        $this->db->delete('tbl_class');
 
         return true;
     }
