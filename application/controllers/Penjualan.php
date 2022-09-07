@@ -427,6 +427,12 @@ class Penjualan extends CI_Controller
         $basic_price = $this->input->post('basic_price', true);
         $selling_price = $this->input->post('selling_price', true);
         $qty_product = $this->input->post('qty_product', true);
+        $qty_last = $this->input->post('qty_last', true);
+        if ($qty_last == NULL) {
+            $qty_selling = 0;
+        } else {
+            $qty_selling = $qty_product - $qty_last;
+        }
 
         $this->form_validation->set_rules(
             'id_franchisor',
@@ -482,10 +488,10 @@ class Penjualan extends CI_Controller
                 'basic_price' => $basic_price,
                 'selling_price' => $selling_price,
                 'qty_product' => $qty_product,
-                'qty_last' => 0,
-                'qty_selling' => 0,
-                'total_basic_price' => 0,
-                'total_selling_price' => 0
+                'qty_last' => $qty_last,
+                'qty_selling' => $qty_selling,
+                'total_basic_price' => $qty_selling * $basic_price,
+                'total_selling_price' => $qty_selling * $selling_price
             ];
 
             $this->penjualan->save_franchise_detail($data);
@@ -600,5 +606,368 @@ class Penjualan extends CI_Controller
         $page = $this->load->view('penjualan/franchise_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
         $mpdf->Output('Laporan Produk Titipan SPW.pdf', 'I');
+    }
+
+
+    // ---------------------------------------- FRANCHISOR ------------------------------------------ //
+    public function franchisor()
+    {
+        $data['title'] = "Data Franchisor";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['franchisor'] = $this->penjualan->get_franchisor();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/franchisor', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function franchisor_add()
+    {
+        $data['title'] = "Data Franchisor";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['franchisor'] = $this->penjualan->get_franchisor();
+
+        $franchisor = $this->input->post('franchisor', true);
+
+        $this->form_validation->set_rules(
+            'franchisor',
+            'Pemilik Produk',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('penjualan/franchisor', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'id_franchisor' => NULL,
+                'franchisor' => $franchisor,
+            ];
+
+            $this->penjualan->save_franchisor($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil ditambahkan!</div>');
+
+            redirect('penjualan/franchisor');
+        }
+    }
+
+    public function franchisor_edit()
+    {
+        $id_franchisor = $this->input->post('id_franchisor', true);
+        $franchisor = $this->input->post('franchisor', true);
+
+        $data = [
+            'franchisor' => $franchisor
+        ];
+
+        $this->penjualan->update_franchisor($data, $id_franchisor);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil diubah!</div>');
+
+        redirect('penjualan/franchisor');
+    }
+
+    public function franchisor_delete()
+    {
+        $id_franchisor = $this->input->post('id_franchisor', true);
+
+        $this->penjualan->delete_franchisor($id_franchisor);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil dihapus!</div>');
+
+        redirect('penjualan/franchisor');
+    }
+
+    // ---------------------------------------- STUDENTS ------------------------------------------ //
+    public function index_student_selling()
+    {
+        $data['title'] = "Data Penjualan Siswa";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->penjualan->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/index_student_selling', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function student_selling()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Penjualan Siswa";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+
+        $data['student_selling'] = $this->penjualan->get_student_selling($id_lab);
+        $data['class'] = $this->penjualan->get_class();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/student_selling', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function student_selling_add()
+    {
+        $data['title'] = "Data Penjualan Siswa";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $id_lab = $this->input->post('id_lab', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_selling = $this->input->post('date_selling', true);
+        $id_class = $this->input->post('id_class', true);
+
+        $this->form_validation->set_rules(
+            'date_selling',
+            'Tanggal Penjualan',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        $this->form_validation->set_rules(
+            'id_class',
+            'Kelas',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('penjualan/student', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $data = [
+                'id_student_selling' => NULL,
+                'date_selling' => $date_selling,
+                'id_user' => $id_user,
+                'id_lab' => $id_lab,
+                'id_class' => $id_class
+            ];
+
+            $this->penjualan->save_student($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil ditambahkan!</div>');
+
+            redirect('penjualan/student_selling/?id_lab=' . $id_lab);
+        }
+    }
+
+    public function student_selling_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_student_selling = $this->input->post('id_student_selling', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_selling = $this->input->post('date_selling', true);
+        $id_class = $this->input->post('id_class', true);
+
+        $data = [
+            'date_selling' => $date_selling,
+            'id_user' => $id_user,
+            'id_lab' => $id_lab,
+            'id_class' => $id_class
+        ];
+
+        $this->penjualan->update_student_selling($data, $id_student_selling);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil diubah!</div>');
+
+        redirect('penjualan/student_selling/?id_lab=' . $id_lab);
+    }
+
+    public function student_selling_detail()
+    {
+        $id_student_selling = $this->input->get('id_student_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_class = $this->input->get('id_class', true);
+
+        $data['title'] = "Data Penjualan Siswa";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_student_selling'] = $id_student_selling;
+        $data['lab'] = $id_lab;
+        $data['id_class'] = $id_class;
+
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');
+        $data['student_selling'] = $this->db->get_where('tbl_student_selling', ['id_student_selling' => $id_student_selling])->row_array();
+        $data['student_selling_detail'] = $this->penjualan->get_student_selling_detail($id_student_selling);
+
+        $data['total_basic_price_student_selling'] = $this->penjualan->sum_total_basic_price_student_selling($id_student_selling);
+        $data['total_selling_price_student_selling'] = $this->penjualan->sum_total_selling_price_student_selling($id_student_selling);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/student_selling_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function student_selling_detail_add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_student_selling = $this->input->post('id_student_selling', true);
+        $id_class = $this->input->post('id_class', true);
+        $product = $this->input->post('product', true);
+        $basic_price = $this->input->post('basic_price', true);
+        $selling_price = $this->input->post('selling_price', true);
+        $qty_product = $this->input->post('qty_product', true);
+        $qty_last = $this->input->post('qty_last', true);
+        if ($qty_last == NULL) {
+            $qty_selling = 0;
+        } else {
+            $qty_selling = $qty_product - $qty_last;
+        }
+
+        $this->form_validation->set_rules(
+            'product',
+            'Produk',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+        $this->form_validation->set_rules(
+            'basic_price',
+            'Harga Dasar',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+        $this->form_validation->set_rules(
+            'selling_price',
+            'Harga Jual',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+        $this->form_validation->set_rules(
+            'qty_product',
+            'Stok Awal',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk gagal ditambahkan!</div>');
+
+            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+        } else {
+            $data = [
+                'id_student_selling_detail' => NULL,
+                'id_student_selling' => $id_student_selling,
+                'id_class' => $id_class,
+                'product' => $product,
+                'basic_price' => $basic_price,
+                'selling_price' => $selling_price,
+                'qty_product' => $qty_product,
+                'qty_last' => $qty_last,
+                'qty_selling' => $qty_selling,
+                'total_basic_price' => $qty_selling * $basic_price,
+                'total_selling_price' => $qty_selling * $selling_price
+            ];
+
+            $this->penjualan->save_student_selling_detail($data);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+
+            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+        }
+    }
+
+    public function student_selling_detail_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_student_selling = $this->input->post('id_student_selling', true);
+        $id_student_selling_detail = $this->input->post('id_student_selling_detail', true);
+        $id_class = $this->input->post('id_class', true);
+        $product = $this->input->post('product', true);
+        $basic_price = $this->input->post('basic_price', true);
+        $selling_price = $this->input->post('selling_price', true);
+        $qty_product = $this->input->post('qty_product', true);
+        $qty_last = $this->input->post('qty_last', true);
+        $qty_selling = $qty_product - $qty_last;
+
+        $data = [
+            'id_student_selling' => $id_student_selling,
+            'product' => $product,
+            'basic_price' => $basic_price,
+            'selling_price' => $selling_price,
+            'qty_product' => $qty_product,
+            'qty_last' => $qty_last,
+            'qty_selling' => $qty_selling,
+            'total_basic_price' => $qty_selling * $basic_price,
+            'total_selling_price' => $qty_selling * $selling_price
+        ];
+
+
+        $this->penjualan->update_student_selling_detail($data, $id_student_selling_detail);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
+
+        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+    }
+
+    public function student_selling_detail_delete()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_student_selling = $this->input->post('id_student_selling', true);
+        $id_student_selling_detail = $this->input->post('id_student_selling_detail', true);
+        $id_class = $this->input->post('id_class', true);
+
+        $this->penjualan->delete_student_selling_detail($id_student_selling_detail);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
+
+        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+    }
+
+    public function printPDF_student_selling()
+    {
+
+        $id_student_selling = $this->input->get('id_student_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_class = $this->input->get('id_class', true);
+
+        $data['title'] = "Data Penjualan Siswa";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_student_selling'] = $id_student_selling;
+        $data['lab'] = $id_lab;
+        $data['id_class'] = $id_class;
+
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');
+        $data['student_selling'] = $this->db->get_where('tbl_student_selling', ['id_student_selling' => $id_student_selling])->row_array();
+        $data['student_selling_detail'] = $this->penjualan->get_student_selling_detail($id_student_selling);
+
+        $data['total_basic_price_student_selling'] = $this->penjualan->sum_total_basic_price_student_selling($id_student_selling);
+        $data['total_selling_price_student_selling'] = $this->penjualan->sum_total_selling_price_student_selling($id_student_selling);
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        $page = $this->load->view('penjualan/student_selling_detail_pdf', $data, TRUE);
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Laporan Produk Siswa.pdf', 'I');
     }
 }

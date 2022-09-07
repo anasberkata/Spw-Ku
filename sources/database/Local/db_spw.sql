@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 05, 2022 at 07:41 PM
+-- Generation Time: Sep 07, 2022 at 08:52 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,46 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_spw`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_class`
+--
+
+CREATE TABLE `tbl_class` (
+  `id_class` int(11) NOT NULL,
+  `class` varchar(125) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_class`
+--
+
+INSERT INTO `tbl_class` (`id_class`, `class`) VALUES
+(1, 'XI Grafika'),
+(2, 'XI APL'),
+(3, 'XI TKJ 1'),
+(4, 'XI TKJ 2'),
+(5, 'XI TKJ 3'),
+(6, 'XI ATPH 1'),
+(7, 'XI ATPH 2'),
+(8, 'XI ATPH 3'),
+(9, 'XI APHP 1'),
+(10, 'XI APHP 2'),
+(11, 'XI APHP 3'),
+(12, 'XI ATU'),
+(13, 'XII GRAFIKA'),
+(14, 'XII APL'),
+(15, 'XII TKJ 1'),
+(16, 'XII TKJ 2'),
+(17, 'XII TKJ 3'),
+(18, 'XII ATPH 1'),
+(19, 'XII ATPH 2'),
+(20, 'XII APHP 1'),
+(21, 'XII APHP 2'),
+(22, 'XII APHP 3'),
+(23, 'XII ATU');
 
 -- --------------------------------------------------------
 
@@ -117,7 +157,12 @@ INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_f
 (7, 5, 6, 'Buras', 1000, 1500, 20, 0, 20, 20000, 30000),
 (9, 5, 4, 'Snack Kriuk', 4500, 5000, 15, 0, 15, 67500, 75000),
 (10, 7, 1, 'Nasi Uduk', 2500, 3000, 20, 0, 20, 50000, 60000),
-(11, 7, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000);
+(11, 7, 2, 'Samosa', 800, 1000, 75, 0, 75, 60000, 75000),
+(12, 5, 2, 'Cilok', 800, 2000, 20, 0, 0, 0, 0),
+(13, 5, 1, 'Nutrisari', 2500, 3000, 60, 0, 0, 0, 0),
+(14, 5, 5, 'Rujak', 2000, 3000, 20, 0, 0, 0, 0),
+(15, 5, 5, 'Cibay', 800, 1000, 20, 20, 0, 0, 0),
+(16, 5, 4, 'Astor', 800, 1000, 20, 0, 20, 16000, 20000);
 
 -- --------------------------------------------------------
 
@@ -127,20 +172,22 @@ INSERT INTO `tbl_franchise_detail` (`id_franchise_detail`, `id_franchise`, `id_f
 
 CREATE TABLE `tbl_franchisor` (
   `id_franchisor` int(11) NOT NULL,
-  `franchisor` varchar(125) NOT NULL
+  `franchisor` varchar(125) NOT NULL,
+  `whatsapp` varchar(125) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_franchisor`
 --
 
-INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`) VALUES
-(1, 'Pak Deri'),
-(2, 'Bu Dyah'),
-(3, 'Bu Siti Julaeha'),
-(4, 'Bu Tuti'),
-(5, 'Pak Anas'),
-(6, 'Pak Luky');
+INSERT INTO `tbl_franchisor` (`id_franchisor`, `franchisor`, `whatsapp`) VALUES
+(1, 'Pak Deri', '81319789000'),
+(2, 'Bu Dyah', '81286544533'),
+(3, 'Bu Siti Julaeha', ''),
+(4, 'Bu Tuti', ''),
+(5, 'Pak Anas', '85156334607'),
+(6, 'Pak Luky', ''),
+(8, 'Ratna XI DG', '');
 
 -- --------------------------------------------------------
 
@@ -426,46 +473,6 @@ INSERT INTO `tbl_schedule` (`id_schedule`, `id_user`, `id_class`, `picket_schedu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_schedule_class`
---
-
-CREATE TABLE `tbl_schedule_class` (
-  `id_schedule_class` int(11) NOT NULL,
-  `class` varchar(125) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_schedule_class`
---
-
-INSERT INTO `tbl_schedule_class` (`id_schedule_class`, `class`) VALUES
-(1, 'XI Grafika'),
-(2, 'XI APL'),
-(3, 'XI TKJ 1'),
-(4, 'XI TKJ 2'),
-(5, 'XI TKJ 3'),
-(6, 'XI ATPH 1'),
-(7, 'XI ATPH 2'),
-(8, 'XI ATPH 3'),
-(9, 'XI APHP 1'),
-(10, 'XI APHP 2'),
-(11, 'XI APHP 3'),
-(12, 'XI ATU'),
-(13, 'XII GRAFIKA'),
-(14, 'XII APL'),
-(15, 'XII TKJ 1'),
-(16, 'XII TKJ 2'),
-(17, 'XII TKJ 3'),
-(18, 'XII ATPH 1'),
-(19, 'XII ATPH 2'),
-(20, 'XII APHP 1'),
-(21, 'XII APHP 2'),
-(22, 'XII APHP 3'),
-(23, 'XII ATU');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_selling`
 --
 
@@ -508,6 +515,58 @@ INSERT INTO `tbl_selling_detail` (`id_selling_detail`, `id_selling`, `id_product
 (22, 18, 57, 3, 4374, 6000),
 (23, 18, 59, 8, 7200, 12000),
 (24, 18, 63, 3, 6000, 7500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_student_selling`
+--
+
+CREATE TABLE `tbl_student_selling` (
+  `id_student_selling` int(11) NOT NULL,
+  `date_selling` date NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_lab` int(11) NOT NULL,
+  `id_class` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_student_selling`
+--
+
+INSERT INTO `tbl_student_selling` (`id_student_selling`, `date_selling`, `id_user`, `id_lab`, `id_class`) VALUES
+(1, '2022-09-06', 1, 1, 1),
+(2, '2022-09-07', 1, 1, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_student_selling_detail`
+--
+
+CREATE TABLE `tbl_student_selling_detail` (
+  `id_student_selling_detail` int(11) NOT NULL,
+  `id_student_selling` int(11) NOT NULL,
+  `id_class` int(11) NOT NULL,
+  `product` varchar(125) NOT NULL,
+  `basic_price` int(11) NOT NULL,
+  `selling_price` int(11) NOT NULL,
+  `qty_product` int(11) NOT NULL,
+  `qty_last` int(11) NOT NULL,
+  `qty_selling` int(11) NOT NULL,
+  `total_basic_price` int(11) NOT NULL,
+  `total_selling_price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_student_selling_detail`
+--
+
+INSERT INTO `tbl_student_selling_detail` (`id_student_selling_detail`, `id_student_selling`, `id_class`, `product`, `basic_price`, `selling_price`, `qty_product`, `qty_last`, `qty_selling`, `total_basic_price`, `total_selling_price`) VALUES
+(1, 2, 14, 'Bala - Bala', 800, 1000, 100, 50, 50, 40000, 50000),
+(2, 2, 14, 'Gehu', 800, 1000, 50, 0, 50, 40000, 50000),
+(3, 2, 14, 'Cireng Merah', 800, 2000, 20, 5, 15, 12000, 30000),
+(5, 1, 1, 'Bala - Bala', 800, 1000, 100, 9, 91, 72800, 91000);
 
 -- --------------------------------------------------------
 
@@ -791,35 +850,44 @@ CREATE TABLE `tbl_user_submenu` (
   `title` varchar(128) NOT NULL,
   `url` varchar(128) NOT NULL,
   `icon` varchar(128) NOT NULL,
-  `is_active` int(1) NOT NULL
+  `is_active` int(1) NOT NULL,
+  `order_submenu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_user_submenu`
 --
 
-INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
-(1, 1, 'Menu Management', 'admin/menu', 'ni ni-bullet-list-67 text-primary', 1),
-(2, 1, 'Access Role Menu', 'admin/role', 'ni ni-ungroup text-success', 1),
-(3, 1, 'Data Web', 'admin/data_web', 'ni ni-world-2 text-warning', 1),
-(4, 17, 'Lab SPW', 'data/lab', 'ni ni-atom text-info', 1),
-(5, 2, 'Data Kategori', 'produk/category', 'ni ni-bullet-list-67 text-info', 1),
-(6, 2, 'Data Produk', 'produk', 'ni ni-app text-warning', 1),
-(7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0),
-(8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1),
-(9, 2, 'Data Pembelian', 'produk/index_purchase', 'ni ni-cart text-success', 1),
-(10, 5, 'Data Penjualan SPW', 'penjualan', 'ni ni-cart text-primary', 1),
-(11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1),
-(12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1),
-(13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1),
-(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1),
-(15, 2, 'Data Supplier', 'produk/supplier', 'ni ni-single-02 text-primary', 1),
-(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1),
-(17, 17, 'Jadwal SPW', 'data/schedule', 'ni ni-calendar-grid-58 text-primary', 1);
+INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `icon`, `is_active`, `order_submenu`) VALUES
+(1, 1, 'Menu Management', 'admin/menu', 'ni ni-bullet-list-67 text-primary', 1, 1),
+(2, 1, 'Access Role Menu', 'admin/role', 'ni ni-ungroup text-success', 1, 2),
+(3, 17, 'Data Web', 'data/data_web', 'ni ni-world-2 text-warning', 1, 3),
+(4, 17, 'Lab SPW', 'data/lab', 'ni ni-atom text-info', 1, 4),
+(5, 2, 'Data Kategori', 'produk/category', 'ni ni-bullet-list-67 text-info', 1, 7),
+(6, 2, 'Data Produk', 'produk', 'ni ni-app text-warning', 1, 8),
+(7, 3, 'Data Kategori', 'peralatan/catagory', 'ni ni-bullet-list-67 text-info', 0, 0),
+(8, 3, 'Data Peralatan', 'peralatan', 'ni ni-settings text-success', 1, 6),
+(9, 2, 'Data Pembelian', 'produk/index_purchase', 'ni ni-cart text-success', 1, 9),
+(10, 5, 'Data Penjualan SPW', 'penjualan', 'ni ni-cart text-primary', 1, 11),
+(11, 6, 'Stok Produk', 'stok', 'ni ni-box-2 text-success', 1, 15),
+(12, 7, 'Daftar Harga', 'daftar', 'ni ni-shop text-primary', 1, 16),
+(13, 16, 'Pengguna', 'pengguna', 'ni ni-single-02 text-danger', 1, 17),
+(14, 16, 'Profile', 'pengguna/profile', 'ni ni-credit-card text-primary', 1, 18),
+(15, 2, 'Data Supplier', 'produk/supplier', 'ni ni-single-02 text-primary', 1, 10),
+(16, 5, 'Data Penjualan Titipan', 'penjualan/index_franchise', 'ni ni-cart text-success', 1, 12),
+(17, 17, 'Jadwal SPW', 'data/schedule', 'ni ni-calendar-grid-58 text-primary', 1, 5),
+(18, 5, 'Data Franchisor', 'penjualan/franchisor', 'ni ni-single-02 text-danger', 1, 14),
+(19, 5, 'Data Penjualan Siswa', 'penjualan/index_student_selling', 'ni ni-cart text-info', 1, 13);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_class`
+--
+ALTER TABLE `tbl_class`
+  ADD PRIMARY KEY (`id_class`);
 
 --
 -- Indexes for table `tbl_data_lab`
@@ -888,12 +956,6 @@ ALTER TABLE `tbl_schedule`
   ADD PRIMARY KEY (`id_schedule`);
 
 --
--- Indexes for table `tbl_schedule_class`
---
-ALTER TABLE `tbl_schedule_class`
-  ADD PRIMARY KEY (`id_schedule_class`);
-
---
 -- Indexes for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
@@ -904,6 +966,18 @@ ALTER TABLE `tbl_selling`
 --
 ALTER TABLE `tbl_selling_detail`
   ADD PRIMARY KEY (`id_selling_detail`);
+
+--
+-- Indexes for table `tbl_student_selling`
+--
+ALTER TABLE `tbl_student_selling`
+  ADD PRIMARY KEY (`id_student_selling`);
+
+--
+-- Indexes for table `tbl_student_selling_detail`
+--
+ALTER TABLE `tbl_student_selling_detail`
+  ADD PRIMARY KEY (`id_student_selling_detail`);
 
 --
 -- Indexes for table `tbl_supplier`
@@ -958,6 +1032,12 @@ ALTER TABLE `tbl_user_submenu`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_class`
+--
+ALTER TABLE `tbl_class`
+  MODIFY `id_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
 -- AUTO_INCREMENT for table `tbl_data_lab`
 --
 ALTER TABLE `tbl_data_lab`
@@ -979,13 +1059,13 @@ ALTER TABLE `tbl_franchise`
 -- AUTO_INCREMENT for table `tbl_franchise_detail`
 --
 ALTER TABLE `tbl_franchise_detail`
-  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_franchise_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_franchisor`
 --
 ALTER TABLE `tbl_franchisor`
-  MODIFY `id_franchisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_franchisor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
@@ -1024,12 +1104,6 @@ ALTER TABLE `tbl_schedule`
   MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tbl_schedule_class`
---
-ALTER TABLE `tbl_schedule_class`
-  MODIFY `id_schedule_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
---
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
@@ -1040,6 +1114,18 @@ ALTER TABLE `tbl_selling`
 --
 ALTER TABLE `tbl_selling_detail`
   MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `tbl_student_selling`
+--
+ALTER TABLE `tbl_student_selling`
+  MODIFY `id_student_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_student_selling_detail`
+--
+ALTER TABLE `tbl_student_selling_detail`
+  MODIFY `id_student_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_supplier`
@@ -1087,7 +1173,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

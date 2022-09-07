@@ -6,6 +6,7 @@ class Admin_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_user_menu');
+        $this->db->order_by('order_menu', 'asc');
         $query = $this->db->get();
         return $query;
     }
@@ -35,6 +36,8 @@ class Admin_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_user_submenu');
         $this->db->join('tbl_user_menu', 'tbl_user_menu.id_user_menu = tbl_user_submenu.menu_id');
+        $this->db->order_by('order_menu', 'asc');
+        $this->db->order_by('order_submenu', 'asc');
         $query = $this->db->get();
         return $query;
     }

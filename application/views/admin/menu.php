@@ -1,7 +1,7 @@
 <div class="row">
 
     <!-- MENU -->
-    <div class="col-12 col-lg-6">
+    <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="row">
@@ -24,7 +24,12 @@
                                     <form role="form" action="<?= base_url('admin/menu_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
+                                                <label>Nama Menu</label>
                                                 <input type="text" class="form-control" placeholder="Nama Menu" name="menu">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Urutan Menu</label>
+                                                <input type="number" class="form-control" placeholder="Urutan Menu" name="order_menu">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -54,6 +59,7 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -66,6 +72,9 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $m->menu; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $m->order_menu; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $m->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
@@ -84,9 +93,14 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('admin/menu_edit') ?>" method="POST">
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="id_user_menu" value="<?= $m->id_user_menu; ?>">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_user_menu" value="<?= $m->id_user_menu; ?>">
+                                                                <label>Nama Menu</label>
                                                                 <input type="text" class="form-control" placeholder="Nama Menu" name="menu" value="<?= $m->menu; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Urutan Menu</label>
+                                                                <input type="number" class="form-control" placeholder="Urutan Menu" name="order_menu" value="<?= $m->order_menu; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -134,7 +148,7 @@
     </div>
 
     <!-- SUBMENU -->
-    <div class="col-12 col-lg-6">
+    <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="row">
@@ -173,6 +187,9 @@
                                             <div class="mb-3">
                                                 <input type="text" class="form-control" placeholder="Icon" name="icon">
                                             </div>
+                                            <div class="mb-3">
+                                                <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -210,6 +227,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Submenu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -230,7 +248,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $sm->url; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sm->icon; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><i class="<?= $sm->icon; ?>"></i></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $sm->order_submenu; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSubmenuEdit<?= $sm->id_user_submenu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
@@ -266,6 +287,9 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $sm->icon; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu" value="<?= $sm->order_submenu; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

@@ -51,6 +51,15 @@ class Admin extends CI_Controller
             )
         );
 
+        $this->form_validation->set_rules(
+            'order_menu',
+            'Urutan Menu',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
         if ($this->form_validation->run() == false) {
             $data['title'] = "Menu Management";
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -65,10 +74,12 @@ class Admin extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $menu = $this->input->post('menu', true);
+            $order_menu = $this->input->post('order_menu', true);
 
             $data = [
                 'id_user_menu' => NULL,
-                'menu' => $menu
+                'menu' => $menu,
+                'order_menu' => $order_menu
             ];
 
             $this->admin->save_menu($data);
@@ -81,9 +92,11 @@ class Admin extends CI_Controller
     {
         $id_user_menu = $this->input->post('id_user_menu', true);
         $menu = $this->input->post('menu', true);
+        $order_menu = $this->input->post('order_menu', true);
 
         $data = [
-            'menu' => $menu
+            'menu' => $menu,
+            'order_menu' => $order_menu
         ];
 
         $this->admin->update_menu($data, $id_user_menu);
@@ -149,6 +162,7 @@ class Admin extends CI_Controller
             $url = $this->input->post('url', true);
             $icon = $this->input->post('icon', true);
             $is_active = 1;
+            $order_submenu = $this->input->post('order_submenu', true);
 
             $data = [
                 'id_user_submenu' => NULL,
@@ -156,7 +170,8 @@ class Admin extends CI_Controller
                 'title' => $title,
                 'url' => $url,
                 'icon' => $icon,
-                'is_active' => $is_active
+                'is_active' => $is_active,
+                'order_submenu' => $order_submenu
             ];
 
             $this->admin->save_submenu($data);
@@ -172,6 +187,7 @@ class Admin extends CI_Controller
         $menu_id = $this->input->post('menu_id', true);
         $url = $this->input->post('url', true);
         $icon = $this->input->post('icon', true);
+        $order_submenu = $this->input->post('order_submenu', true);
         $is_active = 1;
 
         $data = [
@@ -179,7 +195,8 @@ class Admin extends CI_Controller
             'menu_id' => $menu_id,
             'url' => $url,
             'icon' => $icon,
-            'is_active' => $is_active
+            'is_active' => $is_active,
+            'order_submenu' => $order_submenu
         ];
 
         $this->admin->update_submenu($data, $id_user_submenu);

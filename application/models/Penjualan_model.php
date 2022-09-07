@@ -244,4 +244,98 @@ class Penjualan_model extends CI_Model
         );
         return $query->row();
     }
+
+    // FRANCHISOR
+    function save_franchisor($data)
+    {
+        $this->db->insert('tbl_franchisor', $data);
+    }
+
+    function update_franchisor($data, $id_franchisor)
+    {
+        $this->db->where('id_franchisor', $id_franchisor);
+        $this->db->update('tbl_franchisor', $data);
+    }
+
+    function delete_franchisor($id_franchisor)
+    {
+        $this->db->where('id_franchisor', $id_franchisor);
+        $this->db->delete('tbl_franchisor');
+
+        return true;
+    }
+
+
+    // STUDENT
+    function get_class()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_class');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_student_selling($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_student_selling');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_student_selling.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');
+        $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('date_selling', 'DESC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_student_selling($data)
+    {
+        $this->db->insert('tbl_student_selling', $data);
+    }
+
+    function update_student_selling($data, $id_student_selling)
+    {
+        $this->db->where('id_student_selling', $id_student_selling);
+        $this->db->update('tbl_student_selling', $data);
+    }
+
+    function get_student_selling_detail($id_student_selling)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_student_selling_detail');
+        // $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('id_student_selling', $id_student_selling);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_student_selling_detail($data)
+    {
+        $this->db->insert('tbl_student_selling_detail', $data);
+    }
+
+    function update_student_selling_detail($data, $id_student_selling_detail)
+    {
+        $this->db->where('id_student_selling_detail', $id_student_selling_detail);
+        $this->db->update('tbl_student_selling_detail', $data);
+    }
+
+    function delete_student_selling_detail($id_student_selling_detail)
+    {
+        $this->db->where('id_student_selling_detail', $id_student_selling_detail);
+        $this->db->delete('tbl_student_selling_detail');
+
+        return true;
+    }
+
+    function sum_total_basic_price_student_selling($id_student_selling)
+    {
+        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price_student_selling` FROM `tbl_student_selling_detail` WHERE `id_student_selling` = $id_student_selling");
+        return $query->row();
+    }
+
+    function sum_total_selling_price_student_selling($id_student_selling)
+    {
+        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price_student_selling` FROM `tbl_student_selling_detail` WHERE `id_student_selling` = $id_student_selling");
+        return $query->row();
+    }
 }

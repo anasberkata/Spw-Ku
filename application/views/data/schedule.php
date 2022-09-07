@@ -43,7 +43,7 @@
                                                 <select class="form-select" aria-label="Default select" name="id_class">
                                                     <option selected>Pilih kelas</option>
                                                     <?php foreach ($class->result() as $c) : ?>
-                                                        <option value="<?= $c->id_schedule_class ?>"><?= $c->class ?></option>
+                                                        <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -132,7 +132,7 @@
                                                                 <select class="form-select" aria-label="Default select" name="id_class">
                                                                     <option value="<?= $s->id_class; ?>" selected><?= $s->class; ?></option>
                                                                     <?php foreach ($class->result() as $c) : ?>
-                                                                        <option value="<?= $c->id_schedule_class ?>"><?= $c->class ?></option>
+                                                                        <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                             </div>
