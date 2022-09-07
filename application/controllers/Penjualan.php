@@ -632,6 +632,7 @@ class Penjualan extends CI_Controller
         $data['franchisor'] = $this->penjualan->get_franchisor();
 
         $franchisor = $this->input->post('franchisor', true);
+        $whatsapp = $this->input->post('whatsapp', true);
 
         $this->form_validation->set_rules(
             'franchisor',
@@ -652,6 +653,7 @@ class Penjualan extends CI_Controller
             $data = [
                 'id_franchisor' => NULL,
                 'franchisor' => $franchisor,
+                'whatsapp' => $whatsapp
             ];
 
             $this->penjualan->save_franchisor($data);
@@ -666,9 +668,11 @@ class Penjualan extends CI_Controller
     {
         $id_franchisor = $this->input->post('id_franchisor', true);
         $franchisor = $this->input->post('franchisor', true);
+        $whatsapp = $this->input->post('whatsapp', true);
 
         $data = [
-            'franchisor' => $franchisor
+            'franchisor' => $franchisor,
+            'whatsapp' => $whatsapp
         ];
 
         $this->penjualan->update_franchisor($data, $id_franchisor);
@@ -765,7 +769,7 @@ class Penjualan extends CI_Controller
                 'id_class' => $id_class
             ];
 
-            $this->penjualan->save_student($data);
+            $this->penjualan->save_student_selling($data);
 
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil ditambahkan!</div>');
 

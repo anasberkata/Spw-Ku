@@ -29,6 +29,10 @@
                                                 <label>Nama Pemilik Produk</label>
                                                 <input type="text" class="form-control" name="franchisor" placeholder="Nama Pemilik Produk">
                                             </div>
+                                            <div class="mb-3">
+                                                <label>No. Whatsapp</label>
+                                                <input type="text" class="form-control" name="whatsapp" placeholder="Contoh: 82000000000">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -94,6 +98,10 @@
                                                             <div class="mb-3">
                                                                 <label>Nama Pemilik Produk</label>
                                                                 <input type="text" class="form-control" name="franchisor" value="<?= $f->franchisor; ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>No. Whatsapp</label>
+                                                                <input type="text" class="form-control" name="whatsapp" placeholder="Contoh: 82000000000" value="<?= $f->whatsapp; ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
