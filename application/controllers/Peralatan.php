@@ -47,6 +47,9 @@ class Peralatan extends CI_Controller
 
     public function tool_add()
     {
+        $data['title'] = "Data Peralatan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $this->form_validation->set_rules(
             'tool',
             'Tool',
@@ -58,9 +61,6 @@ class Peralatan extends CI_Controller
 
         if ($this->form_validation->run() == false) {
             $id_lab = $this->input->get('id_lab', true);
-
-            $data['title'] = "Data Peralatan";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
             $data['tool'] = $this->peralatan->get_tools($id_lab);
             $data['tool_condition'] = $this->peralatan->get_condition();

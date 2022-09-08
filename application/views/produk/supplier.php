@@ -61,7 +61,7 @@
                             <table class="table align-items-center mb-0" id="table1">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Supplier</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telephone</th>
@@ -82,11 +82,11 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->address; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->phone; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><a class="btn btn-success mt-3" href="https://wa.me/<?= $s->phone; ?>"><i class="fa fa-whatsapp cursor-pointer"></i></a></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSupplierEdit<?= $s->id_supplier; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSupplierDelete<?= $s->id_supplier; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>

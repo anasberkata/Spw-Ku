@@ -24,6 +24,7 @@
                                     <form role="form" action="<?= base_url('produk/category_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
+                                                <label>Katagori</label>
                                                 <input type="text" class="form-control" placeholder="Kategori" name="category">
                                             </div>
                                         </div>
@@ -49,10 +50,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
@@ -84,8 +85,9 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('produk/category_edit') ?>" method="POST">
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="id_category" value="<?= $c->id_category; ?>">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_category" value="<?= $c->id_category; ?>">
+                                                                <label>Katagori</label>
                                                                 <input type="text" class="form-control" placeholder="Nama Kategori" name="category" value="<?= $c->category; ?>">
                                                             </div>
                                                         </div>

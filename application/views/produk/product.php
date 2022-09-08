@@ -20,27 +20,9 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <form role="form" action="<?= base_url('produk/product_search') ?>" method="GET">
-                                    <div class="row">
-                                        <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Lokasi</label>
-                                        </div>
-                                        <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_place">
-                                                <option>Pilih Lokasi Produk</option>
-                                                <?php foreach ($place->result() as $p) : ?>
-                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
-                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <!-- <div class="col-12">
+                                
+                            </div> -->
                         </div>
 
                         <!-- Modal Tambah Menu -->
@@ -53,51 +35,71 @@
                                     </div>
                                     <?= form_open_multipart('produk/product_add'); ?>
                                     <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label>Kode Produk</label>
-                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Lab SPW</label>
-                                            <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <label>Kategori Produk</label>
-                                            <select class="form-select" aria-label="Default select" name="id_category">
-                                                <option selected>Pilih kategori</option>
-                                                <?php foreach ($category->result() as $c) : ?>
-                                                    <option value="<?= $c->id_category ?>"><?= $c->category ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class=" mb-3">
-                                            <label>Tempat Produk</label>
-                                            <select class="form-select" aria-label="Default select" name="id_place">
-                                                <option selected>Pilih tempat</option>
-                                                <?php foreach ($place->result() as $pl) : ?>
-                                                    <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Nama Produk</label>
-                                            <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Qty</label>
-                                            <input type="number" class="form-control" placeholder="Qty" name="qty">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Harga Dasar (Rp.)</label>
-                                            <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Harga Jual (Rp.)</label>
-                                            <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Gambar Produk</label>
-                                            <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">
+                                        <div class="row">
+                                            <!-- <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Kode Produk</label>
+                                                    <input type="text" class="form-control" placeholder="Kode Produk" name="code">
+                                                </div>
+                                            </div> -->
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Lab SPW</label>
+                                                    <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class=" mb-3">
+                                                    <label>Kategori Produk</label>
+                                                    <select class="form-select" aria-label="Default select" name="id_category">
+                                                        <option selected>Pilih kategori</option>
+                                                        <?php foreach ($category->result() as $c) : ?>
+                                                            <option value="<?= $c->id_category ?>"><?= $c->category ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class=" mb-3">
+                                                    <label>Tempat Produk</label>
+                                                    <select class="form-select" aria-label="Default select" name="id_place">
+                                                        <option selected>Pilih tempat</option>
+                                                        <?php foreach ($place->result() as $pl) : ?>
+                                                            <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Nama Produk</label>
+                                                    <input type="text" class="form-control" placeholder="Nama Produk" name="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Qty</label>
+                                                    <input type="number" class="form-control" placeholder="Qty" name="qty">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Harga Dasar (Rp.)</label>
+                                                    <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Harga Jual (Rp.)</label>
+                                                    <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Gambar Produk</label>
+                                                    <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -122,10 +124,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                                         <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Produk</th> -->
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
@@ -182,7 +184,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $p->id_product; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $p->id_product; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
@@ -199,57 +201,84 @@
                                                     <div class="modal-body">
                                                         <input type="hidden" class="form-control" placeholder="Kode Produk" name="id_product" value="<?= $p->id_product; ?>">
                                                         <input type="hidden" class="form-control" placeholder="Kode Produk" name="id_lab" value="<?= $p->id_lab; ?>">
-                                                        <div class="mb-3">
-                                                            <label>Kode Produk</label>
-                                                            <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $p->code; ?>">
-                                                        </div>
-                                                        <div class=" mb-3">
-                                                            <label>Kategori Produk</label>
-                                                            <select class="form-select" aria-label="Default select" name="id_category">
-                                                                <option value="<?= $p->id_category; ?>" selected><?= $p->category; ?></option>
-                                                                <?php foreach ($category->result() as $c) : ?>
-                                                                    <option value="<?= $c->id_category ?>"><?= $c->category ?></option>
-                                                                <?php endforeach; ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class=" mb-3">
-                                                            <label>Tempat Produk</label>
-                                                            <select class="form-select" aria-label="Default select" name="id_place">
-                                                                <option value="<?= $p->id_place; ?>" selected><?= $p->place; ?></option>
-                                                                <?php foreach ($place->result() as $pl) : ?>
-                                                                    <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
-                                                                <?php endforeach; ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Nama Produk</label>
-                                                            <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $p->product; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Qty</label>
-                                                            <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $p->qty; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Harga Dasar (Rp.)</label>
-                                                            <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price" value="<?= $p->basic_price; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Harga Jual (Rp.)</label>
-                                                            <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price" value="<?= $p->selling_price; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Gambar Produk</label>
-                                                            <div class="row">
-                                                                <div class="col-3 col-lg-2">
-                                                                    <div class="avatar avatar-xl position-relative">
-                                                                        <img src="<?= base_url('assets/img/products/' . $p->image); ?>" alt="product_image" class="w-100 border-radius-lg shadow-sm">
-                                                                    </div>
+
+                                                        <div class="row">
+                                                            <!-- <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Kode Produk</label>
+                                                                    <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $p->code; ?>">
                                                                 </div>
-                                                                <div class="col-9 col-lg-10">
-                                                                    <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                            </div> -->
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class=" mb-3">
+                                                                    <label>Kategori Produk</label>
+                                                                    <select class="form-select" aria-label="Default select" name="id_category">
+                                                                        <option value="<?= $p->id_category; ?>" selected><?= $p->category; ?></option>
+                                                                        <?php foreach ($category->result() as $c) : ?>
+                                                                            <option value="<?= $c->id_category ?>"><?= $c->category ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class=" mb-3">
+                                                                    <label>Tempat Produk</label>
+                                                                    <select class="form-select" aria-label="Default select" name="id_place">
+                                                                        <option value="<?= $p->id_place; ?>" selected><?= $p->place; ?></option>
+                                                                        <?php foreach ($place->result() as $pl) : ?>
+                                                                            <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Nama Produk</label>
+                                                                    <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $p->product; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Qty</label>
+                                                                    <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $p->qty; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Harga Dasar (Rp.)</label>
+                                                                    <input type="number" class="form-control" placeholder="Harga Dasar (Rp.)" name="basic_price" value="<?= $p->basic_price; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Harga Jual (Rp.)</label>
+                                                                    <input type="number" class="form-control" placeholder="Harga Jual (Rp.)" name="selling_price" value="<?= $p->selling_price; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label>Gambar Produk</label>
+                                                                    <div class="row">
+                                                                        <div class="col-3 col-lg-2">
+                                                                            <div class="avatar avatar-xl position-relative">
+                                                                                <img src="<?= base_url('assets/img/products/' . $p->image); ?>" alt="product_image" class="w-100 border-radius-lg shadow-sm">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-9 col-lg-10">
+                                                                            <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
+
+
+
+
+
+
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>

@@ -58,7 +58,7 @@
                             <table class="table align-items-center mb-0" id="table1">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. Whatsapp</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
@@ -75,7 +75,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $f->franchisor; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="btn btn-success btn-sm"><i class="fa fa-whatsapp"></i></a></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="btn btn-success btn-sm mt-3"><i class="fa fa-whatsapp"></i></a></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchisorEdit<?= $f->id_franchisor; ?>"><i class="fa fa-edit cursor-pointer"></i></a>

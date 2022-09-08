@@ -76,72 +76,82 @@
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
-                                            <div class="mb-3">
-                                                <label>Pemilik Produk</label>
-                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                    <option selected>Pilih Pemilik Produk</option>
-                                                    <?php foreach ($franchisor->result() as $f) : ?>
-                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
+
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Pemilik Produk</label>
+                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                            <option selected>Pilih Pemilik Produk</option>
+                                                            <?php foreach ($franchisor->result() as $f) : ?>
+                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
 
 
 
 
 
-                                                <!-- <input type="text" class="form-control" list="franchisor" id="id_franchisor" placeholder="Pilih Pemilik Produk" autocomplete="off">
-                                                <datalist id="franchisor">
-                                                    <?php foreach ($franchisor->result() as $f) : ?>
-                                                        <option data-value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                    <?php endforeach; ?>
-                                                </datalist>
-                                                <input type="hidden" name="id_franchisor" id="id_franchisor-hidden">
+                                                        <!-- <input type="text" class="form-control" list="franchisor" id="id_franchisor" placeholder="Pilih Pemilik Produk" autocomplete="off">
+                                                        <datalist id="franchisor">
+                                                            <?php foreach ($franchisor->result() as $f) : ?>
+                                                                <option data-value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                            <?php endforeach; ?>
+                                                        </datalist>
+                                                        <input type="hidden" name="id_franchisor" id="id_franchisor-hidden">
 
-                                                <script>
-                                                    document.querySelector('input[list]').addEventListener('input', function(e) {
-                                                        var input = e.target,
-                                                            list = input.getAttribute('list'),
-                                                            options = document.querySelectorAll('#' + list + ' option'),
-                                                            hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
-                                                            inputValue = input.value;
+                                                        <script>
+                                                            document.querySelector('input[list]').addEventListener('input', function(e) {
+                                                                var input = e.target,
+                                                                    list = input.getAttribute('list'),
+                                                                    options = document.querySelectorAll('#' + list + ' option'),
+                                                                    hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                                                                    inputValue = input.value;
 
-                                                        hiddenInput.value = inputValue;
+                                                                hiddenInput.value = inputValue;
 
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            var option = options[i];
+                                                                for (var i = 0; i < options.length; i++) {
+                                                                    var option = options[i];
 
-                                                            if (option.innerText === inputValue) {
-                                                                hiddenInput.value = option.getAttribute('data-value');
-                                                                break;
-                                                            }
-                                                        }
-                                                    });
-                                                </script> -->
-
-
-
-
-
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Nama Produk</label>
-                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Dasar (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Jual (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Awal</label>
-                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Akhir (Kosongkan bila belum terdata)</label>
-                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
+                                                                    if (option.innerText === inputValue) {
+                                                                        hiddenInput.value = option.getAttribute('data-value');
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            });
+                                                        </script> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Nama Produk</label>
+                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Dasar (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Jual (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Awal</label>
+                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Akhir (Kosongkan bila belum)</label>
+                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -173,7 +183,7 @@
                             <table class="table align-items-center mb-0" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemilik Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
@@ -236,7 +246,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $fd->id_franchise_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $fd->id_franchise_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
@@ -254,34 +264,49 @@
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>" readonly>
                                                             <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>" readonly>
-                                                            <div class="mb-3">
-                                                                <label>Pemilik Produk</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                                    <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
-                                                                    <?php foreach ($franchisor->result() as $f) : ?>
-                                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Nama Produk</label>
-                                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Dasar (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Jual (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Awal</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Akhir</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Pemilik Produk</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                                            <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
+                                                                            <?php foreach ($franchisor->result() as $f) : ?>
+                                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Nama Produk</label>
+                                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Dasar (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Jual (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Awal</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Akhir</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <!-- <div class="mb-3">
                                                                 <label>Qty Terjual</label>

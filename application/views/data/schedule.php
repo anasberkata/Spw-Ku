@@ -98,7 +98,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalScheduleEdit<?= $s->id_schedule; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalScheduleDelete<?= $s->id_schedule; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>

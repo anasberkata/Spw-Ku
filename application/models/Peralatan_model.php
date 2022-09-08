@@ -2,7 +2,7 @@
 class Peralatan_model extends CI_Model
 {
 
-    // ERALATAN
+    // PERALATAN
     function get_lab()
     {
         $this->db->select('*');

@@ -320,7 +320,7 @@ class Penjualan extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/index_franchise', $data);
+        $this->load->view('penjualan/franchise_index', $data);
         $this->load->view('templates/footer');
     }
 
@@ -703,7 +703,7 @@ class Penjualan extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/index_student_selling', $data);
+        $this->load->view('penjualan/student_selling_index', $data);
         $this->load->view('templates/footer');
     }
 

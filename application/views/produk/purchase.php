@@ -67,10 +67,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Pembelian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Supplier</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">PJ Produk</th>
@@ -95,7 +95,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('produk/purchase_detail/?id_purchase=') . $p->id_purchase . '&id_lab=' . $p->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
-
+                                                |
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseEdit<?= $p->id_purchase; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
                                                 <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $p->id_purchase; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->

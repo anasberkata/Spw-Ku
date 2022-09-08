@@ -43,25 +43,37 @@
                                             <input type="hidden" name="id_student_selling" value="<?= $id_student_selling ?>">
                                             <input type="hidden" name="id_class" value="<?= $id_class ?>">
 
-                                            <div class="mb-3">
-                                                <label>Nama Produk</label>
-                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Dasar (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Jual (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Awal</label>
-                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Akhir (Kosongkan bila belum terdata)</label>
-                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Nama Produk</label>
+                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Dasar (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Jual (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Awal</label>
+                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Akhir (Kosongkan bila belum)</label>
+                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -93,7 +105,7 @@
                             <table class="table align-items-center mb-0" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Jual</th>
@@ -138,7 +150,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $fd->id_student_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $fd->id_student_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
@@ -157,30 +169,51 @@
                                                             <input type="hidden" name="id_student_selling" value="<?= $id_student_selling ?>" readonly>
                                                             <input type="hidden" name="id_student_selling_detail" value="<?= $fd->id_student_selling_detail; ?>" readonly>
                                                             <input type="hidden" name="id_class" value="<?= $fd->id_class; ?>" readonly>
-                                                            <div class="mb-3">
-                                                                <label>Nama Produk</label>
-                                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
+
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Nama Produk</label>
+                                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Dasar (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Jual (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Awal</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Akhir</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Terjual</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
+                                                                    </div>
+                                                                </div> -->
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Dasar (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Jual (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Awal</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Akhir</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
-                                                            </div>
-                                                            <!-- <div class="mb-3">
-                                                                <label>Qty Terjual</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
-                                                            </div> -->
+
+
+
+
+
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>

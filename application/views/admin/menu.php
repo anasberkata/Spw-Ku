@@ -171,13 +171,13 @@
                                     <form role="form" action="<?= base_url('admin/submenu_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Nama Submenu</label>
                                                         <input type="text" class="form-control" placeholder="Nama Submenu" name="title">
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Menu</label>
                                                         <select class="form-select" aria-label="Default select" name="menu_id">
@@ -188,19 +188,19 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Url</label>
                                                         <input type="text" class="form-control" placeholder="URL" name="url">
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Icon</label>
                                                         <input type="text" class="form-control" placeholder="Icon" name="icon">
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Urutan Submenu</label>
                                                         <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu">
@@ -285,13 +285,13 @@
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_user_submenu" value="<?= $sm->id_user_submenu; ?>">
                                                             <div class="row">
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Nama Submenu</label>
                                                                         <input type="text" class="form-control" placeholder="Nama Submenu" name="title" value="<?= $sm->title; ?>">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Menu</label>
                                                                         <select class="form-select" aria-label="Default select" name="menu_id">
@@ -302,19 +302,19 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Url</label>
                                                                         <input type="text" class="form-control" placeholder="URL" name="url" value="<?= $sm->url; ?>">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Icon</label>
                                                                         <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $sm->icon; ?>">
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Urutan Submenu</label>
                                                                         <input type="number" class="form-control" placeholder="Urutan Submenu" name="order_submenu" value="<?= $sm->order_submenu; ?>">

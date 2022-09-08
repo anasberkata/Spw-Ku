@@ -28,38 +28,55 @@
                                     </div>
                                     <form role="form" action="<?= base_url('peralatan/tool_add') ?>" method="POST">
                                         <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label>Lab SPW</label>
-                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Nama Peralatan</label>
-                                                <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Spesifikasi / Merk</label>
-                                                <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty</label>
-                                                <input type="number" class="form-control" placeholder="Qty" name="qty">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga" name="price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Kondisi</label>
-                                                <select class="form-select" aria-label="Default select" name="id_tool_condition">
-                                                    <option selected>Pilih kondisi</option>
-                                                    <?php foreach ($tool_condition->result() as $tc) : ?>
-                                                        <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Keterangan</label>
-                                                <input type="text" class="form-control" placeholder="Keterangan" name="description">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Lab SPW</label>
+                                                        <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Nama Peralatan</label>
+                                                        <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Spesifikasi / Merk</label>
+                                                        <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty</label>
+                                                        <input type="number" class="form-control" placeholder="Qty" name="qty">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga" name="price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Kondisi</label>
+                                                        <select class="form-select" aria-label="Default select" name="id_tool_condition">
+                                                            <option selected>Pilih kondisi</option>
+                                                            <?php foreach ($tool_condition->result() as $tc) : ?>
+                                                                <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label>Keterangan</label>
+                                                        <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description"> -->
+                                                        <textarea class="form-control" name="description" rows="5"></textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -84,10 +101,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Peralatan</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Spesifikasi / Merk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
@@ -134,7 +151,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalToolEdit<?= $t->id_tool; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalToolDelete<?= $t->id_tool; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
@@ -149,39 +166,56 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('peralatan/tool_edit') ?>" method="POST">
                                                         <div class="modal-body">
-                                                            <div class="mb-3">
-                                                                <label>Lab SPW</label>
-                                                                <input type="hidden" class="form-control" placeholder="Lab SPW" name="id_tool" value="<?= $t->id_tool ?>">
-                                                                <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Nama Peralatan</label>
-                                                                <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool" value="<?= $t->tool; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Spesifikasi / Merk</label>
-                                                                <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand" value="<?= $t->brand; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty</label>
-                                                                <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $t->qty; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga" name="price" value="<?= $t->price; ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Kondisi</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_tool_condition">
-                                                                    <option value="<?= $t->tool_condition; ?>"><?= $t->condition ?></option>
-                                                                    <?php foreach ($tool_condition->result() as $tc) : ?>
-                                                                        <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Keterangan</label>
-                                                                <input type="text" class="form-control" placeholder="Keterangan" name="description" value="<?= $t->description; ?>">
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Lab SPW</label>
+                                                                        <input type="hidden" class="form-control" placeholder="Lab SPW" name="id_tool" value="<?= $t->id_tool ?>">
+                                                                        <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Nama Peralatan</label>
+                                                                        <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool" value="<?= $t->tool; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Spesifikasi / Merk</label>
+                                                                        <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand" value="<?= $t->brand; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty</label>
+                                                                        <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $t->qty; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga" name="price" value="<?= $t->price; ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Kondisi</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_tool_condition">
+                                                                            <option value="<?= $t->tool_condition; ?>"><?= $t->condition ?></option>
+                                                                            <?php foreach ($tool_condition->result() as $tc) : ?>
+                                                                                <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-12">
+                                                                    <div class="mb-3">
+                                                                        <label>Keterangan</label>
+                                                                        <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description" value="<?= $t->description; ?>"> -->
+                                                                        <textarea class="form-control" name="description" rows="5" value="<?= $t->description; ?>"><?= $t->description; ?></textarea>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

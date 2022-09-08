@@ -33,15 +33,19 @@
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                             <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
-                                            <div class="mb-3">
-                                                <select onchange="get_price()" class="form-select" aria-label="Default select" name="id_product" id="id_product">
-                                                    <option selected>Pilih Produk</option>
-                                                    <?php foreach ($product->result() as $p) : ?>
-                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
 
-                                                <!-- <input type="text" class="form-control" list="product" id="id_product" autocomplete="off">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Pilih Produk</label>
+                                                        <select onchange="get_price()" class="form-select" aria-label="Default select" name="id_product" id="id_product">
+                                                            <option selected>Pilih Produk</option>
+                                                            <?php foreach ($product->result() as $p) : ?>
+                                                                <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+
+                                                        <!-- <input type="text" class="form-control" list="product" id="id_product" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p) : ?>
                                                         <option data-value="<?= $p->id_product ?>"><?= $p->product ?></option>
@@ -71,18 +75,26 @@
                                                 </script> -->
 
 
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Produk</label>
-                                                <input type="text" class="form-control" placeholder="Jumlah Produk" name="qty_product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Dasar (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Dasar Produk" name="basic_price" id="basic_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Jual (Rp.)</label>
-                                                <input type="text" class="form-control" placeholder="Harga Jual Produk" name="selling_price" id="selling_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Produk</label>
+                                                        <input type="number" class="form-control" placeholder="Jumlah Produk" name="qty_product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Dasar (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Dasar Produk" name="basic_price" id="basic_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Jual (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Jual Produk" name="selling_price" id="selling_price">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -111,7 +123,7 @@
                             <table class="table align-items-center mb-0" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga </th>
@@ -140,7 +152,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $pd->id_purchase_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $pd->id_purchase_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>
@@ -158,26 +170,42 @@
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                                             <input type="hidden" name="id_purchase" value="<?= $id_purchase ?>" readonly>
                                                             <input type="hidden" name="id_purchase_detail" value="<?= $pd->id_purchase_detail; ?>" readonly>
-                                                            <div class="mb-3">
-                                                                <select class="form-select" aria-label="Default select" name="id_product">
-                                                                    <option value="<?= $pd->id_product ?>"><?= $pd->product ?></option>
-                                                                    <?php foreach ($product->result() as $p) : ?>
-                                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
+
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Pilih Produk</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_product">
+                                                                            <option value="<?= $pd->id_product ?>"><?= $pd->product ?></option>
+                                                                            <?php foreach ($product->result() as $p) : ?>
+                                                                                <option value="<?= $p->id_product ?>"><?= $p->product ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Produk</label>
+                                                                        <input type="number" class="form-control" placeholder="Jumlah Produk" name="qty_product" value="<?= $pd->qty_product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Dasar (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Dasar Produk" name="basic_price" value="<?= $pd->basic_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Jual (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Jual Produk" name="selling_price" value="<?= $pd->selling_price ?>">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Produk</label>
-                                                                <input type="text" class="form-control" placeholder="Jumlah Produk" name="qty_product" value="<?= $pd->qty_product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Dasar (Rp.)</label>
-                                                                <input type="text" class="form-control" placeholder="Harga Dasar Produk" name="basic_price" value="<?= $pd->basic_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Jual (Rp.)</label>
-                                                                <input type="text" class="form-control" placeholder="Harga Jual Produk" name="selling_price" value="<?= $pd->selling_price ?>">
-                                                            </div>
+
+
+
+
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>

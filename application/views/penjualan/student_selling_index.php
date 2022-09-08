@@ -17,7 +17,7 @@
                             <table class="table align-items-center mb-0" id="table1">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Lab</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
@@ -33,7 +33,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $l->lab; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a href="<?= base_url('penjualan/franchise/?id_lab=') . $l->id_lab; ?>" class="badge bg-primary btn-sm px-3 py-2 rounded-pill"><i class="fa fa-arrow-right cursor-pointer"></i></a>
+                                                <a href="<?= base_url('penjualan/student_selling/?id_lab=') . $l->id_lab; ?>" class="badge bg-primary btn-sm px-3 py-2 rounded-pill"><i class="fa fa-arrow-right cursor-pointer"></i></a>
                                             </td>
                                         </tr>
                                         <?php $i++; ?>

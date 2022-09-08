@@ -27,7 +27,7 @@
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label>Nama Kelas</label>
-                                                <input type="text" class="form-control" name="class">
+                                                <input type="text" class="form-control" name="class" placeholder="Nama Kelas">
                                             </div>
 
                                         </div>
@@ -73,7 +73,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalClassEdit<?= $c->id_class; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                <br class="my-2">
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalClassDelete<?= $c->id_class; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>

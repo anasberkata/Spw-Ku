@@ -58,10 +58,10 @@
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Penjualan</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Petugas / Guru Piket</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
@@ -82,7 +82,7 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/franchise_detail/?id_franchise=') . $f->id_franchise . '&id_lab=' . $f->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
-
+                                                |
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchiseEdit<?= $f->id_franchise; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
                                                 <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $f->id_franchise; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
