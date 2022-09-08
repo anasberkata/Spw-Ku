@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table align-items-center" id="data">
+                <table class="table align-items-center" id="data-table">
                     <tbody>
                         <?php foreach ($product->result() as $p) : ?>
                             <tr>

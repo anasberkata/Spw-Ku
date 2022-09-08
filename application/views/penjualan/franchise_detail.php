@@ -148,9 +148,12 @@
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
-                                                        <label>Qty Akhir (Kosongkan bila belum)</label>
+                                                        <label>Qty Akhir <span class="text-danger">*</span></label>
                                                         <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
                                                     </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="text-sm small"><small><i><span class="text-danger">*</span>(Kosongkan jika tidak ada data)</i></small></p>
                                                 </div>
                                             </div>
                                         </div>

@@ -75,11 +75,11 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $f->franchisor; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="btn btn-success btn-sm mt-3"><i class="fa fa-whatsapp"></i></a></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="badge bg-success btn-sm px-3 py-2 rounded-pill"><i class="fa fa-whatsapp"></i></a></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchisorEdit<?= $f->id_franchisor; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-
+                                                |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchisorDelete<?= $f->id_franchisor; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td>
                                         </tr>

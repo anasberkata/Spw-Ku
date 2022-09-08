@@ -25,52 +25,73 @@
                                     </div>
                                     <?= form_open_multipart('pengguna/user_add'); ?>
                                     <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label>Nama Lengkap</label>
-                                            <input type="text" class="form-control" placeholder="Nama lengkap" name="name">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Nama Lengkap</label>
+                                                    <input type="text" class="form-control" placeholder="Nama lengkap" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>E-Mail</label>
+                                                    <input type="email" class="form-control" placeholder="E-Mail" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" placeholder="Username" name="username">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class=" mb-3">
+                                                    <label>Role</label>
+                                                    <select class="form-select" aria-label="Default select" name="role_id">
+                                                        <option selected>Pilih Role Akses</option>
+                                                        <?php foreach ($role->result() as $r) : ?>
+                                                            <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Gambar Profile</label>
+                                                    <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Facebook</label>
+                                                    <input type="text" class="form-control" placeholder="Username Facebook" name="facebook">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Instagram</label>
+                                                    <input type="text" class="form-control" placeholder="Username Instagram" name="instagram">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Whatsapp</label>
+                                                    <input type="number" class="form-control" placeholder="80000000000" name="whatsapp">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Icon</label>
+                                                    <input type="text" class="form-control" placeholder="Icon" name="icon">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label>E-Mail</label>
-                                            <input type="email" class="form-control" placeholder="E-Mail" name="email">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Username</label>
-                                            <input type="text" class="form-control" placeholder="Username" name="username">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Password</label>
-                                            <input type="password" class="form-control" placeholder="Password" name="password">
-                                        </div>
-                                        <div class=" mb-3">
-                                            <label>Role</label>
-                                            <select class="form-select" aria-label="Default select" name="role_id">
-                                                <option selected>Pilih Role Akses</option>
-                                                <?php foreach ($role->result() as $r) : ?>
-                                                    <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Gambar Profile</label>
-                                            <input type="file" class="form-control" placeholder="Pilih Gambar" name="image">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Facebook</label>
-                                            <input type="text" class="form-control" placeholder="Username Facebook" name="facebook">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Instagram</label>
-                                            <input type="text" class="form-control" placeholder="Username Instagram" name="instagram">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Whatsapp</label>
-                                            <input type="number" class="form-control" placeholder="80000000000" name="whatsapp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label>Icon</label>
-                                            <input type="text" class="form-control" placeholder="Icon" name="icon">
-                                        </div>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -98,10 +119,10 @@
 
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
+                            <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
@@ -135,9 +156,9 @@
                                             <?php if ($user["role_id"] == 1) : ?>
                                                 <td class="align-middle text-center text-sm">
                                                     <a type="button" class="badge bg-success btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></a>
-
+                                                    |
                                                     <a type="button" class="badge bg-primary btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-
+                                                    |
                                                     <a type="button" class="badge bg-danger btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                                 </td>
                                             <?php endif; ?>
@@ -175,7 +196,7 @@
                                                                     </p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label>Whatsapp</label>
+                                                                    <label>Instagram</label>
                                                                     <p class="ms-1 text-sm">
                                                                         <a href="https://www.instagram.com/<?= $u->instagram; ?>" target="blank"><?= $u->instagram; ?></a>
                                                                     </p>
@@ -191,7 +212,7 @@
                                                                     <p class="ms-1 text-sm"><?= $u->role; ?></p>
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label>Instagram</label>
+                                                                    <label>Whatsapp</label>
                                                                     <p class="ms-1 text-sm">
                                                                         <a href="https://api.whatsapp.com/send?phone=62<?= $u->whatsapp; ?>" target="blank"><?= $u->whatsapp; ?></a>
                                                                     </p>
@@ -199,7 +220,7 @@
 
                                                                 <div class="mb-3">
                                                                     <label>Icon</label>
-                                                                    <p class="ms-1 text-sm"><?= $u->icon; ?></p>
+                                                                    <p class="ms-1 text-sm"><i class="<?= $u->icon; ?>"></i></p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -222,60 +243,85 @@
                                                     </div>
                                                     <?= form_open_multipart('pengguna/user_edit'); ?>
                                                     <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <input type="hidden" name="id_user" value="<?= $u->id_user; ?>">
-                                                            <label>Nama Lengkap</label>
-                                                            <input type="text" class="form-control" placeholder="Nama lengkap" name="name" value="<?= $u->name; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>E-Mail</label>
-                                                            <input type="email" class="form-control" placeholder="E-Mail" name="email" value="<?= $u->email; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Username</label>
-                                                            <input type="text" class="form-control" placeholder="Username" name="username" value="<?= $u->username; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Password Baru (Kosongkan jika tidak ingin diubah)</label>
-                                                            <input type="password" class="form-control" placeholder="Password Baru" name="new_password">
-                                                        </div>
-                                                        <div class=" mb-3">
-                                                            <label>Role</label>
-                                                            <select class="form-select" aria-label="Default select" name="role_id">
-                                                                <option value="<?= $u->id_role; ?>"><?= $u->role ?></option>
-                                                                <?php foreach ($role->result() as $r) : ?>
-                                                                    <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
-                                                                <?php endforeach; ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Gambar Pengguna</label>
-                                                            <div class="row">
-                                                                <div class="col-3 col-lg-2">
-                                                                    <div class="avatar avatar-xl position-relative">
-                                                                        <img src="<?= base_url('assets/img/users/' . $u->image); ?>" alt="user_image" class="w-100 border-radius-lg shadow-sm">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-9 col-lg-10">
-                                                                    <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                        <input type="hidden" name="id_user" value="<?= $u->id_user; ?>">
+                                                        <div class="row">
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Nama Lengkap</label>
+                                                                    <input type="text" class="form-control" placeholder="Nama lengkap" name="name" value="<?= $u->name; ?>">
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Facebook</label>
-                                                            <input type="text" class="form-control" placeholder="Username Facebook" name="facebook" value="<?= $u->facebook; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Instagram</label>
-                                                            <input type="text" class="form-control" placeholder="Username Instagram" name="instagram" value="<?= $u->instagram; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Whatsapp</label>
-                                                            <input type="number" class="form-control" placeholder="80000000000" name="whatsapp" value="<?= $u->whatsapp; ?>">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label>Icon</label>
-                                                            <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $u->icon; ?>">
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>E-Mail</label>
+                                                                    <input type="email" class="form-control" placeholder="E-Mail" name="email" value="<?= $u->email; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Username</label>
+                                                                    <input type="text" class="form-control" placeholder="Username" name="username" value="<?= $u->username; ?>">
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Password Baru <span class="text-danger">*</span></label>
+                                                                    <input type="password" class="form-control" placeholder="Password Baru" name="new_password">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class=" mb-3">
+                                                                    <label>Role</label>
+                                                                    <select class="form-select" aria-label="Default select" name="role_id">
+                                                                        <option value="<?= $u->id_role; ?>"><?= $u->role ?></option>
+                                                                        <?php foreach ($role->result() as $r) : ?>
+                                                                            <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
+                                                                        <?php endforeach; ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-12">
+                                                                <div class="mb-3">
+                                                                    <label>Gambar Pengguna</label>
+                                                                    <div class="row">
+                                                                        <div class="col-3 col-lg-2">
+                                                                            <div class="avatar avatar-xl position-relative">
+                                                                                <img src="<?= base_url('assets/img/users/' . $u->image); ?>" alt="user_image" class="w-100 border-radius-lg shadow-sm">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-9 col-lg-10">
+                                                                            <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Facebook</label>
+                                                                    <input type="text" class="form-control" placeholder="Username Facebook" name="facebook" value="<?= $u->facebook; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Instagram</label>
+                                                                    <input type="text" class="form-control" placeholder="Username Instagram" name="instagram" value="<?= $u->instagram; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Whatsapp</label>
+                                                                    <input type="number" class="form-control" placeholder="80000000000" name="whatsapp" value="<?= $u->whatsapp; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Icon</label>
+                                                                    <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $u->icon; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <p class="text-sm small"><small><i><span class="text-danger">*</span>(Kosongkan jika tidak ada perubahan)</i></small></p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
