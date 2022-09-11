@@ -60,30 +60,52 @@
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
-                                            <div class="mb-3">
-                                                <label>Pemilik Produk</label>
-                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                    <option selected>Pilih Pemilik Produk</option>
-                                                    <?php foreach ($franchisor->result() as $f) : ?>
-                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Nama Produk</label>
-                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Dasar (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Harga Jual (Rp.)</label>
-                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label>Qty Awal</label>
-                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
+
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Pemilik Produk</label>
+                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                            <option selected>Pilih Pemilik Produk</option>
+                                                            <?php foreach ($franchisor->result() as $f) : ?>
+                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Nama Produk</label>
+                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Dasar (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Harga Jual (Rp.)</label>
+                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Awal</label>
+                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Qty Akhir <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="text-sm small"><small><i><span class="text-danger">*</span>(Kosongkan jika tidak ada data)</i></small></p>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">

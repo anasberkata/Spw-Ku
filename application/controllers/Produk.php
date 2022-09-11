@@ -100,7 +100,7 @@ class Produk extends CI_Controller
 
             $data = [
                 'id_product' => NULL,
-                'code' => $code,
+                'code' => "SPW",
                 'id_category' => $id_category,
                 'id_place' => $id_place,
                 'product' => $product,

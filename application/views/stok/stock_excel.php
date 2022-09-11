@@ -62,6 +62,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
         </tr>
 
         <?php $i = 1; ?>
+        <?php $row = 9; ?>
         <?php foreach ($product->result() as $p) : ?>
             <tr>
                 <td style="text-align: center;">
@@ -70,13 +71,13 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 <td>
                     <p><?= $p->product; ?></p>
                 </td>
-                <td style="text-align: right;">
-                    <p>Rp. <?= $p->basic_price; ?></p>
+                <td style="text-align: right; color:#fff;">
+                    <p><?= $p->basic_price; ?></p>
                 </td>
                 <td style="text-align: right;">
-                    <p>Rp. <?= $p->selling_price; ?></p>
+                    <p><?= $p->selling_price; ?></p>
                 </td>
-                <td style="text-align: center;">
+                <td style="text-align: center; color:#fff;">
                     <p><?= $p->qty; ?></p>
                 </td>
                 <td>
@@ -85,21 +86,22 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 <td>
                     <p></p>
                 </td>
-                <td>
-                    <p></p>
+                <td style="color:#fff;">
+                    <p>=sum(G<?= $row; ?>*C<?= $row; ?>)</p>
                 </td>
                 <td>
-                    <p></p>
+                    <p>=sum(G<?= $row; ?>*D<?= $row; ?>)</p>
                 </td>
             </tr>
 
+            <?php $row++; ?>
             <?php $i++; ?>
         <?php endforeach; ?>
 
         <tr>
             <th colspan="7" style="text-align: right;"> TOTAL</th>
-            <td></td>
-            <td></td>
+            <td style="color:#fff;">=sum(I9:I<?= $row - 1; ?>)</td>
+            <td>=sum(I9:I<?= $row - 1; ?>)</td>
         </tr>
         <tr></tr>
         <tr>
@@ -113,9 +115,9 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
             <td colspan="2">Guru Pembimbing Praktek</td>
             <td colspan="2">:</td>
             <td colspan="2"></td>
-            <td rowspan="2"></td>
-            <td rowspan="2"></td>
-            <td rowspan="2"></td>
+            <td rowspan="2" style="color: #fff;">=H<?= $row; ?></td>
+            <td rowspan="2">=I<?= $row; ?></td>
+            <td rowspan="2" style="color: #fff;">=I<?= $row; ?>-H<?= $row; ?></td>
         </tr>
         <tr>
             <td colspan="2">Kepala Lab SPW</td>

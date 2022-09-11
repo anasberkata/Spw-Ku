@@ -33,7 +33,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label>No. Handphone / Whatsapp</label>
-                                                <input type="text" class="form-control" placeholder="No Handphone / Whatsapp" name="phone">
+                                                <input type="text" class="form-control" placeholder="Contoh: 62851000000" name="phone">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -82,7 +82,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->address; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><a class="badge bg-success btn-sm px-3 py-2 rounded-pill" href="https://wa.me/<?= $s->phone; ?>"><i class="fa fa-whatsapp cursor-pointer"></i></a></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><a class="badge bg-success btn-sm px-3 py-2 rounded-pill" href="https://wa.me/<?= $s->phone; ?>" target="blank"><i class="fa fa-whatsapp cursor-pointer"></i></a></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSupplierEdit<?= $s->id_supplier; ?>"><i class="fa fa-edit cursor-pointer"></i></a>

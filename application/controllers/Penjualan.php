@@ -736,30 +736,19 @@ class Penjualan extends CI_Controller
         $date_selling = $this->input->post('date_selling', true);
         $id_class = $this->input->post('id_class', true);
 
-        $this->form_validation->set_rules(
-            'date_selling',
-            'Tanggal Penjualan',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
 
-        $this->form_validation->set_rules(
-            'id_class',
-            'Kelas',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
+        $data_check = [
+            'date_selling' => $date_selling,
+            'id_lab' => $id_lab,
+            'id_class' => $id_class
+        ];
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('penjualan/student', $data);
-            $this->load->view('templates/footer');
+        $student_selling_check = $this->db->get_where('tbl_student_selling', $data_check)->row_array();
+
+        if ($student_selling_check) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan siswa sudah ada</div>');
+
+            redirect('penjualan/student_selling/?id_lab=' . $id_lab);
         } else {
             $data = [
                 'id_student_selling' => NULL,
