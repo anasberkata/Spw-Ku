@@ -171,6 +171,8 @@
                                                         <span class="badge badge-sm bg-gradient-primary"><?= $fd->franchisor; ?></span>
                                                     <?php elseif ($fd->id_franchisor == 6) : ?>
                                                         <span class="badge badge-sm bg-gradient-dark"><?= $fd->franchisor; ?></span>
+                                                    <?php else : ?>
+                                                        <span class="badge badge-sm bg-gradient-secondary"><?= $fd->franchisor; ?></span>
                                                     <?php endif; ?>
                                                 </p>
                                             </td>
