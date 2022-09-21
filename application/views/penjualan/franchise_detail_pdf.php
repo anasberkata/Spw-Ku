@@ -50,7 +50,7 @@
 
     <hr>
 
-    <h6 class="text-xs">Lab : <b><i><?= "SPW " . $lab; ?></i></b></h6>
+    <h6 class="text-xs">Lab : <b><i> SPW 1 & 2</i></b></h6>
 
     <table class="table align-items-center" cellpadding="7">
         <thead>

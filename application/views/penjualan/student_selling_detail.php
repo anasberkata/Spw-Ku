@@ -7,19 +7,19 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h6>Daftar Penjualan Produk Siswa : <?= $student_selling["class"]; ?></h6>
-                        <p class="small"><?= date('d M Y', strtotime($student_selling["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"] . " // Kelas : " . $student_selling["class"]; ?></p>
+                        <p class="small"><?= date('d M Y', strtotime($student_selling["date_selling"])) . " // SPW 1 & 2 // <br> Guru Piket : " . $user["name"] . " // Kelas : " . $student_selling["class"]; ?></p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('penjualan/student_selling/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3">
+                                    <a href="<?= base_url('penjualan/student_selling'); ?>" class="btn btn-primary btn-sm mb-3">
                                         Kembali
                                     </a>
                                     <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF_student_selling/?id_student_selling=' . $id_student_selling . '&id_lab=' . $lab . '&id_class=' . $id_class) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF_student_selling/?id_student_selling=' . $id_student_selling . '&id_class=' . $id_class) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
@@ -39,7 +39,6 @@
                                     </div>
                                     <form role="form" action="<?= base_url('penjualan/student_selling_detail_add') ?>" method="POST">
                                         <div class="modal-body">
-                                            <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                             <input type="hidden" name="id_student_selling" value="<?= $id_student_selling ?>">
                                             <input type="hidden" name="id_class" value="<?= $id_class ?>">
 
@@ -168,7 +167,6 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('penjualan/student_selling_detail_edit') ?>" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                                             <input type="hidden" name="id_student_selling" value="<?= $id_student_selling ?>" readonly>
                                                             <input type="hidden" name="id_student_selling_detail" value="<?= $fd->id_student_selling_detail; ?>" readonly>
                                                             <input type="hidden" name="id_class" value="<?= $fd->id_class; ?>" readonly>
@@ -211,12 +209,6 @@
                                                                     </div>
                                                                 </div> -->
                                                             </div>
-
-
-
-
-
-
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -238,7 +230,6 @@
                                                     <form role="form" action="<?= base_url('penjualan/student_selling_detail_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_lab" value="<?= $lab; ?>">
                                                                 <input type="hidden" name="id_student_selling" value="<?= $fd->id_student_selling; ?>">
                                                                 <input type="hidden" name="id_student_selling_detail" value="<?= $fd->id_student_selling_detail; ?>">
                                                                 <input type="hidden" name="id_class" value="<?= $fd->id_class; ?>">

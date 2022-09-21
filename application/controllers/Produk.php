@@ -27,6 +27,82 @@ class Produk extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // =============================================== KATAGORI =============================================== 
+    public function category()
+    {
+        $data['title'] = "Data Kategori";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['category'] = $this->produk->get_categories();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('produk/category', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function category_add()
+    {
+        $this->form_validation->set_rules(
+            'category',
+            'Category',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Data Kategori";
+            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+            $data['category'] = $this->produk->get_categories();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('produk/category', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $category = $this->input->post('category', true);
+
+            $data = [
+                'id_category' => NULL,
+                'category' => $category
+            ];
+
+            $this->produk->save_category($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Menu berhasil ditambahkan!</div>');
+            redirect('produk/category');
+        }
+    }
+
+    public function category_edit()
+    {
+        $id_category = $this->input->post('id_category', true);
+        $category = $this->input->post('category', true);
+
+        $data = [
+            'category' => $category
+        ];
+
+        $this->produk->update_category($data, $id_category);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil diubah!</div>');
+        redirect('produk/category');
+    }
+
+    public function category_delete()
+    {
+        $id_category = $this->input->post('id_category');
+
+        $this->produk->delete_category($id_category);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil dihapus!</div>');
+        redirect('produk/category');
+    }
+
+    // =============================================== PRODUK =============================================== 
     public function product()
     {
         $id_lab = $this->input->get('id_lab', true);
@@ -193,81 +269,6 @@ class Produk extends CI_Controller
         }
 
         return "default-product.jpg";
-    }
-
-    // =============================================== KATAGORI =============================================== 
-    public function category()
-    {
-        $data['title'] = "Data Kategori";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['category'] = $this->produk->get_categories();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('produk/category', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function category_add()
-    {
-        $this->form_validation->set_rules(
-            'category',
-            'Category',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Kategori";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['category'] = $this->produk->get_categories();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/category', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $category = $this->input->post('category', true);
-
-            $data = [
-                'id_category' => NULL,
-                'category' => $category
-            ];
-
-            $this->produk->save_category($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Menu berhasil ditambahkan!</div>');
-            redirect('produk/category');
-        }
-    }
-
-    public function category_edit()
-    {
-        $id_category = $this->input->post('id_category', true);
-        $category = $this->input->post('category', true);
-
-        $data = [
-            'category' => $category
-        ];
-
-        $this->produk->update_category($data, $id_category);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil diubah!</div>');
-        redirect('produk/category');
-    }
-
-    public function category_delete()
-    {
-        $id_category = $this->input->post('id_category');
-
-        $this->produk->delete_category($id_category);
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil dihapus!</div>');
-        redirect('produk/category');
     }
 
     // =============================================== PEMBELIAN=============================================== 
@@ -521,7 +522,7 @@ class Produk extends CI_Controller
     }
 
 
-    // SUPPLIER
+    // =============================================== SUPPLIER =============================================== 
     public function supplier()
     {
         $data['title'] = "Data Supplier";

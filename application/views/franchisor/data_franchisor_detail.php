@@ -13,108 +13,15 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('penjualan/franchise'); ?>" class="btn btn-primary btn-sm mb-3">
+                                    <a href="<?= base_url('franchisor/data_franchisor'); ?>" class="btn btn-primary btn-sm mb-3">
                                         Kembali
                                     </a>
-                                    <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
-                                        Tambah
-                                    </button>
-                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise . '&id_franchisor=' . $id_franchisor) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
-                                        <i class="fa fa-download"></i>
+                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise); ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                        <i class="fa fa-download"></i> Download
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <form role="form" action="<?= base_url('penjualan/franchise_detail_search') ?>" method="GET">
-                                    <div class="row">
-                                        <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
-                                        <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Pemilik</label>
-                                        </div>
-                                        <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                <option>Pilih Pemilik Produk</option>
-                                                <?php foreach ($franchisor->result() as $f) : ?>
-                                                    <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
-                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
-
-                        <!-- Modal Tambah Menu -->
-                        <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_add') ?>" method="POST">
-                                        <div class="modal-body">
-                                            <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
-
-                                            <div class="row">
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Pemilik Produk</label>
-                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                            <option selected>Pilih Pemilik Produk</option>
-                                                            <?php foreach ($franchisor->result() as $f) : ?>
-                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                            <?php endforeach; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Nama Produk</label>
-                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Harga Dasar (Rp.)</label>
-                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Harga Jual (Rp.)</label>
-                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Qty Awal</label>
-                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Qty Akhir <span class="text-danger">*</span></label>
-                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="text-sm small"><small><i><span class="text-danger">*</span>(Kosongkan jika tidak ada data)</i></small></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -132,10 +39,10 @@
 
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-0" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemilik Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
@@ -260,15 +167,11 @@
                                                                         <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
                                                                     </div>
                                                                 </div>
-                                                                <!-- <div class="col-12 col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label>Qty Terjual</label>
-                                                                        <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
-                                                                    </div>
-                                                                </div> -->
                                                             </div>
-
-
+                                                            <!-- <div class="mb-3">
+                                                                <label>Qty Terjual</label>
+                                                                <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
+                                                            </div> -->
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>

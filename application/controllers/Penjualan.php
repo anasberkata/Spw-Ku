@@ -310,30 +310,12 @@ class Penjualan extends CI_Controller
 
 
     // TITIPAN
-    public function index_franchise()
-    {
-        $data['title'] = "Data Penjualan Titipan";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['lab'] = $this->penjualan->get_lab();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/franchise_index', $data);
-        $this->load->view('templates/footer');
-    }
-
     public function franchise()
     {
-        $id_lab = $this->input->get('id_lab', true);
-
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['lab'] = $id_lab;
-
-        $data['franchise'] = $this->penjualan->get_franchise($id_lab);
+        $data['franchise'] = $this->penjualan->get_franchise();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
@@ -344,13 +326,11 @@ class Penjualan extends CI_Controller
 
     public function franchise_add()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
 
         $data_check = [
             'date_selling' => $date_selling,
-            'id_lab' => $id_lab
         ];
 
         $franchise_check = $this->db->get_where('tbl_franchise', $data_check)->row_array();
@@ -358,51 +338,59 @@ class Penjualan extends CI_Controller
         if ($franchise_check) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan titipan sudah ada</div>');
 
-            redirect('penjualan/franchise/?id_lab=' . $id_lab);
+            redirect('penjualan/franchise');
         } else {
             $data = [
                 'id_franchise' => NULL,
                 'date_selling' => $date_selling,
-                'id_user' => $id_user,
-                'id_lab' => $id_lab
+                'id_user' => $id_user
             ];
 
             $this->penjualan->save_franchise($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan titipan berhasil ditambahkan! Silahkan isi Produk</div>');
 
-            redirect('penjualan/franchise/?id_lab=' . $id_lab);
+            redirect('penjualan/franchise');
         }
     }
 
     public function franchise_edit()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
         $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
 
-        $data = [
+        $data_check = [
             'date_selling' => $date_selling,
-            'id_user' => $id_user
         ];
 
-        $this->penjualan->update_franchise($data, $id_franchise);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan titipan berhasil diubah!</div>');
+        $franchise_check = $this->db->get_where('tbl_franchise', $data_check)->row_array();
 
-        redirect('penjualan/franchise/?id_lab=' . $id_lab);
+        if ($franchise_check) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan titipan sudah ada</div>');
+
+            redirect('penjualan/franchise');
+        } else {
+            $data = [
+                'date_selling' => $date_selling,
+                'id_user' => $id_user
+            ];
+
+            $this->penjualan->update_franchise($data, $id_franchise);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan titipan berhasil diubah!</div>');
+
+            redirect('penjualan/franchise');
+        }
     }
 
     // SELLING DETAIL
     public function franchise_detail()
     {
         $id_franchise = $this->input->get('id_franchise', true);
-        $id_lab = $this->input->get('id_lab', true);
 
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_franchise'] = $id_franchise;
-        $data['lab'] = $id_lab;
         $data['franchisor'] = $this->penjualan->get_franchisor();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
@@ -420,7 +408,6 @@ class Penjualan extends CI_Controller
 
     public function franchise_detail_add()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
         $id_franchisor = $this->input->post('id_franchisor', true);
         $product = $this->input->post('product', true);
@@ -478,7 +465,7 @@ class Penjualan extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk gagal ditambahkan!</div>');
 
-            redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+            redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise);
         } else {
             $data = [
                 'id_franchise_detail' => NULL,
@@ -498,13 +485,12 @@ class Penjualan extends CI_Controller
 
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
 
-            redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+            redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise);
         }
     }
 
     public function franchise_detail_edit()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
         $id_franchise_detail = $this->input->post('id_franchise_detail', true);
         $id_franchisor = $this->input->post('id_franchisor', true);
@@ -532,12 +518,11 @@ class Penjualan extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
 
-        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise);
     }
 
     public function franchise_detail_delete()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
         $id_franchise_detail = $this->input->post('id_franchise_detail', true);
 
@@ -545,12 +530,11 @@ class Penjualan extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
 
-        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise);
     }
 
     public function franchise_detail_search()
     {
-        $id_lab = $this->input->get('id_lab', true);
         $id_franchise = $this->input->get('id_franchise', true);
         $id_franchisor = $this->input->get('id_franchisor', true);
 
@@ -558,7 +542,6 @@ class Penjualan extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_franchise'] = $id_franchise;
-        $data['lab'] = $id_lab;
         $data['id_franchisor'] = $id_franchisor;
         $data['franchisor'] = $this->penjualan->get_franchisor();
 
@@ -580,14 +563,12 @@ class Penjualan extends CI_Controller
     {
 
         $id_franchise = $this->input->get('id_franchise', true);
-        $id_lab = $this->input->get('id_lab', true);
         $id_franchisor = $this->input->get('id_franchisor', true);
 
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_franchise'] = $id_franchise;
-        $data['lab'] = $id_lab;
         $data['franchisor'] = $this->db->get_where('tbl_franchisor', ['id_franchisor' => $id_franchisor])->row_array();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
@@ -605,7 +586,7 @@ class Penjualan extends CI_Controller
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
         $page = $this->load->view('penjualan/franchise_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
-        $mpdf->Output('Laporan Produk Titipan SPW.pdf', 'I');
+        $mpdf->Output('Laporan Produk Titipan ' . $data['franchisor']['franchisor'] . '.pdf', 'I');
     }
 
 
@@ -693,30 +674,12 @@ class Penjualan extends CI_Controller
     }
 
     // ---------------------------------------- STUDENTS ------------------------------------------ //
-    public function index_student_selling()
-    {
-        $data['title'] = "Data Penjualan Siswa";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['lab'] = $this->penjualan->get_lab();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/student_selling_index', $data);
-        $this->load->view('templates/footer');
-    }
-
     public function student_selling()
     {
-        $id_lab = $this->input->get('id_lab', true);
-
         $data['title'] = "Data Penjualan Siswa";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['lab'] = $id_lab;
-
-        $data['student_selling'] = $this->penjualan->get_student_selling($id_lab);
+        $data['student_selling'] = $this->penjualan->get_student_selling();
         $data['class'] = $this->penjualan->get_class();
 
         $this->load->view('templates/header', $data);
@@ -731,44 +694,54 @@ class Penjualan extends CI_Controller
         $data['title'] = "Data Penjualan Siswa";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $id_lab = $this->input->post('id_lab', true);
         $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
         $id_class = $this->input->post('id_class', true);
 
+        $this->form_validation->set_rules(
+            'id_class',
+            'Kelas',
+            'required',
+            array(
+                'required' => '{field} wajib dipilih'
+            )
+        );
 
-        $data_check = [
-            'date_selling' => $date_selling,
-            'id_lab' => $id_lab,
-            'id_class' => $id_class
-        ];
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kelas harus dipilih!</div>');
 
-        $student_selling_check = $this->db->get_where('tbl_student_selling', $data_check)->row_array();
-
-        if ($student_selling_check) {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan siswa sudah ada</div>');
-
-            redirect('penjualan/student_selling/?id_lab=' . $id_lab);
+            redirect('penjualan/student_selling');
         } else {
-            $data = [
-                'id_student_selling' => NULL,
+            $data_check = [
                 'date_selling' => $date_selling,
-                'id_user' => $id_user,
-                'id_lab' => $id_lab,
                 'id_class' => $id_class
             ];
 
-            $this->penjualan->save_student_selling($data);
+            $student_selling_check = $this->db->get_where('tbl_student_selling', $data_check)->row_array();
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil ditambahkan!</div>');
+            if ($student_selling_check) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan siswa sudah ada</div>');
 
-            redirect('penjualan/student_selling/?id_lab=' . $id_lab);
+                redirect('penjualan/student_selling');
+            } else {
+                $data = [
+                    'id_student_selling' => NULL,
+                    'date_selling' => $date_selling,
+                    'id_user' => $id_user,
+                    'id_class' => $id_class
+                ];
+
+                $this->penjualan->save_student_selling($data);
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil ditambahkan!</div>');
+
+                redirect('penjualan/student_selling');
+            }
         }
     }
 
     public function student_selling_edit()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_student_selling = $this->input->post('id_student_selling', true);
         $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
@@ -777,27 +750,24 @@ class Penjualan extends CI_Controller
         $data = [
             'date_selling' => $date_selling,
             'id_user' => $id_user,
-            'id_lab' => $id_lab,
             'id_class' => $id_class
         ];
 
         $this->penjualan->update_student_selling($data, $id_student_selling);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan produk siswa berhasil diubah!</div>');
 
-        redirect('penjualan/student_selling/?id_lab=' . $id_lab);
+        redirect('penjualan/student_selling');
     }
 
     public function student_selling_detail()
     {
         $id_student_selling = $this->input->get('id_student_selling', true);
-        $id_lab = $this->input->get('id_lab', true);
         $id_class = $this->input->get('id_class', true);
 
         $data['title'] = "Data Penjualan Siswa";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_student_selling'] = $id_student_selling;
-        $data['lab'] = $id_lab;
         $data['id_class'] = $id_class;
 
         $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');
@@ -816,7 +786,6 @@ class Penjualan extends CI_Controller
 
     public function student_selling_detail_add()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_student_selling = $this->input->post('id_student_selling', true);
         $id_class = $this->input->post('id_class', true);
         $product = $this->input->post('product', true);
@@ -866,7 +835,7 @@ class Penjualan extends CI_Controller
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk gagal ditambahkan!</div>');
 
-            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_class=' . $id_class);
         } else {
             $data = [
                 'id_student_selling_detail' => NULL,
@@ -886,13 +855,12 @@ class Penjualan extends CI_Controller
 
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
 
-            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+            redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_class=' . $id_class);
         }
     }
 
     public function student_selling_detail_edit()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_student_selling = $this->input->post('id_student_selling', true);
         $id_student_selling_detail = $this->input->post('id_student_selling_detail', true);
         $id_class = $this->input->post('id_class', true);
@@ -920,12 +888,11 @@ class Penjualan extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
 
-        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_class=' . $id_class);
     }
 
     public function student_selling_detail_delete()
     {
-        $id_lab = $this->input->post('id_lab', true);
         $id_student_selling = $this->input->post('id_student_selling', true);
         $id_student_selling_detail = $this->input->post('id_student_selling_detail', true);
         $id_class = $this->input->post('id_class', true);
@@ -934,21 +901,19 @@ class Penjualan extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
 
-        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_lab=' . $id_lab . '&id_class=' . $id_class);
+        redirect('penjualan/student_selling_detail/?id_student_selling=' . $id_student_selling . '&id_class=' . $id_class);
     }
 
     public function printPDF_student_selling()
     {
 
         $id_student_selling = $this->input->get('id_student_selling', true);
-        $id_lab = $this->input->get('id_lab', true);
         $id_class = $this->input->get('id_class', true);
 
         $data['title'] = "Data Penjualan Siswa";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_student_selling'] = $id_student_selling;
-        $data['lab'] = $id_lab;
         $data['id_class'] = $id_class;
 
         $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');

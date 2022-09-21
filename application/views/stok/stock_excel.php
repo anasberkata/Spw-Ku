@@ -71,13 +71,13 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 <td>
                     <p><?= $p->product; ?></p>
                 </td>
-                <td style="text-align: right; color:#fff;">
+                <td style="text-align: right;">
                     <p><?= $p->basic_price; ?></p>
                 </td>
                 <td style="text-align: right;">
                     <p><?= $p->selling_price; ?></p>
                 </td>
-                <td style="text-align: center; color:#fff;">
+                <td style="text-align: center;">
                     <p><?= $p->qty; ?></p>
                 </td>
                 <td>
@@ -86,7 +86,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 <td>
                     <p></p>
                 </td>
-                <td style="color:#fff;">
+                <td>
                     <p>=sum(G<?= $row; ?>*C<?= $row; ?>)</p>
                 </td>
                 <td>
@@ -100,7 +100,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
 
         <tr>
             <th colspan="7" style="text-align: right;"> TOTAL</th>
-            <td style="color:#fff;">=sum(I9:I<?= $row - 1; ?>)</td>
+            <td>=sum(I9:I<?= $row - 1; ?>)</td>
             <td>=sum(I9:I<?= $row - 1; ?>)</td>
         </tr>
         <tr></tr>
@@ -115,9 +115,9 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
             <td colspan="2">Guru Pembimbing Praktek</td>
             <td colspan="2">:</td>
             <td colspan="2"></td>
-            <td rowspan="2" style="color: #fff;">=H<?= $row; ?></td>
+            <td rowspan="2">=H<?= $row; ?></td>
             <td rowspan="2">=I<?= $row; ?></td>
-            <td rowspan="2" style="color: #fff;">=I<?= $row; ?>-H<?= $row; ?></td>
+            <td rowspan="2">=I<?= $row; ?>-H<?= $row; ?></td>
         </tr>
         <tr>
             <td colspan="2">Kepala Lab SPW</td>

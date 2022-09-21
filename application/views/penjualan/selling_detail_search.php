@@ -100,7 +100,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label>Qty Terjual</label>
-                                                <input type="text" class="form-control" placeholder="Jumlah Terjual" name="qty_selling">
+                                                <input type="number" class="form-control" placeholder="Jumlah Terjual" name="qty_selling">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -198,7 +198,7 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label>Qty Terjual</label>
-                                                                <input type="text" class="form-control" placeholder="Jumlah Terjual" name="qty_selling" value="<?= $sd->qty_selling ?>">
+                                                                <input type="number" class="form-control" placeholder="Jumlah Terjual" name="qty_selling" value="<?= $sd->qty_selling ?>">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

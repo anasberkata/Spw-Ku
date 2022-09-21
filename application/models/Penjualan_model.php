@@ -147,12 +147,11 @@ class Penjualan_model extends CI_Model
         return $query;
     }
 
-    function get_franchise($id_lab)
+    function get_franchise()
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise.id_user');
-        $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
         $query = $this->db->get();
         return $query;
@@ -275,13 +274,12 @@ class Penjualan_model extends CI_Model
         return $query;
     }
 
-    function get_student_selling($id_lab)
+    function get_student_selling()
     {
         $this->db->select('*');
         $this->db->from('tbl_student_selling');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_student_selling.id_user');
         $this->db->join('tbl_class', 'tbl_class.id_class = tbl_student_selling.id_class');
-        $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
         $query = $this->db->get();
         return $query;

@@ -11,6 +11,37 @@ class Produk_model extends CI_Model
         return $query;
     }
 
+    // ============================================================ KATAGORI ============================================================ 
+    function get_categories()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product_categories');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_category($data)
+    {
+        $this->db->insert('tbl_product_categories', $data);
+    }
+
+    function update_category(
+        $data,
+        $id_category
+    ) {
+        $this->db->where('id_category', $id_category);
+        $this->db->update('tbl_product_categories', $data);
+    }
+
+    function delete_category($id_category)
+    {
+        $this->db->where('id_category', $id_category);
+        $this->db->delete('tbl_product_categories');
+
+        return true;
+    }
+
+    // ============================================================ PRODUK ============================================================ 
     function get_products($id_lab)
     {
         $this->db->select('*');
@@ -47,12 +78,6 @@ class Produk_model extends CI_Model
         $this->db->insert('tbl_product', $data);
     }
 
-    // function update_product($data, $id_product)
-    // {
-    //     $this->db->where('id_product', $id_product);
-    //     $this->db->update('tbl_product', $data);
-    // }
-
     function update_product($id_product)
     {
         $this->db->where('id_product', $id_product);
@@ -66,35 +91,6 @@ class Produk_model extends CI_Model
 
         return true;
     }
-
-    // ============================================================ KATAGORI ============================================================ 
-    function get_categories()
-    {
-        $this->db->select('*');
-        $this->db->from('tbl_product_categories');
-        $query = $this->db->get();
-        return $query;
-    }
-
-    function save_category($data)
-    {
-        $this->db->insert('tbl_product_categories', $data);
-    }
-
-    function update_category($data, $id_category)
-    {
-        $this->db->where('id_category', $id_category);
-        $this->db->update('tbl_product_categories', $data);
-    }
-
-    function delete_category($id_category)
-    {
-        $this->db->where('id_category', $id_category);
-        $this->db->delete('tbl_product_categories');
-
-        return true;
-    }
-
 
     // ============================================================ TEMPAT PRODUK ============================================================ 
     function get_places()

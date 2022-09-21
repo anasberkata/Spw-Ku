@@ -29,7 +29,6 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Menu Management";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['menu'] = $this->admin->get_menus();
         $data['submenu'] = $this->admin->get_submenus();
 
@@ -42,6 +41,11 @@ class Admin extends CI_Controller
 
     public function menu_add()
     {
+        $data['title'] = "Menu Management";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['menu'] = $this->admin->get_menus();
+        $data['submenu'] = $this->admin->get_submenus();
+
         $this->form_validation->set_rules(
             'menu',
             'Menu',
@@ -61,12 +65,6 @@ class Admin extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Menu Management";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['menu'] = $this->admin->get_menus();
-            $data['submenu'] = $this->admin->get_submenus();
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
@@ -117,6 +115,11 @@ class Admin extends CI_Controller
     // SUBMENU
     public function submenu_add()
     {
+        $data['title'] = "Menu Management";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['menu'] = $this->admin->get_menus();
+        $data['submenu'] = $this->admin->get_submenus();
+
         $this->form_validation->set_rules(
             'title',
             'Title',
@@ -145,12 +148,6 @@ class Admin extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Menu Management";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['menu'] = $this->admin->get_menus();
-            $data['submenu'] = $this->admin->get_submenus();
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
@@ -220,7 +217,6 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Access Role Menu";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['role'] = $this->admin->get_role();
 
         $this->load->view('templates/header', $data);
@@ -234,8 +230,8 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Access Role Menu";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['role'] = $this->admin->get_role_by_id($role_id);
+
         $this->db->where('id_user_menu !=', 1);
         $data['menu'] = $this->admin->get_menus();
 
@@ -250,10 +246,6 @@ class Admin extends CI_Controller
     {
         $menu_id = $this->input->post('menuId');
         $role_id = $this->input->post('roleId');
-
-        echo $menu_id;
-        echo $role_id;
-        die;
 
         $data = [
             'role_id' => $role_id,
@@ -273,6 +265,10 @@ class Admin extends CI_Controller
 
     public function role_add()
     {
+        $data['title'] = "Access Role Menu";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['role'] = $this->admin->get_role();
+
         $this->form_validation->set_rules(
             'role',
             'Menu',
@@ -283,11 +279,6 @@ class Admin extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Access Role Menu";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['role'] = $this->admin->get_role();
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);

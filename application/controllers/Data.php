@@ -11,6 +11,40 @@ class Data extends CI_Controller
         // $this->load->helper('date');
     }
 
+    // DATABASE
+    public function data_web()
+    {
+        $data['title'] = "Data Web";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('data/data_web', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function database_backup()
+    {
+        date_default_timezone_set("Asia/Jakarta");
+
+        $this->load->dbutil();
+        $pref = [
+            'format' => 'zip',
+            'filename' => 'spw-ku.sql'
+        ];
+
+        $backup     = $this->dbutil->backup($pref);
+        $db_name    = 'backup_db_spw__' . date("d-m-Y__H-i-s") . '.zip';
+        $save       = './sources/database/' . $db_name;
+
+        $this->load->helper('file');
+        write_file($save, $backup);
+
+        $this->load->helper("download");
+        force_download($db_name, $backup);
+    }
+
     // DATA LAB SPW
     public function lab()
     {
@@ -31,7 +65,6 @@ class Data extends CI_Controller
     {
         $data['title'] = "Jadwal SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['schedule'] = $this->data->get_schedule();
         $data['teacher'] = $this->data->get_teacher();
         $data['class'] = $this->data->get_class();
@@ -47,6 +80,9 @@ class Data extends CI_Controller
     {
         $data['title'] = "Jadwal SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['schedule'] = $this->data->get_schedule();
+        $data['teacher'] = $this->data->get_teacher();
+        $data['class'] = $this->data->get_class();
 
         $this->form_validation->set_rules(
             'picket_schedule',
@@ -76,10 +112,6 @@ class Data extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['schedule'] = $this->data->get_schedule();
-            $data['teacher'] = $this->data->get_teacher();
-            $data['class'] = $this->data->get_class();
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
@@ -111,7 +143,6 @@ class Data extends CI_Controller
         $id_class = $this->input->post('id_class', true);
         $picket_schedule = $this->input->post('picket_schedule', true);
 
-
         $this->db->set('id_user', $id_user);
         $this->db->set('id_class', $id_class);
         $this->db->set('picket_schedule', $picket_schedule);
@@ -136,7 +167,6 @@ class Data extends CI_Controller
     {
         $data['title'] = "Data Kelas";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['class'] = $this->data->get_class();
 
         $this->load->view('templates/header', $data);
@@ -186,7 +216,6 @@ class Data extends CI_Controller
     {
         $id_class = $this->input->post('id_class', true);
         $class = $this->input->post('class', true);
-
 
         $this->db->set('class', $class);
 

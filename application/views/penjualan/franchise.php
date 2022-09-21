@@ -6,19 +6,17 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Data Penjualan Produk Titipan Lab SPW <?= $lab; ?></h6>
+                        <h6>Data Penjualan Produk Titipan Lab SPW 1 & 2</h6>
                     </div>
                     <div class="col">
                         <div class="btn-group float-end w-100 w-lg-auto">
-                            <a href="<?= base_url('penjualan/index_franchise'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                            <!-- <a href="<?= base_url('penjualan/index_franchise'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                 Kembali
-                            </a>
+                            </a> -->
                             <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalFranchiseAdd">
                                 Tambah
                             </button>
                         </div>
-
-
 
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalFranchiseAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -30,7 +28,6 @@
                                     </div>
                                     <form role="form" action="<?= base_url('penjualan/franchise_add'); ?>" method="POST">
                                         <div class="modal-body">
-                                            <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                             <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                             <div class="mb-3">
                                                 <label>Tanggal Penjualan</label>
@@ -81,7 +78,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $f->name; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/franchise_detail/?id_franchise=') . $f->id_franchise . '&id_lab=' . $f->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/franchise_detail/?id_franchise=') . $f->id_franchise; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
                                                 |
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchiseEdit<?= $f->id_franchise; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
@@ -99,7 +96,6 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('penjualan/franchise_edit'); ?>" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                                             <input type="hidden" class="form-control" name="id_franchise" value="<?= $f->id_franchise; ?>">
                                                             <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                                             <div class="mb-3">
