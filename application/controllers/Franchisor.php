@@ -17,7 +17,6 @@ class Franchisor extends CI_Controller
     {
         $data['title'] = "Data Penjualan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['franchise'] = $this->penjualan->get_franchise();
 
         $this->load->view('templates/header', $data);
@@ -30,6 +29,7 @@ class Franchisor extends CI_Controller
     public function data_franchisor_detail()
     {
         $id_franchise = $this->input->get('id_franchise', true);
+        $id_franchisor = $this->input->get('id_franchisor', true);
 
         $data['title'] = "Data Penjualan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -38,7 +38,7 @@ class Franchisor extends CI_Controller
         $data['franchisor'] = $this->penjualan->get_franchisor();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
-        $data['franchise_detail'] = $this->penjualan->get_franchise_detail($id_franchise);
+        $data['franchise_detail'] = $this->penjualan->get_franchise_detail_for_franchisor($id_franchise);
 
         $data['total_basic_price_franchise'] = $this->penjualan->sum_total_basic_price_franchise($id_franchise);
         $data['total_selling_price_franchise'] = $this->penjualan->sum_total_selling_price_franchise($id_franchise);

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h6>Daftar Penjualan Produk Titipan :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($franchise["date_selling"])) . " // SPW 1 & 2 // Guru Piket : " . $user["name"]; ?></p>
+                        <p class="small"><?= date('d F Y', strtotime($franchise["date_selling"])) . " // SPW 1 & 2 // Pemilik Produk : " . $user["name"]; ?></p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">

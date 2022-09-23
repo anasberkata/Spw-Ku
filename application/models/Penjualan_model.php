@@ -180,6 +180,18 @@ class Penjualan_model extends CI_Model
         return $query;
     }
 
+    function get_franchise_detail_for_franchisor($id_franchise)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_franchise_detail');
+        $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
+        $this->db->where('id_franchise', $id_franchise);
+        $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->order_by('id_franchise_detail', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
+
     function save_franchise_detail($data)
     {
         $this->db->insert('tbl_franchise_detail', $data);

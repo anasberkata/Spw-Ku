@@ -43,7 +43,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $f->name; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('franchisor/data_franchisor_detail/?id_franchise=') . $f->id_franchise; ?>"><i class="fa fa-list cursor-pointer"> </i> Lihat Data</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('franchisor/data_franchisor_detail/?id_franchise=') . $f->id_franchise . '&id_franchisor=' . $user["id_user"]; ?>"><i class="fa fa-list cursor-pointer"> </i> Lihat Data</a>
                                             </td>
                                         </tr>
                                         <?php $i++; ?>
