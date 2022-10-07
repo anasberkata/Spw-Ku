@@ -6,6 +6,7 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_data_lab');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_data_lab.product_in_charge');
         $query = $this->db->get();
         return $query;
     }
@@ -142,16 +143,19 @@ class Penjualan_model extends CI_Model
     function get_franchisor()
     {
         $this->db->select('*');
-        $this->db->from('tbl_franchisor');
+        // $this->db->from('tbl_franchisor');
+        $this->db->from('tbl_users');
+        $this->db->where('role_id = 7');
         $query = $this->db->get();
         return $query;
     }
 
-    function get_franchise()
+    function get_franchise($id_lab)
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise.id_user');
+        $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
         $query = $this->db->get();
         return $query;
@@ -172,9 +176,10 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise_detail');
-        $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise_detail.id_franchisor');
         $this->db->where('id_franchise', $id_franchise);
-        $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->where('role_id', 7);
+        $this->db->order_by('tbl_users.id_user', 'ASC');
         $this->db->order_by('id_franchise_detail', 'ASC');
         $query = $this->db->get();
         return $query;
@@ -259,23 +264,23 @@ class Penjualan_model extends CI_Model
     // FRANCHISOR
     function save_franchisor($data)
     {
-        $this->db->insert('tbl_franchisor', $data);
+        // $this->db->insert('tbl_franchisor', $data);
+        $this->db->insert('tbl_users', $data);
     }
 
-    function update_franchisor($data, $id_franchisor)
+    function update_franchisor($data, $id_user)
     {
-        $this->db->where('id_franchisor', $id_franchisor);
-        $this->db->update('tbl_franchisor', $data);
+        $this->db->where('id_user', $id_user);
+        $this->db->update('tbl_users', $data);
     }
 
-    function delete_franchisor($id_franchisor)
+    function delete_franchisor($id_user)
     {
-        $this->db->where('id_franchisor', $id_franchisor);
-        $this->db->delete('tbl_franchisor');
+        $this->db->where('id_user', $id_user);
+        $this->db->delete('tbl_users');
 
         return true;
     }
-
 
     // STUDENT
     function get_class()

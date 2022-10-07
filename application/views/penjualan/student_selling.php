@@ -6,11 +6,11 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Data Penjualan Produk Siswa Lab SPW 1 & 2</h6>
+                        <h6>Data Penjualan Produk Siswa Lab SPW <?= $lab; ?></h6>
                     </div>
                     <div class="col">
                         <div class="btn-group float-end w-100 w-lg-auto">
-                            <a href="<?= base_url('penjualan/index_student_selling'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
+                            <a href="<?= base_url('penjualan/student_selling_index'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                 Kembali
                             </a>
                             <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalStudentAdd">
@@ -28,6 +28,7 @@
                                     </div>
                                     <form role="form" action="<?= base_url('penjualan/student_selling_add'); ?>" method="POST">
                                         <div class="modal-body">
+                                            <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                             <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                             <div class="mb-3">
                                                 <label>Tanggal Penjualan</label>
@@ -61,7 +62,6 @@
                     </div>
                     <div class="col-12">
                         <?= form_error('date_selling', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                        <?= form_error('id_class', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
@@ -92,7 +92,7 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->class; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/student_selling_detail/?id_student_selling=') . $s->id_student_selling . '&id_class=' . $s->id_class; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/student_selling_detail/?id_student_selling=') . $s->id_student_selling . '&id_lab=' . $s->id_lab . '&id_class=' . $s->id_class; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
                                                 |
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalStudentSellingEdit<?= $s->id_student_selling; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
@@ -110,6 +110,7 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('penjualan/student_selling_edit'); ?>" method="POST">
                                                         <div class="modal-body">
+                                                            <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
                                                             <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                                             <input type="hidden" class="form-control" name="id_student_selling" value="<?= $s->id_student_selling; ?>">
                                                             <div class="mb-3">

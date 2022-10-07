@@ -1,49 +1,50 @@
 <div class="row">
+    <div class="col">
+        <h6 class="text-white p-3">Pilih Lab</h6>
+    </div>
+</div>
 
-    <!-- ROLE -->
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header pb-0">
-                <div class="row">
-                    <div class="col">
-                        <h6>Pilih Lab SPW</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Lab</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($lab->result() as $l) : ?>
-                                        <tr>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $l->lab; ?></p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <a href="<?= base_url('produk/product/?id_lab=') . $l->id_lab; ?>" class="badge bg-primary btn-sm px-3 py-2 rounded-pill"><i class="fa fa-arrow-right cursor-pointer"></i></a>
-                                            </td>
-                                        </tr>
-                                        <?php $i++; ?>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+<div class="row mb-5">
+    <div class="col">
+        <div class="row">
+            <?php $i = 1; ?>
+            <?php foreach ($lab->result() as $l) : ?>
+                <div class="col-xl-6 mb-xl-0 mb-4">
+                    <a href="<?= base_url('produk/product/?id_lab=') . $l->id_lab; ?>">
+                        <div class="card bg-transparent shadow-xl">
+                            <div class="overflow-hidden position-relative border-radius-xl" style="
+                      background-image: url('<?= base_url('assets/img/') . $l->photo_lab; ?>'); background-size: cover;
+                    ">
+                                <span class="mask bg-gradient-dark"></span>
+                                <div class="card-body position-relative z-index-1 p-3">
+                                    <i class="fas fa-wifi text-white p-2"></i>
+                                    <h5 class="text-white mt-4 mb-5 pb-2 text-uppercase">
+                                        <?= $l->lab; ?>
+                                    </h5>
+                                    <div class="d-flex">
+                                        <div class="d-flex">
+                                            <div class="me-4">
+                                                <p class="text-white text-sm opacity-8 mb-0">
+                                                    PJ. Produk
+                                                </p>
+                                                <h6 class="text-white mb-0"><?= $l->name; ?></h6>
+                                            </div>
+                                            <div>
+                                                <p class="text-white text-sm opacity-8 mb-0">
+                                                    PJ. Peralatan
+                                                </p>
+                                                <h6 class="text-white mb-0"><?= $l->equipment_in_charge; ?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            </div>
+                <?php $i++; ?>
+            <?php endforeach; ?>
         </div>
     </div>
+
 </div>
