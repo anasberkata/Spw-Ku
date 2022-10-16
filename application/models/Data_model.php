@@ -24,10 +24,12 @@ class Data_model extends CI_Model
     // SCHEDULE
     function get_schedule()
     {
+        $today = date("Y-m-d");
         $this->db->select('*');
         $this->db->from('tbl_schedule');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_schedule.id_user');
         $this->db->join('tbl_class', 'tbl_class.id_class = tbl_schedule.id_class');
+        $this->db->where('picket_schedule >=', $today);
         $query = $this->db->get();
         return $query;
     }

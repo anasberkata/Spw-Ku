@@ -25,7 +25,8 @@ class Dashboard_model extends CI_Model
 
     function count_franchisor()
     {
-        $query = $this->db->get('tbl_franchisor');
+        $this->db->where('role_id=7');
+        $query = $this->db->get('tbl_users');
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         } else {
