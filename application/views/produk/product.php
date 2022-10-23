@@ -36,12 +36,6 @@
                                     <?= form_open_multipart('produk/product_add'); ?>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <!-- <div class="col-12 col-lg-6">
-                                                <div class="mb-3">
-                                                    <label>Kode Produk</label>
-                                                    <input type="text" class="form-control" placeholder="Kode Produk" name="code">
-                                                </div>
-                                            </div> -->
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
                                                     <label>Lab SPW</label>
@@ -68,6 +62,12 @@
                                                             <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Kode Barcode</label>
+                                                    <input type="text" class="form-control" placeholder="Kode Barcode" name="code">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-6">
@@ -132,6 +132,7 @@
                                         <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kode Produk</th> -->
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. Barcode</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
@@ -151,9 +152,6 @@
                                                     <img src="<?= base_url('assets/img/products/' . $p->image); ?>" alt="product_image" class="w-100 border-radius-lg shadow-sm">
                                                 </div>
                                             </td>
-                                            <!-- <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->code; ?></p>
-                                            </td> -->
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->category; ?></p>
                                             </td>
@@ -169,6 +167,9 @@
                                                         <span class="badge badge-sm bg-gradient-danger"><?= $p->place; ?></span>
                                                     <?php endif; ?>
                                                 </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->code; ?></p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->product; ?></p>
@@ -203,12 +204,6 @@
                                                         <input type="hidden" class="form-control" placeholder="Kode Produk" name="id_lab" value="<?= $p->id_lab; ?>">
 
                                                         <div class="row">
-                                                            <!-- <div class="col-12 col-lg-6">
-                                                                <div class="mb-3">
-                                                                    <label>Kode Produk</label>
-                                                                    <input type="text" class="form-control" placeholder="Kode Produk" name="code" value="<?= $p->code; ?>">
-                                                                </div>
-                                                            </div> -->
                                                             <div class="col-12 col-lg-6">
                                                                 <div class=" mb-3">
                                                                     <label>Kategori Produk</label>
@@ -229,6 +224,12 @@
                                                                             <option value="<?= $pl->id_place ?>"><?= $pl->place ?></option>
                                                                         <?php endforeach; ?>
                                                                     </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Kode Barcode</label>
+                                                                    <input type="text" class="form-control" placeholder="Kode Barcode" name="code" value="<?= $p->code; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-lg-6">

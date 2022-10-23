@@ -19,7 +19,7 @@
                                     <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise . '&id_lab=' . $lab . '&id_franchisor=' . $id_franchisor) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise . '&id_lab=' . $lab . '&id_user=' . $id_user) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
@@ -33,10 +33,10 @@
                                             <label class="col-form-label text-sm">Pemilik</label>
                                         </div>
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                            <select class="form-select" aria-label="Default select" name="id_user">
                                                 <option>Pilih Pemilik Produk</option>
                                                 <?php foreach ($franchisor->result() as $f) : ?>
-                                                    <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                    <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -65,10 +65,10 @@
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Pemilik Produk</label>
-                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                        <select class="form-select" aria-label="Default select" name="id_user">
                                                             <option selected>Pilih Pemilik Produk</option>
                                                             <?php foreach ($franchisor->result() as $f) : ?>
-                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -159,21 +159,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?php if ($fd->id_franchisor == 1) : ?>
-                                                        <span class="badge badge-sm bg-gradient-success"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 2) : ?>
-                                                        <span class="badge badge-sm bg-gradient-info"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 3) : ?>
-                                                        <span class="badge badge-sm bg-gradient-warning"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 4) : ?>
-                                                        <span class="badge badge-sm bg-gradient-danger"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 5) : ?>
-                                                        <span class="badge badge-sm bg-gradient-primary"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 6) : ?>
-                                                        <span class="badge badge-sm bg-gradient-dark"><?= $fd->franchisor; ?></span>
-                                                    <?php else : ?>
-                                                        <span class="badge badge-sm bg-gradient-secondary"><?= $fd->franchisor; ?></span>
-                                                    <?php endif; ?>
+                                                    <span class="badge badge-sm bg-gradient-success"><?= $fd->name; ?></span>
                                                 </p>
                                             </td>
                                             <td>
@@ -220,34 +206,49 @@
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
                                                             <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>" readonly>
                                                             <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>" readonly>
-                                                            <div class="mb-3">
-                                                                <label>Pemilik Produk</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                                    <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
-                                                                    <?php foreach ($franchisor->result() as $f) : ?>
-                                                                        <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Nama Produk</label>
-                                                                <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Dasar (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Harga Jual (Rp.)</label>
-                                                                <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Awal</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label>Qty Akhir</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Pemilik Produk</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_user">
+                                                                            <option value="<?= $fd->id_user ?>"><?= $fd->name ?></option>
+                                                                            <?php foreach ($franchisor->result() as $f) : ?>
+                                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Nama Produk</label>
+                                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Dasar (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Harga Jual (Rp.)</label>
+                                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Awal</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
+                                                                        <label>Qty Akhir</label>
+                                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <!-- <div class="mb-3">
                                                                 <label>Qty Terjual</label>

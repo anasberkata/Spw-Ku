@@ -189,9 +189,9 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise_detail');
-        $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise_detail.id_franchisor');
         $this->db->where('id_franchise', $id_franchise);
-        $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->order_by('tbl_users.id_user', 'ASC');
         $this->db->order_by('id_franchise_detail', 'ASC');
         $query = $this->db->get();
         return $query;
@@ -228,35 +228,35 @@ class Penjualan_model extends CI_Model
         return $query->row();
     }
 
-    function search_franchise_detail($id_franchise, $id_franchisor)
+    function search_franchise_detail($id_franchise, $id_user)
     {
         $this->db->select('*');
         $this->db->from('tbl_franchise_detail');
-        $this->db->join('tbl_franchisor', 'tbl_franchisor.id_franchisor = tbl_franchise_detail.id_franchisor');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise_detail.id_franchisor');
         $this->db->where('id_franchise', $id_franchise);
-        $this->db->where('tbl_franchisor.id_franchisor', $id_franchisor);
-        $this->db->order_by('tbl_franchisor.id_franchisor', 'ASC');
+        $this->db->where('tbl_users.id_user', $id_user);
+        $this->db->order_by('tbl_users.id_user', 'ASC');
         $this->db->order_by('id_franchise_detail', 'ASC');
         $query = $this->db->get();
         return $query;
     }
 
-    function search_sum_total_basic_price_franchise($id_franchise, $id_franchisor)
+    function search_sum_total_basic_price_franchise($id_franchise, $id_user)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_basic_price`) AS `total_basic_price_franchise`
             FROM `tbl_franchise_detail`
-            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_franchisor"
+            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_user"
         );
         return $query->row();
     }
 
-    function search_sum_total_selling_price_franchise($id_franchise, $id_franchisor)
+    function search_sum_total_selling_price_franchise($id_franchise, $id_user)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_selling_price`) AS `total_selling_price_franchise`
             FROM `tbl_franchise_detail`
-            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_franchisor"
+            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_user"
         );
         return $query->row();
     }

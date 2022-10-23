@@ -49,10 +49,10 @@
                                             <label class="col-form-label text-sm">Pemilik</label>
                                         </div>
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                            <select class="form-select" aria-label="Default select" name="id_user">
                                                 <option>Pilih Pemilik Produk</option>
                                                 <?php foreach ($franchisor->result() as $f) : ?>
-                                                    <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                    <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -81,16 +81,12 @@
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Pemilik Produk</label>
-                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
+                                                        <select class="form-select" aria-label="Default select" name="id_user">
                                                             <option selected>Pilih Pemilik Produk</option>
                                                             <?php foreach ($franchisor->result() as $f) : ?>
                                                                 <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
-
-
-
-
 
                                                         <!-- <input type="text" class="form-control" list="franchisor" id="id_franchisor" placeholder="Pilih Pemilik Produk" autocomplete="off">
                                                         <datalist id="franchisor">
@@ -260,10 +256,10 @@
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Pemilik Produk</label>
-                                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                                            <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
+                                                                        <select class="form-select" aria-label="Default select" name="id_user">
+                                                                            <option value="<?= $fd->id_user ?>"><?= $fd->name ?></option>
                                                                             <?php foreach ($franchisor->result() as $f) : ?>
-                                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                     </div>

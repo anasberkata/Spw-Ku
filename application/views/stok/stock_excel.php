@@ -100,7 +100,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
 
         <tr>
             <th colspan="7" style="text-align: right;"> TOTAL</th>
-            <td>=sum(I9:I<?= $row - 1; ?>)</td>
+            <td>=sum(H9:H<?= $row - 1; ?>)</td>
             <td>=sum(I9:I<?= $row - 1; ?>)</td>
         </tr>
         <tr></tr>

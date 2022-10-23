@@ -64,21 +64,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?php if ($fd->id_franchisor == 1) : ?>
-                                                        <span class="badge badge-sm bg-gradient-success"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 2) : ?>
-                                                        <span class="badge badge-sm bg-gradient-info"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 3) : ?>
-                                                        <span class="badge badge-sm bg-gradient-warning"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 4) : ?>
-                                                        <span class="badge badge-sm bg-gradient-danger"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 5) : ?>
-                                                        <span class="badge badge-sm bg-gradient-primary"><?= $fd->franchisor; ?></span>
-                                                    <?php elseif ($fd->id_franchisor == 6) : ?>
-                                                        <span class="badge badge-sm bg-gradient-dark"><?= $fd->franchisor; ?></span>
-                                                    <?php else : ?>
-                                                        <span class="badge badge-sm bg-gradient-secondary"><?= $fd->franchisor; ?></span>
-                                                    <?php endif; ?>
+                                                    <span class="badge badge-sm bg-gradient-success"><?= $fd->name; ?></span>
                                                 </p>
                                             </td>
                                             <td>
@@ -129,10 +115,10 @@
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Pemilik Produk</label>
-                                                                        <select class="form-select" aria-label="Default select" name="id_franchisor">
-                                                                            <option value="<?= $fd->id_franchisor ?>"><?= $fd->franchisor ?></option>
+                                                                        <select class="form-select" aria-label="Default select" name="id_user">
+                                                                            <option value="<?= $fd->id_user ?>"><?= $fd->name ?></option>
                                                                             <?php foreach ($franchisor->result() as $f) : ?>
-                                                                                <option value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
+                                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                     </div>

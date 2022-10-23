@@ -422,7 +422,7 @@ class Penjualan extends CI_Controller
     {
         $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
-        $id_franchisor = $this->input->post('id_franchisor', true);
+        $id_user = $this->input->post('id_user', true);
         $product = $this->input->post('product', true);
         $basic_price = $this->input->post('basic_price', true);
         $selling_price = $this->input->post('selling_price', true);
@@ -435,7 +435,7 @@ class Penjualan extends CI_Controller
         }
 
         $this->form_validation->set_rules(
-            'id_franchisor',
+            'id_user',
             'Pemilik Produk',
             'required',
             array(
@@ -483,7 +483,7 @@ class Penjualan extends CI_Controller
             $data = [
                 'id_franchise_detail' => NULL,
                 'id_franchise' => $id_franchise,
-                'id_franchisor' => $id_franchisor,
+                'id_franchisor' => $id_user,
                 'product' => $product,
                 'basic_price' => $basic_price,
                 'selling_price' => $selling_price,
@@ -507,7 +507,7 @@ class Penjualan extends CI_Controller
         $id_lab = $this->input->post('id_lab', true);
         $id_franchise = $this->input->post('id_franchise', true);
         $id_franchise_detail = $this->input->post('id_franchise_detail', true);
-        $id_franchisor = $this->input->post('id_franchisor', true);
+        $id_user = $this->input->post('id_user', true);
         $product = $this->input->post('product', true);
         $basic_price = $this->input->post('basic_price', true);
         $selling_price = $this->input->post('selling_price', true);
@@ -516,7 +516,7 @@ class Penjualan extends CI_Controller
         $qty_selling = $qty_product - $qty_last;
 
         $data = [
-            'id_franchisor' => $id_franchisor,
+            'id_franchisor' => $id_user,
             'product' => $product,
             'basic_price' => $basic_price,
             'selling_price' => $selling_price,
@@ -552,21 +552,21 @@ class Penjualan extends CI_Controller
     {
         $id_lab = $this->input->get('id_lab', true);
         $id_franchise = $this->input->get('id_franchise', true);
-        $id_franchisor = $this->input->get('id_franchisor', true);
+        $id_user = $this->input->get('id_user', true);
 
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_franchise'] = $id_franchise;
         $data['lab'] = $id_lab;
-        $data['id_franchisor'] = $id_franchisor;
+        $data['id_user'] = $id_user;
         $data['franchisor'] = $this->penjualan->get_franchisor();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
-        $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_franchisor);
+        $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_user);
 
-        $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_franchisor);
-        $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_franchisor);
+        $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_user);
+        $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_user);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
@@ -581,25 +581,25 @@ class Penjualan extends CI_Controller
 
         $id_franchise = $this->input->get('id_franchise', true);
         $id_lab = $this->input->get('id_lab', true);
-        $id_franchisor = $this->input->get('id_franchisor', true);
+        $id_user = $this->input->get('id_user', true);
 
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['id_franchise'] = $id_franchise;
         $data['lab'] = $id_lab;
-        $data['franchisor'] = $this->db->get_where('tbl_franchisor', ['id_franchisor' => $id_franchisor])->row_array();
+        $data['franchisor'] = $this->db->get_where('tbl_users', ['id_user' => $id_user])->row_array();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
 
-        if (!isset($id_franchisor)) {
+        if (!isset($id_user)) {
             $data['franchise_detail'] = $this->penjualan->get_franchise_detail($id_franchise);
             $data['total_basic_price_franchise'] = $this->penjualan->sum_total_basic_price_franchise($id_franchise);
             $data['total_selling_price_franchise'] = $this->penjualan->sum_total_selling_price_franchise($id_franchise);
         } else {
-            $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_franchisor);
-            $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_franchisor);
-            $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_franchisor);
+            $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_user);
+            $data['total_basic_price_franchise'] = $this->penjualan->search_sum_total_basic_price_franchise($id_franchise, $id_user);
+            $data['total_selling_price_franchise'] = $this->penjualan->search_sum_total_selling_price_franchise($id_franchise, $id_user);
         }
 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);

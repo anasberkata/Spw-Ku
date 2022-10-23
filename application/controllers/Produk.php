@@ -110,13 +110,6 @@ class Produk extends CI_Controller
         $data['title'] = "Data Produk";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        // Kode Produk
-        // $ambilKode = $this->produk->get_code_product();
-        // $nourut = (int) substr($ambilKode, 4, 1);
-        // $kodeBarang = $nourut + 1;
-        // $awalKode = "SPW-";
-        // $data['code_product'] = $awalKode . $kodeBarang;
-
         $data['category'] = $this->produk->get_categories();
         $data['product'] = $this->produk->get_products($id_lab);
         $data['place'] = $this->produk->get_places();
@@ -146,13 +139,6 @@ class Produk extends CI_Controller
             $data['title'] = "Data Produk";
             $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-            // Kode Produk
-            // $ambilKode = $this->produk->get_code_product();
-            // $nourut = (int) substr($ambilKode, 4, 1);
-            // $kodeBarang = $nourut + 1;
-            // $awalKode = "SPW-";
-            // $data['code_product'] = $awalKode . $kodeBarang;
-
             $data['category'] = $this->produk->get_categories();
             $data['product'] = $this->produk->get_products($id_lab);
             $data['place'] = $this->produk->get_places();
@@ -176,9 +162,10 @@ class Produk extends CI_Controller
 
             $data = [
                 'id_product' => NULL,
-                'code' => "SPW",
+                'code' => $code,
                 'id_category' => $id_category,
                 'id_place' => $id_place,
+                'id_owner' => 0,
                 'product' => $product,
                 'qty' => $qty,
                 'basic_price' => $basic_price,

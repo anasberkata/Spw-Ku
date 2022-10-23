@@ -1,4 +1,87 @@
-<!-- INFO 1 -->
+<!-- SELAMAT DATANG -->
+<div class="row">
+    <div class="col-xl-9 col-sm-8 col-8 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-xl-7 col-sm-12">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-uppercase font-weight-bolder">Welcome!</p>
+                            <p>
+                                Selamat datang <b><?= $user["name"]; ?></b>, jangan lupa mengucap <b><i>"Bismillah"</i></b> sebelum memulai aktivitas. Semoga aktifitas hari ini berjalan lancar. Aamiin
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-sm-12 text-end">
+                        <div class="icon icon-shape shadow-primary text-center rounded-circle">
+                            <i class="ni ni-calendar-grid-58 text-lg opacity-10 text-dark" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-12 text-end">
+                        <div class="font-weight-bolder">
+                            <script>
+                                var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                                var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum&#39;at', 'Sabtu'];
+                                var date = new Date();
+                                var day = date.getDate();
+                                var month = date.getMonth();
+                                var thisDay = date.getDay(),
+
+                                    thisDay = myDays[thisDay];
+
+                                var yy = date.getYear();
+                                var year = (yy < 1000) ? yy + 1900 : yy;
+
+                                document.write(thisDay + ', ' + day + ' ' + months[month] + ' ' + year);
+                            </script>
+                        </div>
+                        <div id="clock"></div>
+
+                        <script>
+                            setInterval(() => {
+                                let date = new Date()
+                                let clock = document.getElementById('clock')
+                                clock.innerHTML =
+                                    date.getHours() + ":" +
+                                    date.getMinutes() + ":" +
+                                    date.getSeconds() + " WIB"
+                            }, 1000);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-4 col-4 mb-4">
+        <a href="<?= base_url("kasir"); ?>">
+            <div class="card text-white" style="
+                      background-image: url('<?= base_url('assets/img/foto-lab-1.jpg'); ?>'); background-size: cover; background-position: center top; height: 100%;
+                    ">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12 col-sm-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Masuk Kasir</p>
+                                <h6 class="font-weight-bolder text-white">
+                                    APPLIKASI KASIR
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+
+                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                <i class="ni ni-bold-right text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- INFO 4 PANEL -->
 <div class="row">
     <div class="col-xl-3 col-sm-6 mb-4">
         <div class="card">
@@ -84,11 +167,9 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
-<!-- INFO JADWAL GURU & PRODUK RANDOM-->
+<!-- INFO JADWAL GURU & PRODUK RANDOM -->
 <div class="row">
     <div class="col-12 col-lg-7 mb-lg-3 mb-4">
         <div class="card">
@@ -181,8 +262,9 @@
     </div>
 </div>
 
+<!-- PRODUK HABIS & DAFTAR FRANCHISOR -->
 <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-7 mb-4">
         <div class="card ">
             <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
@@ -215,6 +297,44 @@
                                     </div>
                                 </td>
                             </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-5">
+        <div class="card ">
+            <div class="card-header pb-0 p-3">
+                <div class="d-flex justify-content-between">
+                    <h6 class="mb-2">Daftar Franchisor</h6>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center mb-0" id="table1">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. Whatsapp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        <?php foreach ($franchisor->result() as $f) : ?>
+                            <tr>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0 px-3"><?= $f->name; ?></p>
+                                </td>
+                                <td>
+                                    <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="badge bg-success btn-sm px-3 py-2 rounded-pill"><i class="fa fa-whatsapp"></i></a></p>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

@@ -61,6 +61,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. Whatsapp</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -76,6 +77,11 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="badge bg-success btn-sm px-3 py-2 rounded-pill"><i class="fa fa-whatsapp"></i></a></p>
+                                            </td>
+                                            <td>
+                                                <a href="<?= base_url('penjualan/franchisor_product/?id_lab=1&id_user=') . $f->id_user; ?>" class="badge bg-info btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 1</span></a>
+                                                |
+                                                <a href="<?= base_url('penjualan/franchisor_product/?id_lab=2&id_user=') . $f->id_user; ?>" class="badge bg-warning btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 2</span></a>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchisorEdit<?= $f->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>

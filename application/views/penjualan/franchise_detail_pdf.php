@@ -194,7 +194,7 @@
                             if ($franchisor == NULL) {
                                 echo "Semua Franchisor";
                             } else {
-                                echo $franchisor["franchisor"];
+                                echo $franchisor["name"];
                             }
                             ?>
                         </p>
