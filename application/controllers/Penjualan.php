@@ -9,6 +9,7 @@ class Penjualan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Penjualan_model', 'penjualan');
+        $this->load->model('Franchisor_model', 'franchisor');
         $this->load->helper('date');
     }
 
@@ -403,7 +404,7 @@ class Penjualan extends CI_Controller
 
         $data['id_franchise'] = $id_franchise;
         $data['lab'] = $id_lab;
-        $data['franchisor'] = $this->penjualan->get_franchisor();
+        $data['franchisor'] = $this->franchisor->get_franchisor();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
         $data['franchise_detail'] = $this->penjualan->get_franchise_detail($id_franchise);
@@ -560,7 +561,7 @@ class Penjualan extends CI_Controller
         $data['id_franchise'] = $id_franchise;
         $data['lab'] = $id_lab;
         $data['id_user'] = $id_user;
-        $data['franchisor'] = $this->penjualan->get_franchisor();
+        $data['franchisor'] = $this->franchisor->get_franchisor();
 
         $data['franchise'] = $this->db->get_where('tbl_franchise', ['id_franchise' => $id_franchise])->row_array();
         $data['franchise_detail'] = $this->penjualan->search_franchise_detail($id_franchise, $id_user);
@@ -606,114 +607,6 @@ class Penjualan extends CI_Controller
         $page = $this->load->view('penjualan/franchise_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
         $mpdf->Output('Laporan Produk Titipan SPW.pdf', 'I');
-    }
-
-
-    // ---------------------------------------- FRANCHISOR ------------------------------------------ //
-    public function franchisor()
-    {
-        $data['title'] = "Data Franchisor";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['franchisor'] = $this->penjualan->get_franchisor();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/franchisor', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function franchisor_add()
-    {
-        $data['title'] = "Data Franchisor";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['franchisor'] = $this->penjualan->get_franchisor();
-
-        $name = $this->input->post('name', true);
-        $email = "";
-        $username = "";
-        $password = "";
-        $role_id = 7;
-        $position = 7;
-        $image = "default.jpg";
-        $facebook = "";
-        $instagram = "";
-        $whatsapp = "";
-        $icon = "";
-        $format = "%Y-%m-%d";
-        $date_created = mdate($format);
-        $is_active = 1;
-
-        $this->form_validation->set_rules(
-            'name',
-            'Pemilik Produk',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('penjualan/franchisor', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $data = [
-                'id_user' => NULL,
-                'name' => $name,
-                'email' => $email,
-                'username' => $username,
-                'password' => $password,
-                'role_id' => $role_id,
-                'position' => $position,
-                'image' => $image,
-                'facebook' => $facebook,
-                'instagram' => $instagram,
-                'whatsapp' => $whatsapp,
-                'icon' => $icon,
-                'date_created' => $date_created,
-                'is_active' => $is_active
-
-            ];
-
-            $this->penjualan->save_franchisor($data);
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil ditambahkan!</div>');
-
-            redirect('penjualan/franchisor');
-        }
-    }
-
-    public function franchisor_edit()
-    {
-        $id_user = $this->input->post('id_user', true);
-        $name = $this->input->post('name', true);
-        $whatsapp = $this->input->post('whatsapp', true);
-
-        $data = [
-            'name' => $name,
-            'whatsapp' => $whatsapp
-        ];
-
-        $this->penjualan->update_franchisor($data, $id_user);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil diubah!</div>');
-
-        redirect('penjualan/franchisor');
-    }
-
-    public function franchisor_delete()
-    {
-        $id_user = $this->input->post('id_user', true);
-
-        $this->penjualan->delete_franchisor($id_user);
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil dihapus!</div>');
-
-        redirect('penjualan/franchisor');
     }
 
     // ---------------------------------------- STUDENTS ------------------------------------------ //

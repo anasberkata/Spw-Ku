@@ -12,7 +12,8 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"mpdf/mpdf": "^8.1"
+		"mpdf/mpdf": "^8.1",
+		"picqer/php-barcode-generator": "^2.2"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

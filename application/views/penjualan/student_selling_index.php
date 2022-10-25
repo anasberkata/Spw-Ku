@@ -9,7 +9,7 @@
         <div class="row">
             <?php $i = 1; ?>
             <?php foreach ($lab->result() as $l) : ?>
-                <div class="col-xl-6 mb-xl-0 mb-4">
+                <div class="col-12 col-sm-6 mb-xl-0 mb-4">
                     <a href="<?= base_url('penjualan/student_selling/?id_lab=') . $l->id_lab; ?>">
                         <div class="card bg-transparent shadow-xl">
                             <div class="overflow-hidden position-relative border-radius-xl" style="

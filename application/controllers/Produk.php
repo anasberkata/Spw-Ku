@@ -27,6 +27,89 @@ class Produk extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // =============================================== SUPPLIER =============================================== 
+    public function supplier()
+    {
+        $data['title'] = "Data Supplier";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['supplier'] = $this->produk->get_supplier();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('produk/supplier', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function supplier_add()
+    {
+        $this->form_validation->set_rules(
+            'supplier',
+            'Supplier',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $data['title'] = "Data Supplier";
+            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+            $data['supplier'] = $this->produk->get_supplier();
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('produk/supplier', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $supplier = $this->input->post('supplier', true);
+            $address = $this->input->post('address', true);
+            $phone = $this->input->post('phone', true);
+
+            $data = [
+                'id_supplier' => NULL,
+                'supplier' => $supplier,
+                'address' => $address,
+                'phone' => $phone
+            ];
+
+            $this->produk->save_supplier($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Supplier berhasil ditambahkan!</div>');
+            redirect('produk/supplier');
+        }
+    }
+
+    public function supplier_edit()
+    {
+        $id_supplier = $this->input->post('id_supplier', true);
+        $supplier = $this->input->post('supplier', true);
+        $address = $this->input->post('address', true);
+        $phone = $this->input->post('phone', true);
+
+        $data = [
+            'supplier' => $supplier,
+            'address' => $address,
+            'phone' => $phone
+        ];
+
+        $this->produk->update_supplier($data, $id_supplier);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pupplier berhasil diubah!</div>');
+        redirect('produk/supplier');
+    }
+
+    public function supplier_delete()
+    {
+        $id_supplier = $this->input->post('id_supplier', true);
+
+        $this->produk->delete_supplier($id_supplier);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">SUpplier berhasil dihapus!</div>');
+        redirect('produk/supplier');
+    }
+
     // =============================================== KATAGORI =============================================== 
     public function category()
     {
@@ -149,7 +232,8 @@ class Produk extends CI_Controller
             $this->load->view('produk/product', $data);
             $this->load->view('templates/footer');
         } else {
-            $code = $this->input->post('code', true);
+            $barcode = $this->input->post('code', true);
+            $code = $this->barcode($barcode);
             $id_lab = $this->input->post('id_lab', true);
             $id_category = $this->input->post('id_category', true);
             $id_place = $this->input->post('id_place', true);
@@ -184,10 +268,11 @@ class Produk extends CI_Controller
     public function product_edit()
     {
         $id_product = $this->input->post('id_product', true);
-        $code = $this->input->post('code', true);
         $id_lab = $this->input->post('id_lab', true);
         $id_category = $this->input->post('id_category', true);
         $id_place = $this->input->post('id_place', true);
+        $barcode = $this->input->post('code', true);
+        $code = $this->barcode($barcode);
         $product = $this->input->post('product', true);
         $qty = $this->input->post('qty', true);
         $basic_price = $this->input->post('basic_price', true);
@@ -256,6 +341,16 @@ class Produk extends CI_Controller
         }
 
         return "default-product.jpg";
+    }
+
+    function barcode($barcode)
+    {
+        // $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+        // echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128)) . '">';
+        $generator = new Picqer\Barcode\BarcodeGeneratorJPG();
+        file_put_contents('assets/img/barcode/' . $barcode . '.jpg', $generator->getBarcode($barcode, $generator::TYPE_CODABAR));
+
+        return $barcode;
     }
 
     // =============================================== PEMBELIAN=============================================== 
@@ -506,89 +601,5 @@ class Produk extends CI_Controller
         // $data = $this->produk->ajax_produk(1);
 
         echo json_encode($data);
-    }
-
-
-    // =============================================== SUPPLIER =============================================== 
-    public function supplier()
-    {
-        $data['title'] = "Data Supplier";
-        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $data['supplier'] = $this->produk->get_supplier();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/aside', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('produk/supplier', $data);
-        $this->load->view('templates/footer');
-    }
-
-    public function supplier_add()
-    {
-        $this->form_validation->set_rules(
-            'supplier',
-            'Supplier',
-            'required',
-            array(
-                'required' => '{field} wajib diisi'
-            )
-        );
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Supplier";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['supplier'] = $this->produk->get_supplier();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/supplier', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $supplier = $this->input->post('supplier', true);
-            $address = $this->input->post('address', true);
-            $phone = $this->input->post('phone', true);
-
-            $data = [
-                'id_supplier' => NULL,
-                'supplier' => $supplier,
-                'address' => $address,
-                'phone' => $phone
-            ];
-
-            $this->produk->save_supplier($data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Supplier berhasil ditambahkan!</div>');
-            redirect('produk/supplier');
-        }
-    }
-
-    public function supplier_edit()
-    {
-        $id_supplier = $this->input->post('id_supplier', true);
-        $supplier = $this->input->post('supplier', true);
-        $address = $this->input->post('address', true);
-        $phone = $this->input->post('phone', true);
-
-        $data = [
-            'supplier' => $supplier,
-            'address' => $address,
-            'phone' => $phone
-        ];
-
-        $this->produk->update_supplier($data, $id_supplier);
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pupplier berhasil diubah!</div>');
-        redirect('produk/supplier');
-    }
-
-    public function supplier_delete()
-    {
-        $id_supplier = $this->input->post('id_supplier', true);
-
-        $this->produk->delete_supplier($id_supplier);
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">SUpplier berhasil dihapus!</div>');
-        redirect('produk/supplier');
     }
 }

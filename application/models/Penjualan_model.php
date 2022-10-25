@@ -140,16 +140,6 @@ class Penjualan_model extends CI_Model
 
 
     // PENJUALAN BARANG TITIPAN
-    function get_franchisor()
-    {
-        $this->db->select('*');
-        // $this->db->from('tbl_franchisor');
-        $this->db->from('tbl_users');
-        $this->db->where('role_id = 7');
-        $query = $this->db->get();
-        return $query;
-    }
-
     function get_franchise()
     {
         $this->db->select('*');
@@ -259,27 +249,6 @@ class Penjualan_model extends CI_Model
             WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_user"
         );
         return $query->row();
-    }
-
-    // FRANCHISOR
-    function save_franchisor($data)
-    {
-        // $this->db->insert('tbl_franchisor', $data);
-        $this->db->insert('tbl_users', $data);
-    }
-
-    function update_franchisor($data, $id_user)
-    {
-        $this->db->where('id_user', $id_user);
-        $this->db->update('tbl_users', $data);
-    }
-
-    function delete_franchisor($id_user)
-    {
-        $this->db->where('id_user', $id_user);
-        $this->db->delete('tbl_users');
-
-        return true;
     }
 
     // STUDENT

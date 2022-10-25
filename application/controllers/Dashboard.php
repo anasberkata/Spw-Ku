@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller
         parent::__construct();
         // is_logged_in();
         $this->load->model('Dashboard_model', 'dashboard');
-        $this->load->model('Penjualan_model', 'penjualan');
+        $this->load->model('Franchisor_model', 'franchisor');
         // $this->load->helper('date');
     }
 
@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller
         $data['schedule'] = $this->dashboard->get_schedule();
         $data['item'] = $this->dashboard->get_products();
         $data['product'] = $this->dashboard->get_products_running_out();
-        $data['franchisor'] = $this->penjualan->get_franchisor();
+        $data['franchisor'] = $this->franchisor->get_franchisor();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

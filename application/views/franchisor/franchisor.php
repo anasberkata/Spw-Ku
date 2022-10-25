@@ -23,7 +23,7 @@
                                         <h5 class="modal-title" id="addModalLabel">Tambah Data Pemilik Produk Titipan</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('penjualan/franchisor_add'); ?>" method="POST">
+                                    <form role="form" action="<?= base_url('franchisor/franchisor_add'); ?>" method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
                                                 <label>Nama Pemilik Produk</label>
@@ -79,9 +79,9 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><a href="https://wa.me/62<?= $f->whatsapp; ?>" target="blank" class="badge bg-success btn-sm px-3 py-2 rounded-pill"><i class="fa fa-whatsapp"></i></a></p>
                                             </td>
                                             <td>
-                                                <a href="<?= base_url('penjualan/franchisor_product/?id_lab=1&id_user=') . $f->id_user; ?>" class="badge bg-info btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 1</span></a>
+                                                <a href="<?= base_url('franchisor/franchisor_product/?id_lab=1&id_user=') . $f->id_user; ?>" class="badge bg-info btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 1</span></a>
                                                 |
-                                                <a href="<?= base_url('penjualan/franchisor_product/?id_lab=2&id_user=') . $f->id_user; ?>" class="badge bg-warning btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 2</span></a>
+                                                <a href="<?= base_url('franchisor/franchisor_product/?id_lab=2&id_user=') . $f->id_user; ?>" class="badge bg-warning btn-sm px-3 py-2 rounded-pill"><span class="small">Lab 2</span></a>
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalFranchisorEdit<?= $f->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
@@ -98,7 +98,7 @@
                                                         <h5 class="modal-title" id="editModalLabel">Edit Pemilik Produk Titipan</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/franchisor_edit'); ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('franchisor/franchisor_edit'); ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="id_user" value="<?= $f->id_user; ?>">
                                                             <div class="mb-3">
@@ -127,7 +127,7 @@
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Pemilik Produk Titipan</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/franchisor_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('franchisor/franchisor_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
                                                                 <input type="hidden" name="id_user" value="<?= $f->id_user; ?>">
