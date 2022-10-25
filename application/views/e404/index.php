@@ -11,7 +11,7 @@
     <div id="tsparticles"></div>
     <div class="denied__wrapper">
         <h1>404</h1>
-        <h3>LOST IN <span>SPACE</span> SPW-DAKU? Hmm, janga khawatir, sepertinya dalam masa perbaikan.</h3>
+        <h3>LOST IN <span>SPACE</span> SPW-DAKU? Hmm, jangan khawatir, halaman ini dalam masa perbaikan. Mohon bersabar ini ujian</h3>
         <img id="astronaut" src="<?= base_url('assets/e404/') ?>images/astronaut.svg" />
         <img class="planet" id="planet" src="<?= base_url('assets/e404/') ?>images/planet.svg" />
         <a href="<?= base_url('dashboard') ?>"><button class="denied__link">Kembali ke Dashboard</button></a>

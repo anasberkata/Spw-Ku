@@ -57,8 +57,30 @@
                                         <?= form_error('email', '<small class"text-danger pl-3">', '</small>') ?>
                                     </div>
                                     <div class="mb-3">
-                                        <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" name="password" id="password">
-                                        <?= form_error('password', '<small class"text-danger pl-3">', '</small>') ?>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" name="password" id="password">
+
+                                            <span id="openPass" onclick="openPass()" class="input-group-text">
+                                                <i class="fas fa-eye"></i>
+                                            </span>
+
+                                            <script>
+                                                function openPass() {
+                                                    var x = document.getElementById('password').type;
+                                                    if (x == 'password') {
+                                                        document.getElementById('password').type = 'text';
+                                                        document.getElementById('openPass').innerHTML = `<i class="fas fa-eye-slash"></i>`;
+                                                    } else {
+                                                        document.getElementById('password').type = 'password';
+                                                        document.getElementById('openPass').innerHTML = `<i class="fas fa-eye"></i>`;
+                                                    }
+                                                }
+                                            </script>
+
+
+                                            <?= form_error('password', '<small class"text-danger pl-3">', '</small>') ?>
+                                        </div>
+
                                     </div>
                                     <!-- <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="rememberMe">

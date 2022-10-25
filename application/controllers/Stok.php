@@ -9,7 +9,7 @@ class Stok extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Stok_model', 'stok');
-        // $this->load->helper('date');
+        $this->load->helper('date');
     }
 
     // PRODUK
@@ -56,6 +56,9 @@ class Stok extends CI_Controller
         $data['product'] = $this->stok->get_products_to_excel($id_lab, $id_place);
         $data['place'] = $this->db->get_where('tbl_product_place', ['id_place' => $id_place])->row_array();
         $data['lab'] = $id_lab;
+
+        $today = date("Y-m-d");
+        $data['schedule'] = $this->stok->get_schedule($today);
 
         $this->load->view('stok/stock_excel.php', $data);
     }

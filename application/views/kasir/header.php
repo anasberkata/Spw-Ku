@@ -50,6 +50,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url("kasir/selling") ?>">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-cart text-success text-sm opacity-10"></i></div>
+                        <br>
                         <span class="nav-link-text ms-1">Penjualan</span>
                     </a>
                 </li>

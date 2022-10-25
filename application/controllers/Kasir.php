@@ -9,7 +9,7 @@ class Kasir extends CI_Controller
         parent::__construct();
         // is_logged_in();
         $this->load->model('Kasir_model', 'kasir');
-        // $this->load->helper('date');
+        $this->load->helper('date');
     }
 
     // LAB

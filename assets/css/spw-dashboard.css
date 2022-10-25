@@ -26609,3 +26609,8 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=dashboard-free.css.map */
+
+span#openPass{
+  border: 1px solid #d2d6da !important;
+  border-radius: 0px 7px 7px 0px;
+}

@@ -113,7 +113,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
         </tr>
         <tr>
             <td colspan="2">Guru Pembimbing Praktek</td>
-            <td colspan="2">:</td>
+            <td colspan="2">: <?= $schedule['name'] ?></td>
             <td colspan="2"></td>
             <td rowspan="2">=H<?= $row; ?></td>
             <td rowspan="2">=I<?= $row; ?></td>
