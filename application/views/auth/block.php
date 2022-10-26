@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Space | tsParticles 404</title>
+    <title>Error 403</title>
     <link type="text/css" rel="stylesheet" href="<?= base_url('assets/e404/') ?>css/404.css" />
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/e404/') ?>images/tsParticles-64.png">
 </head>

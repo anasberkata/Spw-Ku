@@ -45,36 +45,22 @@
                                                             <?php endforeach; ?>
                                                         </select>
 
-                                                        <!-- <input type="text" class="form-control" list="product" id="id_product" autocomplete="off">
-                                                <datalist id="product">
-                                                    <?php foreach ($product->result() as $p) : ?>
-                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?></option>
-                                                    <?php endforeach; ?>
-                                                </datalist>
-                                                <input type="hidden" name="id_product" id="id_product-hidden">
-
-                                                <script>
-                                                    document.querySelector('input[list]').addEventListener('input', function(e) {
-                                                        var input = e.target,
-                                                            list = input.getAttribute('list'),
-                                                            options = document.querySelectorAll('#' + list + ' option'),
-                                                            hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
-                                                            inputValue = input.value;
-
-                                                        hiddenInput.value = inputValue;
-
-                                                        for (var i = 0; i < options.length; i++) {
-                                                            var option = options[i];
-
-                                                            if (option.innerText === inputValue) {
-                                                                hiddenInput.value = option.getAttribute('data-value');
-                                                                break;
+                                                        <script type="text/javascript">
+                                                            function get_price() {
+                                                                var id = $("#id_product").val();
+                                                                $.ajax({
+                                                                    url: '<?= base_url('autocomplete/ajax_produk/'); ?>',
+                                                                    method: "GET",
+                                                                    data: "id=" + id,
+                                                                }).success(function(data) {
+                                                                    var json = data,
+                                                                        obj = JSON.parse(json);
+                                                                    console.log(obj);
+                                                                    $('#basic_price').val(obj.basic_price);
+                                                                    $('#selling_price').val(obj.selling_price);
+                                                                });
                                                             }
-                                                        }
-                                                    });
-                                                </script> -->
-
-
+                                                        </script>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">

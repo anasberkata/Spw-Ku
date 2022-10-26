@@ -6,6 +6,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <div class="numbers">
+
                             <h5>TRANSAKSI</h5>
                             <!-- <p class="text-sm mb-0 text-uppercase font-weight-bolder">Transaksi</p> -->
                             <form role="form" action="<?= base_url('kasir/casheer_detail_add') ?>" method="POST">
@@ -28,7 +29,7 @@
                                     <input type="number" class="form-control" id="total_product" placeholder="Jumlah Barang" name="qty_selling">
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-0">
                                     <button type="submit" class="btn btn-success w-100" style="height: 100px;">Tambah</button>
                                 </div>
                             </form>
@@ -53,11 +54,14 @@
                     </div>
                     <div class="col-12 col-sm-8 text-end">
                         <h5 class="text-bolder">TOTAL PEMBAYARAN : </h5>
-                        <h1 class="text-danger" style="font-size: 75px;">Rp. 80.000</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1 class="text-danger mt-3" style="font-size: 60px;">Rp. 80.000</h1>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-warning w-100" style="height: 100px;">Bayar</button>
+                            </div>
+                        </div>
                         <div class="table-responsive p-0 mb-3">
                             <table class="table align-items-center mb-0" id="table1">
                                 <thead>
