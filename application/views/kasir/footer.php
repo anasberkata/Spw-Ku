@@ -65,22 +65,7 @@
 
 <!-- <script src="<?= base_url('assets/js/jquery.min.js'); ?>"></script> -->
 
-<script type="text/javascript">
-    function get_price() {
-        var id = $("#id_product").val();
-        $.ajax({
-            url: '<?= base_url('autocomplete/ajax_produk/'); ?>',
-            method: "GET",
-            data: "id=" + id,
-        }).success(function(data) {
-            var json = data,
-                obj = JSON.parse(json);
-            console.log(obj);
-            $('#basic_price').val(obj.basic_price);
-            $('#selling_price').val(obj.selling_price);
-        });
-    }
-</script>
+
 
 <script>
     var win = navigator.platform.indexOf('Win') > -1;

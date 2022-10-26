@@ -17,4 +17,11 @@ class Autocomplete_model extends CI_Model
         // return $hasil->result();
         return $hasil->row();
     }
+
+    function ajax_barcode($barcode)
+    {
+        $hasil = $this->db->query("SELECT * FROM tbl_product WHERE code = '$barcode'");
+        // return $hasil->result();
+        return $hasil->row();
+    }
 }

@@ -29,4 +29,15 @@ class Autocomplete extends CI_Controller
 
         echo json_encode($data);
     }
+
+    public function ajax_barcode()
+    {
+        $barcode = $this->input->get('barcode');
+        // $id = 6;
+
+        $data = $this->autofill->ajax_barcode($barcode);
+        // $data = $this->pembelian->ajax_produk(1);
+
+        echo json_encode($data);
+    }
 }
