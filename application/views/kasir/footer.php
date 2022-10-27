@@ -16,28 +16,6 @@
 </div>
 </main>
 
-<!-- Modal Logout -->
-<div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="LogoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="LogoutModalLabel">Logout</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <h4 class="text-sm mt-3">Yakin ingin keluar?</h4>
-                    <p class="small">Jangan lupa ucapkan <b><i>"Alhamdulillah"</i></b>, pekerjaan sudah beres, silahkan klik "Logout" untuk keluar.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                <a class="btn btn-danger btn-sm" href="<?= base_url('auth/logout'); ?>">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--   Core JS Files   -->
 <script src="<?= base_url('assets/') ?>js/core/popper.min.js"></script>
 <script src="<?= base_url('assets/') ?>js/core/bootstrap.min.js"></script>
