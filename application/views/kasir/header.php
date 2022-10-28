@@ -27,6 +27,7 @@
 
     <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url('assets/') ?>css/spw-dashboard.css?v=2.0.2" rel="stylesheet" />
+    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>casheer/css/bootstrap.css"> -->
 </head>
 
 <body class="g-sidenav-show bg-gray-100">

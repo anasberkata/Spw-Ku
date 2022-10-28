@@ -73,7 +73,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="detail-cart">
+                                <tbody id="detail_cart">
 
                                 </tbody>
                             </table>
@@ -119,55 +119,12 @@
                                 <div class="card-body">
                                     <h6 class="card-title"><?= $p->product; ?></h6>
                                     <p class="card-text text-xs font-weight-bold">Harga : Rp. <?= number_format($p->selling_price, 0, ',', '.'); ?>,-</p>
-                                    <button class="btn btn-success btn-sm w-100 add-cart" data-productid="<?= $p->id_product; ?>" data-productname="<?= $p->product; ?>" data-productprice="<?= $p->selling_price; ?>">Tambah</button>
+
+                                    <button class="add_cart btn btn-success btn-sm" data-productid="<?php echo $p->id_product; ?>" data-productname="<?php echo $p->product; ?>" data-productprice="<?php echo $p->selling_price; ?>">Add To Cart</button>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <script type="text/javascript" src="<?php echo base_url() . 'assets/casheer/jquery-2.2.3.min.js' ?>"></script>
-                    <script type="text/javascript" src="<?php echo base_url() . 'assets/casheer/bootstrap.js' ?>"></script>
-
-                    <script type="text/javascript">
-                        $(document).ready(function() {
-                            $('.add_cart').click(function() {
-                                var produk_id = $(this).data("productid");
-                                var produk_nama = $(this).data("productname");
-                                var produk_harga = $(this).data("productprice");
-                                var quantity = $('#' + produk_id).val();
-                                $.ajax({
-                                    url: "<?= base_url('kasir/casheer_cart_add'); ?>",
-                                    method: "POST",
-                                    data: {
-                                        produk_id: produk_id,
-                                        produk_nama: produk_nama,
-                                        produk_harga: produk_harga,
-                                        quantity: quantity
-                                    },
-                                    success: function(data) {
-                                        $('#detail_cart').html(data);
-                                    }
-                                });
-                            });
-
-                            // Load shopping cart
-                            $('#detail_cart').load("<?= base_url('kasir/casheer_cart_load'); ?>");
-
-                            //Hapus Item Cart
-                            $(document).on('click', '.hapus_cart', function() {
-                                var row_id = $(this).attr("id"); //mengambil row_id dari artibut id
-                                $.ajax({
-                                    url: "<?= base_url('kasir/casheer_cart_delete'); ?>",
-                                    method: "POST",
-                                    data: {
-                                        row_id: row_id
-                                    },
-                                    success: function(data) {
-                                        $('#detail_cart').html(data);
-                                    }
-                                });
-                            });
-                        });
-                    </script>
                 </div>
             </div>
         </div>

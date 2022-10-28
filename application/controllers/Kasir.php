@@ -20,9 +20,9 @@ class Kasir extends CI_Controller
 
         $data['lab'] = $this->kasir->get_lab();
 
-        $this->load->view('kasir/header', $data);
+        // $this->load->view('kasir/header', $data);
         $this->load->view('kasir/index', $data);
-        $this->load->view('kasir/footer');
+        // $this->load->view('kasir/footer');
     }
 
     // KASIR
@@ -56,25 +56,47 @@ class Kasir extends CI_Controller
 
     function show_cart()
     { //Fungsi untuk menampilkan Cart
-        $output = '';
+        $output = '
+            <h5 class="text-bolder">TOTAL PEMBAYARAN : </h5>
+
+            <div class="row">
+                <div class="col-8">
+                    <h1 class="text-danger mt-3" style="font-size: 60px;">Rp. ' . number_format($this->cart->total()) . '</h1>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-warning w-100" style="height: 100px;">Bayar</button>
+                </div>
+            </div>
+            <div class="table-responsive p-0 mb-3">
+                <table class="table align-items-center mb-0" id="table1">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">Produk</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subtotal</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        ';
         $no = 0;
         foreach ($this->cart->contents() as $items) {
             $no++;
             $output .= '
-				<tr>
-					<td>' . $items['name'] . '</td>
-					<td>' . number_format($items['price']) . '</td>
-					<td>' . $items['qty'] . '</td>
-					<td>' . number_format($items['subtotal']) . '</td>
-					<td><button type="button" id="' . $items['rowid'] . '" class="hapus_cart btn btn-danger btn-xs">Batal</button></td>
-				</tr>
+                        <tr>
+                            <td><p class="text-xs font-weight-bold mb-0 px-3 text-start">' . $items['name'] . '</p></td>
+                            <td><p class="text-xs font-weight-bold mb-0 px-3 text-end">Rp. ' . number_format($items['price']) . '</p></td>
+                            <td><p class="text-xs font-weight-bold mb-0 px-3 text-end">' . $items['qty'] . '</p></td>
+                            <td><p class="text-xs font-weight-bold mb-0 px-3 text-end">Rp. ' . number_format($items['subtotal']) . '</p></td>
+                            <td><p class="text-xs font-weight-bold mb-0 px-3 text-end"><button type="button" id="' . $items['rowid'] . '" class="hapus_cart btn btn-danger btn-xs mt-3">Batal</button></p></td>
+                        </tr>
 			';
         }
         $output .= '
-			<tr>
-				<th colspan="3">Total</th>
-				<th colspan="2">' . 'Rp ' . number_format($this->cart->total()) . '</th>
-			</tr>
+                    </tbody>
+                </table>
+            </div>
 		';
         return $output;
     }

@@ -23,4 +23,10 @@ class Kasir_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function get_product_list($limit, $start)
+    {
+        $query = $this->db->get('tbl_product', $limit, $start);
+        return $query;
+    }
 }
