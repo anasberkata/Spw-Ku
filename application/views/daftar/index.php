@@ -25,6 +25,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="card-body pt-0 pb-2">
                 <div class="row">
                     <?php $i = 1; ?>

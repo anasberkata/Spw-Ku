@@ -15,18 +15,29 @@ class Kasir_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_product');
-        // $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
-        // $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
         $this->db->where('id_lab', $id_lab);
-        // $this->db->order_by('place', 'ASC');
-        // $this->db->order_by('product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
 
-    function get_product_list($limit, $start)
+    public function get_produk_id($id)
     {
-        $query = $this->db->get('tbl_product', $limit, $start);
-        return $query;
+        $this->db->select('tbl_product.*, category');
+        $this->db->from('tbl_product');
+        $this->db->join('tbl_product_category', 'id_category=tbl_product_category.id_category', 'left');
+        $this->db->where('id_product', $id);
+        return $this->db->get();
+    }
+
+    public function order_add($data)
+    {
+        $this->db->insert('tbl_order', $data);
+        $id = $this->db->insert_id();
+        return (isset($id)) ? $id : FALSE;
+    }
+
+    public function order_detail_add($data)
+    {
+        $this->db->insert('tbl_order_detail', $data);
     }
 }
