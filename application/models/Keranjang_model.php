@@ -15,7 +15,6 @@ class Keranjang_model extends CI_Model
 
     public function get_produk_all($id_lab)
     {
-
         $this->db->select('*');
         $this->db->where('id_lab', $id_lab);
         $query = $this->db->get('tbl_product');

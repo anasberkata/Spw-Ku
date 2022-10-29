@@ -18,7 +18,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
 
-    <link rel="stylesheet" href="<?= base_url('vendor/') ?>simple-datatables/style.css">
+    <!-- <link rel="stylesheet" href="<?= base_url('vendor/') ?>simple-datatables/style.css"> -->
 
     <link id="pagestyle" href="<?= base_url('assets/') ?>css/spw-dashboard.css?v=2.0.2" rel="stylesheet" />
 </head>

@@ -11,16 +11,34 @@ class Kasir_model extends CI_Model
         return $query;
     }
 
-    function get_product($id_lab)
+    function count_products($id_lab)
     {
-        $this->db->select('*');
-        $this->db->from('tbl_product');
         $this->db->where('id_lab', $id_lab);
-        $query = $this->db->get();
-        return $query;
+        $query = $this->db->get('tbl_product');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
     }
 
-    public function get_produk_id($id)
+    public function search($keyword, $id_lab)
+    {
+        $this->db->where('id_lab', $id_lab);
+        $this->db->like('product', $keyword);
+        $query = $this->db->get('tbl_product');
+        return $query->result_array();
+    }
+
+    public function get_product_all($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->where('id_lab', $id_lab);
+        $query = $this->db->get('tbl_product');
+        return $query->result_array();
+    }
+
+    public  function get_product_id($id)
     {
         $this->db->select('tbl_product.*, category');
         $this->db->from('tbl_product');
@@ -29,14 +47,14 @@ class Kasir_model extends CI_Model
         return $this->db->get();
     }
 
-    public function order_add($data)
+    public function add_order($data)
     {
         $this->db->insert('tbl_order', $data);
         $id = $this->db->insert_id();
         return (isset($id)) ? $id : FALSE;
     }
 
-    public function order_detail_add($data)
+    public function add_detail_order($data)
     {
         $this->db->insert('tbl_order_detail', $data);
     }

@@ -8,7 +8,7 @@ class Kasir extends CI_Controller
     {
         parent::__construct();
         // is_logged_in();
-        $this->load->model('Kasir_model', 'kasir');
+        $this->load->model('Kasir_model', 'k');
         $this->load->helper('date');
     }
 
@@ -18,7 +18,7 @@ class Kasir extends CI_Controller
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['lab'] = $this->kasir->get_lab();
+        $data['lab'] = $this->k->get_lab();
 
         $this->load->view('kasir/header', $data);
         $this->load->view('kasir/index', $data);
@@ -34,19 +34,61 @@ class Kasir extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $id_lab;
-        $data['product'] = $this->kasir->get_product($id_lab);
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->get_product_all($id_lab);
 
-        $this->load->view('kasir/kasir', $data);
+        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/cashier', $data);
+        $this->load->view('keranjang/footer');
     }
 
-    public function tampil_cart()
+    public function search()
     {
-        $data['product'] = $this->kasir->get_product();
-        $this->load->view('kasir/kasir', $data);
+        $id_lab = $this->input->post('id_lab');
+        $keyword = $this->input->post('keyword');
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->search($keyword, $id_lab);
+
+        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/cashier', $data);
+        $this->load->view('keranjang/footer');
+
+        // $callback = array('hasil' => $hasil,);
+        // echo json_encode($callback);
     }
 
-    function tambah()
+    public function show_cart()
     {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->get_product_all($id_lab);
+
+        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/cashier', $data);
+        $this->load->view('keranjang/footer');
+    }
+
+    function add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->get_product_all($id_lab);
+
         $data_produk = array(
             'id' => $this->input->post('id'),
             'name' => $this->input->post('nama'),
@@ -55,19 +97,36 @@ class Kasir extends CI_Controller
             'qty' => $this->input->post('qty')
         );
         $this->cart->insert($data_produk);
-        redirect('kasir/cashier/?id_lab=');
+        redirect('kasir/cashier/?id_lab=' . $id_lab);
     }
 
-    public function check_out()
+    function add_by_barcode()
     {
-        $data['product'] = $this->kasir->get_product();
-        $this->load->view('kasir/kasir', $data);
+        $id_lab = $this->input->post('lab_id', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->get_product_all($id_lab);
+
+        $data_produk = array(
+            'id' => $this->input->post('product_id'),
+            'name' => $this->input->post('product_name'),
+            'price' => $this->input->post('selling_price'),
+            'gambar' => $this->input->post('gambar'),
+            'qty' => $this->input->post('quantity')
+        );
+        $this->cart->insert($data_produk);
+        redirect('kasir/cashier/?id_lab=' . $id_lab);
     }
 
-
-
-    function hapus($rowid)
+    function delete()
     {
+        $id_lab = $this->input->get('id_lab', true);
+        $rowid = $this->input->get('rowid', true);
+
         if ($rowid == "all") {
             $this->cart->destroy();
         } else {
@@ -77,11 +136,13 @@ class Kasir extends CI_Controller
             );
             $this->cart->update($data);
         }
-        redirect('keranjang/tampil_cart');
+        redirect('kasir/cashier/?id_lab=' . $id_lab);
     }
 
-    function ubah_cart()
+    function update_cart()
     {
+        $id_lab = $this->input->post('id_lab', true);
+
         $cart_info = $_POST['cart'];
         foreach ($cart_info as $id => $cart) {
             $rowid = $cart['rowid'];
@@ -98,17 +159,22 @@ class Kasir extends CI_Controller
             );
             $this->cart->update($data);
         }
-        redirect('keranjang/tampil_cart');
+        redirect('kasir/cashier/?id_lab=' . $id_lab);
     }
 
-    public function proses_order()
+    public function order()
     {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         //-------------------------Input data order------------------------------
         $data_order = array(
             'date_order' => date('Y-m-d'),
-            'id_lab' => 1
+            'id_lab' => $id_lab
         );
-        $id_order = $this->kasir->order_add($data_order);
+        $id_order = $this->k->add_order($data_order);
         //-------------------------Input data detail order-----------------------
         if ($cart = $this->cart->contents()) {
             foreach ($cart as $item) {
@@ -119,15 +185,13 @@ class Kasir extends CI_Controller
                     'total_basic_price' => 0,
                     'total_selling_price' => $item['price']
                 );
-                $proses = $this->kasir->order_detail_add($data_detail);
+                $proses = $this->k->add_detail_order($data_detail);
             }
         }
         //-------------------------Hapus shopping cart--------------------------
         $this->cart->destroy();
 
-        $data['product'] = $this->kasir->get_product();
-        $this->load->view('keranjang/header', $data);
-        $this->load->view('keranjang/index', $data);
-        $this->load->view('keranjang/footer');
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembayaran berhasil diinput! Silahkan untuk melanjutkan</div>');
+        redirect('kasir/cashier/?id_lab=' . $id_lab);
     }
 }

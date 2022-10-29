@@ -28,9 +28,14 @@ class Keranjang extends CI_Controller
 
     public function tampil_cart()
     {
+        $id_lab = $this->input->get('id_lab', true);
+
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-        $data['produk'] = $this->k->get_produk_all();
+
+        $data['lab'] = $id_lab;
+        $data['count_products'] = $this->k->count_products($id_lab);
+        $data['produk'] = $this->k->get_produk_all($id_lab);
 
         $this->load->view('keranjang/header', $data);
         $this->load->view('keranjang/index', $data);
@@ -69,8 +74,11 @@ class Keranjang extends CI_Controller
         redirect('keranjang/?id_lab=' . $id_lab);
     }
 
-    function hapus($rowid)
+    function hapus()
     {
+        $id_lab = $this->input->get('id_lab', true);
+        $rowid = $this->input->get('rowid', true);
+
         if ($rowid == "all") {
             $this->cart->destroy();
         } else {
@@ -80,11 +88,13 @@ class Keranjang extends CI_Controller
             );
             $this->cart->update($data);
         }
-        redirect('keranjang/tampil_cart');
+        redirect('keranjang/?id_lab=' . $id_lab);
     }
 
     function ubah_cart()
     {
+        $id_lab = $this->input->post('id_lab', true);
+
         $cart_info = $_POST['cart'];
         foreach ($cart_info as $id => $cart) {
             $rowid = $cart['rowid'];
@@ -101,18 +111,20 @@ class Keranjang extends CI_Controller
             );
             $this->cart->update($data);
         }
-        redirect('keranjang/tampil_cart');
+        redirect('keranjang/?id_lab=' . $id_lab);
     }
 
     public function proses_order()
     {
+        $id_lab = $this->input->get('id_lab', true);
+
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         //-------------------------Input data order------------------------------
         $data_order = array(
             'date_order' => date('Y-m-d'),
-            'id_lab' => 1
+            'id_lab' => $id_lab
         );
         $id_order = $this->k->tambah_order($data_order);
         //-------------------------Input data detail order-----------------------
@@ -131,9 +143,7 @@ class Keranjang extends CI_Controller
         //-------------------------Hapus shopping cart--------------------------
         $this->cart->destroy();
 
-        $data['produk'] = $this->k->get_produk_all();
-        $this->load->view('keranjang/header', $data);
-        $this->load->view('keranjang/index', $data);
-        $this->load->view('keranjang/footer');
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembayaran berhasil diinput! Silahkan untuk melanjutkan</div>');
+        redirect('keranjang/?id_lab=' . $id_lab);
     }
 }

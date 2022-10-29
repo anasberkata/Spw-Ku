@@ -7,11 +7,11 @@
                         <div class="col-12 col-sm-4">
                             <div class="numbers">
                                 <h5>TRANSAKSI</h5>
-                                <form role="form" action="<?= base_url('') ?>" method="POST">
-                                    <!-- <input type="hidden" name="id_lab" value="<?= $lab ?>"> -->
+                                <form id="form1" role="form" action="<?= base_url(); ?>keranjang/tambah" method="POST" accept-charset="utf-8">
+                                    <!-- <form role="form" action="" method="POST" accept-charset="utf-8"> -->
                                     <div class="mb-3">
                                         <label>Barcode</label>
-                                        <input type="text" class="form-control" list="product" placeholder="Barcode" autofocus autocomplete="off" onkeyup="get_product()" id="barcode_product">
+                                        <input type="text" class="form-control" list="product" placeholder="Barcode" autofocus autocomplete="off" onkeyup="get_product()" id="barcode_product" name="barcode">
                                         <datalist id="product">
                                             <?php foreach ($produk as $p) : ?>
                                                 <option data-value="<?= $p['code']; ?>"><?= $p['code']; ?></option>
@@ -30,40 +30,40 @@
                                                         obj = JSON.parse(json);
                                                     console.log(obj);
                                                     $('#id_product').val(obj.id_product);
+                                                    // $('#barcode_product').val(obj.code);
                                                     $('#name_product').val(obj.product);
                                                     $('#selling_price').val(obj.selling_price);
-                                                    $('#quantity').val(1);
+                                                    $('#gambar').val(obj.image);
                                                 });
                                             }
                                         </script>
                                     </div>
                                     <div class="mb-3">
                                         <label>Produk</label>
-                                        <input type="hidden" class="form-control" id="id_product" name="product_id" readonly>
-                                        <input type="text" class="form-control" id="name_product" placeholder="Produk" name="product_name" readonly>
-                                        <input type="hidden" class="form-control" id="selling_price" placeholder="Harga" name="product_price" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Jumlah</label>
-                                        <input type="number" class="form-control" id="quantity" placeholder="Jumlah Barang" name="quantity">
+                                        <input type="hidden" name="id_lab" value="<?= $lab; ?>" class="form-control" />
+                                        <input type="hidden" name="id" id="id_product" class="form-control" readonly />
+                                        <input type="text" name="nama" id="name_product" class="form-control" placeholder="Produk" readonly />
+                                        <input type="hidden" name="harga" id="selling_price" class="form-control" placeholder="Harga" readonly />
+                                        <input type="hidden" name="gambar" class="form-control" id="gambar" />
+                                        <input type="hidden" class="form-control" id="quantity" placeholder="Jumlah Barang" name="qty" value="1">
                                     </div>
 
-                                    <div class="mb-0">
-                                        <button type="submit" class="add_cart_by_barcode btn btn-success w-100" style="height: 100px;">Tambah</button>
+                                    <div class=" mb-0">
+                                        <button type="submit" class="add_cart_by_barcode btn btn-success w-100" name="product_add" style="height: 100px;">Tambah</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="col-12 col-sm-8 text-end">
-                            <form action="<?php echo base_url('keranjang/ubah_cart'); ?>" method="post" name="frmShopping" id="frmShopping" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="<?= base_url('keranjang/ubah_cart'); ?>" method="post" name="frmShopping" id="frmShopping" class="form-horizontal" enctype="multipart/form-data">
                                 <?php if ($cart = $this->cart->contents()) : ?>
                                     <h5>PEMBAYARAN</h5>
                                     <div class="table-responsive p-0 mb-3">
-                                        <table class="table mb-0">
+                                        <table class="table align-items-center mb-0">
                                             <tr>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">Produk</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="100px">Qty</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                             </tr>
@@ -88,33 +88,49 @@
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">
+                                                            <input type="hidden" class="form-control form-control-sm" name="id_lab" value="<?= $lab; ?>">
                                                             <input type="number" class="form-control form-control-sm" name="cart[<?= $item['id']; ?>][qty]" value="<?= $item['qty']; ?>" />
+                                                            <!-- <?= $item['qty']; ?> -->
                                                         </p>
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">Rp. <?= number_format($item['subtotal'], 0, ",", ".") ?></p>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url('keranjang/hapus/') . $item['rowid']; ?>" class="badge bg-danger pr-2 pl-2"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                        <a href="<?= base_url('keranjang/hapus/?rowid=') . $item['rowid'] . '&id_lab=' . $lab; ?>" class="badge bg-danger pr-2 pl-2"><i class="fa fa-trash cursor-pointer"></i></a>
                                                     </td>
                                                 <?php endforeach; ?>
                                                 </tr>
                                         </table>
+                                        <hr>
                                         <div class="row">
                                             <div class="col-8">
                                                 <h1 class="text-danger" style="font-size: 60px;">Rp. <?= number_format($grand_total, 0, ",", "."); ?></h1>
                                             </div>
                                             <div class="col-4">
-                                                <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-danger w-75" rel="noopener noreferrer">Kosongkan</a>
+                                                <a href="<?= base_url('keranjang/hapus/?rowid=all') . '&id_lab=' . $lab; ?>" class="btn btn-sm btn-danger w-75">Kosongkan</a>
                                                 <br>
                                                 <button class="btn btn-sm btn-success w-75" type="submit">Update</button>
                                                 <br>
-                                                <a href="<?= base_url() ?>keranjang/proses_order" class="btn btn-sm btn-primary w-75">Bayar</a>
+                                                <a href="<?= base_url('keranjang/proses_order/?id_lab=') . $lab; ?>" class="btn btn-sm btn-primary w-75">Bayar</a>
                                             </div>
                                         </div>
                                     </div>
                                 <?php else : ?>
-                                    <h5>Keranjang masih kosong</h5>
+                                    <h5>PEMBAYARAN</h5>
+                                    <?= $this->session->flashdata('message'); ?>
+                                    <div class="table-responsive p-0 mb-3">
+                                        <table class="table align-items-center mb-0">
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">Produk</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah</th>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <p class="w-100 text-center text-dark text-xs"><i>Silahkan scan atau cari produk</i></p>
                                 <?php endif; ?>
                             </form>
                         </div>
@@ -156,7 +172,7 @@
                     <?php foreach ($produk as $row) : ?>
                         <div class="col-3 mb-4">
                             <div class="card" style="min-height: 380px;">
-                                <form method="post" action="<?= base_url(); ?>keranjang/tambah" method="post" accept-charset="utf-8">
+                                <form action="<?= base_url(); ?>keranjang/tambah" method="post" accept-charset="utf-8">
                                     <a href="#"><img class="img-thumbnail" src="<?= base_url('assets/img/products/') . $row['image']; ?>" /></a>
                                     <div class="card-body">
                                         <h6 class="card-title">
@@ -183,30 +199,21 @@
     </div>
 </div>
 
-<!-- Modal Penilai -->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-md">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <form method="post" action="<?php echo base_url() ?>keranjang/hapus/all">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&amp;amp;times;</button>
-                    <h4 class="modal-title">Konfirmasi</h4>
+<footer class="footer pt-3  ">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+            <div class="col mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                    © <script>
+                        document.write(new Date().getFullYear())
+                    </script>.
+                    Dev by
+                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">TIM SPW SMK NEGERI 2 CILAKU CIANJUR</a>
                 </div>
-                <div class="modal-body">
-                    Anda yakin mau mengosongkan Shopping Cart?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Tidak</button>
-                    <button type="submit" class="btn btn-sm btn-default">Ya</button>
-                </div>
-
-            </form>
+            </div>
         </div>
-
     </div>
-</div>
-<!--End Modal-->
+</footer>
 
 <script type="text/javascript" src="<?php echo base_url() . 'assets/casheer/js/jquery-2.2.3.min.js' ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/casheer/js/bootstrap.js' ?>"></script>
@@ -271,33 +278,3 @@
         });
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer class="footer pt-3  ">
-    <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-            <div class="col mb-lg-0 mb-4">
-                <div class="copyright text-center text-sm text-muted text-lg-start">
-                    © <script>
-                        document.write(new Date().getFullYear())
-                    </script>.
-                    Dev by
-                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">TIM SPW SMK NEGERI 2 CILAKU CIANJUR</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
