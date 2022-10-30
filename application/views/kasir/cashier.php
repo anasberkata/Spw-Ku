@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-4">
                             <div class="numbers">
-                                <h5>TRANSAKSI</h5>
+                                <h5>TRANSAKSI KASIR SPW <?= $lab; ?></h5>
                                 <!-- <form id="form1" role="form" action="<?= base_url(); ?>kasir/add" method="POST" accept-charset="utf-8"> -->
                                 <!-- <form role="form" action="" method="POST" accept-charset="utf-8"> -->
                                 <div class="mb-3">

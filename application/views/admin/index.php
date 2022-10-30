@@ -53,31 +53,35 @@
         </div>
     </div>
     <div class="col-xl-3 col-sm-4 col-4 mb-4">
-        <a href="<?= base_url("kasir"); ?>">
-            <div class="card text-white" style="
-                      background-image: url('<?= base_url('assets/img/foto-lab-1.jpg'); ?>'); background-size: cover; background-position: center top; height: 100%;
+        <div class="card text-white" style="
+                    background-image: url('<?= base_url('assets/img/foto-lab-1.jpg'); ?>'); background-size: cover; background-position: center top; height: 100%;
                     ">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-12 col-sm-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-uppercase font-weight-bold">Masuk Kasir</p>
-                                <h6 class="font-weight-bolder text-white">
-                                    APPLIKASI KASIR
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-4">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="numbers">
+                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Masuk Kasir</p>
+                            <h6 class="font-weight-bolder text-white">
+                                APPLIKASI KASIR
+                            </h6>
+                            <?php foreach ($lab->result() as $l) : ?>
+                                <a href="<?= base_url("kasir/cashier/?id_lab=") . $l->id_lab; ?>" class="btn btn-primary text-sm text-uppercase" onclick="runPopup()">
+                                    Kasir <?= $l->lab; ?> <i class="ni ni-bold-right"></i>
+                                </a>
+                            <?php endforeach; ?>
 
-                            <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                <i class="ni ni-bold-right text-lg opacity-10" aria-hidden="true"></i>
-                            </div>
+                            <script>
+                                function runPopup() {
+                                    var respond = prompt("Masukkan Nama Anda: ");
+                                    window.alert("Hai, " + respond + " Selamat Bekerja!");
 
+                                };
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 </div>
 

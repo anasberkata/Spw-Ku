@@ -37,9 +37,9 @@ class Kasir extends CI_Controller
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->get_product_all($id_lab);
 
-        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier', $data);
-        $this->load->view('keranjang/footer');
+        $this->load->view('kasir/footer');
     }
 
     public function search()
@@ -54,9 +54,9 @@ class Kasir extends CI_Controller
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->search($keyword, $id_lab);
 
-        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier', $data);
-        $this->load->view('keranjang/footer');
+        $this->load->view('kasir/footer');
 
         // $callback = array('hasil' => $hasil,);
         // echo json_encode($callback);
@@ -73,9 +73,9 @@ class Kasir extends CI_Controller
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->get_product_all($id_lab);
 
-        $this->load->view('keranjang/header', $data);
+        $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier', $data);
-        $this->load->view('keranjang/footer');
+        $this->load->view('kasir/footer');
     }
 
     function add()
@@ -170,8 +170,9 @@ class Kasir extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         //-------------------------Input data order------------------------------
+        $format = "%Y-%m-%d";
         $data_order = array(
-            'date_order' => date('Y-m-d'),
+            'date_order' => mdate($format),
             'id_lab' => $id_lab
         );
         $id_order = $this->k->add_order($data_order);
@@ -183,7 +184,9 @@ class Kasir extends CI_Controller
                     'id_product' => $item['id'],
                     'qty_selling' => $item['qty'],
                     'total_basic_price' => 0,
-                    'total_selling_price' => $item['price']
+                    'total_selling_price' => $item['price'] * $item['qty'],
+                    'date_order' => mdate($format),
+                    'id_lab' => $id_lab
                 );
                 $proses = $this->k->add_detail_order($data_detail);
             }
@@ -193,5 +196,72 @@ class Kasir extends CI_Controller
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembayaran berhasil diinput! Silahkan untuk melanjutkan</div>');
         redirect('kasir/cashier/?id_lab=' . $id_lab);
+    }
+
+
+    // PENJUALAN
+    public function selling()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['selling'] = $this->k->get_selling($id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_selling', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function selling_detail()
+    {
+        $date_order = $this->input->get('date_order', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_order'] = $date_order;
+        $data['lab'] = $id_lab;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['place'] = $this->k->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_order', ['date_order' => $date_order])->row_array();
+        $data['selling_detail'] = $this->k->get_selling_detail($date_order, $id_lab);
+
+        $data['total_basic_price'] = $this->k->sum_total_basic_price($date_order, $id_lab);
+        $data['total_selling_price'] = $this->k->sum_total_selling_price($date_order, $id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_selling_detail', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function selling_detail_search()
+    {
+        $date_order = $this->input->get('date_order', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_place = $this->input->get('id_place', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_order'] = $date_order;
+        $data['lab'] = $id_lab;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['place'] = $this->k->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_order', ['date_order' => $date_order])->row_array();
+        $data['selling_detail'] = $this->k->search_selling_detail($date_order, $id_lab, $id_place);
+
+        $data['total_basic_price'] = $this->k->search_sum_total_basic_price($date_order, $id_lab, $id_place);
+        $data['total_selling_price'] = $this->k->search_sum_total_selling_price($date_order, $id_lab, $id_place);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_selling_detail_search', $data);
+        $this->load->view('kasir/footer');
     }
 }

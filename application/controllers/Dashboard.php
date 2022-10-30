@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller
         // is_logged_in();
         $this->load->model('Dashboard_model', 'dashboard');
         $this->load->model('Franchisor_model', 'franchisor');
+        $this->load->model('Kasir_model', 'k');
         // $this->load->helper('date');
     }
 
@@ -25,6 +26,7 @@ class Dashboard extends CI_Controller
         $data['item'] = $this->dashboard->get_products();
         $data['product'] = $this->dashboard->get_products_running_out();
         $data['franchisor'] = $this->franchisor->get_franchisor();
+        $data['lab'] = $this->k->get_lab();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

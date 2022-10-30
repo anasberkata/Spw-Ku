@@ -11,27 +11,21 @@
         <?= $title; ?>
     </title>
 
-    <!-- Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-
-    <!-- Nucleo Icons -->
     <link href="<?= base_url('assets/') ?>css/nucleo-icons.css" rel="stylesheet" />
     <link href="<?= base_url('assets/') ?>css/nucleo-svg.css" rel="stylesheet" />
-
-    <!-- Font Awesome & Nucleo Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="<?= base_url('assets/') ?>css/nucleo-svg.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
-    <!-- Datatables -->
+
     <link rel="stylesheet" href="<?= base_url('vendor/') ?>simple-datatables/style.css">
 
-    <!-- CSS Files -->
     <link id="pagestyle" href="<?= base_url('assets/') ?>css/spw-dashboard.css?v=2.0.2" rel="stylesheet" />
-    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url('assets/') ?>casheer/css/bootstrap.css"> -->
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
+
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 fixed-start" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -49,9 +43,14 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">MENU KASIR</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url("kasir/selling") ?>">
+                    <a class="nav-link" href="<?= base_url("kasir/cashier/?id_lab=") . $lab; ?>">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-basket text-primary text-sm opacity-10"></i></div>
+                        <span class="nav-link-text ms-1">Kasir</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= base_url("kasir/selling/?id_lab=") . $lab; ?>">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-cart text-success text-sm opacity-10"></i></div>
-                        <br>
                         <span class="nav-link-text ms-1">Penjualan</span>
                     </a>
                 </li>
