@@ -92,6 +92,7 @@ class Kasir_model extends CI_Model
         $this->db->select('*');
         $this->db->distinct('DISTINCT(product), qty_selling');
         $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
         $this->db->select_sum('total_selling_price');
         $this->db->group_by('product');
         $this->db->from('tbl_order_detail');
@@ -121,6 +122,7 @@ class Kasir_model extends CI_Model
         $this->db->select('*');
         $this->db->distinct('DISTINCT(product), qty_selling');
         $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
         $this->db->select_sum('total_selling_price');
         $this->db->group_by('product');
         $this->db->from('tbl_order_detail');
