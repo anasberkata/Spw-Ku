@@ -65,7 +65,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Terjual</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">(Qty Terjual) x <br> (Harga Dasar)</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">(Qty Terjual) x <br> (Harga Jual)</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
+                                        <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,11 +96,11 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-</p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
+                                            <!-- <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_order_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 |
                                                 <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_order_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                            </td>
+                                            </td> -->
                                         </tr>
 
                                         <?php $i++; ?>

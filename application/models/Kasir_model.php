@@ -67,6 +67,12 @@ class Kasir_model extends CI_Model
         $this->db->insert('tbl_order_detail', $data);
     }
 
+    public function update_stock_product($data_stock_update, $id)
+    {
+        $this->db->where('id_product', $id);
+        $this->db->update('tbl_product', $data_stock_update);
+    }
+
     // PENJUALAN
     public function get_selling($id_lab)
     {

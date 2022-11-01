@@ -94,7 +94,9 @@ class Kasir extends CI_Controller
             'name' => $this->input->post('nama'),
             'price' => $this->input->post('harga'),
             'gambar' => $this->input->post('gambar'),
-            'qty' => $this->input->post('qty')
+            'qty' => $this->input->post('qty'),
+            'basic_price' => $this->input->post('harga_dasar'),
+            'first_qty' => $this->input->post('stok_awal')
         );
         $this->cart->insert($data_produk);
         redirect('kasir/cashier/?id_lab=' . $id_lab);
@@ -116,7 +118,9 @@ class Kasir extends CI_Controller
             'name' => $this->input->post('product_name'),
             'price' => $this->input->post('selling_price'),
             'gambar' => $this->input->post('gambar'),
-            'qty' => $this->input->post('quantity')
+            'qty' => $this->input->post('quantity'),
+            'basic_price' => $this->input->post('basic_price'),
+            'first_qty' => $this->input->post('first_qty')
         );
         $this->cart->insert($data_produk);
         redirect('kasir/cashier/?id_lab=' . $id_lab);
@@ -179,16 +183,26 @@ class Kasir extends CI_Controller
         //-------------------------Input data detail order-----------------------
         if ($cart = $this->cart->contents()) {
             foreach ($cart as $item) {
+                $id = $item['id'];
+                $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id])->row_array();
+
                 $data_detail = array(
                     'id_order' => $id_order,
                     'id_product' => $item['id'],
                     'qty_selling' => $item['qty'],
-                    'total_basic_price' => 0,
+                    'total_basic_price' => $item['basic_price'] * $item['qty'],
                     'total_selling_price' => $item['price'] * $item['qty'],
                     'date_order' => mdate($format),
                     'id_lab' => $id_lab
                 );
+
                 $proses = $this->k->add_detail_order($data_detail);
+
+                $data_stock_update = array(
+                    'qty' => $d['p']['qty'] - $item['qty']
+                );
+
+                $update_stok = $this->k->update_stock_product($data_stock_update, $id);
             }
         }
         //-------------------------Hapus shopping cart--------------------------

@@ -32,6 +32,8 @@
                                                 $('#id_product').val(obj.id_product);
                                                 // $('#barcode_product').val(obj.code);
                                                 $('#name_product').val(obj.product);
+                                                $('#first_qty').val(obj.qty);
+                                                $('#basic_price').val(obj.basic_price);
                                                 $('#selling_price').val(obj.selling_price);
                                                 $('#gambar').val(obj.image);
                                             });
@@ -40,12 +42,17 @@
                                 </div>
                                 <div class="mb-3">
                                     <label>Produk</label>
-                                    <input type="hidden" name="id_lab" id="id_lab" value="<?= $lab; ?>" class="form-control" />
-                                    <input type="hidden" name="id" id="id_product" class="form-control" readonly />
+                                    <input type="hidden" name="id_lab" id="id_lab" value="<?= $lab; ?>" />
+                                    <input type="hidden" name="id" id="id_product" />
                                     <input type="text" name="nama" id="name_product" class="form-control" placeholder="Produk" readonly />
-                                    <input type="hidden" name="harga" id="selling_price" class="form-control" placeholder="Harga" readonly />
-                                    <input type="hidden" name="gambar" class="form-control" id="gambar" />
-                                    <input type="hidden" class="form-control" id="quantity" placeholder="Jumlah Barang" name="qty" value="1">
+                                    <input type="hidden" name="gambar" id="gambar" />
+                                    <input type="hidden" name="first_stock" id="first_qty">
+                                    <input type="hidden" name="qty" id="quantity" value="1">
+                                </div>
+                                <div class="mb-3">
+                                    <label>Produk</label>
+                                    <input type="hidden" name="harga_dasar" id="basic_price" class="form-control" placeholder="Harga" readonly />
+                                    <input type="text" name="harga" id="selling_price" class="form-control" placeholder="Harga" readonly />
                                 </div>
 
                                 <div class=" mb-0">
@@ -78,6 +85,8 @@
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][name]" value="<?= $item['name']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][price]" value="<?= $item['price']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][qty]" value="<?= $item['qty']; ?>" />
+                                                <input type="hidden" name="cart[<?= $item['id']; ?>][basic_price]" value="<?= $item['basic_price']; ?>" />
+                                                <input type="hidden" name="cart[<?= $item['id']; ?>][first_qty]" value="<?= $item['first_qty']; ?>" />
 
                                                 <tr>
                                                     <td>
@@ -179,12 +188,14 @@
                                         <h6 class="card-title">
                                             <a href="#"><?= $row['product']; ?></a>
                                         </h6>
-                                        <p class="card-text text-xs font-weight-clod">Rp. <?= number_format($row['selling_price'], 0, ",", "."); ?></=>
+                                        <p class="card-text text-xs font-weight-clod">Rp. <?= number_format($row['selling_price'], 0, ",", "."); ?></p>
                                     </div>
                                     <div class="card-footer">
                                         <input type="hidden" name="id_lab" value="<?= $row['id_lab']; ?>" />
                                         <input type="hidden" name="id" value="<?= $row['id_product']; ?>" />
                                         <input type="hidden" name="nama" value="<?= $row['product']; ?>" />
+                                        <input type="hidden" name="stok_awal" value="<?= $row['qty']; ?>" />
+                                        <input type="hidden" name="harga_dasar" value="<?= $row['basic_price']; ?>" />
                                         <input type="hidden" name="harga" value="<?= $row['selling_price']; ?>" />
                                         <input type="hidden" name="gambar" value="<?= $row['image']; ?>" />
                                         <input type="hidden" name="qty" value="1" />
@@ -226,7 +237,9 @@
             var id_lab = document.getElementById("id_lab").value;
             var id_product = document.getElementById("id_product").value;
             var name_product = document.getElementById("name_product").value;
+            var first_qty = document.getElementById("first_qty").value;
             var gambar = document.getElementById("gambar").value;
+            var basic_price = document.getElementById("basic_price").value;
             var selling_price = document.getElementById("selling_price").value;
             var quantity = document.getElementById("quantity").value;
 
@@ -238,7 +251,9 @@
                     lab_id: id_lab,
                     product_id: id_product,
                     product_name: name_product,
+                    first_qty: first_qty,
                     gambar: gambar,
+                    basic_price: basic_price,
                     selling_price: selling_price,
                     quantity: quantity
                 },
