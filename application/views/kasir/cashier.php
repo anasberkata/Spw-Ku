@@ -155,21 +155,21 @@
         <div class="card mb-4">
             <div class="card-header pb-0 mb-3">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <h6>Daftar Produk (<?= $count_products; ?> Produk)</h6>
                     </div>
-                    <div class="col">
-                        <form role="form" action="<?= base_url('kasir/search') ?>" method="POST" class="float-end">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <form role="form" action="<?= base_url('kasir/search') ?>" method="POST" class="">
                             <div class="row">
-                                <input type="hidden" class="form-control" id="id_lab" name="id_lab" value="<?= $lab; ?>">
-                                <div class="col-lg-4">
+                                <input type="hidden" class="form-control mb-2" id="id_lab" name="id_lab" value="<?= $lab; ?>">
+                                <div class="col-lg-4 col-sm-4">
                                     <label class="col-form-label text-sm">Nama Produk</label>
                                 </div>
-                                <div class="col-lg-6">
-                                    <input type="text" class="form-control" id="keyword" placeholder="Cari Produk" name="keyword" onkeyup="get_p()">
+                                <div class="col-lg-6 col-sm-6">
+                                    <input type="text" class="form-control mb-2" id="keyword" placeholder="Cari Produk" name="keyword" onkeyup="get_p()">
                                 </div>
-                                <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-primary get-p"><i class="fa fa-search"></i></button>
+                                <div class="col-lg-2 col-sm-2">
+                                    <button type="submit" class="btn btn-primary mb-2 w-100 get-p"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                         </form>

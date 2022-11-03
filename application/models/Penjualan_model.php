@@ -35,7 +35,8 @@ class Penjualan_model extends CI_Model
     // PENJUALAN
     function get_selling($id_lab)
     {
-        $this->db->select('*');
+        $this->db->distinct('DISTINCT(date_selling), id_lab');
+        $this->db->group_by('date_selling');
         $this->db->from('tbl_selling');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
         $this->db->where('id_lab', $id_lab);
@@ -56,12 +57,20 @@ class Penjualan_model extends CI_Model
         $this->db->update('tbl_selling', $data);
     }
 
-    function get_selling_detail($id_selling)
+    function get_selling_detail($date_selling, $id_lab)
     {
         $this->db->select('*');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
         $this->db->from('tbl_selling_detail');
+        // $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
-        $this->db->where('id_selling', $id_selling);
+        $this->db->where('tbl_selling_detail.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -91,49 +100,57 @@ class Penjualan_model extends CI_Model
         $this->db->update('tbl_product', $data_stock);
     }
 
-    function sum_total_basic_price($id_selling)
+    function sum_total_basic_price($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price` FROM `tbl_selling_detail` WHERE `id_selling` = $id_selling");
+        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price` FROM `tbl_selling_detail` WHERE `date_selling` = '$date_selling' AND `id_lab` = '$id_lab'");
         return $query->row();
     }
 
-    function sum_total_selling_price($id_selling)
+    function sum_total_selling_price($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price` FROM `tbl_selling_detail` WHERE `id_selling` = $id_selling");
+        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price` FROM `tbl_selling_detail` WHERE `date_selling` = '$date_selling' AND `id_lab` = '$id_lab'");
         return $query->row();
     }
 
-    function search_selling_detail($id_selling, $id_place)
+    public function search_selling_detail($date_selling, $id_lab, $id_place)
     {
         $this->db->select('*');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
         $this->db->from('tbl_selling_detail');
+        // $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
-        $this->db->where('id_selling', $id_selling);
-        $this->db->where('id_place', $id_place);
+        $this->db->where('tbl_selling_detail.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', $id_place);
+        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
 
-    function search_sum_total_basic_price($id_selling, $id_place)
+    function search_sum_total_basic_price($date_selling, $id_lab, $id_place)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_basic_price`) AS `total_basic_price`
             FROM `tbl_selling_detail`
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `id_selling` = $id_selling AND `id_place` = $id_place"
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `id_place` = '$id_place'"
         );
         return $query->row();
     }
 
-    function search_sum_total_selling_price($id_selling, $id_place)
+    function search_sum_total_selling_price($date_selling, $id_lab, $id_place)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `id_selling` = $id_selling AND `id_place` = $id_place"
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `id_place` = '$id_place'"
         );
         return $query->row();
     }

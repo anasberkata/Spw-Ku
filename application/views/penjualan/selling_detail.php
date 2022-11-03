@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h6>Daftar Penjualan Produk :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($selling["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
+                        <p class="small"><?= date('d F Y', strtotime($date_selling)) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">
@@ -19,7 +19,7 @@
                                     <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF/?id_selling=' . $id_selling . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF/?date_selling=' . $date_selling . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
@@ -28,7 +28,7 @@
                                 <form role="form" action="<?= base_url('penjualan/selling_detail_search') ?>" method="GET">
                                     <div class="row">
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="id_selling" value="<?= $id_selling ?>">
+                                        <input type="hidden" name="date_selling" value="<?= $date_selling ?>">
                                         <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
                                             <label class="col-form-label text-sm">Lokasi</label>
                                         </div>
@@ -59,7 +59,7 @@
                                     <form role="form" action="<?= base_url('penjualan/selling_detail_add') ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                            <input type="hidden" name="id_selling" value="<?= $id_selling ?>">
+                                            <input type="hidden" name="date_selling" value="<?= $date_selling ?>">
                                             <div class="mb-3">
                                                 <label>Pilih Produk</label>
                                                 <!-- <select class="form-select" aria-label="Default select" name="id_product">
@@ -187,7 +187,7 @@
                                                     <form role="form" action="<?= base_url('penjualan/selling_detail_edit') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
-                                                            <input type="hidden" name="id_selling" value="<?= $id_selling ?>" readonly>
+                                                            <input type="hidden" name="date_selling" value="<?= $date_selling ?>" readonly>
                                                             <input type="hidden" name="id_selling_detail" value="<?= $sd->id_selling_detail; ?>" readonly>
                                                             <div class="mb-3">
                                                                 <select class="form-select" aria-label="Default select" name="id_product">
@@ -222,7 +222,7 @@
                                                     <form role="form" action="<?= base_url('penjualan/selling_detail_delete') ?>" method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_selling" value="<?= $sd->id_selling; ?>">
+                                                                <input type="hidden" name="date_selling" value="<?= $sd->date_selling; ?>">
                                                                 <input type="hidden" name="id_selling_detail" value="<?= $sd->id_selling_detail; ?>">
                                                                 <input type="hidden" name="id_lab" value="<?= $lab; ?>">
                                                                 <input type="hidden" name="id_product" value="<?= $sd->id_product; ?>">

@@ -174,12 +174,16 @@ class Kasir extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         //-------------------------Input data order------------------------------
+        $today = date("Y-m-d");
+        $guru_piket = $this->k->get_schedule($today);
+
         $format = "%Y-%m-%d";
         $data_order = array(
-            'date_order' => mdate($format),
+            'date_selling' => mdate($format),
+            'id_user' => $guru_piket['id_user'],
             'id_lab' => $id_lab
         );
-        $id_order = $this->k->add_order($data_order);
+        $id_selling = $this->k->add_order($data_order);
         //-------------------------Input data detail order-----------------------
         if ($cart = $this->cart->contents()) {
             foreach ($cart as $item) {
@@ -187,12 +191,12 @@ class Kasir extends CI_Controller
                 $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id])->row_array();
 
                 $data_detail = array(
-                    'id_order' => $id_order,
+                    'id_selling' => $id_selling,
                     'id_product' => $item['id'],
                     'qty_selling' => $item['qty'],
                     'total_basic_price' => $item['basic_price'] * $item['qty'],
                     'total_selling_price' => $item['price'] * $item['qty'],
-                    'date_order' => mdate($format),
+                    'date_selling' => mdate($format),
                     'id_lab' => $id_lab
                 );
 
@@ -232,22 +236,22 @@ class Kasir extends CI_Controller
 
     public function selling_detail()
     {
-        $date_order = $this->input->get('date_order', true);
+        $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['date_order'] = $date_order;
+        $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['produk'] = $this->k->get_product_all($id_lab);
         $data['place'] = $this->k->get_place();
 
-        $data['selling'] = $this->db->get_where('tbl_order', ['date_order' => $date_order])->row_array();
-        $data['selling_detail'] = $this->k->get_selling_detail($date_order, $id_lab);
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->k->get_selling_detail($date_selling, $id_lab);
 
-        $data['total_basic_price'] = $this->k->sum_total_basic_price($date_order, $id_lab);
-        $data['total_selling_price'] = $this->k->sum_total_selling_price($date_order, $id_lab);
+        $data['total_basic_price'] = $this->k->sum_total_basic_price($date_selling, $id_lab);
+        $data['total_selling_price'] = $this->k->sum_total_selling_price($date_selling, $id_lab);
 
         $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier_selling_detail', $data);
@@ -256,23 +260,23 @@ class Kasir extends CI_Controller
 
     public function selling_detail_search()
     {
-        $date_order = $this->input->get('date_order', true);
+        $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
         $id_place = $this->input->get('id_place', true);
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['date_order'] = $date_order;
+        $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['produk'] = $this->k->get_product_all($id_lab);
         $data['place'] = $this->k->get_place();
 
-        $data['selling'] = $this->db->get_where('tbl_order', ['date_order' => $date_order])->row_array();
-        $data['selling_detail'] = $this->k->search_selling_detail($date_order, $id_lab, $id_place);
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->k->search_selling_detail($date_selling, $id_lab, $id_place);
 
-        $data['total_basic_price'] = $this->k->search_sum_total_basic_price($date_order, $id_lab, $id_place);
-        $data['total_selling_price'] = $this->k->search_sum_total_selling_price($date_order, $id_lab, $id_place);
+        $data['total_basic_price'] = $this->k->search_sum_total_basic_price($date_selling, $id_lab, $id_place);
+        $data['total_selling_price'] = $this->k->search_sum_total_selling_price($date_selling, $id_lab, $id_place);
 
         $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier_selling_detail_search', $data);

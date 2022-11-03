@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h6>Daftar Penjualan Produk :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($selling["date_order"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
+                        <p class="small"><?= date('d F Y', strtotime($selling["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">
@@ -19,7 +19,7 @@
                                     <!-- <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button> -->
-                                    <!-- <a href="<?= base_url('kasir/printPDF/?date_order=' . $selling["date_order"] . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <!-- <a href="<?= base_url('kasir/printPDF/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a> -->
                                 </div>
@@ -28,7 +28,7 @@
                                 <form role="form" action="<?= base_url('kasir/selling_detail_search') ?>" method="GET">
                                     <div class="row">
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="date_order" value="<?= $selling["date_order"] ?>">
+                                        <input type="hidden" name="date_selling" value="<?= $selling["date_selling"] ?>">
                                         <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
                                             <label class="col-form-label text-sm">Lokasi</label>
                                         </div>
@@ -97,9 +97,9 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <!-- <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_order_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
                                                 |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_order_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
                                             </td> -->
                                         </tr>
 

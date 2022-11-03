@@ -28,7 +28,7 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Penjualan</th>
-                                        <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Petugas / Guru Piket</th> -->
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Petugas / Guru Piket</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -40,17 +40,17 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= date('d F Y', strtotime($s->date_order)); ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= date('d F Y', strtotime($s->date_selling)); ?></p>
                                             </td>
-                                            <!-- <td>
+                                            <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->name; ?></p>
-                                            </td> -->
+                                            </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('kasir/selling_detail/?date_order=') . $s->date_order . '&id_lab=' . $s->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Detail</a>
+                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('kasir/selling_detail/?date_selling=') . $s->date_selling . '&id_lab=' . $s->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Detail</a>
 
-                                                <!-- <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSellingEdit<?= $s->id_order; ?>"><i class="fa fa-edit cursor-pointer"></i></a> -->
+                                                <!-- <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSellingEdit<?= $s->id_selling; ?>"><i class="fa fa-edit cursor-pointer"></i></a> -->
 
-                                                <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $s->id_order; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
+                                                <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $s->id_selling; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
                                             </td>
                                         </tr>
 

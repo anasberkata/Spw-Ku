@@ -102,22 +102,22 @@ class Penjualan extends CI_Controller
     // SELLING DETAIL
     public function selling_detail()
     {
-        $id_selling = $this->input->get('id_selling', true);
+        $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
 
         $data['title'] = "Data Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['id_selling'] = $id_selling;
+        $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['product'] = $this->penjualan->get_product($id_lab);
         $data['place'] = $this->penjualan->get_place();
 
-        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
-        $data['selling_detail'] = $this->penjualan->get_selling_detail($id_selling);
+        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->penjualan->get_selling_detail($date_selling, $id_lab);
 
-        $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($id_selling);
-        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($id_selling);
+        $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($date_selling, $id_lab);
+        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($date_selling, $id_lab);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
@@ -247,29 +247,28 @@ class Penjualan extends CI_Controller
 
     public function selling_detail_search()
     {
+        $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
-        $id_selling = $this->input->get('id_selling', true);
         $id_place = $this->input->get('id_place', true);
 
         $data['title'] = "Data Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
-        $data['id_selling'] = $id_selling;
+        $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
-        $data['id_place'] = $id_place;
         $data['product'] = $this->penjualan->get_product($id_lab);
         $data['place'] = $this->penjualan->get_place();
 
-        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $id_selling])->row_array();
-        $data['selling_detail'] = $this->penjualan->search_selling_detail($id_selling, $id_place);
+        $data['selling'] = $this->db->get_where('tbl_selling', ['id_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->penjualan->get_selling_detail($date_selling, $id_lab, $id_place);
 
-        $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price($id_selling, $id_place);
-        $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price($id_selling, $id_place);
+        $data['total_basic_price'] = $this->penjualan->sum_total_basic_price($date_selling, $id_lab, $id_place);
+        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price($date_selling, $id_lab, $id_place);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/selling_detail_search', $data);
+        $this->load->view('penjualan/selling_detail', $data);
         $this->load->view('templates/footer');
     }
 
