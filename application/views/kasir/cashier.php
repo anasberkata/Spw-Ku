@@ -10,13 +10,8 @@
                                 <!-- <form id="form1" role="form" action="<?= base_url(); ?>kasir/add" method="POST" accept-charset="utf-8"> -->
                                 <!-- <form role="form" action="" method="POST" accept-charset="utf-8"> -->
                                 <div class="mb-3">
-                                    <label>Barcode</label>
-                                    <input type="text" class="form-control" list="product" placeholder="Barcode" autofocus autocomplete="off" onkeyup="get_product()" id="barcode_product" name="barcode">
-                                    <datalist id="product">
-                                        <?php foreach ($produk as $p) : ?>
-                                            <option data-value="<?= $p['code']; ?>"><?= $p['code']; ?></option>
-                                        <?php endforeach; ?>
-                                    </datalist>
+                                    <label>Barcode (Scan / Ketikan Nomor Barcode)</label>
+                                    <input type="text" class="form-control" placeholder="Barcode" autofocus autocomplete="off" onkeyup="get_product()" id="barcode_product" name="barcode">
 
                                     <script type="text/javascript">
                                         function get_product() {
@@ -41,16 +36,68 @@
                                     </script>
                                 </div>
                                 <div class="mb-3">
-                                    <label>Produk</label>
+                                    <label>Produk (Ketikan Nama Produk)</label>
                                     <input type="hidden" name="id_lab" id="id_lab" value="<?= $lab; ?>" />
                                     <input type="hidden" name="id" id="id_product" />
-                                    <input type="text" name="nama" id="name_product" class="form-control" placeholder="Produk" readonly />
                                     <input type="hidden" name="gambar" id="gambar" />
                                     <input type="hidden" name="first_stock" id="first_qty">
                                     <input type="hidden" name="qty" id="quantity" value="1">
+                                    <input type="text" name="nama" id="name_product" class="form-control" placeholder="Produk" list="product" autocomplete="off" onkeyup="get_price()" />
+                                    <datalist id="product">
+                                        <?php foreach ($produk as $p) : ?>
+                                            <option data-value="<?= $p['id_product']; ?>"><?= $p['product']; ?></option>
+                                        <?php endforeach; ?>
+                                    </datalist>
+                                    <input type="hidden" name="id_product" id="id_product-hidden">
+
+                                    <script>
+                                        document.querySelector('input[list]').addEventListener('input', function(e) {
+                                            var input = e.target,
+                                                list = input.getAttribute('list'),
+                                                options = document.querySelectorAll('#' + list + ' option'),
+                                                hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                                                inputValue = input.value;
+
+                                            hiddenInput.value = inputValue;
+
+                                            for (var i = 0; i < options.length; i++) {
+                                                var option = options[i];
+
+                                                if (option.innerText === inputValue) {
+                                                    hiddenInput.value = option.getAttribute('data-value');
+                                                    break;
+                                                }
+                                            }
+                                        });
+                                    </script>
+
+                                    <script type="text/javascript">
+                                        function get_price() {
+                                            var product = $("#name_product").val();
+                                            $.ajax({
+                                                url: '<?= base_url('autocomplete/ajax_name_product/'); ?>',
+                                                method: "GET",
+                                                data: "product=" + product,
+                                            }).success(function(data) {
+                                                var json = data,
+                                                    obj = JSON.parse(json);
+                                                console.log(obj);
+                                                $('#id_product').val(obj.id_product);
+                                                $('#barcode_product').val(obj.code);
+                                                // $('#name_product').val(obj.product);
+                                                $('#first_qty').val(obj.qty);
+                                                $('#basic_price').val(obj.basic_price);
+                                                $('#selling_price').val(obj.selling_price);
+                                                $('#gambar').val(obj.image);
+                                            });
+                                        }
+                                    </script>
+
+
+
                                 </div>
                                 <div class="mb-3">
-                                    <label>Produk</label>
+                                    <label>Harga</label>
                                     <input type="hidden" name="harga_dasar" id="basic_price" class="form-control" placeholder="Harga" readonly />
                                     <input type="text" name="harga" id="selling_price" class="form-control" placeholder="Harga" readonly />
                                 </div>

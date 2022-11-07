@@ -24,4 +24,11 @@ class Autocomplete_model extends CI_Model
         // return $hasil->result();
         return $hasil->row();
     }
+
+    function ajax_name_product($product)
+    {
+        $hasil = $this->db->query("SELECT * FROM tbl_product WHERE product = '$product'");
+        // return $hasil->result();
+        return $hasil->row();
+    }
 }

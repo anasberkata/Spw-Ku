@@ -40,4 +40,15 @@ class Autocomplete extends CI_Controller
 
         echo json_encode($data);
     }
+
+    public function ajax_name_product()
+    {
+        $product = $this->input->get('product');
+        // $id = 6;
+
+        $data = $this->autofill->ajax_name_product($product);
+        // $data = $this->pembelian->ajax_produk(1);
+
+        echo json_encode($data);
+    }
 }
