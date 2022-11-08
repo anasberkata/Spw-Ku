@@ -31,7 +31,6 @@
                                     <form role="form" action="<?= base_url('penjualan/selling_add'); ?>" method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
-                                            <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                             <div class="mb-3">
                                                 <label>Tanggal Penjualan</label>
                                                 <input type="date" class="form-control" name="date_selling">
@@ -83,14 +82,14 @@
                                             <td class="align-middle text-center text-sm">
                                                 <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('penjualan/selling_detail/?date_selling=') . $s->date_selling . '&id_lab=' . $s->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Detail</a>
                                                 |
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSellingEdit<?= $s->id_selling; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSellingEdit<?= $s->date_selling; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
 
-                                                <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $s->id_selling; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
+                                                <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $s->date_selling; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
                                             </td>
                                         </tr>
 
                                         <!-- Modal Edit -->
-                                        <div class="modal fade" id="modalSellingEdit<?= $s->id_selling; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalSellingEdit<?= $s->date_selling; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -100,8 +99,6 @@
                                                     <form role="form" action="<?= base_url('penjualan/selling_edit'); ?>" method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="id_lab" value="<?= $lab; ?>">
-                                                            <input type="hidden" class="form-control" name="id_selling" value="<?= $s->id_selling; ?>">
-                                                            <input type="hidden" class="form-control" name="id_user" value="<?= $user['id_user']; ?>">
                                                             <div class="mb-3">
                                                                 <label>Tanggal Penjualan</label>
                                                                 <input type="date" class="form-control" name="date_selling" value="<?= $s->date_selling; ?>">

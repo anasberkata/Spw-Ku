@@ -131,6 +131,7 @@
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][rowid]" value="<?= $item['rowid']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][name]" value="<?= $item['name']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][price]" value="<?= $item['price']; ?>" />
+                                                <input type="hidden" name="cart[<?= $item['id']; ?>][gambar]" value="<?= $item['gambar']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][qty]" value="<?= $item['qty']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][basic_price]" value="<?= $item['basic_price']; ?>" />
                                                 <input type="hidden" name="cart[<?= $item['id']; ?>][first_qty]" value="<?= $item['first_qty']; ?>" />
@@ -187,6 +188,20 @@
                                         </table>
                                     </div>
                                     <p class="w-100 text-center text-dark text-xs"><i>Silahkan scan atau cari produk</i></p>
+
+                                    <h6 class="text-center">Tata cara menggunakan aplikasi kasir</h6>
+                                    <ul class="mx-5">
+                                        <li class="w-100 text-start text-dark text-xs">Kamu bisa scan barcode produk agar produk beserta harga muncul. Kemudian klik <i>tombol tambah</i> untuk menambahkan ke tabel pembayaran.</li>
+                                        <li class="w-100 text-start text-dark text-xs">jika produk tidak ada atau tidak sesuai dengan hasil scan, kamu bisa mengetik nama produk di bagian produk.</li>
+                                        <li class="w-100 text-start text-dark text-xs">Setelah produk muncul, pilih produknya lalu tekan tombol tambah.</li>
+                                    </ul>
+
+                                    <h6 class="text-center">Cart</h6>
+                                    <ul class="mx-5">
+                                        <li class="w-100 text-start text-dark text-xs">Tombol Kosongkan digunakan untuk mengosongkan Cart.</li>
+                                        <li class="w-100 text-start text-dark text-xs">Tombol Update digunakan untuk mengubah nilai keseluruhan jika ada perubahan jumlah produk yang dibeli.</li>
+                                        <li class="w-100 text-start text-dark text-xs">Tombol Bayar digunakan untuk menginput pembayaran ke dalam database. tombol Bayar di klik setelah pembeli memberikan uang.</li>
+                                    </ul>
                                 <?php endif; ?>
                             </form>
                         </div>

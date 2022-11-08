@@ -50,7 +50,6 @@ class Penjualan extends CI_Controller
     public function selling_add()
     {
         $id_lab = $this->input->post('id_lab', true);
-        $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
 
         $data_check = [
@@ -65,10 +64,13 @@ class Penjualan extends CI_Controller
 
             redirect('penjualan/selling/?id_lab=' . $id_lab);
         } else {
+            $today = date("Y-m-d");
+            $guru_piket = $this->penjualan->get_schedule($today);
+
             $data = [
                 'id_selling' => NULL,
                 'date_selling' => $date_selling,
-                'id_user' => $id_user,
+                'id_user' => $guru_piket['id_user'],
                 'id_lab' => $id_lab
             ];
 
@@ -82,16 +84,17 @@ class Penjualan extends CI_Controller
     public function selling_edit()
     {
         $id_lab = $this->input->post('id_lab', true);
-        $id_selling = $this->input->post('id_selling', true);
-        $id_user = $this->input->post('id_user', true);
         $date_selling = $this->input->post('date_selling', true);
+
+        $today = date("Y-m-d");
+        $guru_piket = $this->penjualan->get_schedule($today);
 
         $data = [
             'date_selling' => $date_selling,
-            'id_user' => $id_user
+            'id_user' => $guru_piket['id_user']
         ];
 
-        $this->penjualan->update_selling($data, $id_selling);
+        $this->penjualan->update_selling($data, $date_selling);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan berhasil diubah!</div>');
 
         redirect('penjualan/selling/?id_lab=' . $id_lab);

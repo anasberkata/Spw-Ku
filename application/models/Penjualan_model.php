@@ -32,6 +32,17 @@ class Penjualan_model extends CI_Model
         return $query;
     }
 
+    function get_schedule($today)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_schedule');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_schedule.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_schedule.id_class');
+        $this->db->where('picket_schedule', $today);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
+
     // PENJUALAN
     function get_selling($id_lab)
     {
@@ -51,9 +62,9 @@ class Penjualan_model extends CI_Model
         $this->db->insert('tbl_selling', $data);
     }
 
-    function update_selling($data, $id_selling)
+    function update_selling($data, $date_selling)
     {
-        $this->db->where('id_selling', $id_selling);
+        $this->db->where('date_selling', $date_selling);
         $this->db->update('tbl_selling', $data);
     }
 
