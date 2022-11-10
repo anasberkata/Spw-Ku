@@ -127,6 +127,7 @@ class Kasir_model extends CI_Model
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling_detail.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_owner', 0);
         $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();
         return $query;

@@ -28,29 +28,17 @@
 
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
+                <div class="row justify-content-end">
+                    <div class="col-12 col-lg-6">
                         <form role="form" action="<?= base_url('kasir/selling_detail_search') ?>" method="GET">
                             <div class="row">
                                 <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                 <input type="hidden" name="date_selling" value="<?= $selling["date_selling"] ?>">
 
                                 <div class="col-12 col-lg-2 my-2">
-                                    <label class="col-form-label text-sm">Pemilik Produk</label>
+                                    <label class="col-form-label text-sm">Lokasi</label>
                                 </div>
-                                <div class="col-12 col-lg-3 my-2">
-                                    <select class="form-select" aria-label="Default select" name="id_owner">
-                                        <option>Pilih Pemilik Produk</option>
-                                        <option value="0">Semua</option>
-                                        <?php foreach ($franchisor->result() as $f) : ?>
-                                            <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="col-12 col-lg-2 my-2">
-                                    <label class="col-form-label text-sm">Lokasi Produk</label>
-                                </div>
-                                <div class="col-12 col-lg-3 my-2">
+                                <div class="col-12 col-lg-8 my-2">
                                     <select class="form-select" aria-label="Default select" name="id_place">
                                         <option>Pilih Lokasi Produk</option>
                                         <option value="0">Semua</option>

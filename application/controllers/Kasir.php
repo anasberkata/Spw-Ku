@@ -247,7 +247,6 @@ class Kasir extends CI_Controller
         $data['lab'] = $id_lab;
         $data['produk'] = $this->k->get_product_all($id_lab);
         $data['place'] = $this->k->get_place();
-        $data['franchisor'] = $this->k->get_franchisor();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->k->get_selling_detail($date_selling, $id_lab);
@@ -265,7 +264,6 @@ class Kasir extends CI_Controller
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
         $id_place = $this->input->get('id_place', true);
-        $id_owner = $this->input->get('id_owner', true);
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -277,20 +275,14 @@ class Kasir extends CI_Controller
         $data['place'] = $this->k->get_place();
         $data['franchisor'] = $this->k->get_franchisor();
 
-        if ($id_place == 0 || $id_owner == 0) {
+        if ($id_place == 0) {
             redirect('kasir/selling_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
-        } else if ($id_place) {
+        } else {
             $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
             $data['selling_detail'] = $this->k->search_selling_detail($date_selling, $id_lab, $id_place);
 
             $data['total_basic_price'] = $this->k->search_sum_total_basic_price($date_selling, $id_lab, $id_place);
             $data['total_selling_price'] = $this->k->search_sum_total_selling_price($date_selling, $id_lab, $id_place);
-        } else if ($id_owner) {
-            $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
-            $data['selling_detail'] = $this->k->search_selling_detail($date_selling, $id_lab, $id_owner);
-
-            $data['total_basic_price'] = $this->k->search_sum_total_basic_price($date_selling, $id_lab, $id_place);
-            $data['total_selling_price'] = $this->k->search_sum_total_selling_price($date_selling, $id_lab, $id_owner);
         }
 
         $this->load->view('kasir/header', $data);
