@@ -121,12 +121,14 @@ class Data extends CI_Controller
             $id_user = $this->input->post('id_user', true);
             $id_class = $this->input->post('id_class', true);
             $picket_schedule = $this->input->post('picket_schedule', true);
+            $id_lab_head = $this->input->post('id_lab_head', true);
 
             $data = [
                 'id_schedule' => NULL,
                 'id_user' => $id_user,
                 'id_class' => $id_class,
-                'picket_schedule' => $picket_schedule
+                'picket_schedule' => $picket_schedule,
+                'id_lab_head' => $id_lab_head
 
             ];
 
@@ -142,10 +144,12 @@ class Data extends CI_Controller
         $id_user = $this->input->post('id_user', true);
         $id_class = $this->input->post('id_class', true);
         $picket_schedule = $this->input->post('picket_schedule', true);
+        $id_lab_head = $this->input->post('id_lab_head', true);
 
         $this->db->set('id_user', $id_user);
         $this->db->set('id_class', $id_class);
         $this->db->set('picket_schedule', $picket_schedule);
+        $this->db->set('id_lab_head', $id_lab_head);
 
         $this->data->update_schedule($id_schedule);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil diubah!</div>');

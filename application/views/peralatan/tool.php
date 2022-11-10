@@ -16,6 +16,9 @@
                             <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalToolAdd">
                                 Tambah
                             </button>
+                            <a href="<?= base_url('peralatan/printPDF/?id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                <i class="fa fa-download"></i>
+                            </a>
                         </div>
 
                         <!-- Modal Tambah Menu -->

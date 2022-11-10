@@ -221,7 +221,7 @@
                         <h6>Daftar Produk (<?= $count_products; ?> Produk)</h6>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                        <form role="form" action="<?= base_url('kasir/search') ?>" method="POST" class="">
+                        <!-- <form role="form" action="<?= base_url('kasir/search') ?>" method="POST" class="">
                             <div class="row">
                                 <input type="hidden" class="form-control mb-2" id="id_lab" name="id_lab" value="<?= $lab; ?>">
                                 <div class="col-lg-4 col-sm-4">
@@ -234,12 +234,16 @@
                                     <button type="submit" class="btn btn-primary mb-2 w-100 get-p"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
             </div>
 
-            <div class="card-body pt-0 pb-2">
+
+
+
+            <!-- PRODUK CARD -->
+            <!-- <div class="card-body pt-0 pb-2">
                 <div class="row">
                     <?php foreach ($produk as $row) : ?>
                         <div class="col-3 mb-4">
@@ -267,6 +271,62 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
+                </div>
+            </div> -->
+
+
+
+
+
+
+            <!-- PRODUK TABLE -->
+            <div class="card-body pt-0 pb-2">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive p-0 mb-3">
+                            <table class="table align-items-center mb-0" id="data-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Jual</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i = 1; ?>
+                                    <?php foreach ($produk as $p) : ?>
+                                        <tr>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $p['product']; ?></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($p['selling_price'], 0, ',', '.'); ?>,-</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <form action="<?= base_url(); ?>kasir/add" method="post" accept-charset="utf-8">
+
+                                                    <input type="hidden" name="id_lab" value="<?= $p['id_lab']; ?>" />
+                                                    <input type="hidden" name="id" value="<?= $p['id_product']; ?>" />
+                                                    <input type="hidden" name="nama" value="<?= $p['product']; ?>" />
+                                                    <input type="hidden" name="stok_awal" value="<?= $p['qty']; ?>" />
+                                                    <input type="hidden" name="harga_dasar" value="<?= $p['basic_price']; ?>" />
+                                                    <input type="hidden" name="harga" value="<?= $p['selling_price']; ?>" />
+                                                    <input type="hidden" name="gambar" value="<?= $p['image']; ?>" />
+                                                    <input type="hidden" name="qty" value="1" />
+                                                    <button type="submit" class="btn btn-sm btn-success">Tambah</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

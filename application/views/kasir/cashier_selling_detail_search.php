@@ -19,34 +19,50 @@
                                     <!-- <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button> -->
-                                    <!-- <a href="<?= base_url('kasir/printPDF/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('kasir/printPDF/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_place=' . $id_place) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
-                                    </a> -->
+                                    </a>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <form role="form" action="<?= base_url('kasir/selling_detail_search') ?>" method="GET">
-                                    <div class="row">
-                                        <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="date_selling" value="<?= $selling["date_selling"] ?>">
-                                        <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Lokasi</label>
-                                        </div>
-                                        <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_place">
-                                                <option>Pilih Lokasi Produk</option>
-                                                <?php foreach ($place->result() as $p) : ?>
-                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
-                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <form role="form" action="<?= base_url('kasir/selling_detail_search') ?>" method="GET">
+                            <div class="row">
+                                <input type="hidden" name="id_lab" value="<?= $lab ?>">
+                                <input type="hidden" name="date_selling" value="<?= $selling["date_selling"] ?>">
 
+                                <div class="col-12 col-lg-2 my-2">
+                                    <label class="col-form-label text-sm">Pemilik Produk</label>
+                                </div>
+                                <div class="col-12 col-lg-3 my-2">
+                                    <select class="form-select" aria-label="Default select" name="id_owner">
+                                        <option>Pilih Pemilik Produk</option>
+                                        <option value="0">Semua</option>
+                                        <?php foreach ($franchisor->result() as $f) : ?>
+                                            <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-2 my-2">
+                                    <label class="col-form-label text-sm">Lokasi Produk</label>
+                                </div>
+                                <div class="col-12 col-lg-3 my-2">
+                                    <select class="form-select" aria-label="Default select" name="id_place">
+                                        <option>Pilih Lokasi Produk</option>
+                                        <option value="0">Semua</option>
+                                        <?php foreach ($place->result() as $p) : ?>
+                                            <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-2 my-2">
+                                    <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -54,7 +70,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive p-0 mb-3">
-                            <table class="table align-items-center mb-0" id="data-table">
+                            <table class="table align-items-center mb-0" id="data-table-02">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>

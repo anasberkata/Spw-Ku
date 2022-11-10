@@ -55,4 +55,10 @@ class Peralatan_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function sum_total_price($id_lab)
+    {
+        $query = $this->db->query("SELECT SUM(`price`) AS `total_price` FROM `tbl_tool` WHERE `id_lab` = '$id_lab'");
+        return $query->row();
+    }
 }

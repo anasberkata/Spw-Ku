@@ -19,9 +19,19 @@ class Kasir_model extends CI_Model
         return $query;
     }
 
+    function get_franchisor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('role_id', 7);
+        $query = $this->db->get();
+        return $query;
+    }
+
     function count_products($id_lab)
     {
         $this->db->where('id_lab', $id_lab);
+        $this->db->where('id_owner', 0);
         $query = $this->db->get('tbl_product');
         if ($query->num_rows() > 0) {
             return $query->num_rows();
@@ -52,8 +62,13 @@ class Kasir_model extends CI_Model
     public function get_product_all($id_lab)
     {
         $this->db->select('*');
+        $this->db->from('tbl_product');
         $this->db->where('id_lab', $id_lab);
-        $query = $this->db->get('tbl_product');
+        $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
+        // $this->db->limit($limit);
+        $this->db->order_by('place', 'ASC');
+        $this->db->order_by('product', 'ASC');
+        $query = $this->db->get();
         return $query->result_array();
     }
 
@@ -91,6 +106,7 @@ class Kasir_model extends CI_Model
         $this->db->group_by('date_selling');
         $this->db->from('tbl_selling');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_selling.id_class');
         $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
         $this->db->order_by('id_selling', 'DESC');
@@ -107,7 +123,7 @@ class Kasir_model extends CI_Model
         $this->db->select_sum('total_selling_price');
         $this->db->group_by('product');
         $this->db->from('tbl_selling_detail');
-        // $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
+        $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling_detail.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);

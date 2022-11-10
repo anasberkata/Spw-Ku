@@ -133,4 +133,23 @@ class Peralatan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil dihapus!</div>');
         redirect('peralatan/tool/?id_lab=' . $id_lab);
     }
+
+    public function printPDF()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Peralatan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['tool'] = $this->peralatan->get_tools($id_lab);
+        $data['tool_condition'] = $this->peralatan->get_condition();
+        $data['lab'] = $id_lab;
+
+        $data['total_price'] = $this->peralatan->sum_total_price($id_lab);
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        $page = $this->load->view('peralatan/tool_pdf', $data, TRUE);
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Data Peralatan Lab SPW ' . $id_lab . '.pdf', 'I');
+    }
 }
