@@ -227,7 +227,6 @@ class Kasir extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $id_lab;
-        $data['produk'] = $this->k->get_product_all($id_lab);
         $data['selling'] = $this->k->get_selling($id_lab);
 
         $this->load->view('kasir/header', $data);
@@ -245,7 +244,7 @@ class Kasir extends CI_Controller
 
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
-        $data['produk'] = $this->k->get_product_all($id_lab);
+        // $data['produk'] = $this->k->get_product_selling($id_lab);
         $data['place'] = $this->k->get_place();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
@@ -321,5 +320,23 @@ class Kasir extends CI_Controller
         $page = $this->load->view('kasir/cashier_selling_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
         $mpdf->Output('Laporan SPW ' . $date_selling . '.pdf', 'I');
+    }
+
+
+    // PENJUALAN TITIPAN
+    public function selling_franchise()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['selling'] = $this->k->get_selling($id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_selling', $data);
+        $this->load->view('kasir/footer');
     }
 }

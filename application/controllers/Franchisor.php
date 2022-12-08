@@ -182,8 +182,8 @@ class Franchisor extends CI_Controller
             $data = [
                 'id_product' => NULL,
                 'code' => $code,
-                'id_category' => 0,
-                'id_place' => 0,
+                'id_category' => 13,
+                'id_place' => 5,
                 'id_owner' => $id_owner,
                 'product' => $product,
                 'qty' => $qty,
