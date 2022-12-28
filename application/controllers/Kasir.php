@@ -333,10 +333,99 @@ class Kasir extends CI_Controller
 
         $data['lab'] = $id_lab;
         $data['produk'] = $this->k->get_product_all($id_lab);
-        $data['selling'] = $this->k->get_selling($id_lab);
+        $data['selling'] = $this->k->get_selling_franchise($id_lab);
 
         $this->load->view('kasir/header', $data);
-        $this->load->view('kasir/cashier_selling', $data);
+        $this->load->view('kasir/cashier_franchise', $data);
         $this->load->view('kasir/footer');
+    }
+
+    public function selling_franchise_detail()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        // $data['produk'] = $this->k->get_product_selling($id_lab);
+        // $data['place'] = $this->k->get_place();
+        $data['franchisor'] = $this->k->get_franchisor();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->k->get_selling_franchise_detail($date_selling, $id_lab);
+
+        $data['total_basic_price'] = $this->k->sum_franchise_total_basic_price($date_selling, $id_lab);
+        $data['total_selling_price'] = $this->k->sum_franchise_total_selling_price($date_selling, $id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_franchise_detail', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function selling_franchise_detail_search()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_franchisor = $this->input->get('id_franchisor', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_franchisor'] = $id_franchisor;
+        // $data['produk'] = $this->k->get_product_all($id_lab);
+        // $data['place'] = $this->k->get_place();
+        $data['franchisor'] = $this->k->get_franchisor();
+
+        if ($id_franchisor == 0) {
+            redirect('kasir/selling_franchise_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+        } else {
+            $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+            $data['selling_detail'] = $this->k->search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor);
+
+            $data['total_basic_price'] = $this->k->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_franchisor);
+            $data['total_selling_price'] = $this->k->search_sum_franchise_total_selling_price($date_selling, $id_lab, $id_franchisor);
+        }
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_franchise_detail_search', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function printPDF_franchise()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_franchisor = $this->input->get('id_franchisor', true);
+
+        $data['title'] = "Data Penjualan Titipan";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_franchisor'] = $id_franchisor;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['place'] = $this->k->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+
+        if (!isset($id_place)) {
+            $data['selling_detail'] = $this->k->get_selling_franchise_detail($date_selling, $id_lab);
+            $data['total_basic_price'] = $this->k->sum_franchise_total_basic_price($date_selling, $id_lab);
+            $data['total_selling_price'] = $this->k->sum_franchise_total_selling_price($date_selling, $id_lab);
+        } else {
+            $data['selling_detail'] = $this->k->search_selling_franchise_detail($date_selling, $id_lab, $id_place);
+            $data['total_basic_price'] = $this->k->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_place);
+            $data['total_selling_price'] = $this->k->search_sum_tfranchise_otal_selling_price($date_selling, $id_lab, $id_place);
+        }
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        $page = $this->load->view('kasir/cashier_franchise_detail_pdf', $data, TRUE);
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Laporan SPW ' . $date_selling . '.pdf', 'I');
     }
 }
