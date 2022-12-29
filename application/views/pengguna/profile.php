@@ -8,10 +8,10 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="row">
-                                <div class="col-6">
-                                    <p class="mb-0 text-uppercase text-sm">Profile Saya</p>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <p class="mb-0 text-uppercase text-sm mb-3">Profile Saya</p>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-lg-6">
                                     <div class="btn-group float-end w-100 w-lg-auto">
                                         <button type="button" class="btn btn-primary btn-sm float-end" data-bs-toggle="modal" data-bs-target="#modalEditProfile<?= $user['id_user']; ?>">
                                             Ubah Profile
@@ -20,8 +20,6 @@
                                             Ubah Password
                                         </button>
                                     </div>
-
-
                                 </div>
 
                                 <!-- Modal Edit Profile-->
@@ -34,57 +32,77 @@
                                             </div>
                                             <?= form_open_multipart('pengguna/profile_edit'); ?>
                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <input type="hidden" name="id_user" value="<?= $user['id_user']; ?>">
-                                                    <label>Nama Lengkap</label>
-                                                    <input type="text" class="form-control" placeholder="Nama lengkap" name="name" value="<?= $user['name']; ?>">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label>E-Mail</label>
-                                                    <input type="email" class="form-control" placeholder="E-Mail" name="email" value="<?= $user['email']; ?>">
-                                                </div>
-                                                <!-- <div class="mb-3">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" placeholder="Username" name="username" value="<?= $user['iusername']; ?>">
-                                                </div> -->
-                                                <div class=" mb-3">
-                                                    <label>Role</label>
-                                                    <select class="form-select" aria-label="Default select" name="role_id">
-                                                        <option value="<?= $user['role_id']; ?>"><?= $user['role']; ?></option>
-                                                        <?php foreach ($role->result() as $r) : ?>
-                                                            <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label>Gambar Profile</label>
-                                                    <div class="row">
-                                                        <div class="col-3 col-lg-2">
-                                                            <div class="avatar avatar-xl position-relative">
-                                                                <img src="<?= base_url('assets/img/users/' . $user['image']); ?>" alt="user_image" class="w-100 border-radius-lg shadow-sm">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <input type="hidden" name="id_user" value="<?= $user['id_user']; ?>">
+                                                            <label>Nama Lengkap</label>
+                                                            <input type="text" class="form-control" placeholder="Nama lengkap" name="name" value="<?= $user['name']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>Username</label>
+                                                            <input type="text" class="form-control" placeholder="Username" name="username" value="<?= $user['username']; ?>" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>E-Mail</label>
+                                                            <input type="email" class="form-control" placeholder="E-Mail" name="email" value="<?= $user['email']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>Role</label>
+                                                            <select class="form-select" aria-label="Default select" name="role_id">
+                                                                <option value="<?= $user['role_id']; ?>"><?= $user['role']; ?></option>
+                                                                <?php foreach ($role->result() as $r) : ?>
+                                                                    <option value="<?= $r->id_role ?>"><?= $r->role ?></option>
+                                                                <?php endforeach; ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <div class="mb-3">
+                                                            <label>Gambar Profile</label>
+                                                            <div class="row">
+                                                                <div class="col-3 col-lg-2">
+                                                                    <div class="avatar avatar-xl position-relative">
+                                                                        <img src="<?= base_url('assets/img/users/' . $user['image']); ?>" alt="user_image" class="border-radius-lg shadow-sm w-100">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-9 col-lg-10">
+                                                                    <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-9 col-lg-10">
-                                                            <input type="file" class="form-control mt-3" placeholder="Pilih Gambar" name="image">
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>Facebook</label>
+                                                            <input type="text" class="form-control" placeholder="Username Facebook" name="facebook" value="<?= $user['facebook']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>Instagram</label>
+                                                            <input type="text" class="form-control" placeholder="Username Instagram" name="instagram" value="<?= $user['instagram']; ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label>Whatsapp</label>
+                                                            <input type="number" class="form-control" placeholder="80000000000" name="whatsapp" value="<?= $user['whatsapp']; ?>">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label>Facebook</label>
-                                                    <input type="text" class="form-control" placeholder="Username Facebook" name="facebook" value="<?= $user['facebook']; ?>">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label>Instagram</label>
-                                                    <input type="text" class="form-control" placeholder="Username Instagram" name="instagram" value="<?= $user['instagram']; ?>">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label>Whatsapp</label>
-                                                    <input type="number" class="form-control" placeholder="80000000000" name="whatsapp" value="<?= $user['whatsapp']; ?>">
-                                                </div>
+
                                                 <!-- <div class="mb-3">
                                                     <label>Icon</label>
                                                     <input type="text" class="form-control" placeholder="Icon" name="icon" value="<?= $user['icon']; ?>">
                                                 </div> -->
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
@@ -162,63 +180,33 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Nama Lengkap</label>
-                                                <!-- <input class="form-control" type="text" value="Jesse"> -->
                                                 <p class="ps-1"><?= $user['name']; ?></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Email</label>
-                                                <!-- <input class="form-control" type="email" value="jesse@example.com"> -->
                                                 <p class="ps-1"><?= $user['email']; ?></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Posisi</label>
-                                                <!-- <input class="form-control" type="text" value="Lucky"> -->
                                                 <p class="ps-1"><?= $user['role']; ?></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="form-control-label">Aktif Sejak</label>
-                                                <!-- <input class="form-control" type="text" value="Lucky"> -->
                                                 <p class="ps-1"><?= date('d F Y', strtotime($user['date_created']));  ?></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <hr class="horizontal dark">
-                            <p class="text-uppercase text-sm">Alamat</p>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Address</label>
-                                        <input class="form-control" type="text" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">City</label>
-                                        <input class="form-control" type="text" value="New York">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Country</label>
-                                        <input class="form-control" type="text" value="United States">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Postal code</label>
-                                        <input class="form-control" type="text" value="437300">
-                                    </div>
-                                </div>
-                            </div> -->
+
                             <hr class="horizontal dark">
+
                             <p class="text-uppercase text-sm">Social Media</p>
                             <div class="row">
                                 <div class="col-md-4">
@@ -244,7 +232,7 @@
                                         <label for="example-text-input" class="form-control-label">Whatsapp</label>
                                         <!-- <input class="form-control" type="text" value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source."> -->
                                         <p class="ps-1">
-                                            <a href="https://api.whatsapp.com/send?phone=62<?= $user['whatsapp']; ?>" target="blank"><?= $user['whatsapp']; ?></a>
+                                            <a href="https://api.whatsapp.com/send?phone=62<?= $user['whatsapp']; ?>" target="blank">+62<?= $user['whatsapp']; ?></a>
                                         </p>
                                     </div>
                                 </div>

@@ -1,6 +1,6 @@
 <!-- SELAMAT DATANG -->
 <div class="row">
-    <div class="col-xl-9 col-sm-8 col-8 mb-4">
+    <div class="col-xl-9 col-sm-8 col-12 mb-4">
         <div class="card">
             <div class="card-body p-3">
                 <div class="row">
@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-3 col-sm-4 col-4 mb-4">
+    <div class="col-xl-3 col-sm-4 col-12 mb-4">
         <div class="card text-white" style="
                     background-image: url('<?= base_url('assets/img/foto-lab-1.jpg'); ?>'); background-size: cover; background-position: center top; height: 100%;
                     ">
@@ -74,7 +74,6 @@
                                 function runPopup() {
                                     var respond = prompt("Masukkan Nama Anda: ");
                                     window.alert("Hai, " + respond + " Selamat Bekerja!");
-
                                 };
                             </script>
                         </div>
@@ -178,11 +177,16 @@
     <div class="col-12 col-lg-7 mb-lg-3 mb-4">
         <div class="card">
             <div class="card-header pb-0 p-3">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-2">Jadwal Guru Piket</h6>
+                <div class="row">
+                    <div class="col-12 col-lg-4">
+                        <h6 class="mb-2">Jadwal Guru Piket</h6>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <p class="text-sm mt-1">Kepala Lab : <?= $labhead["lab_head"]; ?></p>
+                    </div>
                 </div>
             </div>
-            <div class="table-responsive mb-4">
+            <div class=" table-responsive mb-4">
                 <table class="table align-items-center">
                     <tbody>
                         <?php foreach ($schedule->result() as $s) : ?>
@@ -278,7 +282,7 @@
             <div class="table-responsive">
                 <table class="table align-items-center" id="data-table">
                     <tbody>
-                        <?php foreach ($product->result() as $p) : ?>
+                        <?php foreach ($product_running_out->result() as $p) : ?>
                             <tr>
                                 <td class="w-30">
                                     <div class="d-flex px-2 py-1 align-items-center">

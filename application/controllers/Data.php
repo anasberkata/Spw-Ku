@@ -60,6 +60,60 @@ class Data extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function lab_add()
+    {
+
+        $this->form_validation->set_rules(
+            'lab',
+            'Lab',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            redirect('data/lab');
+        } else {
+            $lab = $this->input->post('lab', true);
+
+            $data = [
+                'id_lab' => NULL,
+                'lab' => $lab,
+                'product_in_charge' => 4,
+                'equipment_in_charge' => 4,
+                'photo_lab' => 'default.jpg'
+
+            ];
+
+            $this->data->save_lab($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Lab berhasil ditambahkan!</div>');
+            redirect('data/lab');
+        }
+    }
+
+    public function lab_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $lab = $this->input->post('lab', true);
+
+        $this->db->set('lab', $lab);
+
+        $this->data->update_lab($id_lab);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Lab berhasil diubah!</div>');
+        redirect('data/lab');
+    }
+
+    public function lab_delete()
+    {
+        $id_lab = $this->input->post('id_lab');
+
+        $this->data->delete_lab($id_lab);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Lab berhasil dihapus!</div>');
+        redirect('data/lab');
+    }
+
     // DATA JADWAL SPW
     public function schedule()
     {
@@ -121,14 +175,14 @@ class Data extends CI_Controller
             $id_user = $this->input->post('id_user', true);
             $id_class = $this->input->post('id_class', true);
             $picket_schedule = $this->input->post('picket_schedule', true);
-            $id_lab_head = $this->input->post('id_lab_head', true);
+            $lab_head = $this->input->post('lab_head', true);
 
             $data = [
                 'id_schedule' => NULL,
                 'id_user' => $id_user,
                 'id_class' => $id_class,
                 'picket_schedule' => $picket_schedule,
-                'id_lab_head' => $id_lab_head
+                'lab_head' => $lab_head
 
             ];
 
@@ -144,12 +198,12 @@ class Data extends CI_Controller
         $id_user = $this->input->post('id_user', true);
         $id_class = $this->input->post('id_class', true);
         $picket_schedule = $this->input->post('picket_schedule', true);
-        $id_lab_head = $this->input->post('id_lab_head', true);
+        $lab_head = $this->input->post('lab_head', true);
 
         $this->db->set('id_user', $id_user);
         $this->db->set('id_class', $id_class);
         $this->db->set('picket_schedule', $picket_schedule);
-        $this->db->set('id_lab_head', $id_lab_head);
+        $this->db->set('lab_head', $lab_head);
 
         $this->data->update_schedule($id_schedule);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil diubah!</div>');

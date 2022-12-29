@@ -20,7 +20,6 @@
                         </div>
 
 
-
                         <!-- Modal Tambah Menu -->
                         <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -137,9 +136,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($pd->total_price, 0, ',', '.'); ?>,-</p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $pd->id_purchase_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $pd->id_purchase_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $pd->id_purchase_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $pd->id_purchase_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
 

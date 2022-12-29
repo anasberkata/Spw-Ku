@@ -231,7 +231,6 @@ class Pengguna extends CI_Controller
 
         $this->db->join('tbl_user_role', 'tbl_user_role.id_role = tbl_users.role_id');
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['role'] = $this->pengguna->get_roles();
 
         $this->load->view('templates/header', $data);
@@ -332,11 +331,7 @@ class Pengguna extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('pengguna/profile', $data);
-            $this->load->view('templates/footer');
+            redirect('pengguna/profile/');
         } else {
             $current_password = $this->input->post('current_password');
             $new_password = $this->input->post('new_password01');

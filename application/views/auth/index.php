@@ -41,6 +41,13 @@
         <div class="page-header min-vh-100">
             <div class="container">
                 <div class="row">
+                    <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('assets/img/bg-login.jpg'); background-size: cover;">
+                            <!-- <span class="mask bg-gradient-primary opacity-6"></span> -->
+                            <h4 class="mt-5 text-white font-weight-bolder font-italic position-relative">"Sekolah Pencetak Wirausaha"</h4>
+                            <p class="text-white position-relative">Belajar tanpa berpikir itu tidaklah berguna, tapi berpikir tanpa belajar itu sangatlah berbahaya!</p>
+                        </div>
+                    </div>
                     <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-center">
@@ -101,13 +108,6 @@
                                     <a href="https://wa.me/message/3KL7OTZRYNCGC1" target="blank" class="text-primary text-gradient font-weight-bold">di Sini</a>
                                 </p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                        <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('assets/img/bg-login.jpg'); background-size: cover;">
-                            <!-- <span class="mask bg-gradient-primary opacity-6"></span> -->
-                            <h4 class="mt-5 text-white font-weight-bolder font-italic position-relative">"Sekolah Pencetak Wirausaha"</h4>
-                            <p class="text-white position-relative">Belajar tanpa berpikir itu tidaklah berguna, tapi berpikir tanpa belajar itu sangatlah berbahaya!</p>
                         </div>
                     </div>
                 </div>

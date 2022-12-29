@@ -25,36 +25,46 @@
                                     </div>
                                     <form role="form" action="<?= base_url('data/schedule_add'); ?>" method="POST">
                                         <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label>Tanggal Praktek</label>
-                                                <input type="date" class="form-control" name="picket_schedule">
-                                            </div>
-                                            <div class=" mb-3">
-                                                <label>Guru Praktek</label>
-                                                <select class="form-select" aria-label="Default select" name="id_user">
-                                                    <option selected>Pilih guru praktek</option>
-                                                    <?php foreach ($teacher->result() as $t) : ?>
-                                                        <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class=" mb-3">
-                                                <label>Kelas</label>
-                                                <select class="form-select" aria-label="Default select" name="id_class">
-                                                    <option selected>Pilih kelas</option>
-                                                    <?php foreach ($class->result() as $c) : ?>
-                                                        <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                            <div class=" mb-3">
-                                                <label>Kepala Lab</label>
-                                                <select class="form-select" aria-label="Default select" name="id_lab_head">
-                                                    <option selected>Pilih kepala lab</option>
-                                                    <?php foreach ($teacher->result() as $t) : ?>
-                                                        <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label>Tanggal Praktek</label>
+                                                        <input type="date" class="form-control" name="picket_schedule">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class=" mb-3">
+                                                        <label>Guru Praktek</label>
+                                                        <select class="form-select" aria-label="Default select" name="id_user">
+                                                            <option selected>Pilih guru praktek</option>
+                                                            <?php foreach ($teacher->result() as $t) : ?>
+                                                                <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class=" mb-3">
+                                                        <label>Kelas</label>
+                                                        <select class="form-select" aria-label="Default select" name="id_class">
+                                                            <option selected>Pilih kelas</option>
+                                                            <?php foreach ($class->result() as $c) : ?>
+                                                                <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class=" mb-3">
+                                                        <label>Kepala Lab</label>
+                                                        <select class="form-select" aria-label="Default select" name="lab_head">
+                                                            <option selected>Pilih kepala lab</option>
+                                                            <?php foreach ($teacher->result() as $t) : ?>
+                                                                <option value="<?= $t->name ?>"><?= $t->name ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -107,12 +117,13 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= date('d F Y', strtotime($s->picket_schedule)); ?></p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->id_lab_head; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $s->lab_head; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalScheduleEdit<?= $s->id_schedule; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalScheduleDelete<?= $s->id_schedule; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalScheduleEdit<?= $s->id_schedule; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalScheduleDelete<?= $s->id_schedule; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
 
@@ -126,37 +137,47 @@
                                                     </div>
                                                     <form role="form" action="<?= base_url('data/schedule_edit'); ?>" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="hidden" class="form-control" name="id_schedule" value="<?= $s->id_schedule; ?>">
-                                                            <div class="mb-3">
-                                                                <label>Tanggal Praktek</label>
-                                                                <input type="date" class="form-control" name="picket_schedule" value="<?= $s->picket_schedule ?>">
-                                                            </div>
-                                                            <div class=" mb-3">
-                                                                <label>Guru Praktek</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_user">
-                                                                    <option value="<?= $s->id_user; ?>" selected><?= $s->name; ?></option>
-                                                                    <?php foreach ($teacher->result() as $t) : ?>
-                                                                        <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class=" mb-3">
-                                                                <label>Kelas</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_class">
-                                                                    <option value="<?= $s->id_class; ?>" selected><?= $s->class; ?></option>
-                                                                    <?php foreach ($class->result() as $c) : ?>
-                                                                        <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
-                                                            </div>
-                                                            <div class=" mb-3">
-                                                                <label>Kepala Lab</label>
-                                                                <select class="form-select" aria-label="Default select" name="id_user">
-                                                                    <option value="<?= $s->id_lab_head; ?>" selected><?= $s->id_lab_head; ?></option>
-                                                                    <?php foreach ($teacher->result() as $t) : ?>
-                                                                        <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
-                                                                    <?php endforeach; ?>
-                                                                </select>
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-6">
+                                                                    <input type="hidden" class="form-control" name="id_schedule" value="<?= $s->id_schedule; ?>">
+                                                                    <div class="mb-3">
+                                                                        <label>Tanggal Praktek</label>
+                                                                        <input type="date" class="form-control" name="picket_schedule" value="<?= $s->picket_schedule ?>">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class=" mb-3">
+                                                                        <label>Guru Praktek</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_user">
+                                                                            <option value="<?= $s->id_user; ?>" selected><?= $s->name; ?></option>
+                                                                            <?php foreach ($teacher->result() as $t) : ?>
+                                                                                <option value="<?= $t->id_user ?>"><?= $t->name ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class=" mb-3">
+                                                                        <label>Kelas</label>
+                                                                        <select class="form-select" aria-label="Default select" name="id_class">
+                                                                            <option value="<?= $s->id_class; ?>" selected><?= $s->class; ?></option>
+                                                                            <?php foreach ($class->result() as $c) : ?>
+                                                                                <option value="<?= $c->id_class ?>"><?= $c->class ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class=" mb-3">
+                                                                        <label>Kepala Lab</label>
+                                                                        <select class="form-select" aria-label="Default select" name="lab_head">
+                                                                            <option value="<?= $s->lab_head; ?>" selected><?= $s->lab_head; ?></option>
+                                                                            <?php foreach ($teacher->result() as $t) : ?>
+                                                                                <option value="<?= $t->name ?>"><?= $t->name ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

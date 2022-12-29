@@ -85,9 +85,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><a class="badge bg-success btn-sm px-3 py-2 rounded-pill" href="https://wa.me/<?= $s->phone; ?>" target="blank"><i class="fa fa-whatsapp cursor-pointer"></i></a></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSupplierEdit<?= $s->id_supplier; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSupplierDelete<?= $s->id_supplier; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalSupplierEdit<?= $s->id_supplier; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalSupplierDelete<?= $s->id_supplier; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
 

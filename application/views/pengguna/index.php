@@ -155,11 +155,11 @@
                                             </td>
                                             <?php if ($user["role_id"] == 1) : ?>
                                                 <td class="align-middle text-center text-sm">
-                                                    <a type="button" class="badge bg-success btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></a>
-                                                    |
-                                                    <a type="button" class="badge bg-primary btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                    |
-                                                    <a type="button" class="badge bg-danger btn-sm px-3 py-2 ms-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                    <div class="btn-group w-100 w-lg-auto mt-2">
+                                                        <button type="button" class="btn btn-success btn-sm px-3" data-bs-toggle="modal" data-bs-target="#modalUserDetail<?= $u->id_user; ?>"><i class="fa fa-user cursor-pointer"></i></button>
+                                                        <button type="button" class="btn btn-primary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#modalUserEdit<?= $u->id_user; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                        <button type="button" class="btn btn-danger btn-sm px-3" data-bs-toggle="modal" data-bs-target="#modalUserDelete<?= $u->id_user; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                    </div>
                                                 </td>
                                             <?php endif; ?>
                                         </tr>

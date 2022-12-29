@@ -317,7 +317,7 @@
                                                     <input type="hidden" name="harga" value="<?= $p['selling_price']; ?>" />
                                                     <input type="hidden" name="gambar" value="<?= $p['image']; ?>" />
                                                     <input type="hidden" name="qty" value="1" />
-                                                    <button type="submit" class="btn btn-sm btn-success">Tambah</button>
+                                                    <button type="submit" class="btn btn-sm btn-success mb-0">Tambah</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -94,11 +94,12 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->name; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-warning btn-sm px-3 py-2 rounded-pill" href="<?= base_url('produk/purchase_detail/?id_purchase=') . $p->id_purchase . '&id_lab=' . $p->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
-                                                |
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseEdit<?= $p->id_purchase; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <a type="button" class="btn btn-warning btn-sm px-3 py-2" href="<?= base_url('produk/purchase_detail/?id_purchase=') . $p->id_purchase . '&id_lab=' . $p->id_lab; ?>"><i class="fa fa-list cursor-pointer"> </i> Input</a>
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalPurchaseEdit<?= $p->id_purchase; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
 
-                                                <!-- <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $p->id_purchase; ?>"><i class="fa fa-trash cursor-pointer"></i></a> -->
+                                                    <!-- <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalPurchaseDelete<?= $p->id_purchase; ?>"><i class="fa fa-trash cursor-pointer"></i></button> -->
+                                                </div>
                                             </td>
                                         </tr>
 

@@ -8,8 +8,6 @@ class Dashboard extends CI_Controller
         parent::__construct();
         // is_logged_in();
         $this->load->model('Dashboard_model', 'dashboard');
-        $this->load->model('Franchisor_model', 'franchisor');
-        $this->load->model('Kasir_model', 'k');
         // $this->load->helper('date');
     }
 
@@ -18,15 +16,18 @@ class Dashboard extends CI_Controller
         $data['title'] = "Dashboard";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
+        $today = date("Y-m-d");
+
         $data['count_class'] = $this->dashboard->count_class();
         $data['count_products'] = $this->dashboard->count_products();
         $data['count_franchisor'] = $this->dashboard->count_franchisor();
         $data['count_users'] = $this->dashboard->count_users();
         $data['schedule'] = $this->dashboard->get_schedule();
+        $data['labhead'] = $this->db->get_where('tbl_schedule', ['picket_schedule' => $today])->row_array();
         $data['item'] = $this->dashboard->get_products();
-        $data['product'] = $this->dashboard->get_products_running_out();
-        $data['franchisor'] = $this->franchisor->get_franchisor();
-        $data['lab'] = $this->k->get_lab();
+        $data['product_running_out'] = $this->dashboard->get_products_running_out();
+        $data['franchisor'] = $this->dashboard->get_franchisor();
+        $data['lab'] = $this->dashboard->get_lab();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);

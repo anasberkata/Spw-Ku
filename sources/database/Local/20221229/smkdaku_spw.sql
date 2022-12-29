@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 28, 2022 at 06:30 PM
+-- Generation Time: Dec 29, 2022 at 06:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -1747,72 +1747,15 @@ CREATE TABLE `tbl_schedule` (
   `id_user` int(11) NOT NULL,
   `id_class` int(11) NOT NULL,
   `picket_schedule` date NOT NULL,
-  `id_lab_head` int(11) NOT NULL
+  `lab_head` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_schedule`
 --
 
-INSERT INTO `tbl_schedule` (`id_schedule`, `id_user`, `id_class`, `picket_schedule`, `id_lab_head`) VALUES
-(12, 9, 9, '2022-09-19', 1),
-(13, 2, 1, '2022-09-20', 1),
-(14, 5, 4, '2022-09-21', 1),
-(15, 9, 22, '2022-09-22', 1),
-(16, 13, 17, '2022-09-23', 1),
-(17, 7, 13, '2022-09-26', 0),
-(18, 13, 16, '2022-09-27', 0),
-(19, 10, 23, '2022-09-28', 0),
-(20, 5, 5, '2022-09-29', 0),
-(21, 6, 22, '2022-09-30', 0),
-(22, 10, 12, '2022-10-03', 0),
-(23, 11, 6, '2022-10-04', 0),
-(24, 11, 7, '2022-10-05', 0),
-(25, 9, 9, '2022-10-17', 0),
-(26, 12, 18, '2022-10-18', 0),
-(27, 3, 14, '2022-10-19', 0),
-(28, 9, 11, '2022-10-20', 0),
-(29, 11, 8, '2022-10-21', 0),
-(30, 6, 20, '2022-10-24', 0),
-(31, 11, 6, '2022-10-25', 0),
-(32, 10, 23, '2022-10-26', 0),
-(33, 6, 21, '2022-10-27', 0),
-(34, 6, 22, '2022-10-28', 0),
-(35, 4, 2, '2022-10-31', 0),
-(36, 13, 16, '2022-11-01', 0),
-(37, 11, 7, '2022-11-02', 0),
-(38, 12, 19, '2022-11-03', 0),
-(39, 9, 10, '2022-11-04', 0),
-(40, 9, 9, '2022-11-07', 0),
-(41, 12, 18, '2022-11-08', 0),
-(42, 5, 4, '2022-11-09', 0),
-(43, 9, 11, '2022-11-10', 0),
-(44, 13, 17, '2022-11-11', 0),
-(45, 6, 20, '2022-11-14', 0),
-(46, 11, 6, '2022-11-15', 0),
-(47, 3, 14, '2022-11-16', 0),
-(48, 6, 21, '2022-11-17', 0),
-(49, 6, 22, '2022-11-18', 0),
-(50, 7, 13, '2022-11-21', 0),
-(51, 13, 16, '2022-11-22', 0),
-(52, 10, 23, '2022-11-23', 0),
-(53, 9, 11, '2022-11-24', 0),
-(54, 9, 10, '2022-11-25', 0),
-(55, 13, 15, '2022-11-28', 0),
-(56, 12, 18, '2022-11-29', 0),
-(57, 11, 7, '2022-11-30', 0),
-(58, 6, 21, '2022-12-01', 0),
-(59, 6, 22, '2022-12-02', 0),
-(60, 4, 2, '2022-12-05', 0),
-(61, 11, 6, '2022-12-06', 0),
-(62, 5, 4, '2022-12-07', 0),
-(63, 12, 19, '2022-12-08', 0),
-(64, 11, 8, '2022-12-09', 0),
-(65, 5, 3, '2022-12-12', 0),
-(66, 13, 16, '2022-12-13', 0),
-(67, 10, 23, '2022-12-14', 0),
-(68, 9, 11, '2022-12-15', 0),
-(69, 13, 17, '2022-12-16', 0);
+INSERT INTO `tbl_schedule` (`id_schedule`, `id_user`, `id_class`, `picket_schedule`, `lab_head`) VALUES
+(71, 13, 17, '2022-12-29', 'Andika Nurhidayat, S.Pd');
 
 -- --------------------------------------------------------
 
@@ -3570,7 +3513,7 @@ ALTER TABLE `tbl_class`
 -- AUTO_INCREMENT for table `tbl_data_lab`
 --
 ALTER TABLE `tbl_data_lab`
-  MODIFY `id_lab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_lab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_data_web`
@@ -3612,7 +3555,7 @@ ALTER TABLE `tbl_purchase_detail`
 -- AUTO_INCREMENT for table `tbl_schedule`
 --
 ALTER TABLE `tbl_schedule`
-  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id_schedule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling`
@@ -3666,7 +3609,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_user_access_menu`
 --
 ALTER TABLE `tbl_user_access_menu`
-  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_user_access_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tbl_user_menu`

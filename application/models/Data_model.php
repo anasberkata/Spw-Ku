@@ -10,6 +10,36 @@ class Data_model extends CI_Model
         return $query;
     }
 
+    function save_lab($data)
+    {
+        $this->db->insert('tbl_data_lab', $data);
+    }
+
+    function update_lab($id_lab)
+    {
+        $this->db->where('id_lab', $id_lab);
+        $this->db->update('tbl_data_lab');
+    }
+
+    function delete_lab($id_lab)
+    {
+        $this->db->where('id_lab', $id_lab);
+        $this->db->delete('tbl_data_lab');
+
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     function get_teacher()
     {
         $this->db->select('*');
@@ -20,6 +50,15 @@ class Data_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+
+
+
+
+
+
+
+
 
     // SCHEDULE
     function get_schedule()

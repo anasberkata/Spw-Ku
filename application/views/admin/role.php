@@ -69,29 +69,13 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $r->role; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <!-- <a type="button" class="badge bg-success btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleAccess<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></a> -->
-                                                <a type="button" class="badge bg-success btn-sm px-3 py-2 rounded-pill" href="<?= base_url('admin/roleaccess/') . $r->id_role; ?>"><i class="fa fa-key cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleEdit<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalRoleDelete<?= $r->id_role; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <a type="button" class="btn btn-success btn-sm px-3 py-2" href="<?= base_url('admin/roleaccess/') . $r->id_role; ?>"><i class="fa fa-key cursor-pointer"></i></a>
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalRoleEdit<?= $r->id_role; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalRoleDelete<?= $r->id_role; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
-
-                                        <!-- Modal Edit Role -->
-                                        <!-- <div class="modal fade" id="modalRoleAccess<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="AccessModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="AccessModalLabel">Ubah Access Role</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h5>Role : <?= $r->role; ?></h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
 
                                         <!-- Modal Edit Role -->
                                         <div class="modal fade" id="modalRoleEdit<?= $r->id_role; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">

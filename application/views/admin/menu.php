@@ -77,9 +77,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $m->order_menu; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $m->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuDelete<?= $m->id_user_menu; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuEdit<?= $m->id_user_menu; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" type="button" data-bs-toggle="modal" data-bs-target="#modalMenuDelete<?= $m->id_user_menu; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
 
@@ -240,7 +241,7 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Menu</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">URL</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Submenu</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
                                     </tr>
                                 </thead>
@@ -267,9 +268,10 @@
                                                 <p class="text-xs font-weight-bold mb-0 px-3"><?= $sm->order_submenu; ?></p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSubmenuEdit<?= $sm->id_user_submenu; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalSubmenuDelete<?= $sm->id_user_submenu; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalSubmenuEdit<?= $sm->id_user_submenu; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalSubmenuDelete<?= $sm->id_user_submenu; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                </div>
                                             </td>
                                         </tr>
 
