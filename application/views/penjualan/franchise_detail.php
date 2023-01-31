@@ -6,58 +6,51 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <h6>Daftar Penjualan Produk Titipan :</h6>
-                        <p class="small"><?= date('d F Y', strtotime($franchise["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?></p>
+                        <h6>Daftar Penjualan Produk :</h6>
+                        <p class="small">
+                            <?= date('d F Y', strtotime($selling["date_selling"])) . " // SPW " . $lab . " // Guru Piket : " . $user["name"]; ?>
+                        </p>
                     </div>
                     <div class="col-12 col-lg-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('penjualan/franchise/?id_lab=') . $lab; ?>" class="btn btn-primary btn-sm mb-3">
+                                    <a href="<?= base_url('penjualan/franchise/?id_lab=') . $lab; ?>"
+                                        class="btn btn-primary btn-sm mb-3">
                                         Kembali
                                     </a>
-                                    <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
+                                    <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal"
+                                        data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF_franchise/?id_franchise=' . $id_franchise . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('penjualan/printPDF/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_place=' . $id_place) ?>"
+                                        class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <!-- <form role="form" action="<?= base_url('penjualan/franchisor_add') ?>" method="GET">
+                                <form role="form" action="<?= base_url('penjualan/selling_detail_search') ?>"
+                                    method="GET">
                                     <div class="row">
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
-                                        <div class="col-4 col-lg-3 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Franchisor</label>
-                                        </div>
-                                        <div class="col-8 col-lg-6 col-md-8 col-sm-8 my-2">
-                                            <input type="text" class="form-control" placeholder="Masukan franchisor baru" name="franchisor">
-                                        </div>
-                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
-                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-pen"></i></button>
-                                        </div>
-                                    </div>
-                                </form> -->
-
-                                <form role="form" action="<?= base_url('penjualan/franchise_detail_search') ?>" method="GET">
-                                    <div class="row">
-                                        <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                        <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
+                                        <input type="hidden" name="date_selling"
+                                            value="<?= $selling["date_selling"] ?>">
                                         <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Pemilik</label>
+                                            <label class="col-form-label text-sm">Lokasi</label>
                                         </div>
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_user">
-                                                <option>Pilih Pemilik Produk</option>
-                                                <?php foreach ($franchisor->result() as $f) : ?>
-                                                    <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
+                                            <select class="form-select" aria-label="Default select" name="id_place">
+                                                <option>Pilih Lokasi Produk</option>
+                                                <option value="0">Semua</option>
+                                                <?php foreach ($place->result() as $p): ?>
+                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
-                                            <button type="submit" class="btn btn-primary w-100"><i class="fa fa-search"></i></button>
+                                            <button type="submit" class="btn btn-primary w-100"><i
+                                                    class="fa fa-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -65,96 +58,71 @@
                         </div>
 
                         <!-- Modal Tambah Menu -->
-                        <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalProductAdd" tabindex="-1" aria-labelledby="addModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
-                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_add') ?>" method="POST">
+                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_add') ?>"
+                                        method="POST">
                                         <div class="modal-body">
                                             <input type="hidden" name="id_lab" value="<?= $lab ?>">
-                                            <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>">
+                                            <input type="hidden" name="date_selling"
+                                                value="<?= $selling["date_selling"] ?>">
+                                            <div class="mb-3">
+                                                <label>Pilih Produk</label>
+                                                <!-- <select class="form-select" aria-label="Default select" name="id_product">
+                                                    <option selected>Pilih Produk</option>
+                                                    <?php foreach ($product->result() as $p): ?>
+                                                                                                                                                                            <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
+                                                    <?php endforeach; ?>
+                                                </select> -->
 
-                                            <div class="row">
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Pemilik Produk</label>
-                                                        <select class="form-select" aria-label="Default select" name="id_user">
-                                                            <option selected>Pilih Pemilik Produk</option>
-                                                            <?php foreach ($franchisor->result() as $f) : ?>
-                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
-                                                            <?php endforeach; ?>
-                                                        </select>
+                                                <input type="text" class="form-control" list="product" id="id_product"
+                                                    placeholder="Pilih Produk" autocomplete="off">
+                                                <datalist id="product">
+                                                    <?php foreach ($product->result() as $p): ?>
+                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                            Stok : <?= $p->qty ?></option>
+                                                    <?php endforeach; ?>
+                                                </datalist>
+                                                <input type="hidden" name="id_product" id="id_product-hidden">
 
-                                                        <!-- <input type="text" class="form-control" list="franchisor" id="id_franchisor" placeholder="Pilih Pemilik Produk" autocomplete="off">
-                                                        <datalist id="franchisor">
-                                                            <?php foreach ($franchisor->result() as $f) : ?>
-                                                                <option data-value="<?= $f->id_franchisor ?>"><?= $f->franchisor ?></option>
-                                                            <?php endforeach; ?>
-                                                        </datalist>
-                                                        <input type="hidden" name="id_franchisor" id="id_franchisor-hidden">
+                                                <script>
+                                                    document.querySelector('input[list]').addEventListener('input', function (e) {
+                                                        var input = e.target,
+                                                            list = input.getAttribute('list'),
+                                                            options = document.querySelectorAll('#' + list + ' option'),
+                                                            hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+                                                            inputValue = input.value;
 
-                                                        <script>
-                                                            document.querySelector('input[list]').addEventListener('input', function(e) {
-                                                                var input = e.target,
-                                                                    list = input.getAttribute('list'),
-                                                                    options = document.querySelectorAll('#' + list + ' option'),
-                                                                    hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
-                                                                    inputValue = input.value;
+                                                        hiddenInput.value = inputValue;
 
-                                                                hiddenInput.value = inputValue;
+                                                        for (var i = 0; i < options.length; i++) {
+                                                            var option = options[i];
 
-                                                                for (var i = 0; i < options.length; i++) {
-                                                                    var option = options[i];
+                                                            if (option.innerText === inputValue) {
+                                                                hiddenInput.value = option.getAttribute('data-value');
+                                                                break;
+                                                            }
+                                                        }
+                                                    });
+                                                </script>
 
-                                                                    if (option.innerText === inputValue) {
-                                                                        hiddenInput.value = option.getAttribute('data-value');
-                                                                        break;
-                                                                    }
-                                                                }
-                                                            });
-                                                        </script> -->
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Nama Produk</label>
-                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Harga Dasar (Rp.)</label>
-                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Harga Jual (Rp.)</label>
-                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Qty Awal</label>
-                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6">
-                                                    <div class="mb-3">
-                                                        <label>Qty Akhir <span class="text-danger">*</span></label>
-                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="text-sm small"><small><i><span class="text-danger">*</span>(Kosongkan jika tidak ada data)</i></small></p>
-                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label>Qty Terjual</label>
+                                                <input type="number" class="form-control" placeholder="Jumlah Terjual"
+                                                    name="qty_selling">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-bs-dismiss="modal">Batal</button>
                                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                         </div>
                                     </form>
@@ -171,10 +139,7 @@
                         <?= $this->session->flashdata('message'); ?>
                     </div>
                     <div class="col-12">
-                        <?= form_error('product', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                        <?= form_error('qty', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                        <?= form_error('basic_price', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
-                        <?= form_error('selling_price', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
+                        <?= form_error('qty_selling', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">', '</div>') ?>
                     </div>
 
                     <div class="col-12">
@@ -182,127 +147,143 @@
                             <table class="table align-items-center mb-0" id="table2">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pemilik Produk</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Dasar</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Jual</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Awal</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Akhir</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty Terjual</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">(Qty Terjual) x <br> (Harga Dasar)</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">(Qty Terjual) x <br> (Harga Jual)</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                            width="7%">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nama Produk</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Harga Dasar</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Harga Jual</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty Akhir</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty Terjual</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            (Qty Terjual) x <br> (Harga Dasar)</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            (Qty Terjual) x <br> (Harga Jual)</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">
+                                            Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($franchise_detail->result() as $fd) : ?>
+                                    <?php foreach ($selling_detail->result() as $sd): ?>
                                         <tr>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
-                                            </td>
-                                            <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <span class="badge badge-sm bg-gradient-success"><?= $fd->name; ?></span>
+                                                    <?= $i; ?>
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $sd->product; ?>
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->basic_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($sd->basic_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($sd->selling_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $sd->qty; ?>
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_last; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $sd->qty_selling; ?>
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_selling; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($sd->total_basic_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_basic_price, 0, ',', '.'); ?>,-</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_selling_price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $fd->id_franchise_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                |
-                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $fd->id_franchise_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                    <a type="button" class="btn btn-primary btn-sm px-3 py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i
+                                                            class="fa fa-edit cursor-pointer"></i></a>
+                                                    <a type="button" class="btn btn-danger btn-sm px-3 py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalProductDelete<?= $sd->id_product; ?>"><i
+                                                            class="fa fa-trash cursor-pointer"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
 
                                         <!-- Modal Edit Role -->
-                                        <div class="modal fade" id="modalProductEdit<?= $fd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalProductEdit<?= $sd->id_selling_detail; ?>"
+                                            tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Data Produk</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_edit') ?>" method="POST">
+                                                    <form role="form"
+                                                        action="<?= base_url('penjualan/selling_detail_edit') ?>"
+                                                        method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
-                                                            <input type="hidden" name="id_franchise" value="<?= $id_franchise ?>" readonly>
-                                                            <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>" readonly>
+                                                            <input type="hidden" name="date_selling"
+                                                                value="<?= $date_selling ?>" readonly>
+                                                            <input type="hidden" name="id_selling_detail"
+                                                                value="<?= $sd->id_selling_detail; ?>" readonly>
 
                                                             <div class="row">
-                                                                <div class="col-12 col-lg-6">
+                                                                <div class="col-12">
                                                                     <div class="mb-3">
-                                                                        <label>Pemilik Produk</label>
-                                                                        <select class="form-select" aria-label="Default select" name="id_user">
-                                                                            <option value="<?= $fd->id_user ?>"><?= $fd->name ?></option>
-                                                                            <?php foreach ($franchisor->result() as $f) : ?>
-                                                                                <option value="<?= $f->id_user ?>"><?= $f->name ?></option>
+                                                                        <select class="form-select"
+                                                                            aria-label="Default select" name="id_product">
+                                                                            <option value="<?= $sd->id_product ?>"><?=
+                                                                                  $sd->product ?> || Stok : <?= $sd->qty ?>
+                                                                            </option>
+                                                                            <?php foreach ($product->result() as $p): ?>
+                                                                                <option value="<?= $p->id_product ?>"><?=
+                                                                                      $p->product ?> || Stok : <?= $sd->qty ?>
+                                                                                </option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-lg-6">
+                                                                <div class="col-6">
                                                                     <div class="mb-3">
-                                                                        <label>Nama Produk</label>
-                                                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product" value="<?= $fd->product ?>">
+                                                                        <label>Qty Terjual Awal</label>
+                                                                        <input type="number" class="form-control"
+                                                                            placeholder="Jumlah Terjual" name="qty_selling"
+                                                                            value="<?= $sd->qty_selling ?>" readonly>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-lg-6">
+                                                                <div class="col-6">
                                                                     <div class="mb-3">
-                                                                        <label>Harga Dasar (Rp.)</label>
-                                                                        <input type="number" class="form-control" placeholder="Harga Dasar" name="basic_price" value="<?= $fd->basic_price ?>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12 col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label>Harga Jual (Rp.)</label>
-                                                                        <input type="number" class="form-control" placeholder="Harga Jual" name="selling_price" value="<?= $fd->selling_price ?>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12 col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label>Qty Awal</label>
-                                                                        <input type="number" class="form-control" placeholder="Stok Awal" name="qty_product" value="<?= $fd->qty_product ?>">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12 col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label>Qty Akhir</label>
-                                                                        <input type="number" class="form-control" placeholder="Stok Akhir" name="qty_last" value="<?= $fd->qty_last ?>">
+                                                                        <label>Kurang / Tambah</label>
+                                                                        <input type="number" class="form-control"
+                                                                            placeholder="Kurang / Tambah" name="qty_mp">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="mb-3">
-                                                                <label>Qty Terjual</label>
-                                                                <input type="number" class="form-control" placeholder="Stok Terjual" name="qty_selling" value="<?= $fd->qty_selling ?>">
-                                                            </div> -->
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary btn-sm">Simpan</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -310,25 +291,38 @@
                                         </div>
 
                                         <!-- Modal Hapus Role -->
-                                        <div class="modal fade" id="modalProductDelete<?= $fd->id_franchise_detail; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalProductDelete<?= $sd->id_product; ?>" tabindex="-1"
+                                            aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Produk</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('penjualan/franchise_detail_delete') ?>" method="POST">
+                                                    <form role="form"
+                                                        action="<?= base_url('penjualan/selling_detail_delete') ?>"
+                                                        method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_franchise" value="<?= $fd->id_franchise; ?>">
-                                                                <input type="hidden" name="id_franchise_detail" value="<?= $fd->id_franchise_detail; ?>">
+                                                                <input type="hidden" name="date_selling"
+                                                                    value="<?= $sd->date_selling; ?>">
+                                                                <input type="hidden" name="id_product"
+                                                                    value="<?= $sd->id_product; ?>">
                                                                 <input type="hidden" name="id_lab" value="<?= $lab; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus produk : <span class="text-bold"><?= $fd->product; ?></span> dari list penjualan produk!</p>
+                                                                <input type="hidden" name="qty_selling"
+                                                                    value="<?= $sd->qty_selling; ?>">
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus produk : <span
+                                                                        class="text-bold">
+                                                                        <?= $sd->product; ?>
+                                                                    </span> dari list penjualan produk!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Hapus</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -339,54 +333,67 @@
                                     <?php endforeach; ?>
 
 
-                                    <?php if ($total_basic_price_franchise->total_basic_price_franchise == NULL) : ?>
-                                    <?php else : ?>
+                                    <?php if ($total_basic_price->total_basic_price == NULL): ?>
+                                    <?php else: ?>
                                         <tr>
-                                            <td colspan="7"></td>
+                                            <td colspan="5"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                    <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price_franchise->total_selling_price_franchise, 0, ',', '.'); ?>,-</p>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td colspan="7"></td>
-                                            <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Dasar</p>
-                                                <p class="text-xs mb-0 px-3">(Disetorkan ke <br> pemilik produk)</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 80% Laba <br> Penjualan</p>
-                                                <p class="text-xs mb-0 px-3">(Disetorkan ke <br> SPW)</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 20% laba <br> Penjualan</p>
-                                                <p class="text-xs mb-0 px-3">(Untuk Siswa)</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                    <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="7"></td>
+                                            <td colspan="5"></td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_franchise->total_basic_price_franchise, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
+                                                    Setor <br> Harga Dasar</p>
+                                                <p class="small font-weight-light mb-0 px-3">(Pemilik Produk)</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
+                                                    Setor <br> Laba SPW</p>
+                                                <p class="small font-weight-light mb-0 px-3">(80% Laba SPW)</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
+                                                    Setor <br> Laba Siswa</p>
+                                                <p class="small font-weight-light mb-0 px-3">(20% Laba Siswa)</p>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="5"></td>
+                                            <td>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                    <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
 
                                             <?php
-                                            $laba_spw = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.8;
+                                            $laba_spw = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.80;
 
-                                            $laba_siswa = ($total_selling_price_franchise->total_selling_price_franchise - $total_basic_price_franchise->total_basic_price_franchise) * 0.2;
+                                            $laba_siswa = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.20;
                                             ?>
 
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba_spw, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                    <?= number_format($laba_spw, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($laba_siswa, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                    <?= number_format($laba_siswa, 0, ',', '.'); ?>,-
+                                                </p>
                                             </td>
                                         </tr>
                                     <?php endif; ?>

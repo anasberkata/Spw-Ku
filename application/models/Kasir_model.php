@@ -128,7 +128,7 @@ class Kasir_model extends CI_Model
         $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
         $this->db->where('tbl_product.id_owner', 0);
-        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
+        $this->db->order_by('tbl_product.product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -263,7 +263,7 @@ class Kasir_model extends CI_Model
         return $query->row();
     }
 
-    public function search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor)
+    function search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor)
     {
         $this->db->select('*');
         $this->db->distinct('DISTINCT(product), qty_selling');

@@ -18,6 +18,21 @@ class Penjualan_model extends CI_Model
         // $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
         $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
         $this->db->where('id_lab', $id_lab);
+        $this->db->where('id_owner', 0);
+        $this->db->order_by('place', 'ASC');
+        $this->db->order_by('product', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_product_franchise($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product');
+        // $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
+        $this->db->join('tbl_product_place', 'tbl_product_place.id_place = tbl_product.id_place');
+        $this->db->where('id_lab', $id_lab);
+        $this->db->where_not_in('id_owner', 0);
         $this->db->order_by('place', 'ASC');
         $this->db->order_by('product', 'ASC');
         $query = $this->db->get();
@@ -28,6 +43,7 @@ class Penjualan_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_product_place');
+        $this->db->where_not_in('id_place', 5);
         $query = $this->db->get();
         return $query;
     }
@@ -50,6 +66,7 @@ class Penjualan_model extends CI_Model
         $this->db->group_by('date_selling');
         $this->db->from('tbl_selling');
         $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_selling.id_class');
         $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
         $this->db->order_by('id_selling', 'DESC');
@@ -60,11 +77,13 @@ class Penjualan_model extends CI_Model
     function save_selling($data)
     {
         $this->db->insert('tbl_selling', $data);
+        $id = $this->db->insert_id();
+        return (isset($id)) ? $id : FALSE;
     }
 
-    function update_selling($data, $date_selling)
+    function update_selling($data, $date_selling_last)
     {
-        $this->db->where('date_selling', $date_selling);
+        $this->db->where('date_selling', $date_selling_last);
         $this->db->update('tbl_selling', $data);
     }
 
@@ -77,11 +96,12 @@ class Penjualan_model extends CI_Model
         $this->db->select_sum('total_selling_price');
         $this->db->group_by('product');
         $this->db->from('tbl_selling_detail');
-        // $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
-        $this->db->where('tbl_selling_detail.date_selling', $date_selling);
+        $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
-        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
+        $this->db->where('tbl_product.id_owner', 0);
+        $this->db->order_by('tbl_product.product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -97,9 +117,10 @@ class Penjualan_model extends CI_Model
         $this->db->update('tbl_selling_detail', $data);
     }
 
-    function delete_selling_detail($id_selling_detail)
+    function delete_selling_detail($id_product, $date_selling)
     {
-        $this->db->where('id_selling_detail', $id_selling_detail);
+        $this->db->where('id_product', $id_product);
+        $this->db->where('date_selling', $date_selling);
         $this->db->delete('tbl_selling_detail');
 
         return true;
@@ -113,13 +134,31 @@ class Penjualan_model extends CI_Model
 
     function sum_total_basic_price($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price` FROM `tbl_selling_detail` WHERE `date_selling` = '$date_selling' AND `id_lab` = '$id_lab'");
+        $query = $this->db->query(
+            "SELECT SUM(`total_basic_price`) AS `total_basic_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product` 
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_product`.`id_owner` = 0
+            "
+        );
         return $query->row();
     }
 
     function sum_total_selling_price($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price` FROM `tbl_selling_detail` WHERE `date_selling` = '$date_selling' AND `id_lab` = '$id_lab'");
+        $query = $this->db->query(
+            "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_product`.`id_owner` = 0
+            "
+        );
         return $query->row();
     }
 
@@ -132,7 +171,7 @@ class Penjualan_model extends CI_Model
         $this->db->select_sum('total_selling_price');
         $this->db->group_by('product');
         $this->db->from('tbl_selling_detail');
-        // $this->db->join('tbl_selling', 'tbl_selling.date_selling = tbl_selling_detail.date_selling');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling_detail.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
@@ -168,37 +207,48 @@ class Penjualan_model extends CI_Model
 
 
     // PENJUALAN BARANG TITIPAN
-    function get_franchise()
+    function get_franchise($id_lab)
     {
-        $this->db->select('*');
-        $this->db->from('tbl_franchise');
-        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise.id_user');
-        // $this->db->where('id_lab', $id_lab);
+        $this->db->distinct('DISTINCT(date_selling), id_lab');
+        $this->db->group_by('date_selling');
+        $this->db->from('tbl_selling');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_selling.id_class');
+        $this->db->where('id_lab', $id_lab);
         $this->db->order_by('date_selling', 'DESC');
+        $this->db->order_by('id_selling', 'DESC');
         $query = $this->db->get();
         return $query;
     }
 
     function save_franchise($data)
     {
-        $this->db->insert('tbl_franchise', $data);
+        $this->db->insert('tbl_selling', $data);
+        $id = $this->db->insert_id();
+        return (isset($id)) ? $id : FALSE;
     }
 
-    function update_franchise($data, $id_franchise)
+    function update_franchise($data, $date_selling_last)
     {
-        $this->db->where('id_franchise', $id_franchise);
-        $this->db->update('tbl_franchise', $data);
+        $this->db->where('date_selling', $date_selling_last);
+        $this->db->update('tbl_selling', $data);
     }
 
-    function get_franchise_detail($id_franchise)
+    function get_franchise_detail($date_selling, $id_lab)
     {
         $this->db->select('*');
-        $this->db->from('tbl_franchise_detail');
-        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise_detail.id_franchisor');
-        $this->db->where('id_franchise', $id_franchise);
-        $this->db->where('role_id', 7);
-        $this->db->order_by('tbl_users.id_user', 'ASC');
-        $this->db->order_by('id_franchise_detail', 'ASC');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
+        $this->db->from('tbl_selling_detail');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('tbl_selling.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where_not_in('tbl_product.id_owner', 0);
+        $this->db->order_by('tbl_product.product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -217,67 +267,124 @@ class Penjualan_model extends CI_Model
 
     function save_franchise_detail($data)
     {
-        $this->db->insert('tbl_franchise_detail', $data);
+        $this->db->insert('tbl_selling_detail', $data);
     }
 
-    function update_franchise_detail($data, $id_franchise_detail)
+    function update_franchise_detail($data, $id_selling_detail)
     {
-        $this->db->where('id_franchise_detail', $id_franchise_detail);
-        $this->db->update('tbl_franchise_detail', $data);
+        $this->db->where('id_selling_detail', $id_selling_detail);
+        $this->db->update('tbl_selling_detail', $data);
     }
 
-    function delete_franchise_detail($id_franchise_detail)
+    function delete_franchise_detail($id_product, $date_selling)
     {
-        $this->db->where('id_franchise_detail', $id_franchise_detail);
-        $this->db->delete('tbl_franchise_detail');
+        $this->db->where('id_product', $id_product);
+        $this->db->where('date_selling', $date_selling);
+        $this->db->delete('tbl_selling_detail');
 
         return true;
     }
 
-    function sum_total_basic_price_franchise($id_franchise)
+    function sum_total_basic_price_franchise($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total_basic_price_franchise` FROM `tbl_franchise_detail` WHERE `id_franchise` = $id_franchise");
+        $query = $this->db->query(
+            "SELECT SUM(`total_basic_price`) AS `total_basic_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product` 
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND NOT `tbl_product`.`id_owner` = 0
+            "
+        );
         return $query->row();
     }
 
-    function sum_total_selling_price_franchise($id_franchise)
+    function sum_total_selling_price_franchise($date_selling, $id_lab)
     {
-        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total_selling_price_franchise` FROM `tbl_franchise_detail` WHERE `id_franchise` = $id_franchise");
+        $query = $this->db->query(
+            "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND NOT `tbl_product`.`id_owner` = 0
+            "
+        );
         return $query->row();
     }
 
-    function search_franchise_detail($id_franchise, $id_user)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function search_franchise_detail($date_selling, $id_lab, $id_franchisor)
     {
         $this->db->select('*');
-        $this->db->from('tbl_franchise_detail');
-        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_franchise_detail.id_franchisor');
-        $this->db->where('id_franchise', $id_franchise);
-        $this->db->where('tbl_users.id_user', $id_user);
-        $this->db->order_by('tbl_users.id_user', 'ASC');
-        $this->db->order_by('id_franchise_detail', 'ASC');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
+        $this->db->from('tbl_selling_detail');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('tbl_selling.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_owner', $id_franchisor);
+        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
 
-    function search_sum_total_basic_price_franchise($id_franchise, $id_user)
+    function search_sum_total_basic_price_franchise($date_selling, $id_lab, $id_franchisor)
     {
         $query = $this->db->query(
-            "SELECT SUM(`total_basic_price`) AS `total_basic_price_franchise`
-            FROM `tbl_franchise_detail`
-            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_user"
+            "SELECT SUM(`total_basic_price`) AS `total_basic_price`
+            FROM `tbl_selling_detail`
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
         );
         return $query->row();
     }
 
-    function search_sum_total_selling_price_franchise($id_franchise, $id_user)
+    function search_sum_total_selling_price_franchise($date_selling, $id_lab, $id_franchisor)
     {
         $query = $this->db->query(
-            "SELECT SUM(`total_selling_price`) AS `total_selling_price_franchise`
-            FROM `tbl_franchise_detail`
-            WHERE `id_franchise` = $id_franchise AND `id_franchisor` = $id_user"
+            "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
         );
         return $query->row();
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     // STUDENT
     function get_class()

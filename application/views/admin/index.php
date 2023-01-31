@@ -182,7 +182,14 @@
                         <h6 class="mb-2">Jadwal Guru Piket</h6>
                     </div>
                     <div class="col-12 col-lg-8">
-                        <p class="text-sm mt-1">Kepala Lab : <?= $labhead["lab_head"]; ?></p>
+                        <p class="text-sm mt-1">Kepala Lab :
+                            <?php
+                            if ($labhead == NULL) {
+                                echo "-";
+                            } else {
+                                echo $labhead["lab_head"];
+                            } ?>
+                        </p>
                     </div>
                 </div>
             </div>

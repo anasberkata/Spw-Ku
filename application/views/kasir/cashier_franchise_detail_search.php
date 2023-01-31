@@ -19,7 +19,7 @@
                                     <!-- <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button> -->
-                                    <a href="<?= base_url('kasir/printPDF_franchise/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                                    <a href="<?= base_url('kasir/printPDF_franchise/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_franchisor=' . $id_franchisor); ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>

@@ -234,6 +234,7 @@ class Kasir extends CI_Controller
         $this->load->view('kasir/footer');
     }
 
+    // SELLING DETAIL
     public function selling_detail()
     {
         $date_selling = $this->input->get('date_selling', true);
@@ -413,19 +414,19 @@ class Kasir extends CI_Controller
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
 
-        if (!isset($id_place)) {
+        if (!isset($id_franchisor)) {
             $data['selling_detail'] = $this->k->get_selling_franchise_detail($date_selling, $id_lab);
             $data['total_basic_price'] = $this->k->sum_franchise_total_basic_price($date_selling, $id_lab);
             $data['total_selling_price'] = $this->k->sum_franchise_total_selling_price($date_selling, $id_lab);
         } else {
-            $data['selling_detail'] = $this->k->search_selling_franchise_detail($date_selling, $id_lab, $id_place);
-            $data['total_basic_price'] = $this->k->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_place);
-            $data['total_selling_price'] = $this->k->search_sum_tfranchise_otal_selling_price($date_selling, $id_lab, $id_place);
+            $data['selling_detail'] = $this->k->search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor);
+            $data['total_basic_price'] = $this->k->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_franchisor);
+            $data['total_selling_price'] = $this->k->search_sum_franchise_total_selling_price($date_selling, $id_lab, $id_franchisor);
         }
 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
         $page = $this->load->view('kasir/cashier_franchise_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
-        $mpdf->Output('Laporan SPW ' . $date_selling . '.pdf', 'I');
+        $mpdf->Output('Laporan Produk Titipan SPW ' . $date_selling . '.pdf', 'I');
     }
 }
