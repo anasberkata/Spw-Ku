@@ -75,19 +75,21 @@
                                                 value="<?= $selling["date_selling"] ?>">
                                             <div class="mb-3">
                                                 <label>Pilih Produk</label>
-                                                <!-- <select class="form-select" aria-label="Default select" name="id_product">
+                                                <select class="form-select" aria-label="Default select"
+                                                    name="id_product">
                                                     <option selected>Pilih Produk</option>
                                                     <?php foreach ($product->result() as $p): ?>
-                                                                                                                                                <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
+                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok :
+                                                            <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
-                                                </select> -->
+                                                </select>
 
-                                                <input type="text" class="form-control" list="product" id="id_product"
+                                                <!-- <input type="text" class="form-control" list="product" id="id_product"
                                                     placeholder="Pilih Produk" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p): ?>
-                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
-                                                            Stok : <?= $p->qty ?></option>
+                                                                    <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                        Stok : <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
                                                 </datalist>
                                                 <input type="hidden" name="id_product" id="id_product-hidden">
@@ -111,7 +113,7 @@
                                                             }
                                                         }
                                                     });
-                                                </script>
+                                                </script> -->
 
                                             </div>
                                             <div class="mb-3">

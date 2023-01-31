@@ -3,11 +3,13 @@
         <div class="row align-items-center justify-content-lg-between">
             <div class="col mb-lg-0 mb-4">
                 <div class="copyright text-center text-sm text-muted text-lg-start">
-                    © <script>
+                    ©
+                    <script>
                         document.write(new Date().getFullYear())
                     </script>.
                     Dev by
-                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">TIM SPW SMK NEGERI 2 CILAKU CIANJUR</a>
+                    <a href="https://www.instagram.com/anasberkata" class="font-weight-bold" target="_blank">TIM SPW SMK
+                        NEGERI 2 CILAKU CIANJUR</a>
                 </div>
             </div>
         </div>
@@ -27,7 +29,8 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <h4 class="text-sm mt-3">Yakin ingin keluar?</h4>
-                    <p class="small">Jangan lupa ucapkan <b><i>"Alhamdulillah"</i></b>, pekerjaan sudah beres, silahkan klik "Logout" untuk keluar.</p>
+                    <p class="small">Jangan lupa ucapkan <b><i>"Alhamdulillah"</i></b>, pekerjaan sudah beres, silahkan
+                        klik "Logout" untuk keluar.</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -56,8 +59,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
-    window.setTimeout(function() {
-        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
             $(this).remove();
         });
     }, 4000);
@@ -81,7 +84,7 @@
     //     $(this).next('.custom-file-label').addClass("selected").html(fileName);
     // });
 
-    $('.form-check-input').on('click', function() {
+    $('.form-check-input').on('click', function () {
         const menuId = $(this).data('menu');
         const roleId = $(this).data('role');
 
@@ -92,7 +95,7 @@
                 menuId: menuId,
                 roleId: roleId
             },
-            success: function() {
+            success: function () {
                 document.location.href = "<?= base_url('admin/roleAccess/'); ?>" + roleId;
             }
         });

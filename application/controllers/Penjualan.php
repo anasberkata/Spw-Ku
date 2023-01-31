@@ -387,7 +387,7 @@ class Penjualan extends CI_Controller
     {
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
-        $id_place = 0;
+        $id_owner = 0;
 
         $data['title'] = "Data Penjualan Titipan";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -395,8 +395,8 @@ class Penjualan extends CI_Controller
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['product'] = $this->penjualan->get_product_franchise($id_lab);
-        $data['place'] = $this->penjualan->get_place();
-        $data['id_place'] = $id_place;
+        $data['owner'] = $this->penjualan->get_owner();
+        $data['id_owner'] = $id_owner;
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->penjualan->get_franchise_detail($date_selling, $id_lab);
@@ -474,79 +474,96 @@ class Penjualan extends CI_Controller
     public function franchise_detail_edit()
     {
         $id_lab = $this->input->post('id_lab', true);
-        $id_franchise = $this->input->post('id_franchise', true);
-        $id_franchise_detail = $this->input->post('id_franchise_detail', true);
-        $id_user = $this->input->post('id_user', true);
-        $product = $this->input->post('product', true);
-        $basic_price = $this->input->post('basic_price', true);
-        $selling_price = $this->input->post('selling_price', true);
-        $qty_product = $this->input->post('qty_product', true);
-        $qty_last = $this->input->post('qty_last', true);
-        $qty_selling = $qty_product - $qty_last;
+        $date_selling = $this->input->post('date_selling', true);
+        $id_selling_detail = $this->input->post('id_selling_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_selling = $this->input->post('qty_selling', true);
+        $qty_mp = $this->input->post('qty_mp', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+        $d['sd'] = $this->db->get_where('tbl_selling_detail', ['id_selling_detail' => $id_selling_detail])->row_array();
+
+        // if ($qty_mp > $d['sd']['qty_selling']) {
+        //     $selisih = $qty_selling - $d['sd']['qty_selling'];
+        //     $qty = $d['p']['qty'] - $selisih;
+        // } else if ($qty_selling < $d['sd']['qty_selling']) {
+        //     $selisih = $d['sd']['qty_selling'] - $qty_selling;
+        //     $qty = $d['p']['qty'] + $selisih;
+        // } else if ($qty_selling == $d['sd']['qty_selling']) {
+        //     $qty = $d['p']['qty'];
+        // }
+
+        $qty_edit = $d['sd']['qty_selling'] + $qty_mp;
 
         $data = [
-            'id_franchisor' => $id_user,
-            'product' => $product,
-            'basic_price' => $basic_price,
-            'selling_price' => $selling_price,
-            'qty_product' => $qty_product,
-            'qty_last' => $qty_last,
-            'qty_selling' => $qty_selling,
-            'total_basic_price' => $qty_selling * $basic_price,
-            'total_selling_price' => $qty_selling * $selling_price
+            'qty_selling' => $qty_edit,
+            'total_basic_price' => $qty_edit * $d['p']['basic_price'],
+            'total_selling_price' => $qty_edit * $d['p']['selling_price']
         ];
 
+        $this->penjualan->update_franchise_detail($data, $id_selling_detail);
 
-        $this->penjualan->update_franchise_detail($data, $id_franchise_detail);
+        $data_stock = [
+            'qty' => $d['p']['qty'] - $qty_mp
+        ];
+
+        $this->penjualan->update_stock_product($data_stock, $id_product);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
 
-        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+        redirect('penjualan/franchise_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
     }
 
     public function franchise_detail_delete()
     {
+        $date_selling = $this->input->post('date_selling', true);
+        $id_product = $this->input->post('id_product', true);
         $id_lab = $this->input->post('id_lab', true);
-        $id_franchise = $this->input->post('id_franchise', true);
-        $id_franchise_detail = $this->input->post('id_franchise_detail', true);
+        $qty_selling = $this->input->post('qty_selling', true);
 
-        $this->penjualan->delete_franchise_detail($id_franchise_detail);
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+        $data_stock = [
+            'qty' => $d['p']['qty'] + $qty_selling
+        ];
+
+        $this->penjualan->delete_franchise_detail($id_product, $date_selling);
+        $this->penjualan->update_stock_product($data_stock, $id_product);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
 
-        redirect('penjualan/franchise_detail/?id_franchise=' . $id_franchise . '&id_lab=' . $id_lab);
+        redirect('penjualan/franchise_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
     }
 
     public function franchise_detail_search()
     {
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
-        $id_franchisor = $this->input->get('id_franchisor', true);
+        $id_owner = $this->input->get('id_owner', true);
 
-        $data['title'] = "Data Penjualan Titipan";
+        $data['title'] = "Data Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
-        $data['id_franchisor'] = $id_franchisor;
-        // $data['produk'] = $this->penjualan->get_product_all($id_lab);
-        // $data['place'] = $this->penjualan->get_place();
-        $data['franchisor'] = $this->franchisor->get_franchisor();
+        $data['id_owner'] = $id_owner;
+        $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['owner'] = $this->penjualan->get_owner();
 
-        if ($id_franchisor == 0) {
+        if ($id_owner == 0) {
             redirect('penjualan/franchise_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
         } else {
             $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
-            $data['selling_detail'] = $this->penjualan->search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor);
+            $data['selling_detail'] = $this->penjualan->search_franchise_detail($date_selling, $id_lab, $id_owner);
 
-            $data['total_basic_price'] = $this->penjualan->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_franchisor);
-            $data['total_selling_price'] = $this->penjualan->search_sum_franchise_total_selling_price($date_selling, $id_lab, $id_franchisor);
+            $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price_franchise($date_selling, $id_lab, $id_owner);
+            $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price_franchise($date_selling, $id_lab, $id_owner);
         }
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('penjualan/franchise_detail_search', $data);
+        $this->load->view('penjualan/franchise_detail', $data);
         $this->load->view('templates/footer');
     }
 
@@ -556,34 +573,56 @@ class Penjualan extends CI_Controller
 
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
-        $id_franchisor = $this->input->get('id_franchisor', true);
+        $id_owner = $this->input->get('id_owner', true);
 
-        $data['title'] = "Data Penjualan Titipan";
+        $data['title'] = "Data Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
-        $data['id_franchisor'] = $id_franchisor;
-        $data['produk'] = $this->k->get_product_all($id_lab);
-        $data['place'] = $this->k->get_place();
+        $data['id_owner'] = $id_owner;
+        $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['owner'] = $this->penjualan->get_owner();
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
 
-        if (!isset($id_franchisor)) {
-            $data['selling_detail'] = $this->penjualan->get_selling_franchise_detail($date_selling, $id_lab);
-            $data['total_basic_price'] = $this->penjualan->sum_franchise_total_basic_price($date_selling, $id_lab);
-            $data['total_selling_price'] = $this->penjualan->sum_franchise_total_selling_price($date_selling, $id_lab);
+        if ($id_owner == 0) {
+            $data['selling_detail'] = $this->penjualan->get_franchise_detail($date_selling, $id_lab);
+            $data['total_basic_price'] = $this->penjualan->sum_total_basic_price_franchise($date_selling, $id_lab);
+            $data['total_selling_price'] = $this->penjualan->sum_total_selling_price_franchise($date_selling, $id_lab);
         } else {
-            $data['selling_detail'] = $this->penjualan->search_selling_franchise_detail($date_selling, $id_lab, $id_franchisor);
-            $data['total_basic_price'] = $this->penjualan->search_sum_franchise_total_basic_price($date_selling, $id_lab, $id_franchisor);
-            $data['total_selling_price'] = $this->penjualan->search_sum_franchise_total_selling_price($date_selling, $id_lab, $id_franchisor);
+            $data['selling_detail'] = $this->penjualan->search_franchise_detail($date_selling, $id_lab, $id_owner);
+            $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price_franchise($date_selling, $id_lab, $id_owner);
+            $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price_franchise($date_selling, $id_lab, $id_owner);
         }
 
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
         $page = $this->load->view('penjualan/franchise_detail_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
-        $mpdf->Output('Laporan Produk Titipan SPW ' . $date_selling . '.pdf', 'I');
+        $mpdf->Output('Laporan SPW Produk Titipan ' . $date_selling . '.pdf', 'I');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // ---------------------------------------- STUDENTS ------------------------------------------ //
     public function student_selling_index()

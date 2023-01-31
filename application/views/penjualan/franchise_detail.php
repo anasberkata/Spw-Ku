@@ -23,28 +23,28 @@
                                         data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button>
-                                    <a href="<?= base_url('penjualan/printPDF/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_place=' . $id_place) ?>"
+                                    <a href="<?= base_url('penjualan/printPDF_franchise/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_owner=' . $id_owner) ?>"
                                         class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <form role="form" action="<?= base_url('penjualan/selling_detail_search') ?>"
+                                <form role="form" action="<?= base_url('penjualan/franchise_detail_search') ?>"
                                     method="GET">
                                     <div class="row">
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                         <input type="hidden" name="date_selling"
                                             value="<?= $selling["date_selling"] ?>">
                                         <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
-                                            <label class="col-form-label text-sm">Lokasi</label>
+                                            <label class="col-form-label text-sm">Pemilik Produk</label>
                                         </div>
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
-                                            <select class="form-select" aria-label="Default select" name="id_place">
-                                                <option>Pilih Lokasi Produk</option>
+                                            <select class="form-select" aria-label="Default select" name="id_owner">
+                                                <option>Pilih Pemilik Produk</option>
                                                 <option value="0">Semua</option>
-                                                <?php foreach ($place->result() as $p): ?>
-                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                <?php foreach ($owner->result() as $p): ?>
+                                                    <option value="<?= $p->id_user ?>"><?= $p->name ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -75,19 +75,21 @@
                                                 value="<?= $selling["date_selling"] ?>">
                                             <div class="mb-3">
                                                 <label>Pilih Produk</label>
-                                                <!-- <select class="form-select" aria-label="Default select" name="id_product">
+                                                <select class="form-select" aria-label="Default select"
+                                                    name="id_product">
                                                     <option selected>Pilih Produk</option>
                                                     <?php foreach ($product->result() as $p): ?>
-                                                                                                                                                                            <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok : <?= $p->qty ?></option>
+                                                        <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok :
+                                                            <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
-                                                </select> -->
+                                                </select>
 
-                                                <input type="text" class="form-control" list="product" id="id_product"
+                                                <!-- <input type="text" class="form-control" list="product" id="id_product"
                                                     placeholder="Pilih Produk" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p): ?>
-                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
-                                                            Stok : <?= $p->qty ?></option>
+                                                                                                                                                                                                                    <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                                                                                                                                                                        Stok : <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
                                                 </datalist>
                                                 <input type="hidden" name="id_product" id="id_product-hidden">
@@ -111,7 +113,7 @@
                                                             }
                                                         }
                                                     });
-                                                </script>
+                                                </script> -->
 
                                             </div>
                                             <div class="mb-3">
@@ -237,7 +239,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <form role="form"
-                                                        action="<?= base_url('penjualan/selling_detail_edit') ?>"
+                                                        action="<?= base_url('penjualan/franchise_detail_edit') ?>"
                                                         method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_lab" value="<?= $lab ?>" readonly>
@@ -301,7 +303,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <form role="form"
-                                                        action="<?= base_url('penjualan/selling_detail_delete') ?>"
+                                                        action="<?= base_url('penjualan/franchise_detail_delete') ?>"
                                                         method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
