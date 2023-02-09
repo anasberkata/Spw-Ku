@@ -8,7 +8,7 @@
                     <div class="col">
                         <h6>Daftar Pembelian Produk :</h6>
                         <p class="small">
-                            <?= date('d F Y', strtotime($purchase["date_purchasing"])) . " // " . $purchase["supplier"] . " // SPW " . $lab; ?>
+                            <?= $purchase_detail->result()[0]->place . " // " . date('d F Y', strtotime($purchase["date_purchasing"])) . " // " . $purchase["supplier"] . " // SPW " . $lab; ?>
                         </p>
                     </div>
                     <div class="col">
@@ -21,6 +21,10 @@
                                 data-bs-target="#modalProductAdd">
                                 Tambah
                             </button>
+                            <a href="<?= base_url('produk/purchase_detail_excel/?id_purchase=' . $id_purchase . '&id_lab=' . $lab); ?>"
+                                class="btn btn-success btn-sm mb-3 float-end">
+                                Excel
+                            </a>
                         </div>
 
 
@@ -245,10 +249,6 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-
-
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary btn-sm"

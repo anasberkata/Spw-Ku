@@ -32,7 +32,8 @@ class Produk_model extends CI_Model
     function update_category(
         $data,
         $id_category
-    ) {
+    )
+    {
         $this->db->where('id_category', $id_category);
         $this->db->update('tbl_product_categories', $data);
     }
@@ -149,6 +150,7 @@ class Produk_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_purchase_detail');
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_purchase_detail.id_product');
+        $this->db->join('tbl_product_place', 'tbl_product.id_place = tbl_product_place.id_place');
         // $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
         // $this->db->join('tbl_users', 'tbl_users.id_user = tbl_purchase.id_user');
         // $this->db->join('tbl_purchase_detail', 'tbl_purchase_detail.id_purchase = tbl_purchase.id_purchase');

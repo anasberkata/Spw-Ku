@@ -602,4 +602,28 @@ class Produk extends CI_Controller
 
         echo json_encode($data);
     }
+
+    public function purchase_detail_excel()
+    {
+        $id_purchase = $this->input->get('id_purchase', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Pembelian";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        // $data['supplier'] = $this->produk->get_supplier();
+
+        $data['id_purchase'] = $id_purchase;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->produk->get_product($id_lab);
+
+        $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
+        $data['purchase'] = $this->db->get_where('tbl_purchase', ['id_purchase' => $id_purchase])->row_array();
+        $data['purchase_detail'] = $this->produk->get_purchase_detail($id_purchase);
+
+        $data['total'] = $this->produk->sum_total_price($id_purchase);
+
+        $this->load->view('produk/purchase_detail_excel', $data);
+    }
+
 }
