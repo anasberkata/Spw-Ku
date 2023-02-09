@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 09, 2023 at 05:28 AM
+-- Generation Time: Feb 09, 2023 at 05:39 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -3419,7 +3419,8 @@ INSERT INTO `tbl_user_submenu` (`id_user_submenu`, `menu_id`, `title`, `url`, `i
 (25, 20, 'Neraca Saldo', 'akuntansi/balance', 'ni ni-collection text-primary', 1, 1),
 (26, 20, 'Laba & Rugi', 'akuntansi/profit_loss', 'ni ni-chart-pie-35 text-danger', 1, 2),
 (27, 6, 'Penyesuaian Stok', 'stok/stock_adjustment', 'ni ni-chart-bar-32 text-danger', 1, 2),
-(28, 2, 'Data Mutasi', 'produk/index_mutation', 'ni ni-app text-danger', 1, 5);
+(28, 2, 'Data Mutasi', 'produk/index_mutation', 'ni ni-app text-danger', 1, 5),
+(29, 3, 'Data Pembelian Aset', 'peralatan/index_purchase', 'ni ni-cart text-danger', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -3710,7 +3711,7 @@ ALTER TABLE `tbl_user_role`
 -- AUTO_INCREMENT for table `tbl_user_submenu`
 --
 ALTER TABLE `tbl_user_submenu`
-  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_user_submenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
