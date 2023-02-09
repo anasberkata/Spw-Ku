@@ -15,7 +15,7 @@ class Peralatan extends CI_Controller
     // PRODUK
     public function index()
     {
-        $data['title'] = "Data Peralatan";
+        $data['title'] = "Data Aset";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $this->peralatan->get_lab();
@@ -31,7 +31,7 @@ class Peralatan extends CI_Controller
     {
         $id_lab = $this->input->get('id_lab', true);
 
-        $data['title'] = "Data Peralatan";
+        $data['title'] = "Data Aset";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['tool'] = $this->peralatan->get_tools($id_lab);
@@ -47,7 +47,7 @@ class Peralatan extends CI_Controller
 
     public function tool_add()
     {
-        $data['title'] = "Data Peralatan";
+        $data['title'] = "Data Aset";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $this->form_validation->set_rules(
@@ -138,7 +138,7 @@ class Peralatan extends CI_Controller
     {
         $id_lab = $this->input->get('id_lab', true);
 
-        $data['title'] = "Data Peralatan";
+        $data['title'] = "Data Aset";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['tool'] = $this->peralatan->get_tools($id_lab);
@@ -150,6 +150,6 @@ class Peralatan extends CI_Controller
         $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
         $page = $this->load->view('peralatan/tool_pdf', $data, TRUE);
         $mpdf->WriteHTML($page);
-        $mpdf->Output('Data Peralatan Lab SPW ' . $id_lab . '.pdf', 'I');
+        $mpdf->Output('Data Aset Lab SPW ' . $id_lab . '.pdf', 'I');
     }
 }

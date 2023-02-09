@@ -28,9 +28,11 @@
 
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 fixed-start" id="sidenav-main">
         <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href=" https://spw.smkn2cilakucianjur.sch.id " target="_blank">
-                <img src="<?= base_url('assets/') ?>img/logos/logo-smkdaku.png" class="navbar-brand-img h-100" alt="main_logo">
+                <img src="<?= base_url('assets/') ?>img/logos/logo-smkdaku.png" class="navbar-brand-img h-100"
+                    alt="main_logo">
                 <span class="ms-1 font-weight-bold">SPW SMKN 2 Cilaku</span>
             </a>
         </div>
@@ -44,19 +46,28 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url("kasir/cashier/?id_lab=") . $lab; ?>">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-basket text-primary text-sm opacity-10"></i></div>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-basket text-primary text-sm opacity-10"></i>
+                        </div>
                         <span class="nav-link-text ms-1">Kasir</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url("kasir/selling/?id_lab=") . $lab; ?>">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-cart text-success text-sm opacity-10"></i></div>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-cart text-success text-sm opacity-10"></i>
+                        </div>
                         <span class="nav-link-text ms-1">Penjualan SPW</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url("kasir/selling_franchise/?id_lab=") . $lab; ?>">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center"><i class="ni ni-cart text-danger text-sm opacity-10"></i></div>
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-cart text-danger text-sm opacity-10"></i>
+                        </div>
                         <span class="nav-link-text ms-1">Penjualan Titipan</span>
                     </a>
                 </li>
@@ -64,16 +75,20 @@
             </ul>
         </div>
         <div class="sidenav-footer mx-3 ">
-            <a class="btn btn-dark btn-sm w-100 mb-3" href="<?= base_url("dashboard"); ?>"><i class="fa fa-tachometer cursor-pointer me-2"></i> Dashboard</a>
+            <a class="btn btn-dark btn-sm w-100 mb-3" href="<?= base_url("dashboard"); ?>"><i
+                    class="fa fa-tachometer cursor-pointer me-2"></i> Dashboard</a>
         </div>
     </aside>
 
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-            <div class="container-fluid py-1 px-3 mt-3">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+            data-scroll="false">
+            <div class="container-fluid py-1 px-3">
                 <nav aria-label="breadcrumb">
-                    <h6 class="font-weight-bolder text-white mb-0"><?= $title; ?></h6>
+                    <h6 class="font-weight-bolder text-white mb-0">
+                        <?= $title; ?>
+                    </h6>
                 </nav>
 
                 <div class="collapse navbar-collapse justify-content-end mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -111,4 +126,4 @@
         </nav>
         <!-- End Navbar -->
 
-        <div class="container-fluid py-4">
+        <div class="container-fluid pb-5">

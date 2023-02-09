@@ -15,7 +15,7 @@ class Produk extends CI_Controller
     // =============================================== PRODUK =============================================== 
     public function index()
     {
-        $data['title'] = "Data Produk";
+        $data['title'] = "Data Gudang";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $this->produk->get_lab();
@@ -190,7 +190,7 @@ class Produk extends CI_Controller
     {
         $id_lab = $this->input->get('id_lab', true);
 
-        $data['title'] = "Data Produk";
+        $data['title'] = "Data Gudang";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['category'] = $this->produk->get_categories();
@@ -282,11 +282,11 @@ class Produk extends CI_Controller
         $change_image = $_FILES['image']['name'];
 
         if ($change_image) {
-            $config['allowed_types']    = 'gif|jpg|png';
-            $config['max_size']         = '2048';
-            $config['upload_path']      = './assets/img/products/';
-            $config['max_width']        = '1024';
-            $config['max_height']       = '1024';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './assets/img/products/';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '1024';
 
             $this->load->library('upload', $config);
 
@@ -328,11 +328,11 @@ class Produk extends CI_Controller
 
     private function uploadImage()
     {
-        $config['allowed_types']    = 'gif|jpg|png';
-        $config['max_size']         = '2048';
-        $config['upload_path']      = './assets/img/products/';
-        $config['max_width']        = '1024';
-        $config['max_height']       = '1024';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '2048';
+        $config['upload_path'] = './assets/img/products/';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '1024';
 
         $this->load->library('upload', $config);
 

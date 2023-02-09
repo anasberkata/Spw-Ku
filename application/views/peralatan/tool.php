@@ -6,28 +6,34 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col">
-                        <h6>Daftar Peralatan LAB SPW <?= $lab; ?></h6>
+                        <h6>Daftar Peralatan LAB SPW
+                            <?= $lab; ?>
+                        </h6>
                     </div>
                     <div class="col">
                         <div class="btn-group float-end w-100 w-lg-auto">
                             <a href="<?= base_url('peralatan'); ?>" class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                 Kembali
                             </a>
-                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal" data-bs-target="#modalToolAdd">
+                            <button type="button" class="btn btn-dark btn-sm mb-3 float-end" data-bs-toggle="modal"
+                                data-bs-target="#modalToolAdd">
                                 Tambah
                             </button>
-                            <a href="<?= base_url('peralatan/printPDF/?id_lab=' . $lab) ?>" class="btn btn-warning btn-sm mb-3" target="_blank">
+                            <a href="<?= base_url('peralatan/printPDF/?id_lab=' . $lab) ?>"
+                                class="btn btn-warning btn-sm mb-3" target="_blank">
                                 <i class="fa fa-download"></i>
                             </a>
                         </div>
 
                         <!-- Modal Tambah Menu -->
-                        <div class="modal fade" id="modalToolAdd" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modalToolAdd" tabindex="-1" aria-labelledby="addModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="addModalLabel">Tambah Peralatan</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <form role="form" action="<?= base_url('peralatan/tool_add') ?>" method="POST">
                                         <div class="modal-body">
@@ -35,40 +41,47 @@
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Lab SPW</label>
-                                                        <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
+                                                        <input type="text" class="form-control" placeholder="Lab SPW"
+                                                            name="id_lab" value="<?= $lab ?>" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Nama Peralatan</label>
-                                                        <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Nama Peralatan" name="tool">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Spesifikasi / Merk</label>
-                                                        <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand">
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Merk Peralatan" name="brand">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Qty</label>
-                                                        <input type="number" class="form-control" placeholder="Qty" name="qty">
+                                                        <input type="number" class="form-control" placeholder="Qty"
+                                                            name="qty">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Harga (Rp.)</label>
-                                                        <input type="number" class="form-control" placeholder="Harga" name="price">
+                                                        <input type="number" class="form-control" placeholder="Harga"
+                                                            name="price">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Kondisi</label>
-                                                        <select class="form-select" aria-label="Default select" name="id_tool_condition">
+                                                        <select class="form-select" aria-label="Default select"
+                                                            name="id_tool_condition">
                                                             <option selected>Pilih kondisi</option>
-                                                            <?php foreach ($tool_condition->result() as $tc) : ?>
-                                                                <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
+                                                            <?php foreach ($tool_condition->result() as $tc): ?>
+                                                                <option value="<?= $tc->id_tool_condition ?>"><?=
+                                                                      $tc->condition ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                     </div>
@@ -77,13 +90,15 @@
                                                     <div class="mb-3">
                                                         <label>Keterangan</label>
                                                         <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description"> -->
-                                                        <textarea class="form-control" name="description" rows="5"></textarea>
+                                                        <textarea class="form-control" name="description"
+                                                            rows="5"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-bs-dismiss="modal">Batal</button>
                                             <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                         </div>
                                     </form>
@@ -107,108 +122,162 @@
                             <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Peralatan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Spesifikasi / Merk</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kondisi</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Keterangan</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                            width="7%">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nama Peralatan</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Spesifikasi / Merk</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Harga</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Kondisi</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Keterangan</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">
+                                            Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($tool->result() as $t) : ?>
+                                    <?php foreach ($tool->result() as $t): ?>
                                         <tr>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->tool; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->brand; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->qty; ?></p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($t->price, 0, ',', '.'); ?>,-</p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $i; ?>
+                                                </p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?php if ($t->tool_condition == 1) : ?>
-                                                        <span class="badge badge-sm bg-gradient-success"><?= $t->condition; ?></span>
-                                                    <?php elseif ($t->tool_condition == 2) : ?>
-                                                        <span class="badge badge-sm bg-gradient-info"><?= $t->condition; ?></span>
-                                                    <?php elseif ($t->tool_condition == 3) : ?>
-                                                        <span class="badge badge-sm bg-gradient-warning"><?= $t->condition; ?></span>
-                                                    <?php elseif ($t->tool_condition == 4) : ?>
-                                                        <span class="badge badge-sm bg-gradient-danger"><?= $t->condition; ?></span>
+                                                    <?= $t->tool; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $t->brand; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $t->qty; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($t->price, 0, ',', '.'); ?>,-
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?php if ($t->tool_condition == 1): ?>
+                                                        <span class="badge badge-sm bg-gradient-success">
+                                                            <?= $t->condition; ?>
+                                                        </span>
+                                                    <?php elseif ($t->tool_condition == 2): ?>
+                                                        <span class="badge badge-sm bg-gradient-info">
+                                                            <?= $t->condition; ?>
+                                                        </span>
+                                                    <?php elseif ($t->tool_condition == 3): ?>
+                                                        <span class="badge badge-sm bg-gradient-warning">
+                                                            <?= $t->condition; ?>
+                                                        </span>
+                                                    <?php elseif ($t->tool_condition == 4): ?>
+                                                        <span class="badge badge-sm bg-gradient-danger">
+                                                            <?= $t->condition; ?>
+                                                        </span>
                                                     <?php endif; ?>
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $t->description; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $t->description; ?>
+                                                </p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <div class="btn-group w-100 w-lg-auto mt-3">
-                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalToolEdit<?= $t->id_tool; ?>"><i class="fa fa-edit cursor-pointer"></i></button>
-                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2" data-bs-toggle="modal" data-bs-target="#modalToolDelete<?= $t->id_tool; ?>"><i class="fa fa-trash cursor-pointer"></i></button>
+                                                <div class="btn-group w-100 w-lg-auto">
+                                                    <button type="button" class="btn btn-primary btn-sm px-3 py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalToolEdit<?= $t->id_tool; ?>"><i
+                                                            class="fa fa-edit cursor-pointer"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm px-3 py-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalToolDelete<?= $t->id_tool; ?>"><i
+                                                            class="fa fa-trash cursor-pointer"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
 
                                         <!-- Modal Edit Role -->
-                                        <div class="modal fade" id="modalToolEdit<?= $t->id_tool; ?>" tabindex="-1" aria-labelledby="EditModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalToolEdit<?= $t->id_tool; ?>" tabindex="-1"
+                                            aria-labelledby="EditModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="EditModalLabel">Ubah Data Peralatan</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('peralatan/tool_edit') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('peralatan/tool_edit') ?>"
+                                                        method="POST">
                                                         <div class="modal-body">
                                                             <div class="row">
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Lab SPW</label>
-                                                                        <input type="hidden" class="form-control" placeholder="Lab SPW" name="id_tool" value="<?= $t->id_tool ?>">
-                                                                        <input type="text" class="form-control" placeholder="Lab SPW" name="id_lab" value="<?= $lab ?>" readonly>
+                                                                        <input type="hidden" class="form-control"
+                                                                            placeholder="Lab SPW" name="id_tool"
+                                                                            value="<?= $t->id_tool ?>">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Lab SPW" name="id_lab"
+                                                                            value="<?= $lab ?>" readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Nama Peralatan</label>
-                                                                        <input type="text" class="form-control" placeholder="Nama Peralatan" name="tool" value="<?= $t->tool; ?>">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Nama Peralatan" name="tool"
+                                                                            value="<?= $t->tool; ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Spesifikasi / Merk</label>
-                                                                        <input type="text" class="form-control" placeholder="Merk Peralatan" name="brand" value="<?= $t->brand; ?>">
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Merk Peralatan" name="brand"
+                                                                            value="<?= $t->brand; ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Qty</label>
-                                                                        <input type="number" class="form-control" placeholder="Qty" name="qty" value="<?= $t->qty; ?>">
+                                                                        <input type="number" class="form-control"
+                                                                            placeholder="Qty" name="qty"
+                                                                            value="<?= $t->qty; ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Harga (Rp.)</label>
-                                                                        <input type="number" class="form-control" placeholder="Harga" name="price" value="<?= $t->price; ?>">
+                                                                        <input type="number" class="form-control"
+                                                                            placeholder="Harga" name="price"
+                                                                            value="<?= $t->price; ?>">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Kondisi</label>
-                                                                        <select class="form-select" aria-label="Default select" name="id_tool_condition">
-                                                                            <option value="<?= $t->tool_condition; ?>"><?= $t->condition ?></option>
-                                                                            <?php foreach ($tool_condition->result() as $tc) : ?>
-                                                                                <option value="<?= $tc->id_tool_condition ?>"><?= $tc->condition ?></option>
+                                                                        <select class="form-select"
+                                                                            aria-label="Default select"
+                                                                            name="id_tool_condition">
+                                                                            <option value="<?= $t->tool_condition; ?>"><?=
+                                                                                  $t->condition ?></option>
+                                                                            <?php foreach ($tool_condition->result() as $tc): ?>
+                                                                                <option value="<?= $tc->id_tool_condition ?>">
+                                                                                    <?= $tc->condition ?></option>
                                                                             <?php endforeach; ?>
                                                                         </select>
                                                                     </div>
@@ -217,14 +286,18 @@
                                                                     <div class="mb-3">
                                                                         <label>Keterangan</label>
                                                                         <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description" value="<?= $t->description; ?>"> -->
-                                                                        <textarea class="form-control" name="description" rows="5" value="<?= $t->description; ?>"><?= $t->description; ?></textarea>
+                                                                        <textarea class="form-control" name="description"
+                                                                            rows="5"
+                                                                            value="<?= $t->description; ?>"><?= $t->description; ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+                                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit"
+                                                                class="btn btn-primary btn-sm">Simpan</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -232,24 +305,34 @@
                                         </div>
 
                                         <!-- Modal Hapus Role -->
-                                        <div class="modal fade" id="modalToolDelete<?= $t->id_tool; ?>" tabindex="-1" aria-labelledby="DeleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modalToolDelete<?= $t->id_tool; ?>" tabindex="-1"
+                                            aria-labelledby="DeleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="DeleteModalLabel">Hapus Peralatan</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('peralatan/tool_delete') ?>" method="POST">
+                                                    <form role="form" action="<?= base_url('peralatan/tool_delete') ?>"
+                                                        method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <input type="hidden" name="id_tool" value="<?= $t->id_tool; ?>">
-                                                                <input type="hidden" name="id_lab" value="<?= $t->id_lab; ?>">
-                                                                <p class="text-sm mt-3">Yakin ingin menghapus peralatan : <span class="text-bold"><?= $t->tool; ?></span>!</p>
+                                                                <input type="hidden" name="id_tool"
+                                                                    value="<?= $t->id_tool; ?>">
+                                                                <input type="hidden" name="id_lab"
+                                                                    value="<?= $t->id_lab; ?>">
+                                                                <p class="text-sm mt-3">Yakin ingin menghapus peralatan :
+                                                                    <span class="text-bold">
+                                                                        <?= $t->tool; ?>
+                                                                    </span>!</p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm">Hapus</button>
                                                         </div>
                                                     </form>
                                                 </div>

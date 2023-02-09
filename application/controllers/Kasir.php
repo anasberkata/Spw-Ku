@@ -286,7 +286,7 @@ class Kasir extends CI_Controller
         }
 
         $this->load->view('kasir/header', $data);
-        $this->load->view('kasir/cashier_selling_detail_search', $data);
+        $this->load->view('kasir/cashier_selling_detail', $data);
         $this->load->view('kasir/footer');
     }
 
@@ -393,7 +393,7 @@ class Kasir extends CI_Controller
         }
 
         $this->load->view('kasir/header', $data);
-        $this->load->view('kasir/cashier_franchise_detail_search', $data);
+        $this->load->view('kasir/cashier_franchise_detail', $data);
         $this->load->view('kasir/footer');
     }
 

@@ -47,7 +47,9 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
 
     <table border="1">
         <tr>
-            <td colspan="9"> Lab : SPW <?= $lab ?></td>
+            <td colspan="9"> Lab : SPW
+                <?= $lab ?>
+            </td>
         </tr>
         <tr>
             <th>NO.</th>
@@ -63,22 +65,32 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
 
         <?php $i = 1; ?>
         <?php $row = 9; ?>
-        <?php foreach ($product->result() as $p) : ?>
+        <?php foreach ($product->result() as $p): ?>
             <tr>
                 <td style="text-align: center;">
-                    <p><?= $i; ?></p>
+                    <p>
+                        <?= $i; ?>
+                    </p>
                 </td>
                 <td>
-                    <p><?= $p->product; ?></p>
+                    <p>
+                        <?= $p->product; ?>
+                    </p>
                 </td>
                 <td style="text-align: right;">
-                    <p><?= $p->basic_price; ?></p>
+                    <p>
+                        <!-- <?= $p->basic_price; ?> -->
+                    </p>
                 </td>
                 <td style="text-align: right;">
-                    <p><?= $p->selling_price; ?></p>
+                    <p>
+                        <?= $p->selling_price; ?>
+                    </p>
                 </td>
                 <td style="text-align: center;">
-                    <p><?= $p->qty; ?></p>
+                    <p>
+                        <!-- <?= $p->qty; ?> -->
+                    </p>
                 </td>
                 <td>
                     <p></p>
@@ -87,10 +99,18 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                     <p></p>
                 </td>
                 <td>
-                    <p>=sum(G<?= $row; ?>*C<?= $row; ?>)</p>
+                    <p>
+                        <!-- =sum(G
+                                <?= $row; ?>*C
+                                <?= $row; ?>) -->
+                    </p>
                 </td>
                 <td>
-                    <p>=sum(G<?= $row; ?>*D<?= $row; ?>)</p>
+                    <p>
+                        <!-- =sum(G
+                                <?= $row; ?>*D
+                                <?= $row; ?>) -->
+                    </p>
                 </td>
             </tr>
 
@@ -100,12 +120,20 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
 
         <tr>
             <th colspan="7" style="text-align: right;"> TOTAL</th>
-            <td>=sum(H9:H<?= $row - 1; ?>)</td>
-            <td>=sum(I9:I<?= $row - 1; ?>)</td>
+            <td>
+                <!-- =sum(H9:H
+                <?= $row - 1; ?>) -->
+            </td>
+            <td>
+                <!-- =sum(I9:I
+                <?= $row - 1; ?>) -->
+            </td>
         </tr>
         <tr></tr>
         <tr>
-            <th colspan="4">Tanggal: <?= date("d M Y"); ?></th>
+            <th colspan="4">Tanggal:
+                <?= date("d M Y"); ?>
+            </th>
             <th colspan="2">TANDA TANGAN</th>
             <th>JUMLAH SETOR <br />TOTAL HARGA <br />DASAR</th>
             <th>JUMLAH SETOR <br />TOTAL HARGA <br />PENJUALAN</th>
@@ -113,11 +141,23 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
         </tr>
         <tr>
             <td colspan="2">Guru Pembimbing Praktek</td>
-            <td colspan="2">: <?= $schedule['name'] ?></td>
+            <td colspan="2">:
+                <?= $schedule['name'] ?>
+            </td>
             <td colspan="2"></td>
-            <td rowspan="2">=H<?= $row; ?></td>
-            <td rowspan="2">=I<?= $row; ?></td>
-            <td rowspan="2">=I<?= $row; ?>-H<?= $row; ?></td>
+            <td rowspan="2">
+                <!-- =H
+                <?= $row; ?> -->
+            </td>
+            <td rowspan="2">
+                <!-- =I
+                <?= $row; ?> -->
+            </td>
+            <td rowspan="2">
+                <!-- =I
+                <?= $row; ?>-H
+                <?= $row; ?> -->
+            </td>
         </tr>
         <tr>
             <td colspan="2">Kepala Lab SPW</td>

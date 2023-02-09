@@ -96,7 +96,7 @@
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                <div class="btn-group w-100 w-lg-auto">
                                                     <a type="button" class="btn btn-warning btn-sm px-3 py-2"
                                                         href="<?= base_url('penjualan/selling_detail/?date_selling=') . $s->date_selling . '&id_lab=' . $s->id_lab; ?>"><i
                                                             class="fa fa-list cursor-pointer"> </i> Detail</a>

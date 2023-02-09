@@ -88,8 +88,8 @@
                                                     placeholder="Pilih Produk" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p): ?>
-                                                                    <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
-                                                                        Stok : <?= $p->qty ?></option>
+                                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                            Stok : <?= $p->qty ?></option>
                                                     <?php endforeach; ?>
                                                 </datalist>
                                                 <input type="hidden" name="id_product" id="id_product-hidden">
@@ -215,7 +215,7 @@
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
-                                                <div class="btn-group w-100 w-lg-auto mt-3">
+                                                <div class="btn-group w-100 w-lg-auto">
                                                     <a type="button" class="btn btn-primary btn-sm px-3 py-2"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i

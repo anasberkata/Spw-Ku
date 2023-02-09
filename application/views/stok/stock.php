@@ -6,24 +6,30 @@
             <div class="card-header pb-0">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <h6>Daftar Produk LAB SPW <?= $lab; ?></h6>
+                        <h6>Daftar Produk LAB SPW
+                            <?= $lab; ?>
+                        </h6>
                     </div>
 
                     <div class="col-12 col-lg-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('stok'); ?>" class="btn btn-primary btn-sm mb-3 ms-2">
+                                    <a href="<?= base_url('stok'); ?>" class="btn btn-primary btn-sm ms-2">
                                         Kembali
                                     </a>
 
                                     <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-success btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button id="btnGroupDrop1" type="button"
+                                            class="btn btn-success btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                             Download Excel
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <?php foreach ($place->result() as $p) : ?>
-                                                <li><a class="dropdown-item" href="<?= base_url('stok/stock_excel/?id_place=') . $p->id_place . "&id_lab=" . $lab; ?>">Produk <?= $p->place ?></a></li>
+                                            <?php foreach ($place->result() as $p): ?>
+                                                <li><a class="dropdown-item"
+                                                        href="<?= base_url('stok/stock_excel/?id_place=') . $p->id_place . "&id_lab=" . $lab; ?>">Produk
+                                                        <?= $p->place ?></a></li>
                                             <?php endforeach; ?>
                                         </ul>
                                     </div>
@@ -39,8 +45,8 @@
                                         <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
                                             <select class="form-select" aria-label="Default select" name="id_place">
                                                 <option>Pilih Lokasi Produk</option>
-                                                <?php foreach ($place->result() as $p) : ?>
-                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                <?php foreach ($place->result() as $p): ?>
+                                                                <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -67,43 +73,63 @@
                             <table class="table align-items-center mb-0" id="data-table">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="7%">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Gambar</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Produk</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Qty</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                            width="7%">No.</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Gambar</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Tempat</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nama Produk</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $i = 1; ?>
-                                    <?php foreach ($product->result() as $p) : ?>
+                                    <?php foreach ($product->result() as $p): ?>
                                         <tr>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $i; ?>
+                                                </p>
                                             </td>
                                             <td>
                                                 <div class="avatar avatar-xl position-relative">
-                                                    <img src="<?= base_url('assets/img/products/' . $p->image); ?>" alt="product_image" class="w-100 border-radius-lg shadow-sm">
+                                                    <img src="<?= base_url('assets/img/products/' . $p->image); ?>"
+                                                        alt="product_image" class="w-100 border-radius-lg shadow-sm">
                                                 </div>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?php if ($p->id_place == 1) : ?>
-                                                        <span class="badge badge-sm bg-gradient-success"><?= $p->place; ?></span>
-                                                    <?php elseif ($p->id_place == 2) : ?>
-                                                        <span class="badge badge-sm bg-gradient-info"><?= $p->place; ?></span>
-                                                    <?php elseif ($p->id_place == 3) : ?>
-                                                        <span class="badge badge-sm bg-gradient-warning"><?= $p->place; ?></span>
-                                                    <?php elseif ($p->id_place == 4) : ?>
-                                                        <span class="badge badge-sm bg-gradient-danger"><?= $p->place; ?></span>
+                                                    <?php if ($p->id_place == 1): ?>
+                                                        <span class="badge badge-sm bg-gradient-success">
+                                                            <?= $p->place; ?>
+                                                        </span>
+                                                    <?php elseif ($p->id_place == 2): ?>
+                                                        <span class="badge badge-sm bg-gradient-info">
+                                                            <?= $p->place; ?>
+                                                        </span>
+                                                    <?php elseif ($p->id_place == 3): ?>
+                                                        <span class="badge badge-sm bg-gradient-warning">
+                                                            <?= $p->place; ?>
+                                                        </span>
+                                                    <?php elseif ($p->id_place == 4): ?>
+                                                        <span class="badge badge-sm bg-gradient-danger">
+                                                            <?= $p->place; ?>
+                                                        </span>
                                                     <?php endif; ?>
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->product; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $p->product; ?>
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3"><?= $p->qty; ?></p>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $p->qty; ?>
+                                                </p>
                                             </td>
                                         </tr>
 
