@@ -152,4 +152,43 @@ class Peralatan extends CI_Controller
         $mpdf->WriteHTML($page);
         $mpdf->Output('Data Aset Lab SPW ' . $id_lab . '.pdf', 'I');
     }
+
+
+    // PURCHASE
+    public function index_purchase()
+    {
+        $data['title'] = "Data Pembelian Aset";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->peralatan->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('peralatan/index_purchase', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function tool_purchase()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Pembelian Aset";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+
+        $data['tool'] = $this->peralatan->get_tools($id_lab);
+        $data['tool_condition'] = $this->peralatan->get_condition();
+
+
+        $data['lab'] = $id_lab;
+
+        $data['tool_purchase'] = $this->peralatan->get_tool_purchase($id_lab);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('peralatan/tool_purchase', $data);
+        $this->load->view('templates/footer');
+    }
 }

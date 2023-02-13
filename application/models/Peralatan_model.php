@@ -61,4 +61,20 @@ class Peralatan_model extends CI_Model
         $query = $this->db->query("SELECT SUM(`price`) AS `total_price` FROM `tbl_tool` WHERE `id_lab` = '$id_lab'");
         return $query->row();
     }
+
+
+    // PURCHASE
+    function get_tool_purchase($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_tool_purchase');
+        // $this->db->join('tbl_supplier', 'tbl_supplier.id_supplier = tbl_purchase.id_supplier');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_tool_purchase.id_user');
+        // $this->db->join('tbl_purchase_detail', 'tbl_purchase_detail.id_purchase = tbl_purchase.id_purchase');
+        $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('date_purchasing', 'DESC');
+        $this->db->order_by('id_purchase', 'DESC');
+        $query = $this->db->get();
+        return $query;
+    }
 }

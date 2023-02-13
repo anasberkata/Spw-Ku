@@ -177,6 +177,13 @@ class Kasir extends CI_Controller
         $today = date("Y-m-d");
         $guru_piket = $this->k->get_schedule($today);
 
+        if (isset($guru_piket)) {
+            $guru_piket = $this->k->get_schedule($today);
+        } else {
+            $guru_piket['id_user'] = 2;
+            $guru_piket['id_class'] = 1;
+        }
+
         $format = "%Y-%m-%d";
         $data_order = array(
             'date_selling' => mdate($format),
