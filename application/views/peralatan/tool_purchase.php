@@ -137,7 +137,8 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <form role="form" action="<?= base_url('peralatan/purchase_edit'); ?>"
+                                                    <form role="form"
+                                                        action="<?= base_url('peralatan/tool_purchase_edit'); ?>"
                                                         method="POST">
                                                         <div class="modal-body">
                                                             <input type="hidden" class="form-control" name="id_lab"

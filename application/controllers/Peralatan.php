@@ -191,4 +191,234 @@ class Peralatan extends CI_Controller
         $this->load->view('peralatan/tool_purchase', $data);
         $this->load->view('templates/footer');
     }
+
+    public function tool_purchase_add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_user = $this->input->post('id_user', true);
+        $shop = $this->input->post('shop', true);
+        $date_purchasing = $this->input->post('date_purchasing', true);
+
+        $data = [
+            'id_purchase' => NULL,
+            'date_purchasing' => $date_purchasing,
+            'shop' => $shop,
+            'id_user' => $id_user,
+            'id_lab' => $id_lab
+        ];
+
+        $this->peralatan->save_tool_purchase($data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembelian berhasil ditambahkan! Silahkan isi Produk</div>');
+
+        redirect('peralatan/tool_purchase/?id_lab=' . $id_lab);
+    }
+
+    public function tool_purchase_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_purchasing = $this->input->post('date_purchasing', true);
+        $shop = $this->input->post('shop', true);
+
+        $data = [
+            'date_purchasing' => $date_purchasing,
+            'shop' => $shop,
+            'id_user' => $id_user
+        ];
+
+        $this->peralatan->update_tool_purchase($data, $id_purchase);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pembelian berhasil diubah!</div>');
+
+        redirect('peralatan/tool_purchase/?id_lab=' . $id_lab);
+    }
+
+    public function tool_purchase_detail()
+    {
+        $id_purchase = $this->input->get('id_purchase', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Pembelian Aset";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        // $data['supplier'] = $this->produk->get_supplier();
+
+        $data['id_purchase'] = $id_purchase;
+        $data['lab'] = $id_lab;
+        $data['tools'] = $this->peralatan->get_tools($id_lab);
+        $data['condition'] = $this->peralatan->get_condition();
+
+        $data['purchase'] = $this->db->get_where('tbl_tool_purchase', ['id_purchase' => $id_purchase])->row_array();
+        $data['purchase_detail'] = $this->peralatan->get_tool_purchase_detail($id_purchase);
+
+        $data['total'] = $this->peralatan->sum_total_purchase_price($id_purchase);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('peralatan/tool_purchase_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function tool_purchase_detail_add()
+    {
+        $this->form_validation->set_rules(
+            'qty_purchase',
+            'Jumlah Aset',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        $this->form_validation->set_rules(
+            'price_purchase',
+            'Harga',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $id_purchase = $this->input->get('id_purchase', true);
+            $id_lab = $this->input->get('id_lab', true);
+
+            redirect('peralatan/tool_purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+
+        } else {
+            $id_lab = $this->input->post('id_lab', true);
+            $id_purchase = $this->input->post('id_purchase', true);
+            $id_tool = $this->input->post('id_tool', true);
+            $qty_purchase = $this->input->post('qty_purchase', true);
+            $price_purchase = $this->input->post('price_purchase', true);
+            $condition_purchase = $this->input->post('condition_purchase', true);
+
+            $data = [
+                'id_purchase_detail' => NULL,
+                'id_purchase' => $id_purchase,
+                'id_tool' => $id_tool,
+                'qty_purchase' => $qty_purchase,
+                'price_purchase' => $price_purchase,
+                'total_price_purchase' => $qty_purchase * $price_purchase,
+                'condition_purchase' => $condition_purchase
+            ];
+
+            $d['t'] = $this->db->get_where('tbl_tool', ['id_tool' => $id_tool])->row_array();
+
+            $data_stock = [
+                'qty' => $d['t']['qty'] + $qty_purchase,
+                'price' => $d['t']['price'] + ($qty_purchase * $price_purchase)
+            ];
+
+            $this->peralatan->save_tool_purchase_detail($data);
+            $this->peralatan->update_stock_tool($data_stock, $id_tool);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil ditambahkan!</div>');
+
+            redirect('peralatan/tool_purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+        }
+    }
+
+    public function tool_purchase_detail_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_purchase_detail = $this->input->post('id_purchase_detail', true);
+        $id_tool = $this->input->post('id_tool', true);
+        $qty_purchase = $this->input->post('qty_purchase', true);
+        $price_purchase = $this->input->post('price_purchase', true);
+        $condition_purchase = $this->input->post('condition_purchase', true);
+
+        $d['t'] = $this->db->get_where('tbl_tool', ['id_tool' => $id_tool])->row_array();
+        $d['pd'] = $this->db->get_where('tbl_tool_purchase_detail', ['id_purchase_detail' => $id_purchase_detail])->row_array();
+
+        if ($qty_purchase == $d['pd']['qty_purchase']) {
+            $qty = $d['t']['qty'];
+        } else {
+            $selisih = $qty_purchase - $d['pd']['qty_purchase'];
+            $qty = $d['t']['qty'] + $selisih;
+        }
+
+        $final_price = $qty_purchase * $price_purchase;
+
+        if ($final_price == $d['pd']['total_price_purchase']) {
+            $price = $d['t']['price'];
+        } else {
+            $selisih_harga = $final_price - $d['pd']['total_price_purchase'];
+            $price = $d['t']['price'] + $selisih_harga;
+        }
+
+        $data = [
+            'id_tool' => $id_tool,
+            'qty_purchase' => $qty_purchase,
+            'price_purchase' => $price_purchase,
+            'total_price_purchase' => $final_price,
+            'condition_purchase' => $condition_purchase
+        ];
+
+        $data_stock = [
+            'qty' => $qty,
+            'price' => $price
+        ];
+
+        $this->peralatan->update_tool_purchase_detail($data, $id_purchase_detail);
+        $this->peralatan->update_stock_tool($data_stock, $id_tool);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil diubah!</div>');
+
+        redirect('peralatan/tool_purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+    }
+
+    public function tool_purchase_detail_delete()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_purchase = $this->input->post('id_purchase', true);
+        $id_purchase_detail = $this->input->post('id_purchase_detail', true);
+        $id_tool = $this->input->post('id_tool', true);
+        $qty_purchase = $this->input->post('qty_purchase', true);
+        $price_purchase = $this->input->post('price_purchase', true);
+
+        $d['t'] = $this->db->get_where('tbl_tool', ['id_tool' => $id_tool])->row_array();
+
+        if ($price_purchase == $d['t']['price']) {
+            $price = 0;
+        } else {
+            $price = $d['t']['price'] - $price_purchase;
+        }
+
+        $data_stock = [
+            'qty' => $d['t']['qty'] - $qty_purchase,
+            'price' => $price
+        ];
+
+        $this->peralatan->delete_tool_purchase_detail($id_purchase_detail);
+        $this->peralatan->update_stock_tool($data_stock, $id_tool);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Peralatan berhasil dihapus!</div>');
+
+        redirect('peralatan/tool_purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
+    }
+
+    public function tool_purchase_detail_excel()
+    {
+        $id_purchase = $this->input->get('id_purchase', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Pembelian Aset";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_purchase'] = $id_purchase;
+        $data['lab'] = $id_lab;
+        $data['tools'] = $this->peralatan->get_tools($id_lab);
+        $data['condition'] = $this->peralatan->get_condition();
+
+        $data['purchase'] = $this->db->get_where('tbl_tool_purchase', ['id_purchase' => $id_purchase])->row_array();
+        $data['purchase_detail'] = $this->peralatan->get_tool_purchase_detail($id_purchase);
+
+        $data['total'] = $this->peralatan->sum_total_purchase_price($id_purchase);
+
+        $this->load->view('peralatan/tool_purchase_detail_excel', $data);
+    }
+
 }

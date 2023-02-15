@@ -1,12 +1,12 @@
 <?php
 header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=Data Pembelian Produk " . $purchase_detail->result()[0]->place . " Lab " . $lab . ".xls");
+header("Content-Disposition: attachment; filename=Data Pembelian " . $purchase["date_purchasing"] . " Lab " . $lab . ".xls");
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Data Pembelian Produk </title>
+    <title>Data Pembelian Peralatan / Set</title>
 </head>
 
 <body>
@@ -48,19 +48,19 @@ header("Content-Disposition: attachment; filename=Data Pembelian Produk " . $pur
     <table border="1">
         <tr>
             <td colspan="9">
-                Data Pembelian Produk :
-                <?= $purchase_detail->result()[0]->place; ?> | Supplier :
-                <?= $purchase["supplier"] ?> | Tanggal :
+                Data Pembelian Peralatan / Aset : Nama Toko :
+                <?= $purchase["shop"] ?> | Tanggal :
                 <?= date('d F Y', strtotime($purchase["date_purchasing"])); ?> | Lab : SPW
                 <?= $lab ?>
             </td>
         </tr>
         <tr>
             <th>NO.</th>
-            <th colspan="5">NAMA PRODUK</th>
-            <th>QTY</th>
-            <th>HARGA DASAR</th>
-            <th>TOTAL</th>
+            <th colspan="5">NAMA ASET</th>
+            <th>QTY ASET</th>
+            <th>HARGA SATUAN</th>
+            <th>TOTAL HARGA</th>
+            <th>KONDISI</th>
         </tr>
 
         <?php $i = 1; ?>
@@ -73,22 +73,27 @@ header("Content-Disposition: attachment; filename=Data Pembelian Produk " . $pur
                 </td>
                 <td colspan="5">
                     <p>
-                        <?= $pd->product; ?>
+                        <?= $pd->tool; ?>
                     </p>
                 </td>
                 <td style="text-align: right;">
                     <p>
-                        <?= $pd->qty_product; ?>
+                        <?= $pd->qty_purchase; ?>
                     </p>
                 </td>
                 <td style="text-align: right;">
                     <p>
-                        <?= $pd->basic_price; ?>
+                        <?= $pd->price_purchase; ?>
                     </p>
                 </td>
                 <td style="text-align: center;">
                     <p>
-                        <?= $pd->total_price; ?>
+                        <?= $pd->total_price_purchase; ?>
+                    </p>
+                </td>
+                <td style="text-align: center;">
+                    <p>
+                        <?= $pd->condition_purchase; ?>
                     </p>
                 </td>
             </tr>

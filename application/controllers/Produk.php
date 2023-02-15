@@ -479,19 +479,8 @@ class Produk extends CI_Controller
             $id_purchase = $this->input->get('id_purchase', true);
             $id_lab = $this->input->get('id_lab', true);
 
-            $data['title'] = "Data Pembelian";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+            redirect('produk/purchase_detail/?id_purchase=' . $id_purchase . '&id_lab=' . $id_lab);
 
-            $data['id_purchase'] = $id_purchase;
-            $data['lab'] = $id_lab;
-            $data['product'] = $this->produk->get_product($id_lab);
-            $data['purchase_detail'] = $this->produk->get_purchase_detail($id_purchase);
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/purchase_detail', $data);
-            $this->load->view('templates/footer');
         } else {
             $id_lab = $this->input->post('id_lab', true);
             $id_purchase = $this->input->post('id_purchase', true);
@@ -539,14 +528,21 @@ class Produk extends CI_Controller
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
         $d['pd'] = $this->db->get_where('tbl_purchase_detail', ['id_purchase_detail' => $id_purchase_detail])->row_array();
 
-        if ($qty_product > $d['pd']['qty_product']) {
+        // if ($qty_product > $d['pd']['qty_product']) {
+        //     $selisih = $qty_product - $d['pd']['qty_product'];
+        //     $qty = $d['p']['qty'] + $selisih;
+        // } else if ($qty_product < $d['pd']['qty_product']) {
+        //     $selisih = $d['pd']['qty_product'] - $qty_product;
+        //     $qty = $d['p']['qty'] - $selisih;
+        // } else if ($qty_product == $d['pd']['qty_product']) {
+        //     $qty = $d['p']['qty'];
+        // }
+
+        if ($qty_product == $d['pd']['qty_product']) {
+            $qty = $d['p']['qty'];
+        } else {
             $selisih = $qty_product - $d['pd']['qty_product'];
             $qty = $d['p']['qty'] + $selisih;
-        } else if ($qty_product < $d['pd']['qty_product']) {
-            $selisih = $d['pd']['qty_product'] - $qty_product;
-            $qty = $d['p']['qty'] - $selisih;
-        } else if ($qty_product == $d['pd']['qty_product']) {
-            $qty = $d['p']['qty'];
         }
 
         $data = [

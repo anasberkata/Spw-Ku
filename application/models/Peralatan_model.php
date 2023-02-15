@@ -62,7 +62,6 @@ class Peralatan_model extends CI_Model
         return $query->row();
     }
 
-
     // PURCHASE
     function get_tool_purchase($id_lab)
     {
@@ -77,4 +76,59 @@ class Peralatan_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function save_tool_purchase($data)
+    {
+        $this->db->insert('tbl_tool_purchase', $data);
+    }
+
+    function update_tool_purchase($data, $id_purchase)
+    {
+        $this->db->where('id_purchase', $id_purchase);
+        $this->db->update('tbl_tool_purchase', $data);
+    }
+
+    // PURCHASE DETAIL
+    function get_tool_purchase_detail($id_purchase)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_tool_purchase_detail');
+        $this->db->join('tbl_tool', 'tbl_tool.id_tool = tbl_tool_purchase_detail.id_tool');
+        $this->db->join('tbl_tool_condition', 'tbl_tool_condition.id_tool_condition = tbl_tool_purchase_detail.condition_purchase');
+        $this->db->where('id_purchase', $id_purchase);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_tool_purchase_detail($data)
+    {
+        $this->db->insert('tbl_tool_purchase_detail', $data);
+    }
+
+    function update_tool_purchase_detail($data, $id_purchase_detail)
+    {
+        $this->db->where('id_purchase_detail', $id_purchase_detail);
+        $this->db->update('tbl_tool_purchase_detail', $data);
+    }
+
+    function delete_tool_purchase_detail($id_purchase_detail)
+    {
+        $this->db->where('id_purchase_detail', $id_purchase_detail);
+        $this->db->delete('tbl_tool_purchase_detail');
+
+        return true;
+    }
+
+    function update_stock_tool($data_stock, $id_tool)
+    {
+        $this->db->where('id_tool', $id_tool);
+        $this->db->update('tbl_tool', $data_stock);
+    }
+
+    function sum_total_purchase_price($id_purchase)
+    {
+        $query = $this->db->query("SELECT SUM(`total_price_purchase`) AS `total` FROM `tbl_tool_purchase_detail` WHERE `id_purchase` = '$id_purchase'");
+        return $query->row();
+    }
+
 }
