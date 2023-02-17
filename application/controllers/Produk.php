@@ -54,16 +54,7 @@ class Produk extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Supplier";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['supplier'] = $this->produk->get_supplier();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/supplier', $data);
-            $this->load->view('templates/footer');
+            redirect('produk/supplier');
         } else {
             $supplier = $this->input->post('supplier', true);
             $address = $this->input->post('address', true);
@@ -137,16 +128,7 @@ class Produk extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Data Kategori";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['category'] = $this->produk->get_categories();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/category', $data);
-            $this->load->view('templates/footer');
+            redirect('produk/category');
         } else {
             $category = $this->input->post('category', true);
 
@@ -219,18 +201,7 @@ class Produk extends CI_Controller
         if ($this->form_validation->run() == false) {
             $id_lab = $this->input->get('id_lab', true);
 
-            $data['title'] = "Data Produk";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['category'] = $this->produk->get_categories();
-            $data['product'] = $this->produk->get_products($id_lab);
-            $data['place'] = $this->produk->get_places();
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/aside', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('produk/product', $data);
-            $this->load->view('templates/footer');
+            redirect('produk/product/?id_lab=' . $id_lab);
         } else {
             $barcode = $this->input->post('code', true);
             $code = $this->barcode($barcode);
@@ -239,6 +210,7 @@ class Produk extends CI_Controller
             $id_place = $this->input->post('id_place', true);
             $product = $this->input->post('product', true);
             $qty = $this->input->post('qty', true);
+            $qty_shop = $this->input->post('qty_shop', true);
             $basic_price = $this->input->post('basic_price', true);
             $selling_price = $this->input->post('selling_price', true);
             $image = $this->uploadImage();
@@ -252,6 +224,7 @@ class Produk extends CI_Controller
                 'id_owner' => 0,
                 'product' => $product,
                 'qty' => $qty,
+                'qty_shop' => $qty_shop,
                 'basic_price' => $basic_price,
                 'selling_price' => $selling_price,
                 'image' => $image,
@@ -275,6 +248,7 @@ class Produk extends CI_Controller
         $code = $this->barcode($barcode);
         $product = $this->input->post('product', true);
         $qty = $this->input->post('qty', true);
+        $qty_shop = $this->input->post('qty_shop', true);
         $basic_price = $this->input->post('basic_price', true);
         $selling_price = $this->input->post('selling_price', true);
 
@@ -307,6 +281,7 @@ class Produk extends CI_Controller
         $this->db->set('id_place', $id_place);
         $this->db->set('product', $product);
         $this->db->set('qty', $qty);
+        $this->db->set('qty_shop', $qty_shop);
         $this->db->set('basic_price', $basic_price);
         $this->db->set('selling_price', $selling_price);
 
@@ -620,6 +595,234 @@ class Produk extends CI_Controller
         $data['total'] = $this->produk->sum_total_price($id_purchase);
 
         $this->load->view('produk/purchase_detail_excel', $data);
+    }
+
+
+
+
+    // MUTASI
+    public function index_mutation()
+    {
+        $data['title'] = "Data Mutasi";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->produk->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('produk/mutation_index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function mutation()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Mutasi";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['mutation'] = $this->produk->get_mutation($id_lab);
+        $data['lab'] = $id_lab;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('produk/mutation', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function mutation_add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_mutation = $this->input->post('date_mutation', true);
+
+        $data = [
+            'id_mutation' => NULL,
+            'date_mutation' => $date_mutation,
+            'id_user' => $id_user,
+            'id_lab' => $id_lab
+        ];
+
+        $this->produk->save_mutation($data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Mutasi berhasil ditambahkan! Silahkan isi Produk</div>');
+
+        redirect('produk/mutation/?id_lab=' . $id_lab);
+    }
+
+    public function mutation_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_mutation = $this->input->post('id_mutation', true);
+        $id_user = $this->input->post('id_user', true);
+        $date_mutation = $this->input->post('date_mutation', true);
+
+        $data = [
+            'date_mutation' => $date_mutation,
+            'id_user' => $id_user
+        ];
+
+        $this->produk->update_mutation($data, $id_mutation);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Mutasi berhasil diubah!</div>');
+
+        redirect('produk/mutation/?id_lab=' . $id_lab);
+    }
+
+    public function mutation_detail()
+    {
+        $id_mutation = $this->input->get('id_mutation', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Mutasi";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_mutation'] = $id_mutation;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->produk->get_product($id_lab);
+
+        $data['mutation'] = $this->db->get_where('tbl_product_mutation', ['id_mutation' => $id_mutation])->row_array();
+        $data['mutation_detail'] = $this->produk->get_mutation_detail($id_mutation);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('produk/mutation_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function mutation_detail_add()
+    {
+        $this->form_validation->set_rules(
+            'id_product',
+            'Produk',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        $this->form_validation->set_rules(
+            'qty_mutation',
+            'Jumlah Produk',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $id_mutation = $this->input->get('id_mutation', true);
+            $id_lab = $this->input->get('id_lab', true);
+
+            redirect('produk/mutation_detail/?id_mutation=' . $id_mutation . '&id_lab=' . $id_lab);
+
+        } else {
+            $id_lab = $this->input->post('id_lab', true);
+            $id_mutation = $this->input->post('id_mutation', true);
+            $id_product = $this->input->post('id_product', true);
+            $qty_mutation = $this->input->post('qty_mutation', true);
+
+            $data = [
+                'id_mutation_detail' => NULL,
+                'id_mutation' => $id_mutation,
+                'id_product' => $id_product,
+                'qty_mutation' => $qty_mutation
+            ];
+
+            $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+            $data_stock = [
+                'qty' => $d['p']['qty'] - $qty_mutation,
+                'qty_shop' => $d['p']['qty_shop'] + $qty_mutation
+            ];
+
+            $this->produk->save_mutation_detail($data);
+            $this->produk->update_stock_product($data_stock, $id_product);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Data mutasi berhasil ditambahkan!</div>');
+
+            redirect('produk/mutation_detail/?id_mutation=' . $id_mutation . '&id_lab=' . $id_lab);
+        }
+    }
+
+    public function mutation_detail_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_mutation = $this->input->post('id_mutation', true);
+        $id_mutation_detail = $this->input->post('id_mutation_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_mutation = $this->input->post('qty_mutation', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+        $d['md'] = $this->db->get_where('tbl_product_mutation_detail', ['id_mutation_detail' => $id_mutation_detail])->row_array();
+
+        if ($qty_mutation == $d['md']['qty_mutation']) {
+            $qty = $d['p']['qty'];
+            $qty_mutation = $d['p']['qty_shop'];
+        } else {
+            $selisih = $qty_mutation - $d['md']['qty_mutation'];
+            $qty = $d['p']['qty'] - $selisih;
+            $qty_mutation = $d['p']['qty_shop'] + $selisih;
+        }
+
+        $data = [
+            'id_product' => $id_product,
+            'qty_mutation' => $qty_mutation
+        ];
+
+        $data_stock = [
+            'qty' => $qty,
+            'qty_shop' => $qty_mutation
+        ];
+
+        $this->produk->update_mutation_detail($data, $id_mutation_detail);
+        $this->produk->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Data mutasi berhasil diubah!</div>');
+
+        redirect('produk/mutation_detail/?id_mutation=' . $id_mutation . '&id_lab=' . $id_lab);
+    }
+
+    public function mutation_detail_delete()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_mutation = $this->input->post('id_mutation', true);
+        $id_mutation_detail = $this->input->post('id_mutation_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_mutation = $this->input->post('qty_mutation', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+        $data_stock = [
+            'qty' => $d['p']['qty'] + $qty_mutation,
+            'qty_shop' => $d['p']['qty_shop'] - $qty_mutation
+        ];
+
+        $this->produk->delete_mutation_detail($id_mutation_detail);
+        $this->produk->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Data mutasi berhasil dihapus!</div>');
+
+        redirect('produk/mutation_detail/?id_mutation=' . $id_mutation . '&id_lab=' . $id_lab);
+    }
+
+    public function mutation_detail_excel()
+    {
+        $id_mutation = $this->input->get('id_mutation', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Mutasi";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['id_mutation'] = $id_mutation;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->produk->get_product($id_lab);
+
+        $data['mutation'] = $this->db->get_where('tbl_product_mutation', ['id_mutation' => $id_mutation])->row_array();
+        $data['mutation_detail'] = $this->produk->get_mutation_detail($id_mutation);
+
+        $this->load->view('produk/mutation_detail_excel', $data);
     }
 
 }

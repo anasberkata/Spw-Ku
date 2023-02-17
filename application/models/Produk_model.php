@@ -219,13 +219,63 @@ class Produk_model extends CI_Model
         return true;
     }
 
-
-
-
     function ajax_produk($id)
     {
         $hasil = $this->db->query("SELECT * FROM tbl_product WHERE id_product = '$id'");
         // return $hasil->result();
         return $hasil->row();
+    }
+
+
+    // MUTATION
+    function get_mutation($id_lab)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product_mutation');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_product_mutation.id_user');
+        $this->db->where('tbl_product_mutation.id_lab', $id_lab);
+        $this->db->order_by('date_mutation', 'DESC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_mutation($data)
+    {
+        $this->db->insert('tbl_product_mutation', $data);
+    }
+
+    function update_mutation($data, $id_mutation)
+    {
+        $this->db->where('id_mutation', $id_mutation);
+        $this->db->update('tbl_product_mutation', $data);
+    }
+
+    function get_mutation_detail($id_mutation)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_product_mutation_detail');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_product_mutation_detail.id_product');
+        $this->db->where('id_mutation', $id_mutation);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_mutation_detail($data)
+    {
+        $this->db->insert('tbl_product_mutation_detail', $data);
+    }
+
+    function update_mutation_detail($data, $id_mutation_detail)
+    {
+        $this->db->where('id_mutation_detail', $id_mutation_detail);
+        $this->db->update('tbl_product_mutation_detail', $data);
+    }
+
+    function delete_mutation_detail($id_mutation_detail)
+    {
+        $this->db->where('id_mutation_detail', $id_mutation_detail);
+        $this->db->delete('tbl_product_mutation_detail');
+
+        return true;
     }
 }

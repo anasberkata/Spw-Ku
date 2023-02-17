@@ -17,7 +17,9 @@ class Peralatan_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_tool');
         $this->db->join('tbl_tool_condition', 'tbl_tool_condition.id_tool_condition = tbl_tool.tool_condition');
+        $this->db->join('tbl_tool_categories', 'tbl_tool_categories.id_tool_category = tbl_tool.id_tool_category');
         $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('tool', 'ASC');
         $query = $this->db->get();
         return $query;
     }
@@ -129,6 +131,37 @@ class Peralatan_model extends CI_Model
     {
         $query = $this->db->query("SELECT SUM(`total_price_purchase`) AS `total` FROM `tbl_tool_purchase_detail` WHERE `id_purchase` = '$id_purchase'");
         return $query->row();
+    }
+
+
+
+
+    // CATEGORIES
+    function get_categories()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_tool_categories');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function save_category($data)
+    {
+        $this->db->insert('tbl_tool_categories', $data);
+    }
+
+    function update_category($data, $id_category)
+    {
+        $this->db->where('id_tool_category', $id_category);
+        $this->db->update('tbl_tool_categories', $data);
+    }
+
+    function delete_category($id_category)
+    {
+        $this->db->where('id_tool_category', $id_category);
+        $this->db->delete('tbl_tool_categories');
+
+        return true;
     }
 
 }

@@ -90,9 +90,16 @@
                                             </div>
                                             <div class="col-12 col-lg-6">
                                                 <div class="mb-3">
-                                                    <label>Qty</label>
-                                                    <input type="number" class="form-control" placeholder="Qty"
+                                                    <label>Qty Gudang</label>
+                                                    <input type="number" class="form-control" placeholder="Qty Gudang"
                                                         name="qty">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-lg-6">
+                                                <div class="mb-3">
+                                                    <label>Qty SPW</label>
+                                                    <input type="number" class="form-control" placeholder="Qty SPW"
+                                                        name="qty_shop">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-lg-6">
@@ -158,6 +165,8 @@
                                             Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty Spw</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Harga Dasar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -229,6 +238,11 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
                                                     <?= $p->qty; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $p->qty_shop; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -318,10 +332,18 @@
                                                             </div>
                                                             <div class="col-12 col-lg-6">
                                                                 <div class="mb-3">
-                                                                    <label>Qty</label>
+                                                                    <label>Qty Gudang</label>
                                                                     <input type="number" class="form-control"
                                                                         placeholder="Qty" name="qty"
                                                                         value="<?= $p->qty; ?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12 col-lg-6">
+                                                                <div class="mb-3">
+                                                                    <label>Qty SPW</label>
+                                                                    <input type="number" class="form-control"
+                                                                        placeholder="Qty" name="qty_shop"
+                                                                        value="<?= $p->qty_shop; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-lg-6">
@@ -359,13 +381,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-
-
-
-
-
 
                                                     </div>
                                                     <div class="modal-footer">

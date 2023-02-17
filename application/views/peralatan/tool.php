@@ -47,6 +47,19 @@
                                                 </div>
                                                 <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
+                                                        <label>Kategori</label>
+                                                        <select class="form-select" aria-label="Default select"
+                                                            name="id_category">
+                                                            <option selected>Pilih Kategori</option>
+                                                            <?php foreach ($tool_categories->result() as $tc): ?>
+                                                                <option value="<?= $tc->id_tool_category ?>"><?=
+                                                                      $tc->tool_category ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="mb-3">
                                                         <label>Nama Peralatan</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Nama Peralatan" name="tool">
@@ -86,12 +99,11 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-12 col-lg-12">
+                                                <div class="col-12 col-lg-6">
                                                     <div class="mb-3">
                                                         <label>Keterangan</label>
-                                                        <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description"> -->
-                                                        <textarea class="form-control" name="description"
-                                                            rows="5"></textarea>
+                                                        <input type="text" class="form-control" placeholder="Keterangan"
+                                                            name="description">
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,6 +137,8 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                             width="7%">No.</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Kategori</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Nama Peralatan</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Spesifikasi / Merk</th>
@@ -148,6 +162,11 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
                                                     <?= $i; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $t->tool_category; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -237,6 +256,20 @@
                                                                 </div>
                                                                 <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
+                                                                        <label>Kategori</label>
+                                                                        <select class="form-select"
+                                                                            aria-label="Default select" name="id_category">
+                                                                            <option value="<?= $t->id_tool_category; ?>"><?=
+                                                                                  $t->tool_category ?></option>
+                                                                            <?php foreach ($tool_categories->result() as $tc): ?>
+                                                                                <option value="<?= $tc->id_tool_category ?>"><?=
+                                                                                      $tc->tool_category ?></option>
+                                                                            <?php endforeach; ?>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12 col-lg-6">
+                                                                    <div class="mb-3">
                                                                         <label>Nama Peralatan</label>
                                                                         <input type="text" class="form-control"
                                                                             placeholder="Nama Peralatan" name="tool"
@@ -282,13 +315,12 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12 col-lg-12">
+                                                                <div class="col-12 col-lg-6">
                                                                     <div class="mb-3">
                                                                         <label>Keterangan</label>
-                                                                        <!-- <input type="text" class="form-control" placeholder="Keterangan" name="description" value="<?= $t->description; ?>"> -->
-                                                                        <textarea class="form-control" name="description"
-                                                                            rows="5"
-                                                                            value="<?= $t->description; ?>"><?= $t->description; ?></textarea>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Keterangan" name="description"
+                                                                            value="<?= $t->description; ?>">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -325,7 +357,8 @@
                                                                 <p class="text-sm mt-3">Yakin ingin menghapus peralatan :
                                                                     <span class="text-bold">
                                                                         <?= $t->tool; ?>
-                                                                    </span>!</p>
+                                                                    </span>!
+                                                                </p>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

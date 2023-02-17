@@ -36,6 +36,7 @@ class Peralatan extends CI_Controller
 
         $data['tool'] = $this->peralatan->get_tools($id_lab);
         $data['tool_condition'] = $this->peralatan->get_condition();
+        $data['tool_categories'] = $this->peralatan->get_categories();
         $data['lab'] = $id_lab;
 
         $this->load->view('templates/header', $data);
@@ -72,6 +73,7 @@ class Peralatan extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $id_lab = $this->input->post('id_lab', true);
+            $id_category = $this->input->post('id_category', true);
             $tool = $this->input->post('tool', true);
             $brand = $this->input->post('brand', true);
             $qty = $this->input->post('qty', true);
@@ -82,6 +84,7 @@ class Peralatan extends CI_Controller
 
             $data = [
                 'id_tool' => NULL,
+                'id_tool_category' => $id_category,
                 'tool' => $tool,
                 'brand' => $brand,
                 'qty' => $qty,
@@ -102,6 +105,7 @@ class Peralatan extends CI_Controller
     {
         $id_tool = $this->input->post('id_tool', true);
         $id_lab = $this->input->post('id_lab', true);
+        $id_category = $this->input->post('id_category', true);
         $tool = $this->input->post('tool', true);
         $brand = $this->input->post('brand', true);
         $qty = $this->input->post('qty', true);
@@ -110,6 +114,7 @@ class Peralatan extends CI_Controller
         $description = $this->input->post('description', true);
 
         $data = [
+            'id_tool_category' => $id_category,
             'tool' => $tool,
             'brand' => $brand,
             'qty' => $qty,
@@ -421,4 +426,73 @@ class Peralatan extends CI_Controller
         $this->load->view('peralatan/tool_purchase_detail_excel', $data);
     }
 
+
+
+    // CATAGORY
+    public function category()
+    {
+        $data['title'] = "Data Kategori Aset";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['category'] = $this->peralatan->get_categories();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('peralatan/category', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function category_add()
+    {
+        $this->form_validation->set_rules(
+            'category',
+            'Category',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+
+            redirect('peralatan/category');
+
+        } else {
+            $category = $this->input->post('category', true);
+
+            $data = [
+                'id_tool_category' => NULL,
+                'tool_category' => $category
+            ];
+
+            $this->peralatan->save_category($data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil ditambahkan!</div>');
+            redirect('peralatan/category');
+        }
+    }
+
+    public function category_edit()
+    {
+        $id_category = $this->input->post('id_category', true);
+        $category = $this->input->post('category', true);
+
+        $data = [
+            'tool_category' => $category
+        ];
+
+        $this->peralatan->update_category($data, $id_category);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil diubah!</div>');
+        redirect('peralatan/category');
+    }
+
+    public function category_delete()
+    {
+        $id_category = $this->input->post('id_category');
+
+        $this->peralatan->delete_category($id_category);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kategori berhasil dihapus!</div>');
+        redirect('peralatan/category');
+    }
 }
