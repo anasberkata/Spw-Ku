@@ -166,7 +166,7 @@ class Penjualan extends CI_Controller
             $proses = $this->penjualan->save_selling_detail($data_detail);
 
             $data_stock = [
-                'qty' => $d['p']['qty'] - $qty_selling
+                'qty_shop' => $d['p']['qty_shop'] - $qty_selling
             ];
 
             $this->penjualan->update_stock_product($data_stock, $id_product);
@@ -210,7 +210,7 @@ class Penjualan extends CI_Controller
         $this->penjualan->update_selling_detail($data, $id_selling_detail);
 
         $data_stock = [
-            'qty' => $d['p']['qty'] - $qty_mp
+            'qty_shop' => $d['p']['qty_shop'] - $qty_mp
         ];
 
         $this->penjualan->update_stock_product($data_stock, $id_product);
@@ -230,7 +230,7 @@ class Penjualan extends CI_Controller
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
 
         $data_stock = [
-            'qty' => $d['p']['qty'] + $qty_selling
+            'qty_shop' => $d['p']['qty_shop'] + $qty_selling
         ];
 
         $this->penjualan->delete_selling_detail($id_product, $date_selling);
@@ -460,7 +460,7 @@ class Penjualan extends CI_Controller
             $proses = $this->penjualan->save_franchise_detail($data_detail);
 
             $data_stock = [
-                'qty' => $d['p']['qty'] - $qty_selling
+                'qty_shop' => $d['p']['qty_shop'] - $qty_selling
             ];
 
             $this->penjualan->update_stock_product($data_stock, $id_product);
@@ -504,7 +504,7 @@ class Penjualan extends CI_Controller
         $this->penjualan->update_franchise_detail($data, $id_selling_detail);
 
         $data_stock = [
-            'qty' => $d['p']['qty'] - $qty_mp
+            'qty_shop' => $d['p']['qty_shop'] - $qty_mp
         ];
 
         $this->penjualan->update_stock_product($data_stock, $id_product);
@@ -524,7 +524,7 @@ class Penjualan extends CI_Controller
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
 
         $data_stock = [
-            'qty' => $d['p']['qty'] + $qty_selling
+            'qty_shop' => $d['p']['qty_shop'] + $qty_selling
         ];
 
         $this->penjualan->delete_franchise_detail($id_product, $date_selling);

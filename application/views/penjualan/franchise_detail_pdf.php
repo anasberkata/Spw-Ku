@@ -62,6 +62,7 @@
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NAMA PRODUK</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA DASAR</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA JUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AWAL</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AKHIR</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY TERJUAL</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA
@@ -96,7 +97,12 @@
                     </td>
                     <td class="border text-center">
                         <p class="text-xs font-weight-bold mb-0 px-3">
-                            <?= $sd->qty; ?>
+                            <?= $sd->qty_shop + $sd->qty_selling; ?>
+                        </p>
+                    </td>
+                    <td class="border text-center">
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $sd->qty_shop; ?>
                         </p>
                     </td>
                     <td class="border text-center">

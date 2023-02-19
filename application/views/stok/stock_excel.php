@@ -89,7 +89,7 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 </td>
                 <td style="text-align: center;">
                     <p>
-                        <!-- <?= $p->qty; ?> -->
+                        <!-- <?= $p->qty_shop; ?> -->
                     </p>
                 </td>
                 <td>
@@ -101,15 +101,15 @@ header("Content-Disposition: attachment; filename=F1 Produk " . $place["place"] 
                 <td>
                     <p>
                         <!-- =sum(G
-                                <?= $row; ?>*C
-                                <?= $row; ?>) -->
+                                    <?= $row; ?>*C
+                                    <?= $row; ?>) -->
                     </p>
                 </td>
                 <td>
                     <p>
                         <!-- =sum(G
-                                <?= $row; ?>*D
-                                <?= $row; ?>) -->
+                                    <?= $row; ?>*D
+                                    <?= $row; ?>) -->
                     </p>
                 </td>
             </tr>

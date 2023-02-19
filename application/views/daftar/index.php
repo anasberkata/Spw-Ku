@@ -44,7 +44,7 @@
                                         <?= number_format($p->selling_price, 0, ',', '.'); ?>,-
                                     </p>
                                     <p class="card-text text-xs">Stok :
-                                        <?= $p->qty; ?>
+                                        <?= $p->qty_shop; ?>
                                     </p>
                                 </div>
                             </div>

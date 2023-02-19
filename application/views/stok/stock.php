@@ -46,7 +46,7 @@
                                             <select class="form-select" aria-label="Default select" name="id_place">
                                                 <option>Pilih Lokasi Produk</option>
                                                 <?php foreach ($place->result() as $p): ?>
-                                                                <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -128,7 +128,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $p->qty; ?>
+                                                    <?= $p->qty_shop; ?>
                                                 </p>
                                             </td>
                                         </tr>

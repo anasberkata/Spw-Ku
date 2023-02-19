@@ -80,7 +80,7 @@
                                                     <option selected>Pilih Produk</option>
                                                     <?php foreach ($product->result() as $p): ?>
                                                         <option value="<?= $p->id_product ?>"><?= $p->product ?> || Stok :
-                                                            <?= $p->qty ?></option>
+                                                            <?= $p->qty_shop ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
 
@@ -88,8 +88,8 @@
                                                     placeholder="Pilih Produk" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p): ?>
-                                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
-                                                                            Stok : <?= $p->qty ?></option>
+                                                                                    <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                                        Stok : <?= $p->qty_shop ?></option>
                                                     <?php endforeach; ?>
                                                 </datalist>
                                                 <input type="hidden" name="id_product" id="id_product-hidden">
@@ -158,6 +158,8 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Harga Jual</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty Awal</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Akhir</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Terjual</th>
@@ -196,7 +198,12 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $sd->qty; ?>
+                                                    <?= $sd->qty_shop + $sd->qty_selling; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $sd->qty_shop; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -254,11 +261,11 @@
                                                                         <select class="form-select"
                                                                             aria-label="Default select" name="id_product">
                                                                             <option value="<?= $sd->id_product ?>"><?=
-                                                                                  $sd->product ?> || Stok : <?= $sd->qty ?>
+                                                                                  $sd->product ?> || Stok : <?= $sd->qty_shop ?>
                                                                             </option>
                                                                             <?php foreach ($product->result() as $p): ?>
                                                                                 <option value="<?= $p->id_product ?>"><?=
-                                                                                      $p->product ?> || Stok : <?= $sd->qty ?>
+                                                                                      $p->product ?> || Stok : <?= $sd->qty_shop ?>
                                                                                 </option>
                                                                             <?php endforeach; ?>
                                                                         </select>

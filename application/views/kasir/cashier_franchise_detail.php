@@ -77,6 +77,8 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Harga Jual</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty Awal</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Akhir</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Terjual</th>
@@ -113,7 +115,12 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $sd->qty; ?>
+                                                    <?= $sd->qty_shop + $sd->qty_selling; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $sd->qty_shop; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -132,10 +139,10 @@
                                                 </p>
                                             </td>
                                             <!-- <td class="align-middle text-center text-sm">
-                                                            <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                            |
-                                                            <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                                        </td> -->
+                                                                    <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                                    |
+                                                                    <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                                </td> -->
                                         </tr>
 
                                         <?php $i++; ?>

@@ -297,30 +297,30 @@
             <!-- <div class="card-body pt-0 pb-2">
                 <div class="row">
                     <?php foreach ($produk as $row): ?>
-                                                                    <div class="col-3 mb-4">
-                                                                        <div class="card" style="min-height: 380px;">
-                                                                            <form action="<?= base_url(); ?>kasir/add" method="post" accept-charset="utf-8">
-                                                                                <a href="#"><img class="img-thumbnail" src="<?= base_url('assets/img/products/') . $row['image']; ?>" /></a>
-                                                                                <div class="card-body">
-                                                                                    <h6 class="card-title">
-                                                                                        <a href="#"><?= $row['product']; ?></a>
-                                                                                    </h6>
-                                                                                    <p class="card-text text-xs font-weight-clod">Rp. <?= number_format($row['selling_price'], 0, ",", "."); ?></p>
+                                                                                <div class="col-3 mb-4">
+                                                                                    <div class="card" style="min-height: 380px;">
+                                                                                        <form action="<?= base_url(); ?>kasir/add" method="post" accept-charset="utf-8">
+                                                                                            <a href="#"><img class="img-thumbnail" src="<?= base_url('assets/img/products/') . $row['image']; ?>" /></a>
+                                                                                            <div class="card-body">
+                                                                                                <h6 class="card-title">
+                                                                                                    <a href="#"><?= $row['product']; ?></a>
+                                                                                                </h6>
+                                                                                                <p class="card-text text-xs font-weight-clod">Rp. <?= number_format($row['selling_price'], 0, ",", "."); ?></p>
+                                                                                            </div>
+                                                                                            <div class="card-footer">
+                                                                                                <input type="hidden" name="id_lab" value="<?= $row['id_lab']; ?>" />
+                                                                                                <input type="hidden" name="id" value="<?= $row['id_product']; ?>" />
+                                                                                                <input type="hidden" name="nama" value="<?= $row['product']; ?>" />
+                                                                                                <input type="hidden" name="stok_awal" value="<?= $row['qty']; ?>" />
+                                                                                                <input type="hidden" name="harga_dasar" value="<?= $row['basic_price']; ?>" />
+                                                                                                <input type="hidden" name="harga" value="<?= $row['selling_price']; ?>" />
+                                                                                                <input type="hidden" name="gambar" value="<?= $row['image']; ?>" />
+                                                                                                <input type="hidden" name="qty" value="1" />
+                                                                                                <button type="submit" class="btn btn-sm btn-success w-100">Tambah</button>
+                                                                                            </div>
+                                                                                        </form>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="card-footer">
-                                                                                    <input type="hidden" name="id_lab" value="<?= $row['id_lab']; ?>" />
-                                                                                    <input type="hidden" name="id" value="<?= $row['id_product']; ?>" />
-                                                                                    <input type="hidden" name="nama" value="<?= $row['product']; ?>" />
-                                                                                    <input type="hidden" name="stok_awal" value="<?= $row['qty']; ?>" />
-                                                                                    <input type="hidden" name="harga_dasar" value="<?= $row['basic_price']; ?>" />
-                                                                                    <input type="hidden" name="harga" value="<?= $row['selling_price']; ?>" />
-                                                                                    <input type="hidden" name="gambar" value="<?= $row['image']; ?>" />
-                                                                                    <input type="hidden" name="qty" value="1" />
-                                                                                    <button type="submit" class="btn btn-sm btn-success w-100">Tambah</button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
                     <?php endforeach; ?>
                 </div>
             </div> -->
@@ -343,6 +343,8 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Nama Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Qty</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Harga Jual</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
@@ -361,6 +363,11 @@
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
                                                     <?= $p['product']; ?>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">
+                                                    <?= $p['qty_shop']; ?>
                                                 </p>
                                             </td>
                                             <td>

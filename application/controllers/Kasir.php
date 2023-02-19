@@ -211,7 +211,7 @@ class Kasir extends CI_Controller
                 $proses = $this->k->add_detail_order($data_detail);
 
                 $data_stock_update = array(
-                    'qty' => $d['p']['qty'] - $item['qty']
+                    'qty_shop' => $d['p']['qty_shop'] - $item['qty']
                 );
 
                 $update_stok = $this->k->update_stock_product($data_stock_update, $id);
