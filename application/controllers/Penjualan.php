@@ -184,34 +184,28 @@ class Penjualan extends CI_Controller
         $id_selling_detail = $this->input->post('id_selling_detail', true);
         $id_product = $this->input->post('id_product', true);
         $qty_selling = $this->input->post('qty_selling', true);
-        $qty_mp = $this->input->post('qty_mp', true);
 
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
         $d['sd'] = $this->db->get_where('tbl_selling_detail', ['id_selling_detail' => $id_selling_detail])->row_array();
 
-        // if ($qty_mp > $d['sd']['qty_selling']) {
-        //     $selisih = $qty_selling - $d['sd']['qty_selling'];
-        //     $qty = $d['p']['qty'] - $selisih;
-        // } else if ($qty_selling < $d['sd']['qty_selling']) {
-        //     $selisih = $d['sd']['qty_selling'] - $qty_selling;
-        //     $qty = $d['p']['qty'] + $selisih;
-        // } else if ($qty_selling == $d['sd']['qty_selling']) {
-        //     $qty = $d['p']['qty'];
-        // }
-
-        $qty_edit = $d['sd']['qty_selling'] + $qty_mp;
+        if ($qty_selling == $d['sd']['qty_selling']) {
+            $qty_shop = $d['p']['qty_shop'];
+        } else {
+            $selisih = $qty_selling - $d['sd']['qty_selling'];
+            $qty_shop = $d['p']['qty_shop'] - $selisih;
+        }
 
         $data = [
-            'qty_selling' => $qty_edit,
-            'total_basic_price' => $qty_edit * $d['p']['basic_price'],
-            'total_selling_price' => $qty_edit * $d['p']['selling_price']
+            'qty_selling' => $qty_selling,
+            'total_basic_price' => $qty_selling * $d['p']['basic_price'],
+            'total_selling_price' => $qty_selling * $d['p']['selling_price']
+        ];
+
+        $data_stock = [
+            'qty_shop' => $qty_shop
         ];
 
         $this->penjualan->update_selling_detail($data, $id_selling_detail);
-
-        $data_stock = [
-            'qty_shop' => $d['p']['qty_shop'] - $qty_mp
-        ];
 
         $this->penjualan->update_stock_product($data_stock, $id_product);
 
@@ -478,34 +472,28 @@ class Penjualan extends CI_Controller
         $id_selling_detail = $this->input->post('id_selling_detail', true);
         $id_product = $this->input->post('id_product', true);
         $qty_selling = $this->input->post('qty_selling', true);
-        $qty_mp = $this->input->post('qty_mp', true);
 
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
         $d['sd'] = $this->db->get_where('tbl_selling_detail', ['id_selling_detail' => $id_selling_detail])->row_array();
 
-        // if ($qty_mp > $d['sd']['qty_selling']) {
-        //     $selisih = $qty_selling - $d['sd']['qty_selling'];
-        //     $qty = $d['p']['qty'] - $selisih;
-        // } else if ($qty_selling < $d['sd']['qty_selling']) {
-        //     $selisih = $d['sd']['qty_selling'] - $qty_selling;
-        //     $qty = $d['p']['qty'] + $selisih;
-        // } else if ($qty_selling == $d['sd']['qty_selling']) {
-        //     $qty = $d['p']['qty'];
-        // }
-
-        $qty_edit = $d['sd']['qty_selling'] + $qty_mp;
+        if ($qty_selling == $d['sd']['qty_selling']) {
+            $qty_shop = $d['p']['qty_shop'];
+        } else {
+            $selisih = $qty_selling - $d['sd']['qty_selling'];
+            $qty_shop = $d['p']['qty_shop'] - $selisih;
+        }
 
         $data = [
-            'qty_selling' => $qty_edit,
-            'total_basic_price' => $qty_edit * $d['p']['basic_price'],
-            'total_selling_price' => $qty_edit * $d['p']['selling_price']
+            'qty_selling' => $qty_selling,
+            'total_basic_price' => $qty_selling * $d['p']['basic_price'],
+            'total_selling_price' => $qty_selling * $d['p']['selling_price']
+        ];
+
+        $data_stock = [
+            'qty_shop' => $qty_shop
         ];
 
         $this->penjualan->update_franchise_detail($data, $id_selling_detail);
-
-        $data_stock = [
-            'qty_shop' => $d['p']['qty_shop'] - $qty_mp
-        ];
 
         $this->penjualan->update_stock_product($data_stock, $id_product);
 

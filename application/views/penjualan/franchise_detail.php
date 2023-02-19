@@ -271,19 +271,12 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-6">
+                                                                <div class="col-12">
                                                                     <div class="mb-3">
                                                                         <label>Qty Terjual Awal</label>
                                                                         <input type="number" class="form-control"
                                                                             placeholder="Jumlah Terjual" name="qty_selling"
-                                                                            value="<?= $sd->qty_selling ?>" readonly>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <div class="mb-3">
-                                                                        <label>Kurang / Tambah</label>
-                                                                        <input type="number" class="form-control"
-                                                                            placeholder="Kurang / Tambah" name="qty_mp">
+                                                                            value="<?= $sd->qty_selling ?>">
                                                                     </div>
                                                                 </div>
                                                             </div>

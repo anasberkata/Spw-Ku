@@ -54,7 +54,8 @@
                                                             id="id_product">
                                                             <option selected>Pilih Produk</option>
                                                             <?php foreach ($product->result() as $p): ?>
-                                                                <option value="<?= $p->id_product ?>"><?= $p->product ?>
+                                                                <option value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                    Stok : <?= $p->qty_shop ?>
                                                                 </option>
                                                             <?php endforeach; ?>
                                                         </select>
