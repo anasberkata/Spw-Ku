@@ -338,7 +338,7 @@
                                     <?php if ($total_basic_price->total_basic_price == NULL): ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                                             </td>
@@ -355,7 +355,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah
                                                     Setor <br> Total Harga <br> Dasar</p>
@@ -371,7 +371,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
                                                     <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
