@@ -15,7 +15,7 @@ class Stok extends CI_Controller
     // PRODUK
     public function index()
     {
-        $data['title'] = "Stok Produk";
+        $data['title'] = "Stok Gudang";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $this->stok->get_lab();
@@ -31,7 +31,7 @@ class Stok extends CI_Controller
     {
         $id_lab = $this->input->get('id_lab', true);
 
-        $data['title'] = "Stok Produk";
+        $data['title'] = "Stok Gudang";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['product'] = $this->stok->get_products($id_lab);
@@ -51,6 +51,56 @@ class Stok extends CI_Controller
         $id_place = $this->input->get('id_place', true);
 
         $data['title'] = "Stok Produk";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['product'] = $this->stok->get_products_to_excel($id_lab, $id_place);
+        $data['place'] = $this->db->get_where('tbl_product_place', ['id_place' => $id_place])->row_array();
+        $data['lab'] = $id_lab;
+
+        $today = date("Y-m-d");
+        $data['schedule'] = $this->stok->get_schedule($today);
+
+        $this->load->view('stok/stock_excel.php', $data);
+    }
+
+    public function index_stock_spw()
+    {
+        $data['title'] = "Stok SPW";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->stok->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('stok/stock_spw_index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function stock_spw()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Stok SPW";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['product'] = $this->stok->get_products($id_lab);
+        $data['place'] = $this->stok->get_places();
+        $data['lab'] = $id_lab;
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('stok/stock_spw', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function stock_spw_excel()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+        $id_place = $this->input->get('id_place', true);
+
+        $data['title'] = "Stok SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['product'] = $this->stok->get_products_to_excel($id_lab, $id_place);

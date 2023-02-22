@@ -421,7 +421,8 @@ class Produk extends CI_Controller
         $data['purchase'] = $this->db->get_where('tbl_purchase', ['id_purchase' => $id_purchase])->row_array();
         $data['purchase_detail'] = $this->produk->get_purchase_detail($id_purchase);
 
-        $data['total'] = $this->produk->sum_total_price($id_purchase);
+        $data['total_basic_price'] = $this->produk->sum_total_basic_price($id_purchase);
+        $data['total_selling_price'] = $this->produk->sum_total_selling_price($id_purchase);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/aside', $data);
@@ -470,7 +471,8 @@ class Produk extends CI_Controller
                 'id_product' => $id_product,
                 'qty_product' => $qty_product,
                 'basic_price' => $basic_price,
-                'total_price' => $qty_product * $basic_price
+                'total_basic_price' => $qty_product * $basic_price,
+                'total_selling_price' => $qty_product * $selling_price
             ];
 
             $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
@@ -503,16 +505,6 @@ class Produk extends CI_Controller
         $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
         $d['pd'] = $this->db->get_where('tbl_purchase_detail', ['id_purchase_detail' => $id_purchase_detail])->row_array();
 
-        // if ($qty_product > $d['pd']['qty_product']) {
-        //     $selisih = $qty_product - $d['pd']['qty_product'];
-        //     $qty = $d['p']['qty'] + $selisih;
-        // } else if ($qty_product < $d['pd']['qty_product']) {
-        //     $selisih = $d['pd']['qty_product'] - $qty_product;
-        //     $qty = $d['p']['qty'] - $selisih;
-        // } else if ($qty_product == $d['pd']['qty_product']) {
-        //     $qty = $d['p']['qty'];
-        // }
-
         if ($qty_product == $d['pd']['qty_product']) {
             $qty = $d['p']['qty'];
         } else {
@@ -524,7 +516,8 @@ class Produk extends CI_Controller
             'id_product' => $id_product,
             'qty_product' => $qty_product,
             'basic_price' => $basic_price,
-            'total_price' => $qty_product * $basic_price
+            'total_basic_price' => $qty_product * $basic_price,
+            'total_selling_price' => $qty_product * $selling_price
         ];
 
         $data_stock = [
@@ -592,7 +585,8 @@ class Produk extends CI_Controller
         $data['purchase'] = $this->db->get_where('tbl_purchase', ['id_purchase' => $id_purchase])->row_array();
         $data['purchase_detail'] = $this->produk->get_purchase_detail($id_purchase);
 
-        $data['total'] = $this->produk->sum_total_price($id_purchase);
+        $data['total_basic_price'] = $this->produk->sum_total_basic_price($id_purchase);
+        $data['total_selling_price'] = $this->produk->sum_total_selling_price($id_purchase);
 
         $this->load->view('produk/purchase_detail_excel', $data);
     }

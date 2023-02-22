@@ -185,9 +185,15 @@ class Produk_model extends CI_Model
     }
 
 
-    function sum_total_price($id_purchase)
+    function sum_total_basic_price($id_purchase)
     {
-        $query = $this->db->query("SELECT SUM(`total_price`) AS `total` FROM `tbl_purchase_detail` WHERE `id_purchase` = $id_purchase");
+        $query = $this->db->query("SELECT SUM(`total_basic_price`) AS `total` FROM `tbl_purchase_detail` WHERE `id_purchase` = $id_purchase");
+        return $query->row();
+    }
+
+    function sum_total_selling_price($id_purchase)
+    {
+        $query = $this->db->query("SELECT SUM(`total_selling_price`) AS `total` FROM `tbl_purchase_detail` WHERE `id_purchase` = $id_purchase");
         return $query->row();
     }
 

@@ -14,7 +14,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('stok'); ?>" class="btn btn-primary btn-sm ms-2">
+                                    <a href="<?= base_url('stok/index_stock_spw'); ?>"
+                                        class="btn btn-primary btn-sm ms-2">
                                         Kembali
                                     </a>
 
@@ -27,7 +28,7 @@
                                         <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <?php foreach ($place->result() as $p): ?>
                                                 <li><a class="dropdown-item"
-                                                        href="<?= base_url('stok/stock_excel/?id_place=') . $p->id_place . "&id_lab=" . $lab; ?>">Produk
+                                                        href="<?= base_url('stok/stock_spw_excel/?id_place=') . $p->id_place . "&id_lab=" . $lab; ?>">Produk
                                                         <?= $p->place ?></a></li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -45,7 +46,7 @@
                                             <select class="form-select" aria-label="Default select" name="id_place">
                                                 <option>Pilih Lokasi Produk</option>
                                                 <?php foreach ($place->result() as $p): ?>
-                                                                                                <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
+                                                                                                                    <option value="<?= $p->id_place ?>"><?= $p->place ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
@@ -119,7 +120,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $p->qty; ?>
+                                                    <?= $p->qty_shop; ?>
                                                 </p>
                                             </td>
                                         </tr>

@@ -10,11 +10,11 @@
             <?php $i = 1; ?>
             <?php foreach ($lab->result() as $l): ?>
                 <div class="col-12 col-sm-6 mb-xl-0 mb-4">
-                    <a href="<?= base_url('produk/product/?id_lab=') . $l->id_lab; ?>">
+                    <a href="<?= base_url('stok/stock_spw/?id_lab=') . $l->id_lab; ?>">
                         <div class="card bg-transparent shadow-xl">
                             <div class="overflow-hidden position-relative border-radius-xl" style="
-                                    background-image: url('<?= base_url('assets/img/') . $l->photo_lab; ?>'); background-size: cover;
-                                    ">
+                                  background-image: url('<?= base_url('assets/img/') . $l->photo_lab; ?>'); background-size: cover;
+                                ">
                                 <span class="mask bg-gradient-dark"></span>
                                 <div class="card-body position-relative z-index-1 p-3">
                                     <i class="fas fa-wifi text-white p-2"></i>

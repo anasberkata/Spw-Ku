@@ -136,9 +136,13 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Produk</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Harga </th>
+                                            Harga Dasar </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Total Harga</th>
+                                            Harga Jual </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Total Harga Dasar</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Total Harga Jual</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">
                                             Action</th>
@@ -170,7 +174,18 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                                                    <?= number_format($pd->total_price, 0, ',', '.'); ?>,-
+                                                    <?= number_format($pd->selling_price, 0, ',', '.'); ?>,-
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($pd->total_basic_price, 0, ',', '.'); ?>,-
+                                                </p>
+                                            </td>
+
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($pd->total_selling_price, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                             <td class="align-middle text-center text-sm">
@@ -306,16 +321,21 @@
                                     <?php endforeach; ?>
 
 
-                                    <?php if ($total->total == NULL): ?>
+                                    <?php if ($total_basic_price->total == NULL): ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="3"></td>
+                                            <td colspan="4"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                                                    <?= number_format($total->total, 0, ',', '.'); ?>,-
+                                                    <?= number_format($total_basic_price->total, 0, ',', '.'); ?>,-
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                    <?= number_format($total_selling_price->total, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                         </tr>

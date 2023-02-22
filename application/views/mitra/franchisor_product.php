@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="btn-group float-end w-100 w-lg-auto">
-                                    <a href="<?= base_url('franchisor/franchisor'); ?>"
+                                    <a href="<?= base_url('mitra/franchisor'); ?>"
                                         class="btn btn-primary btn-sm mb-3 ms-2 float-end">
                                         Kembali
                                     </a>
@@ -25,9 +25,6 @@
                                     </button>
                                 </div>
                             </div>
-                            <!-- <div class="col-12">
-                                
-                            </div> -->
                         </div>
 
                         <!-- Modal Tambah Menu -->
@@ -40,7 +37,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <?= form_open_multipart('franchisor/franchisor_product_add'); ?>
+                                    <?= form_open_multipart('mitra/franchisor_product_add'); ?>
                                     <div class="modal-body">
                                         <div class="row">
                                             <input type="hidden" class="form-control" name="id_user"
@@ -177,7 +174,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $p->qty; ?>
+                                                    <?= $p->qty_shop; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -214,7 +211,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
-                                                    <?= form_open_multipart('franchisor/franchisor_product_edit'); ?>
+                                                    <?= form_open_multipart('mitra/franchisor_product_edit'); ?>
                                                     <div class="modal-body">
                                                         <input type="hidden" class="form-control" placeholder="Kode Produk"
                                                             name="id_product" value="<?= $p->id_product; ?>">
@@ -251,7 +248,7 @@
                                                                     <label>Qty</label>
                                                                     <input type="number" class="form-control"
                                                                         placeholder="Qty" name="qty"
-                                                                        value="<?= $p->qty; ?>">
+                                                                        value="<?= $p->qty_shop; ?>">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-lg-6">
@@ -311,7 +308,7 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <form role="form"
-                                                        action="<?= base_url('franchisor/franchisor_product_delete') ?>"
+                                                        action="<?= base_url('mitra/franchisor_product_delete') ?>"
                                                         method="POST">
                                                         <div class="modal-body">
                                                             <div class="mb-3">

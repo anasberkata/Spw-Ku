@@ -36,10 +36,10 @@
                                         <input type="hidden" name="id_lab" value="<?= $lab ?>">
                                         <input type="hidden" name="date_selling"
                                             value="<?= $selling["date_selling"] ?>">
-                                        <div class="col-4 col-lg-2 col-md-4 col-sm-4 my-2">
+                                        <div class="col-2 col-lg-2 col-md-2 col-sm-2 my-2">
                                             <label class="col-form-label text-sm">Pemilik Produk</label>
                                         </div>
-                                        <div class="col-8 col-lg-7 col-md-8 col-sm-8 my-2">
+                                        <div class="col-7 col-lg-7 col-md-8 col-sm-8 my-2">
                                             <select class="form-select" aria-label="Default select" name="id_owner">
                                                 <option>Pilih Pemilik Produk</option>
                                                 <option value="0">Semua</option>
@@ -48,7 +48,7 @@
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="col-12 col-lg-3 col-md-12 col-sm-12 my-2">
+                                        <div class="col-3 col-lg-3 col-md-2 col-sm-2 my-2">
                                             <button type="submit" class="btn btn-primary w-100"><i
                                                     class="fa fa-search"></i></button>
                                         </div>

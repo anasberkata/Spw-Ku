@@ -60,7 +60,9 @@ header("Content-Disposition: attachment; filename=Data Pembelian Produk " . $pur
             <th colspan="5">NAMA PRODUK</th>
             <th>QTY</th>
             <th>HARGA DASAR</th>
-            <th>TOTAL</th>
+            <th>HARGA JUAL</th>
+            <th>TOTAL HARGA DASAR</th>
+            <th>TOTAL HARGA JUAL</th>
         </tr>
 
         <?php $i = 1; ?>
@@ -86,21 +88,34 @@ header("Content-Disposition: attachment; filename=Data Pembelian Produk " . $pur
                         <?= $pd->basic_price; ?>
                     </p>
                 </td>
-                <td style="text-align: center;">
+                <td style="text-align: right;">
                     <p>
-                        <?= $pd->total_price; ?>
+                        <?= $pd->selling_price; ?>
+                    </p>
+                </td>
+                <td style="text-align: right;">
+                    <p>
+                        <?= $pd->total_basic_price; ?>
+                    </p>
+                </td>
+                <td style="text-align: right;">
+                    <p>
+                        <?= $pd->total_selling_price; ?>
                     </p>
                 </td>
             </tr>
             <?php $i++; ?>
         <?php endforeach; ?>
 
-        <?php if ($total->total == NULL): ?>
+        <?php if ($total_basic_price->total == NULL): ?>
         <?php else: ?>
             <tr>
-                <th colspan="8" style="text-align: right;"> TOTAL</th>
+                <th colspan="9" style="text-align: right;"> TOTAL</th>
                 <td>
-                    <?= $total->total; ?>
+                    <?= $total_basic_price->total; ?>
+                </td>
+                <td>
+                    <?= $total_selling_price->total; ?>
                 </td>
             </tr>
         <?php endif; ?>
