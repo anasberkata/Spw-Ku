@@ -212,17 +212,6 @@
                 </tr>
                 <tr class="border">
                     <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Kepala Lab Bertugas</p>
-                    </td>
-                    <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3">: </p>
-                    </td>
-                    <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3"></p>
-                    </td>
-                </tr>
-                <tr class="border">
-                    <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3">Supplier / Pemilik Produk</p>
                     </td>
                     <td class="border">

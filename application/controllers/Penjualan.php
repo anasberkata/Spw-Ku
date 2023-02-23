@@ -9,7 +9,7 @@ class Penjualan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->load->model('Penjualan_model', 'penjualan');
-        $this->load->model('Franchisor_model', 'franchisor');
+        $this->load->model('Mitra_model', 'mitra');
         $this->load->helper('date');
     }
 
@@ -304,6 +304,278 @@ class Penjualan extends CI_Controller
 
 
 
+    // MITRA
+    public function partner_index()
+    {
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->penjualan->get_lab();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/partner_index', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function partner()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['selling'] = $this->penjualan->get_partner_selling($id_lab);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/partner', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function partner_add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $date_selling = $this->input->post('date_selling', true);
+
+        $guru_piket = $this->penjualan->get_schedule($date_selling);
+
+        $data = [
+            'id_selling' => NULL,
+            'date_selling' => $date_selling,
+            'id_user' => $guru_piket['id_user'],
+            'id_class' => $guru_piket['id_class'],
+            'id_lab' => $id_lab
+        ];
+
+        $this->penjualan->save_partner_selling($data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan mitra berhasil ditambahkan! Silahkan isi Produk</div>');
+
+        redirect('penjualan/partner/?id_lab=' . $id_lab);
+    }
+
+    public function partner_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $date_selling_last = $this->input->post('date_selling_last', true);
+        $date_selling_now = $this->input->post('date_selling_now', true);
+
+        $guru_piket = $this->penjualan->get_schedule($date_selling_now);
+
+        $data = [
+            'date_selling' => $date_selling_now,
+            'id_user' => $guru_piket['id_user']
+        ];
+
+        $this->penjualan->update_partner_selling($data, $date_selling_last);
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Tanggal penjualan mitra berhasil diubah!</div>');
+
+        redirect('penjualan/partner/?id_lab=' . $id_lab);
+    }
+
+    public function partner_detail()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_partner = 0;
+
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['product'] = $this->penjualan->get_partner_product($id_lab);
+        $data['partner'] = $this->penjualan->get_partner();
+        $data['id_partner'] = $id_partner;
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->penjualan->get_partner_selling_detail($date_selling, $id_lab);
+
+        // $data['total_basic_price'] = $this->penjualan->sum_total_basic_price_partner($date_selling, $id_lab);
+        $data['total_selling_price'] = $this->penjualan->sum_total_selling_price_partner($date_selling, $id_lab);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/partner_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function partner_detail_add()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $date_selling = $this->input->post('date_selling', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_selling = $this->input->post('qty_selling', true);
+
+        $this->form_validation->set_rules(
+            'qty_selling',
+            'Jumlah Terjual',
+            'required',
+            array(
+                'required' => '{field} wajib diisi'
+            )
+        );
+
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Gagal! Stok terjual produk wajib diisi.</div>');
+
+            redirect('penjualan/partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+        } else {
+            $format = "%Y-%m-%d";
+
+            //------------------------- Input data order------------------------------
+            $guru_piket = $this->penjualan->get_schedule($date_selling);
+
+            $data_selling = [
+                'date_selling' => $date_selling,
+                'id_user' => $guru_piket['id_user'],
+                'id_class' => $guru_piket['id_class'],
+                'id_lab' => $id_lab
+            ];
+            $id_selling = $this->penjualan->save_partner_selling($data_selling);
+
+            $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+            $data_detail = [
+                'id_selling_detail' => NULL,
+                'id_selling' => $id_selling,
+                'id_product' => $id_product,
+                'qty_selling' => $qty_selling,
+                'total_basic_price' => $qty_selling * $d['p']['basic_price'],
+                'total_selling_price' => $qty_selling * $d['p']['selling_price'],
+                'date_selling' => $date_selling,
+                'id_lab' => $id_lab
+            ];
+            $proses = $this->penjualan->save_partner_selling_detail($data_detail);
+
+            $data_stock = [
+                'qty_shop' => $d['p']['qty_shop'] - $qty_selling
+            ];
+
+            $this->penjualan->update_stock_product($data_stock, $id_product);
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+
+            redirect('penjualan/partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+        }
+    }
+
+    public function partner_detail_edit()
+    {
+        $id_lab = $this->input->post('id_lab', true);
+        $date_selling = $this->input->post('date_selling', true);
+        $id_selling_detail = $this->input->post('id_selling_detail', true);
+        $id_product = $this->input->post('id_product', true);
+        $qty_selling = $this->input->post('qty_selling', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+        $d['sd'] = $this->db->get_where('tbl_selling_detail', ['id_selling_detail' => $id_selling_detail])->row_array();
+
+        if ($qty_selling == $d['sd']['qty_selling']) {
+            $qty_shop = $d['p']['qty_shop'];
+        } else {
+            $selisih = $qty_selling - $d['sd']['qty_selling'];
+            $qty_shop = $d['p']['qty_shop'] - $selisih;
+        }
+
+        $data = [
+            'qty_selling' => $qty_selling,
+            'total_basic_price' => $qty_selling * $d['p']['basic_price'],
+            'total_selling_price' => $qty_selling * $d['p']['selling_price']
+        ];
+
+        $data_stock = [
+            'qty_shop' => $qty_shop
+        ];
+
+        $this->penjualan->update_partner_selling_detail($data, $id_selling_detail);
+
+        $this->penjualan->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
+
+        redirect('penjualan/partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+    }
+
+    public function partner_detail_delete()
+    {
+        $date_selling = $this->input->post('date_selling', true);
+        $id_product = $this->input->post('id_product', true);
+        $id_lab = $this->input->post('id_lab', true);
+        $qty_selling = $this->input->post('qty_selling', true);
+
+        $d['p'] = $this->db->get_where('tbl_product', ['id_product' => $id_product])->row_array();
+
+        $data_stock = [
+            'qty_shop' => $d['p']['qty_shop'] + $qty_selling
+        ];
+
+        $this->penjualan->delete_partner_selling_detail($id_product, $date_selling);
+        $this->penjualan->update_stock_product($data_stock, $id_product);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
+
+        redirect('penjualan/partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+    }
+
+    public function partner_detail_search()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_partner = $this->input->get('id_partner', true);
+
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_partner'] = $id_partner;
+        $data['product'] = $this->penjualan->get_partner_product($id_lab);
+        $data['partner'] = $this->penjualan->get_partner();
+
+        if ($id_partner == 0) {
+            redirect('penjualan/partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+        } else {
+            $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+            $data['selling_detail'] = $this->penjualan->search_partner_selling_detail($date_selling, $id_lab, $id_partner);
+
+            // $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price_franchise($date_selling, $id_lab, $id_partner);
+            $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price_partner($date_selling, $id_lab, $id_partner);
+        }
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/aside', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('penjualan/partner_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // TITIPAN
     public function franchise_index()
     {
@@ -535,7 +807,7 @@ class Penjualan extends CI_Controller
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['id_owner'] = $id_owner;
-        $data['product'] = $this->penjualan->get_product($id_lab);
+        $data['product'] = $this->penjualan->get_product_franchise($id_lab);
         $data['owner'] = $this->penjualan->get_owner();
 
         if ($id_owner == 0) {

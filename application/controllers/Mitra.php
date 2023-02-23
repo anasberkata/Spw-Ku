@@ -238,7 +238,7 @@ class Mitra extends CI_Controller
         // $this->db->set('basic_price', $basic_price);
         $this->db->set('selling_price', $selling_price);
 
-        $this->mitra->update_product($id_product);
+        $this->mitra->update_partner_product($id_product);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
         redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
