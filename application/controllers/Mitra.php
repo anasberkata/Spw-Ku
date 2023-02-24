@@ -190,7 +190,7 @@ class Mitra extends CI_Controller
                 'is_active' => $is_active
             ];
 
-            $this->mitra->save_product($data);
+            $this->mitra->save_partner_product($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
             redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
         }

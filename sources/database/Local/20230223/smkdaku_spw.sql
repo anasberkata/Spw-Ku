@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 23, 2023 at 09:09 AM
+-- Generation Time: Feb 23, 2023 at 04:57 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -641,7 +641,8 @@ INSERT INTO `tbl_product` (`id_product`, `code`, `id_category`, `id_place`, `id_
 (492, '320029928920019', 1, 4, 0, 'Aqua', 5, 15, 2500, 4000, 'default-product.jpg', 1, 1),
 (493, '0102', 13, 5, 20, 'Seblak Toping Aboeya', 0, -13, 4300, 8000, 'default-product.jpg', 1, 1),
 (494, '0103', 13, 5, 20, 'Cilok Goang Aboeya', 0, -120, 0, 1000, 'default-product.jpg', 1, 1),
-(498, '0201', 14, 6, 27, 'Mie Goreng Pak Deri', 0, -6, 4300, 5000, 'default-product.jpg', 1, 1);
+(498, '0201', 14, 6, 27, 'Mie Goreng Pak Deri', 0, -11, 4300, 5000, 'default-product.jpg', 1, 1),
+(500, '0301', 13, 5, 21, 'Siomay Fitri', 0, -5, 0, 5000, 'default-product.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1951,7 +1952,9 @@ INSERT INTO `tbl_selling` (`id_selling`, `date_selling`, `id_user`, `id_class`, 
 (123, '2023-02-23', 12, 19, 1),
 (124, '2023-02-23', 12, 19, 1),
 (125, '2023-02-23', 12, 19, 1),
-(126, '2023-02-23', 12, 19, 1);
+(126, '2023-02-23', 12, 19, 1),
+(127, '2023-02-23', 12, 19, 1),
+(128, '2023-02-23', 12, 19, 1);
 
 -- --------------------------------------------------------
 
@@ -3093,7 +3096,9 @@ INSERT INTO `tbl_selling_detail` (`id_selling_detail`, `id_selling`, `id_product
 (1178, 120, 498, 6, 25800, 30000, '2023-02-19', 1),
 (1179, 122, 494, 120, 0, 120000, '2023-02-23', 1),
 (1181, 124, 490, 17, 30600, 102000, '2023-02-23', 1),
-(1183, 126, 493, 23, 98900, 184000, '2023-02-23', 1);
+(1183, 126, 493, 23, 98900, 184000, '2023-02-23', 1),
+(1184, 127, 500, 5, 0, 25000, '2023-02-23', 1),
+(1185, 128, 498, 5, 21500, 25000, '2023-02-23', 1);
 
 -- --------------------------------------------------------
 
@@ -3806,7 +3811,7 @@ ALTER TABLE `tbl_data_web`
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=500;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
 
 --
 -- AUTO_INCREMENT for table `tbl_product_categories`
@@ -3854,13 +3859,13 @@ ALTER TABLE `tbl_schedule`
 -- AUTO_INCREMENT for table `tbl_selling`
 --
 ALTER TABLE `tbl_selling`
-  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id_selling` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `tbl_selling_detail`
 --
 ALTER TABLE `tbl_selling_detail`
-  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1184;
+  MODIFY `id_selling_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1186;
 
 --
 -- AUTO_INCREMENT for table `tbl_student_selling`

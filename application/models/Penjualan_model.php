@@ -258,6 +258,7 @@ class Penjualan_model extends CI_Model
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', 5);
         $this->db->where_not_in('tbl_product.id_owner', 0);
         $this->db->order_by('tbl_product.product', 'ASC');
         $query = $this->db->get();
@@ -293,6 +294,7 @@ class Penjualan_model extends CI_Model
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
             WHERE `tbl_selling_detail`.`date_selling` = '$date_selling'
             AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_product`.`id_place` = 5
             AND NOT `tbl_product`.`id_owner` = 0
             "
         );
@@ -424,6 +426,7 @@ class Penjualan_model extends CI_Model
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', 6);
         $this->db->where_not_in('tbl_product.id_owner', 0);
         $this->db->order_by('tbl_product.product', 'ASC');
         $query = $this->db->get();
@@ -471,6 +474,7 @@ class Penjualan_model extends CI_Model
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
             WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
             AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_product`.`id_place` = 6
             AND NOT `tbl_product`.`id_owner` = 0
             "
         );
@@ -485,7 +489,8 @@ class Penjualan_model extends CI_Model
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
             WHERE `tbl_selling_detail`.`date_selling` = '$date_selling' 
-            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab'
+            AND `tbl_product`.`id_place` = 6 
             AND NOT `tbl_product`.`id_owner` = 0
             "
         );

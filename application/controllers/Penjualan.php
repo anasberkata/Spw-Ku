@@ -554,7 +554,39 @@ class Penjualan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function printPDF_partner()
+    {
 
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_partner = $this->input->get('id_partner', true);
+
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_partner'] = $id_partner;
+        $data['product'] = $this->penjualan->get_partner_product($id_lab);
+        $data['partner'] = $this->penjualan->get_partner();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+
+        if ($id_partner == 0) {
+            $data['selling_detail'] = $this->penjualan->get_partner_selling_detail($date_selling, $id_lab);
+            // $data['total_basic_price'] = $this->penjualan->sum_total_basic_price_partner($date_selling, $id_lab);
+            $data['total_selling_price'] = $this->penjualan->sum_total_selling_price_partner($date_selling, $id_lab);
+        } else {
+            $data['selling_detail'] = $this->penjualan->search_partner_selling_detail($date_selling, $id_lab, $id_partner);
+            // $data['total_basic_price'] = $this->penjualan->search_sum_total_basic_price_partner($date_selling, $id_lab, $id_partner);
+            $data['total_selling_price'] = $this->penjualan->search_sum_total_selling_price_partner($date_selling, $id_lab, $id_partner);
+        }
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        $page = $this->load->view('penjualan/partner_detail_pdf', $data, TRUE);
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Laporan SPW Produk Mitra ' . $date_selling . '.pdf', 'I');
+    }
 
 
 

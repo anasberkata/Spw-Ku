@@ -87,8 +87,8 @@
                                                     placeholder="Pilih Produk" autocomplete="off">
                                                 <datalist id="product">
                                                     <?php foreach ($product->result() as $p): ?>
-                                                                                                                                                                                                                                                                                                                        <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
-                                                                                                                                                                                                                                                                                                                            Stok : <?= $p->qty_shop ?></option>
+                                                                                                                                                                                                                                                                                                                                            <option data-value="<?= $p->id_product ?>"><?= $p->product ?> ||
+                                                                                                                                                                                                                                                                                                                                                Stok : <?= $p->qty_shop ?></option>
                                                     <?php endforeach; ?>
                                                 </datalist>
                                                 <input type="hidden" name="id_product" id="id_product-hidden">
