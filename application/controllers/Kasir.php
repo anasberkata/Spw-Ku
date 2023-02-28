@@ -17,7 +17,6 @@ class Kasir extends CI_Controller
     {
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['lab'] = $this->k->get_lab();
 
         $this->load->view('kasir/header', $data);
@@ -32,7 +31,6 @@ class Kasir extends CI_Controller
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['lab'] = $id_lab;
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->get_product_all($id_lab);
@@ -49,7 +47,6 @@ class Kasir extends CI_Controller
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['lab'] = $id_lab;
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->search($keyword, $id_lab);
@@ -57,9 +54,6 @@ class Kasir extends CI_Controller
         $this->load->view('kasir/header', $data);
         $this->load->view('kasir/cashier', $data);
         $this->load->view('kasir/footer');
-
-        // $callback = array('hasil' => $hasil,);
-        // echo json_encode($callback);
     }
 
     public function show_cart()
@@ -68,7 +62,6 @@ class Kasir extends CI_Controller
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['lab'] = $id_lab;
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->get_product_all($id_lab);
@@ -84,7 +77,6 @@ class Kasir extends CI_Controller
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
         $data['lab'] = $id_lab;
         $data['count_products'] = $this->k->count_products($id_lab);
         $data['produk'] = $this->k->get_product_all($id_lab);
@@ -252,12 +244,9 @@ class Kasir extends CI_Controller
 
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
-        // $data['produk'] = $this->k->get_product_selling($id_lab);
         $data['place'] = $this->k->get_place();
-
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->k->get_selling_detail($date_selling, $id_lab);
-
         $data['total_basic_price'] = $this->k->sum_total_basic_price($date_selling, $id_lab);
         $data['total_selling_price'] = $this->k->sum_total_selling_price($date_selling, $id_lab);
 
@@ -329,6 +318,132 @@ class Kasir extends CI_Controller
         $mpdf->WriteHTML($page);
         $mpdf->Output('Laporan SPW ' . $date_selling . '.pdf', 'I');
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    // PENJUALAN TITIPAN
+    public function selling_partner()
+    {
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $id_lab;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['selling'] = $this->k->get_selling_partner($id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_partner', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function selling_partner_detail()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        // $data['produk'] = $this->k->get_product_selling($id_lab);
+        // $data['place'] = $this->k->get_place();
+        $data['partner'] = $this->k->get_partner();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+        $data['selling_detail'] = $this->k->get_selling_partner_detail($date_selling, $id_lab);
+
+        $data['total_basic_price'] = $this->k->sum_partner_total_basic_price($date_selling, $id_lab);
+        $data['total_selling_price'] = $this->k->sum_partner_total_selling_price($date_selling, $id_lab);
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_partner_detail', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function selling_partner_detail_search()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_partner = $this->input->get('id_partner', true);
+
+        $data['title'] = "Kasir";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_partner'] = $id_partner;
+        // $data['produk'] = $this->k->get_product_all($id_lab);
+        // $data['place'] = $this->k->get_place();
+        $data['partner'] = $this->k->get_partner();
+
+        if ($id_partner == 0) {
+            redirect('kasir/selling_partner_detail/?date_selling=' . $date_selling . '&id_lab=' . $id_lab);
+        } else {
+            $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+            $data['selling_detail'] = $this->k->search_selling_partner_detail($date_selling, $id_lab, $id_partner);
+
+            $data['total_basic_price'] = $this->k->search_sum_partner_total_basic_price($date_selling, $id_lab, $id_partner);
+            $data['total_selling_price'] = $this->k->search_sum_partner_total_selling_price($date_selling, $id_lab, $id_partner);
+        }
+
+        $this->load->view('kasir/header', $data);
+        $this->load->view('kasir/cashier_partner_detail', $data);
+        $this->load->view('kasir/footer');
+    }
+
+    public function printPDF_partner()
+    {
+        $date_selling = $this->input->get('date_selling', true);
+        $id_lab = $this->input->get('id_lab', true);
+        $id_partner = $this->input->get('id_partner', true);
+
+        $data['title'] = "Data Penjualan Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['date_selling'] = $date_selling;
+        $data['lab'] = $id_lab;
+        $data['id_partner'] = $id_partner;
+        $data['produk'] = $this->k->get_product_all($id_lab);
+        $data['place'] = $this->k->get_place();
+
+        $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
+
+        if (!isset($id_franchisor)) {
+            $data['selling_detail'] = $this->k->get_selling_partner_detail($date_selling, $id_lab);
+            $data['total_basic_price'] = $this->k->sum_partner_total_basic_price($date_selling, $id_lab);
+            $data['total_selling_price'] = $this->k->sum_partner_total_selling_price($date_selling, $id_lab);
+        } else {
+            $data['selling_detail'] = $this->k->search_selling_partner_detail($date_selling, $id_lab, $id_partner);
+            $data['total_basic_price'] = $this->k->search_sum_partner_total_basic_price($date_selling, $id_lab, $id_partner);
+            $data['total_selling_price'] = $this->k->search_sum_partner_total_selling_price($date_selling, $id_lab, $id_partner);
+        }
+
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L', 'setAutoTopMargin' => 'stretch']);
+        $page = $this->load->view('kasir/cashier_partner_detail_pdf', $data, TRUE);
+        $mpdf->WriteHTML($page);
+        $mpdf->Output('Laporan Produk Mitra ' . $date_selling . '.pdf', 'I');
+    }
+
+
+
+
+
+
+
+
+
 
 
     // PENJUALAN TITIPAN

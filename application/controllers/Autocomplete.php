@@ -22,10 +22,7 @@ class Autocomplete extends CI_Controller
     public function ajax_produk()
     {
         $id = $this->input->get('id');
-        // $id = 6;
-
         $data = $this->autofill->ajax_produk($id);
-        // $data = $this->pembelian->ajax_produk(1);
 
         echo json_encode($data);
     }
@@ -33,10 +30,7 @@ class Autocomplete extends CI_Controller
     public function ajax_barcode()
     {
         $barcode = $this->input->get('barcode');
-        // $id = 6;
-
         $data = $this->autofill->ajax_barcode($barcode);
-        // $data = $this->pembelian->ajax_produk(1);
 
         echo json_encode($data);
     }
@@ -44,10 +38,7 @@ class Autocomplete extends CI_Controller
     public function ajax_name_product()
     {
         $product = $this->input->get('product');
-        // $id = 6;
-
         $data = $this->autofill->ajax_name_product($product);
-        // $data = $this->pembelian->ajax_produk(1);
 
         echo json_encode($data);
     }

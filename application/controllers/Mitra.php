@@ -12,7 +12,7 @@ class Mitra extends CI_Controller
         $this->load->helper('date');
     }
 
-    // ---------------------------------------- FRANCHISOR ------------------------------------------ //
+    // ---------------------------------------- MITRA ------------------------------------------ //
     public function partner()
     {
         $data['title'] = "Data Mitra";
@@ -61,7 +61,11 @@ class Mitra extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            redirect('mitra/partner');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('mitra/partner', $data);
+            $this->load->view('templates/footer');
         } else {
             $data = [
                 'id_user' => NULL,
@@ -82,7 +86,6 @@ class Mitra extends CI_Controller
             ];
 
             $this->mitra->save_partner($data);
-
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Mitra berhasil ditambahkan!</div>');
 
             redirect('mitra/partner');
@@ -128,7 +131,6 @@ class Mitra extends CI_Controller
 
         $data['partner_product'] = $this->mitra->get_partner_product($id_lab, $id_partner);
         $data['lab'] = $id_lab;
-
         $data['partner'] = $this->db->get_where('tbl_users', ['id_user' => $id_partner])->row_array();
 
         $this->load->view('templates/header', $data);
@@ -140,9 +142,20 @@ class Mitra extends CI_Controller
 
     public function partner_product_add()
     {
+        $id_lab = $this->input->post('id_lab', true);
+        $id_partner = $this->input->post('id_user', true);
+
+        $data['title'] = "Data Mitra";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['partner_product'] = $this->mitra->get_partner_product($id_lab, $id_partner);
+        $data['lab'] = $id_lab;
+
+        $data['partner'] = $this->db->get_where('tbl_users', ['id_user' => $id_partner])->row_array();
+
         $this->form_validation->set_rules(
             'product',
-            'Product',
+            'Produk',
             'required',
             array(
                 'required' => '{field} wajib diisi'
@@ -158,10 +171,11 @@ class Mitra extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $id_lab = $this->input->get('id_lab', true);
-            $id_partner = $this->input->get('id_user', true);
-
-            redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('mitra/partner_product', $data);
+            $this->load->view('templates/footer');
         } else {
             $barcode = $this->input->post('code', true);
             $code = $this->barcode($barcode);
@@ -192,6 +206,7 @@ class Mitra extends CI_Controller
 
             $this->mitra->save_partner_product($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+
             redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
         }
     }
@@ -234,13 +249,12 @@ class Mitra extends CI_Controller
 
         $this->db->set('code', $code);
         $this->db->set('product', $product);
-        // $this->db->set('qty_shop', $qty);
-        // $this->db->set('basic_price', $basic_price);
         $this->db->set('selling_price', $selling_price);
 
         $this->mitra->update_partner_product($id_product);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
+
         redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
     }
 
@@ -256,18 +270,9 @@ class Mitra extends CI_Controller
         unlink($target);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil dihapus!</div>');
+
         redirect('mitra/partner_product/?id_lab=' . $id_lab . '&id_user=' . $id_partner);
     }
-
-
-
-
-
-
-
-
-
-
 
     // ---------------------------------------- FRANCHISOR ------------------------------------------ //
     public function franchisor()
@@ -291,6 +296,7 @@ class Mitra extends CI_Controller
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['franchisor'] = $this->mitra->get_franchisor();
+        $data['lab'] = $this->mitra->get_lab();
 
         $name = $this->input->post('name', true);
         $email = "";
@@ -317,7 +323,11 @@ class Mitra extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            redirect('mitra/franchisor');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('mitra/franchisor', $data);
+            $this->load->view('templates/footer');
         } else {
             $data = [
                 'id_user' => NULL,
@@ -338,7 +348,6 @@ class Mitra extends CI_Controller
             ];
 
             $this->mitra->save_franchisor($data);
-
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil ditambahkan!</div>');
 
             redirect('mitra/franchisor');
@@ -368,7 +377,6 @@ class Mitra extends CI_Controller
 
         $this->mitra->delete_franchisor($id_owner);
         $this->mitra->delete_product_franchisor($id_owner);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Franchisor berhasil dihapus!</div>');
 
         redirect('mitra/franchisor');
@@ -396,6 +404,17 @@ class Mitra extends CI_Controller
 
     public function franchisor_product_add()
     {
+        $id_lab = $this->input->get('id_lab', true);
+        $id_owner = $this->input->get('id_user', true);
+
+        $data['title'] = "Data Franchisor";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['franchisor_product'] = $this->mitra->get_franchisor_product($id_lab, $id_owner);
+        $data['lab'] = $id_lab;
+
+        $data['owner'] = $this->db->get_where('tbl_users', ['id_user' => $id_owner])->row_array();
+
         $this->form_validation->set_rules(
             'product',
             'Product',
@@ -406,10 +425,11 @@ class Mitra extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $id_lab = $this->input->get('id_lab', true);
-            $id_owner = $this->input->get('id_user', true);
-
-            redirect('mitra/franchisor_product/?id_lab=' . $id_lab . '&id_user=' . $id_owner);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('mitra/franchisor_product', $data);
+            $this->load->view('templates/footer');
         } else {
             $barcode = $this->input->post('code', true);
             $code = $this->barcode($barcode);
@@ -440,6 +460,7 @@ class Mitra extends CI_Controller
 
             $this->mitra->save_franchisor_product($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil ditambahkan!</div>');
+
             redirect('mitra/franchisor_product/?id_lab=' . $id_lab . '&id_user=' . $id_owner);
         }
     }
@@ -487,7 +508,6 @@ class Mitra extends CI_Controller
         $this->db->set('selling_price', $selling_price);
 
         $this->mitra->update_franchisor_product($id_product);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Produk berhasil diubah!</div>');
 
         redirect('mitra/franchisor_product/?id_lab=' . $id_lab . '&id_user=' . $id_owner);
@@ -535,6 +555,29 @@ class Mitra extends CI_Controller
 
         return $barcode;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // DATA KHUSUS FRANCHISOR
     public function data_franchisor()

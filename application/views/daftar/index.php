@@ -5,21 +5,21 @@
         <div class="card mb-4">
             <div class="card-header pb-0 mb-3">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <h6>Daftar Harga Produk</h6>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <form role="form" action="<?= base_url('daftar/daftar_search') ?>" method="POST"
                             class="float-end">
                             <div class="row">
-                                <div class="col-12 col-lg-4">
+                                <div class="col-4">
                                     <label class="col-form-label text-sm">Nama Produk</label>
                                 </div>
-                                <div class="col-12 col-lg-6">
+                                <div class="col-5 col-sm-5 col-lg-5">
                                     <input type="text" class="form-control mb-3" placeholder="Cari Produk"
                                         name="product">
                                 </div>
-                                <div class="col-12 col-lg-2">
+                                <div class="col-3">
                                     <button type="submit" class="btn btn-primary w-100"><i
                                             class="fa fa-search"></i></button>
                                 </div>

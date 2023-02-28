@@ -33,7 +33,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="addModalLabel">Tambah Produk Titipan</h5>
+                                        <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -174,15 +174,15 @@
                                                 </p>
                                             </td>
                                             <!-- <td>
-                                                            <p class="text-xs font-weight-bold mb-0 px-3">
-                                                                <?= $p->qty_shop; ?>
-                                                            </p>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                                                                <?= number_format($p->basic_price, 0, ',', '.'); ?>,-
-                                                            </p>
-                                                        </td> -->
+                                                                            <p class="text-xs font-weight-bold mb-0 px-3">
+                                                                                <?= $p->qty_shop; ?>
+                                                                            </p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                                                <?= number_format($p->basic_price, 0, ',', '.'); ?>,-
+                                                                            </p>
+                                                                        </td> -->
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp.
                                                     <?= number_format($p->selling_price, 0, ',', '.'); ?>,-
@@ -245,21 +245,21 @@
                                                                 </div>
                                                             </div>
                                                             <!-- <div class="col-12 col-lg-6">
-                                                                        <div class="mb-3">
-                                                                            <label>Qty</label>
-                                                                            <input type="number" class="form-control"
-                                                                                placeholder="Qty" name="qty"
-                                                                                value="<?= $p->qty_shop; ?>">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-12 col-lg-6">
-                                                                        <div class="mb-3">
-                                                                            <label>Harga Dasar (Rp.)</label>
-                                                                            <input type="number" class="form-control"
-                                                                                placeholder="Harga Dasar (Rp.)" name="basic_price"
-                                                                                value="<?= $p->basic_price; ?>">
-                                                                        </div>
-                                                                    </div> -->
+                                                                                        <div class="mb-3">
+                                                                                            <label>Qty</label>
+                                                                                            <input type="number" class="form-control"
+                                                                                                placeholder="Qty" name="qty"
+                                                                                                value="<?= $p->qty_shop; ?>">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12 col-lg-6">
+                                                                                        <div class="mb-3">
+                                                                                            <label>Harga Dasar (Rp.)</label>
+                                                                                            <input type="number" class="form-control"
+                                                                                                placeholder="Harga Dasar (Rp.)" name="basic_price"
+                                                                                                value="<?= $p->basic_price; ?>">
+                                                                                        </div>
+                                                                                    </div> -->
                                                             <div class="col-12 col-lg-6">
                                                                 <div class="mb-3">
                                                                     <label>Harga Jual (Rp.)</label>

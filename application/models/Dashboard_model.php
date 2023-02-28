@@ -77,7 +77,7 @@ class Dashboard_model extends CI_Model
         return $query;
     }
 
-    function get_franchisor()
+    function get_partner()
     {
         $this->db->select('*');
         $this->db->from('tbl_users');

@@ -13,10 +13,10 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        $today = date("Y-m-d");
+
         $data['title'] = "Dashboard";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-        $today = date("Y-m-d");
 
         $data['count_class'] = $this->dashboard->count_class();
         $data['count_products'] = $this->dashboard->count_products();
@@ -26,7 +26,7 @@ class Dashboard extends CI_Controller
         $data['labhead'] = $this->db->get_where('tbl_schedule', ['picket_schedule' => $today])->row_array();
         $data['item'] = $this->dashboard->get_products();
         $data['product_running_out'] = $this->dashboard->get_products_running_out();
-        $data['franchisor'] = $this->dashboard->get_franchisor();
+        $data['partner'] = $this->dashboard->get_partner();
         $data['lab'] = $this->dashboard->get_lab();
 
         $this->load->view('templates/header', $data);

@@ -29,6 +29,12 @@ class Pengguna extends CI_Controller
 
     public function user_add()
     {
+        $data['title'] = "Pengguna";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['users'] = $this->pengguna->get_users();
+        $data['role'] = $this->pengguna->get_roles();
+
         $this->form_validation->set_rules(
             'name',
             'Name',
@@ -37,7 +43,6 @@ class Pengguna extends CI_Controller
                 'required' => '{field} wajib diisi'
             )
         );
-
         $this->form_validation->set_rules(
             'email',
             'Email',
@@ -48,7 +53,6 @@ class Pengguna extends CI_Controller
                 'is_unique' => 'E-Mail sudah terdaftar!'
             )
         );
-
         $this->form_validation->set_rules(
             'username',
             'Username',
@@ -58,7 +62,6 @@ class Pengguna extends CI_Controller
                 'is_unique' => 'Username sudah terdaftar!'
             )
         );
-
         $this->form_validation->set_rules(
             'password',
             'Password',
@@ -71,12 +74,6 @@ class Pengguna extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Pengguna";
-            $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
-
-            $data['users'] = $this->pengguna->get_users();
-            $data['role'] = $this->pengguna->get_roles();
-
             $this->load->view('templates/header', $data);
             $this->load->view('templates/aside', $data);
             $this->load->view('templates/topbar', $data);
@@ -118,6 +115,7 @@ class Pengguna extends CI_Controller
 
             $this->pengguna->save_user($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pengguna berhasil ditambahkan!</div>');
+
             redirect('pengguna');
         }
     }
@@ -149,11 +147,11 @@ class Pengguna extends CI_Controller
         $change_image = $_FILES['image']['name'];
 
         if ($change_image) {
-            $config['allowed_types']    = 'gif|jpg|png';
-            $config['max_size']         = '2048';
-            $config['upload_path']      = './assets/img/users/';
-            $config['max_width']        = '1024';
-            $config['max_height']       = '1024';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './assets/img/users/';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '1024';
 
             $this->load->library('upload', $config);
 
@@ -193,6 +191,7 @@ class Pengguna extends CI_Controller
 
         $this->pengguna->update_user($id_user);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pengguna berhasil diubah!</div>');
+
         redirect('pengguna');
     }
 
@@ -201,18 +200,18 @@ class Pengguna extends CI_Controller
         $id_user = $this->input->post('id_user');
 
         $this->pengguna->delete_user($id_user);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Pengguna berhasil dihapus!</div>');
+
         redirect('pengguna');
     }
 
     private function uploadImage()
     {
-        $config['allowed_types']    = 'gif|jpg|png';
-        $config['max_size']         = '2048';
-        $config['upload_path']      = './assets/img/users/';
-        $config['max_width']        = '1024';
-        $config['max_height']       = '1024';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '2048';
+        $config['upload_path'] = './assets/img/users/';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '1024';
 
         $this->load->library('upload', $config);
 
@@ -231,6 +230,7 @@ class Pengguna extends CI_Controller
 
         $this->db->join('tbl_user_role', 'tbl_user_role.id_role = tbl_users.role_id');
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['role'] = $this->pengguna->get_roles();
 
         $this->load->view('templates/header', $data);
@@ -257,11 +257,11 @@ class Pengguna extends CI_Controller
         $change_image = $_FILES['image']['name'];
 
         if ($change_image) {
-            $config['allowed_types']    = 'gif|jpg|png';
-            $config['max_size']         = '2048';
-            $config['upload_path']      = './assets/img/users/';
-            $config['max_width']        = '1024';
-            $config['max_height']       = '1024';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '2048';
+            $config['upload_path'] = './assets/img/users/';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '1024';
 
             $this->load->library('upload', $config);
 
@@ -289,6 +289,7 @@ class Pengguna extends CI_Controller
 
         $this->pengguna->update_profile($id_user);
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Profile anda berhasil diubah!</div>');
+
         redirect('pengguna/profile/');
     }
 
@@ -298,6 +299,7 @@ class Pengguna extends CI_Controller
 
         $this->db->join('tbl_user_role', 'tbl_user_role.id_role = tbl_users.role_id');
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['role'] = $this->pengguna->get_roles();
 
         $this->form_validation->set_rules(

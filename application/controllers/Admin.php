@@ -29,6 +29,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Menu Management";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['menu'] = $this->admin->get_menus();
         $data['submenu'] = $this->admin->get_submenus();
 
@@ -43,6 +44,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Menu Management";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['menu'] = $this->admin->get_menus();
         $data['submenu'] = $this->admin->get_submenus();
 
@@ -107,7 +109,6 @@ class Admin extends CI_Controller
         $id_user_menu = $this->input->post('id_user_menu');
 
         $this->admin->delete_menu($id_user_menu);
-
         $this->session->set_flashdata('message_menu', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Menu berhasil dihapus!</div>');
         redirect('admin/menu');
     }
@@ -117,6 +118,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Menu Management";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['menu'] = $this->admin->get_menus();
         $data['submenu'] = $this->admin->get_submenus();
 
@@ -206,7 +208,6 @@ class Admin extends CI_Controller
         $id_user_submenu = $this->input->post('id_user_submenu');
 
         $this->admin->delete_submenu($id_user_submenu);
-
         $this->session->set_flashdata('message_submenu', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Submenu berhasil dihapus!</div>');
         redirect('admin/menu');
     }
@@ -217,6 +218,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Access Role Menu";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['role'] = $this->admin->get_role();
 
         $this->load->view('templates/header', $data);
@@ -230,6 +232,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Access Role Menu";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['role'] = $this->admin->get_role_by_id($role_id);
 
         $this->db->where('id_user_menu !=', 1);
@@ -267,6 +270,7 @@ class Admin extends CI_Controller
     {
         $data['title'] = "Access Role Menu";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['role'] = $this->admin->get_role();
 
         $this->form_validation->set_rules(
@@ -317,7 +321,6 @@ class Admin extends CI_Controller
         $id_role = $this->input->post('id_role');
 
         $this->admin->delete_role($id_role);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Role berhasil dihapus!</div>');
         redirect('admin/role');
     }

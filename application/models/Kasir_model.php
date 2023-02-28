@@ -20,11 +20,20 @@ class Kasir_model extends CI_Model
         return $query;
     }
 
-    function get_franchisor()
+    function get_partner()
     {
         $this->db->select('*');
         $this->db->from('tbl_users');
         $this->db->where('role_id', 7);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_franchisor()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_users');
+        $this->db->where('role_id', 8);
         $query = $this->db->get();
         return $query;
     }
@@ -203,6 +212,120 @@ class Kasir_model extends CI_Model
     }
 
 
+
+
+
+
+    // PENJUALAN TITIPAN
+    public function get_selling_partner($id_lab)
+    {
+        $this->db->distinct('DISTINCT(date_selling), id_lab');
+        $this->db->group_by('date_selling');
+        $this->db->from('tbl_selling');
+        $this->db->join('tbl_users', 'tbl_users.id_user = tbl_selling.id_user');
+        $this->db->join('tbl_class', 'tbl_class.id_class = tbl_selling.id_class');
+        $this->db->where('id_lab', $id_lab);
+        $this->db->order_by('date_selling', 'DESC');
+        $this->db->order_by('id_selling', 'DESC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    public function get_selling_partner_detail($date_selling, $id_lab)
+    {
+        $this->db->select('*');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
+        $this->db->from('tbl_selling_detail');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('tbl_selling.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', 5);
+        $this->db->where_not_in('tbl_product.id_owner', 0);
+        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function sum_partner_total_basic_price($date_selling, $id_lab)
+    {
+        $query = $this->db->query(
+            "SELECT SUM(`total_basic_price`) AS `total_basic_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            "
+        );
+        return $query->row();
+    }
+
+    function sum_partner_total_selling_price($date_selling, $id_lab)
+    {
+        $query = $this->db->query(
+            "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            "
+        );
+        return $query->row();
+    }
+
+    function search_selling_partner_detail($date_selling, $id_lab, $id_franchisor)
+    {
+        $this->db->select('*');
+        $this->db->distinct('DISTINCT(product), qty_selling');
+        $this->db->select_sum('qty_selling');
+        $this->db->select_sum('total_basic_price');
+        $this->db->select_sum('total_selling_price');
+        $this->db->group_by('product');
+        $this->db->from('tbl_selling_detail');
+        $this->db->join('tbl_selling', 'tbl_selling.id_selling = tbl_selling_detail.id_selling');
+        $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
+        $this->db->where('tbl_selling.date_selling', $date_selling);
+        $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_owner', $id_franchisor);
+        $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function search_sum_partner_total_basic_price($date_selling, $id_lab, $id_franchisor)
+    {
+        $query = $this->db->query(
+            "SELECT SUM(`total_basic_price`) AS `total_basic_price`
+            FROM `tbl_selling_detail`
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
+        );
+        return $query->row();
+    }
+
+    function search_sum_partner_total_selling_price($date_selling, $id_lab, $id_franchisor)
+    {
+        $query = $this->db->query(
+            "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
+            FROM `tbl_selling_detail` 
+            INNER JOIN `tbl_product`
+            ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
+        );
+        return $query->row();
+    }
+
+
+
+
+
+
+
     // PENJUALAN TITIPAN
     public function get_selling_franchise($id_lab)
     {
@@ -231,6 +354,7 @@ class Kasir_model extends CI_Model
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
+        $this->db->where('tbl_product.id_place', 6);
         $this->db->where_not_in('tbl_product.id_owner', 0);
         $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();

@@ -34,9 +34,9 @@ class Data extends CI_Controller
             'filename' => 'spw-ku.sql'
         ];
 
-        $backup     = $this->dbutil->backup($pref);
-        $db_name    = 'backup_db_spw__' . date("d-m-Y__H-i-s") . '.zip';
-        $save       = './sources/database/' . $db_name;
+        $backup = $this->dbutil->backup($pref);
+        $db_name = 'backup_db_spw__' . date("d-m-Y__H-i-s") . '.zip';
+        $save = './sources/database/' . $db_name;
 
         $this->load->helper('file');
         write_file($save, $backup);
@@ -62,6 +62,10 @@ class Data extends CI_Controller
 
     public function lab_add()
     {
+        $data['title'] = "Lab SPW";
+        $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['lab'] = $this->data->get_lab();
 
         $this->form_validation->set_rules(
             'lab',
@@ -73,7 +77,11 @@ class Data extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            redirect('data/lab');
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/aside', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('data/lab', $data);
+            $this->load->view('templates/footer');
         } else {
             $lab = $this->input->post('lab', true);
 
@@ -109,7 +117,6 @@ class Data extends CI_Controller
         $id_lab = $this->input->post('id_lab');
 
         $this->data->delete_lab($id_lab);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Lab berhasil dihapus!</div>');
         redirect('data/lab');
     }
@@ -119,6 +126,7 @@ class Data extends CI_Controller
     {
         $data['title'] = "Jadwal SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['schedule'] = $this->data->get_schedule();
         $data['teacher'] = $this->data->get_teacher();
         $data['class'] = $this->data->get_class();
@@ -215,16 +223,16 @@ class Data extends CI_Controller
         $id_schedule = $this->input->post('id_schedule');
 
         $this->data->delete_schedule($id_schedule);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Jadwal berhasil dihapus!</div>');
         redirect('data/schedule');
     }
 
     // DATA KELAS
-    public function class()
+    public function class ()
     {
         $data['title'] = "Data Kelas";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['class'] = $this->data->get_class();
 
         $this->load->view('templates/header', $data);
@@ -238,6 +246,7 @@ class Data extends CI_Controller
     {
         $data['title'] = "Data Kelas";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
         $data['class'] = $this->data->get_class();
 
         $this->form_validation->set_rules(
@@ -287,7 +296,6 @@ class Data extends CI_Controller
         $id_class = $this->input->post('id_class');
 
         $this->data->delete_class($id_class);
-
         $this->session->set_flashdata('message', '<div class="alert alert-success text-white text-sm mb-3 text-center w-75 mx-auto" role="alert">Kelas berhasil dihapus!</div>');
         redirect('data/class');
     }

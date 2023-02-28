@@ -14,12 +14,12 @@ class Daftar_model extends CI_Model
         return $query;
     }
 
-    function get_products_by_search($search)
+    function get_products_by_search($keyword)
     {
 
         $this->db->distinct('DISTINCT(product), image, selling_price, qty');
         $this->db->group_by('product');
-        $this->db->like('product', $search);
+        $this->db->like('product', $keyword);
         // $this->db->select('product');
         $this->db->from('tbl_product');
         // $this->db->join('tbl_product_categories', 'tbl_product_categories.id_category = tbl_product.id_category');
