@@ -60,9 +60,10 @@
             <tr class="border-2">
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NO.</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NAMA PRODUK</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA JUAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY TERJUAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA JUAL)
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">HARGA JUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">QTY TERJUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">(QTY TERJUAL) x
+                    (HARGA JUAL)
                 </td>
             </tr>
         </thead>

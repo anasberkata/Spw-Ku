@@ -22,7 +22,7 @@
                                     <!-- <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button> -->
-                                    <a href="<?= base_url('kasir/printPDF_partner/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab) ?>"
+                                    <a href="<?= base_url('kasir/printPDF_partner/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_partner=' . $id_partner) ?>"
                                         class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
@@ -69,22 +69,16 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                                             width="7%">No.</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                                            style="width: 50%;">
                                             Nama Produk</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Harga Dasar</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Harga Jual</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Qty Awal</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Qty Akhir</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Qty Terjual</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            (Qty Terjual) x <br> (Harga Dasar)</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            (Qty Terjual) x <br> (Harga Jual)</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-end">
+                                            (Qty Terjual) x (Harga Jual)</th>
                                         <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center ">Action</th> -->
                                     </tr>
                                 </thead>
@@ -104,22 +98,7 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                                                    <?= number_format($sd->basic_price, 0, ',', '.'); ?>,-
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
                                                     <?= number_format($sd->selling_price, 0, ',', '.'); ?>,-
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $sd->qty_shop + $sd->qty_selling; ?>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">
-                                                    <?= $sd->qty_shop; ?>
                                                 </p>
                                             </td>
                                             <td>
@@ -128,20 +107,15 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                                                    <?= number_format($sd->total_basic_price, 0, ',', '.'); ?>,-
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                                                <p class="text-xs font-weight-bold mb-0 px-3 text-end">Rp.
                                                     <?= number_format($sd->total_selling_price, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                             <!-- <td class="align-middle text-center text-sm">
-                                                                                            <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                                                            |
-                                                                                            <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                                                                        </td> -->
+                                                                                                                                                                                                <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                                                                                                                                                                |
+                                                                                                                                                                                                <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                                                                                                                                                            </td> -->
                                         </tr>
 
                                         <?php $i++; ?>
@@ -151,63 +125,47 @@
                                     <?php if ($total_selling_price->total_selling_price == NULL): ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="3"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
-                                                    <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                                                <p class="text-xs font-weight-bolder mb-0 px-3 text-end">Rp.
                                                     <?= number_format($total_selling_price->total_selling_price, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="3"></td>
                                             <td>
                                                 <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
-                                                    Setor <br> Harga Dasar</p>
-                                                <p class="small font-weight-light mb-0 px-3">(Pemilik Produk)</p>
+                                                    Setor <br> Laba Mitra</p>
+                                                <p class="small font-weight-light mb-0 px-3">(85% Mitra)</p>
                                             </td>
                                             <td>
                                                 <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
                                                     Setor <br> Laba SPW</p>
-                                                <p class="small font-weight-light mb-0 px-3">(80% Laba SPW)</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
-                                                    Setor <br> Laba Siswa</p>
-                                                <p class="small font-weight-light mb-0 px-3">(20% Laba Siswa)</p>
+                                                <p class="small font-weight-light mb-0 px-3">(15% SPW)</p>
                                             </td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
-                                            <td>
-                                                <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
-                                                    <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
-                                                </p>
-                                            </td>
+                                            <td colspan="3"></td>
 
                                             <?php
-                                            $laba_spw = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.80;
-
-                                            $laba_siswa = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.20;
+                                            $laba_mitra = $total_selling_price->total_selling_price * 0.85;
+                                            $laba_spw = $total_selling_price->total_selling_price * 0.15;
                                             ?>
 
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
-                                                    <?= number_format($laba_spw, 0, ',', '.'); ?>,-
+                                                    <?= number_format($laba_mitra, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
-                                                    <?= number_format($laba_siswa, 0, ',', '.'); ?>,-
+                                                    <?= number_format($laba_spw, 0, ',', '.'); ?>,-
                                                 </p>
                                             </td>
                                         </tr>

@@ -217,12 +217,23 @@ class Kasir extends CI_Controller
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
     // PENJUALAN
     public function selling()
     {
         $id_lab = $this->input->get('id_lab', true);
 
-        $data['title'] = "Kasir";
+        $data['title'] = "Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['lab'] = $id_lab;
@@ -238,15 +249,19 @@ class Kasir extends CI_Controller
     {
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
+        $id_place = 0;
 
-        $data['title'] = "Kasir";
+        $data['title'] = "Penjualan SPW";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $data['date_selling'] = $date_selling;
         $data['lab'] = $id_lab;
         $data['place'] = $this->k->get_place();
+        $data['id_place'] = $id_place;
+
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->k->get_selling_detail($date_selling, $id_lab);
+
         $data['total_basic_price'] = $this->k->sum_total_basic_price($date_selling, $id_lab);
         $data['total_selling_price'] = $this->k->sum_total_selling_price($date_selling, $id_lab);
 
@@ -303,7 +318,7 @@ class Kasir extends CI_Controller
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
 
-        if (!isset($id_place)) {
+        if ($id_place == 0) {
             $data['selling_detail'] = $this->k->get_selling_detail($date_selling, $id_lab);
             $data['total_basic_price'] = $this->k->sum_total_basic_price($date_selling, $id_lab);
             $data['total_selling_price'] = $this->k->sum_total_selling_price($date_selling, $id_lab);
@@ -351,6 +366,7 @@ class Kasir extends CI_Controller
     {
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
+        $id_partner = 0;
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -360,6 +376,7 @@ class Kasir extends CI_Controller
         // $data['produk'] = $this->k->get_product_selling($id_lab);
         // $data['place'] = $this->k->get_place();
         $data['partner'] = $this->k->get_partner();
+        $data['id_partner'] = $id_partner;
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->k->get_selling_partner_detail($date_selling, $id_lab);
@@ -420,7 +437,7 @@ class Kasir extends CI_Controller
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
 
-        if (!isset($id_franchisor)) {
+        if ($id_partner == 0) {
             $data['selling_detail'] = $this->k->get_selling_partner_detail($date_selling, $id_lab);
             $data['total_basic_price'] = $this->k->sum_partner_total_basic_price($date_selling, $id_lab);
             $data['total_selling_price'] = $this->k->sum_partner_total_selling_price($date_selling, $id_lab);
@@ -467,6 +484,7 @@ class Kasir extends CI_Controller
     {
         $date_selling = $this->input->get('date_selling', true);
         $id_lab = $this->input->get('id_lab', true);
+        $id_franchisor = 0;
 
         $data['title'] = "Kasir";
         $data['user'] = $this->db->get_where('tbl_users', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -476,6 +494,7 @@ class Kasir extends CI_Controller
         // $data['produk'] = $this->k->get_product_selling($id_lab);
         // $data['place'] = $this->k->get_place();
         $data['franchisor'] = $this->k->get_franchisor();
+        $data['id_franchisor'] = $id_franchisor;
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
         $data['selling_detail'] = $this->k->get_selling_franchise_detail($date_selling, $id_lab);
@@ -536,7 +555,7 @@ class Kasir extends CI_Controller
 
         $data['selling'] = $this->db->get_where('tbl_selling', ['date_selling' => $date_selling])->row_array();
 
-        if (!isset($id_franchisor)) {
+        if ($id_franchisor == 0) {
             $data['selling_detail'] = $this->k->get_selling_franchise_detail($date_selling, $id_lab);
             $data['total_basic_price'] = $this->k->sum_franchise_total_basic_price($date_selling, $id_lab);
             $data['total_selling_price'] = $this->k->sum_franchise_total_selling_price($date_selling, $id_lab);

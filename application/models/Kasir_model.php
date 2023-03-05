@@ -108,6 +108,15 @@ class Kasir_model extends CI_Model
         $this->db->update('tbl_product', $data_stock_update);
     }
 
+
+
+
+
+
+
+
+
+
     // PENJUALAN
     public function get_selling($id_lab)
     {
@@ -258,7 +267,7 @@ class Kasir_model extends CI_Model
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_place` = 5 AND NOT `tbl_product`.`id_owner` = 0
             "
         );
         return $query->row();
@@ -271,13 +280,16 @@ class Kasir_model extends CI_Model
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            WHERE `tbl_selling_detail`.`date_selling` = '$date_selling'
+            AND `tbl_selling_detail`.`id_lab` = '$id_lab' 
+            AND `tbl_product`.`id_place` = 5
+            AND NOT `tbl_product`.`id_owner` = 0
             "
         );
         return $query->row();
     }
 
-    function search_selling_partner_detail($date_selling, $id_lab, $id_franchisor)
+    function search_selling_partner_detail($date_selling, $id_lab, $id_partner)
     {
         $this->db->select('*');
         $this->db->distinct('DISTINCT(product), qty_selling');
@@ -290,32 +302,32 @@ class Kasir_model extends CI_Model
         $this->db->join('tbl_product', 'tbl_product.id_product = tbl_selling_detail.id_product');
         $this->db->where('tbl_selling.date_selling', $date_selling);
         $this->db->where('tbl_selling_detail.id_lab', $id_lab);
-        $this->db->where('tbl_product.id_owner', $id_franchisor);
+        $this->db->where('tbl_product.id_owner', $id_partner);
         $this->db->order_by('tbl_selling_detail.id_product', 'ASC');
         $query = $this->db->get();
         return $query;
     }
 
-    function search_sum_partner_total_basic_price($date_selling, $id_lab, $id_franchisor)
+    function search_sum_partner_total_basic_price($date_selling, $id_lab, $id_partner)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_basic_price`) AS `total_basic_price`
             FROM `tbl_selling_detail`
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_partner'"
         );
         return $query->row();
     }
 
-    function search_sum_partner_total_selling_price($date_selling, $id_lab, $id_franchisor)
+    function search_sum_partner_total_selling_price($date_selling, $id_lab, $id_partner)
     {
         $query = $this->db->query(
             "SELECT SUM(`total_selling_price`) AS `total_selling_price` 
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_franchisor'"
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_owner` = '$id_partner'"
         );
         return $query->row();
     }
@@ -368,7 +380,7 @@ class Kasir_model extends CI_Model
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_place` = 6 AND NOT `tbl_product`.`id_owner` = 0
             "
         );
         return $query->row();
@@ -381,7 +393,7 @@ class Kasir_model extends CI_Model
             FROM `tbl_selling_detail` 
             INNER JOIN `tbl_product`
             ON `tbl_selling_detail`.`id_product` = `tbl_product`.`id_product`
-            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND NOT `tbl_product`.`id_owner` = 0
+            WHERE `date_selling` = '$date_selling' AND `tbl_selling_detail`.`id_lab` = '$id_lab' AND `tbl_product`.`id_place` = 6 AND NOT `tbl_product`.`id_owner` = 0
             "
         );
         return $query->row();

@@ -128,7 +128,7 @@
             <?php if ($total_basic_price->total_basic_price == NULL): ?>
             <?php else: ?>
                 <tr class="border">
-                    <td colspan="5"></td>
+                    <td colspan="6"></td>
                     <td>
                         <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                     </td>

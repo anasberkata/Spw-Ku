@@ -22,7 +22,7 @@
                                     <!-- <button type="button" class="btn btn-dark btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalProductAdd">
                                         Tambah
                                     </button> -->
-                                    <a href="<?= base_url('kasir/printPDF_franchise/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab) ?>"
+                                    <a href="<?= base_url('kasir/printPDF_franchise/?date_selling=' . $selling["date_selling"] . '&id_lab=' . $lab . '&id_franchisor=' . $id_franchisor) ?>"
                                         class="btn btn-warning btn-sm mb-3" target="_blank">
                                         <i class="fa fa-download"></i>
                                     </a>
@@ -139,10 +139,10 @@
                                                 </p>
                                             </td>
                                             <!-- <td class="align-middle text-center text-sm">
-                                                                    <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
-                                                                    |
-                                                                    <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
-                                                                </td> -->
+                                                                                                            <a type="button" class="badge bg-primary btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductEdit<?= $sd->id_selling_detail; ?>"><i class="fa fa-edit cursor-pointer"></i></a>
+                                                                                                            |
+                                                                                                            <a type="button" class="badge bg-danger btn-sm px-3 py-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalProductDelete<?= $sd->id_selling_detail; ?>"><i class="fa fa-trash cursor-pointer"></i></a>
+                                                                                                        </td> -->
                                         </tr>
 
                                         <?php $i++; ?>
@@ -152,7 +152,7 @@
                                     <?php if ($total_selling_price->total_selling_price == NULL): ?>
                                     <?php else: ?>
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                                             </td>
@@ -169,7 +169,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
                                                     Setor <br> Harga Dasar</p>
@@ -188,7 +188,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td colspan="5"></td>
+                                            <td colspan="6"></td>
                                             <td>
                                                 <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
                                                     <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-

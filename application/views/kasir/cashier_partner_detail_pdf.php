@@ -60,14 +60,10 @@
             <tr class="border-2">
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NO.</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">NAMA PRODUK</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA DASAR</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">HARGA JUAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AWAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AKHIR</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY TERJUAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA
-                    DASAR)</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA JUAL)
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">HARGA JUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">QTY TERJUAL</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3 text-center">(QTY TERJUAL) x
+                    (HARGA JUAL)
                 </td>
             </tr>
         </thead>
@@ -87,32 +83,12 @@
                     </td>
                     <td class="border text-end">
                         <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                            <?= number_format($sd->basic_price, 0, ',', '.'); ?>,-
-                        </p>
-                    </td>
-                    <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
                             <?= number_format($sd->selling_price, 0, ',', '.'); ?>,-
                         </p>
                     </td>
                     <td class="border text-center">
                         <p class="text-xs font-weight-bold mb-0 px-3">
-                            <?= $sd->qty_shop + $sd->qty_selling; ?>
-                        </p>
-                    </td>
-                    <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3">
-                            <?= $sd->qty_shop; ?>
-                        </p>
-                    </td>
-                    <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3">
                             <?= $sd->qty_selling; ?>
-                        </p>
-                    </td>
-                    <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                            <?= number_format($sd->total_basic_price, 0, ',', '.'); ?>,-
                         </p>
                     </td>
                     <td class="border text-end">
@@ -128,14 +104,9 @@
             <?php if ($total_basic_price->total_basic_price == NULL): ?>
             <?php else: ?>
                 <tr class="border">
-                    <td colspan="5"></td>
+                    <td colspan="3"></td>
                     <td>
                         <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
-                    </td>
-                    <td class="border text-end">
-                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
-                            <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
-                        </p>
                     </td>
                     <td class="border text-end">
                         <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
@@ -161,16 +132,14 @@
                         <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Tanda Tangan</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total Setor <br> Harga Dasar</p>
-                        <p class="small font-weight-light mb-0 px-3">(Pemilik Produk)</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
+                            Setor <br> Laba Mitra</p>
+                        <p class="small font-weight-light mb-0 px-3">(85% Mitra)</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total Setor <br> Laba SPW</p>
-                        <p class="small font-weight-light mb-0 px-3">(80% Stor ke SPW)</p>
-                    </td>
-                    <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total Setor <br> Laba Siswa</p>
-                        <p class="small font-weight-light mb-0 px-3">(20% Laba Siswa)</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Total
+                            Setor <br> Laba SPW</p>
+                        <p class="small font-weight-light mb-0 px-3">(15% SPW)</p>
                     </td>
                 </tr>
             </thead>
@@ -187,26 +156,24 @@
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3"></p>
                     </td>
-                    <td class="border text-center" rowspan="3">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                            <?= number_format($total_basic_price->total_basic_price, 0, ',', '.'); ?>,-
-                        </p>
-                    </td>
 
                     <?php
-                    $laba_spw = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.80;
-
-                    $laba_siswa = ($total_selling_price->total_selling_price - $total_basic_price->total_basic_price) * 0.20;
+                    $laba_mitra = $total_selling_price->total_selling_price * 0.85;
+                    $laba_spw = $total_selling_price->total_selling_price * 0.15;
                     ?>
 
                     <td class="border text-center" rowspan="3">
                         <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                            <?= number_format($laba_spw, 0, ',', '.'); ?>,-
+                            <?= number_format($laba_mitra, 0, ',', '.'); ?>,-
                         </p>
                     </td>
+
+
+
+
                     <td class="border text-center" rowspan="3">
                         <p class="text-xs font-weight-bold mb-0 px-3">Rp.
-                            <?= number_format($laba_siswa, 0, ',', '.'); ?>,-
+                            <?= number_format($laba_spw, 0, ',', '.'); ?>,-
                         </p>
                     </td>
                 </tr>
@@ -223,7 +190,7 @@
                 </tr>
                 <tr class="border">
                     <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Supplier / Pemilik Produk</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Mitra</p>
                     </td>
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3">: </p>

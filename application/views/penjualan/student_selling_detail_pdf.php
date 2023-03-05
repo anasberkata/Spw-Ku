@@ -34,7 +34,8 @@
     <table cellpadding="10" width="100%">
         <tr>
             <td width="25%"></td>
-            <td width="10%"><img src="<?= base_url('assets/img/logos/logo-smkdaku.png'); ?>" alt="Logo SMK DAKU" width="75"></td>
+            <td width="10%"><img src="<?= base_url('assets/img/logos/logo-smkdaku.png'); ?>" alt="Logo SMK DAKU"
+                    width="75"></td>
             <td width="30%" style="text-align: center;">
                 <p class="text-xs">SEKOLAH PENCETAK WIRAUSAHA (SPW)
                     <br>SMK NEGERI 2 CILAKU CIANJUR
@@ -50,7 +51,9 @@
 
     <hr>
 
-    <h6 class="text-xs">Lab : <b><i><?= "SPW " . $lab; ?></i></b></h6>
+    <h6 class="text-xs">Lab : <b><i>
+                <?="SPW " . $lab; ?>
+            </i></b></h6>
 
     <table class="table align-items-center" cellpadding="7">
         <thead>
@@ -62,58 +65,82 @@
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AWAL</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY AKHIR</td>
                 <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">QTY TERJUAL</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA DASAR)</td>
-                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA JUAL)</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA
+                    DASAR)</td>
+                <td class="border text-uppercase text-xs font-weight-bolder mb-0 px-3">(QTY TERJUAL) x <br> (HARGA JUAL)
+                </td>
             </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            <?php foreach ($student_selling_detail->result() as $fd) : ?>
+            <?php foreach ($student_selling_detail->result() as $fd): ?>
                 <tr class="border height-100">
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $i; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $i; ?>
+                        </p>
                     </td>
                     <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->product; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $fd->product; ?>
+                        </p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->basic_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($fd->basic_price, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($fd->selling_price, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_product; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $fd->qty_product; ?>
+                        </p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_last; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $fd->qty_last; ?>
+                        </p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-xs font-weight-bold mb-0 px-3"><?= $fd->qty_selling; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">
+                            <?= $fd->qty_selling; ?>
+                        </p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_basic_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($fd->total_basic_price, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($fd->total_selling_price, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($fd->total_selling_price, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                 </tr>
 
                 <?php $i++; ?>
             <?php endforeach; ?>
 
-            <?php if ($total_basic_price_student_selling->total_basic_price_student_selling == NULL) : ?>
-            <?php else : ?>
+            <?php if ($total_basic_price_student_selling->total_basic_price_student_selling == NULL): ?>
+            <?php else: ?>
                 <tr class="border">
                     <td colspan="6"></td>
                     <td>
                         <p class="text-xs font-weight-bolder mb-0 px-3">TOTAL</p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_basic_price_student_selling->total_basic_price_student_selling, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                            <?= number_format($total_basic_price_student_selling->total_basic_price_student_selling, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                     <td class="border text-end">
-                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp. <?= number_format($total_selling_price_student_selling->total_selling_price_student_selling, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bolder mb-0 px-3">Rp.
+                            <?= number_format($total_selling_price_student_selling->total_selling_price_student_selling, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                 </tr>
             <?php endif; ?>
@@ -121,26 +148,31 @@
     </table>
 
     <table class="table align-items-center" cellpadding="7">
-        <?php if ($total_basic_price_student_selling->total_basic_price_student_selling == NULL) : ?>
-        <?php else : ?>
+        <?php if ($total_basic_price_student_selling->total_basic_price_student_selling == NULL): ?>
+        <?php else: ?>
             <thead>
                 <tr class="border">
                     <td colspan="2">
-                        <p class="text-xs font-weight-bold">Tanggal : <?= date('d F Y', strtotime($student_selling["date_selling"])) ?></p>
+                        <p class="text-xs font-weight-bold">Tanggal :
+                            <?= date('d F Y', strtotime($student_selling["date_selling"])) ?>
+                        </p>
                     </td>
                     <td class="border text-center">
                         <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Tanda Tangan</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga <br> Dasar</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> Total Harga
+                            <br> Dasar</p>
                         <p class="text-xs mb-0 px-3">(Disetorkan ke <br> pemilik produk)</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 80% Laba <br> Penjualan</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 80% Laba <br>
+                            Penjualan</p>
                         <p class="text-xs mb-0 px-3">(Disetorkan ke <br> SPW)</p>
                     </td>
                     <td class="border text-center">
-                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 20% laba <br> Penjualan</p>
+                        <p class="text-uppercase text-xs font-weight-bolder mb-0 px-3 pt-5">Jumlah Setor <br> 20% laba <br>
+                            Penjualan</p>
                         <p class="text-xs mb-0 px-3">(Untuk Siswa)</p>
                     </td>
                 </tr>
@@ -151,13 +183,17 @@
                         <p class="text-xs font-weight-bold mb-0 px-3">Guru Pembimbing Praktik</p>
                     </td>
                     <td class="border">
-                        <p class="text-xs font-weight-bold mb-0 px-3">: <?= $user["name"]; ?></p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">:
+                            <?= $user["name"]; ?>
+                        </p>
                     </td>
                     <td class="border">
                         <p class="text-xs font-weight-bold mb-0 px-3"></p>
                     </td>
                     <td class="border text-center" rowspan="3">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($total_basic_price_student_selling->total_basic_price_student_selling, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($total_basic_price_student_selling->total_basic_price_student_selling, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
 
                     <?php
@@ -167,10 +203,14 @@
                     ?>
 
                     <td class="border text-center" rowspan="3">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($laba_spw, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($laba_spw, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                     <td class="border text-center" rowspan="3">
-                        <p class="text-xs font-weight-bold mb-0 px-3">Rp. <?= number_format($laba_siswa, 0, ',', '.'); ?>,-</p>
+                        <p class="text-xs font-weight-bold mb-0 px-3">Rp.
+                            <?= number_format($laba_siswa, 0, ',', '.'); ?>,-
+                        </p>
                     </td>
                 </tr>
                 <tr class="border">
